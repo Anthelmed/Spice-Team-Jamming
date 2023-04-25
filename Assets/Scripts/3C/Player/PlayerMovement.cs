@@ -32,6 +32,7 @@ namespace _3C.Player
         {
             m_CurrentMovement = Vector2.LerpUnclamped(m_CurrentMovement, Movement, Time.deltaTime * m_MovementDamping);
             m_Rigidbody.velocity = CurrentWorldSpeed;
+            transform.LookAt(transform.position + m_CurrentMovement.X0Y());
         }
     }
 }
