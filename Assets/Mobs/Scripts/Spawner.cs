@@ -83,7 +83,9 @@ namespace Mobs
                 newVelocity = targetSpeed,
                 targetPosition = new float2(target.position.x, target.position.z),
                 avoidanceRadiusSq = prefab.avoidanceRadius * prefab.avoidanceRadius,
-                avoidanceStrength = prefab.avoidanceStrength
+                avoidanceStrength = prefab.avoidanceStrength,
+                viewRadiusSq = prefab.viewRadius * prefab.viewRadius,
+                cohesionStrength = prefab.cohesionStrength,
             }.Schedule(boids.Length, boids.Length / 16 + 16);
 
             m_moveJobHandle = new Jobs.MoveMobsJob
@@ -95,10 +97,6 @@ namespace Mobs
                 dt = Time.deltaTime
             }.Schedule(transforms, dependency);
         }
-
-        //private void LateUpdate()
-        //{
-        //}
 
         private void OnDrawGizmosSelected()
         {

@@ -48,6 +48,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   acceleration: 10
+  avoidanceRadius: 1.5
+  avoidanceStrength: 1
+  viewRadius: 5
+  cohesionStrength: 0.25
 --- !u!33 &6387678164699145861
 MeshFilter:
   m_ObjectHideFlags: 0

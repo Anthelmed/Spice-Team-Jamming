@@ -14,11 +14,16 @@ namespace Mobs
         [Header("Boids")]
         public float avoidanceRadius = 1f;
         public float avoidanceStrength = 1f;
+        public float viewRadius = 5f;
+        public float cohesionStrength = 1f;
 
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, avoidanceRadius);
+
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, viewRadius);
         }
     }
 }
