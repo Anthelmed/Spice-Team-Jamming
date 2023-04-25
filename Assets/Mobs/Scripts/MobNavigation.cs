@@ -10,6 +10,7 @@ namespace Mobs
         public Transform target;
 
         public float speed = 1;
+        public float angularSpeed = 360f*2f;
 
         private void Reset()
         {
@@ -30,6 +31,9 @@ namespace Mobs
             {
                 direction.Normalize();
                 direction *= speed;
+
+                var desiredRotation = Quaternion.LookRotation(direction, Vector3.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, desiredRotation, angularSpeed * Time.deltaTime);
             }
 
             transform.position += direction * Time.deltaTime;
