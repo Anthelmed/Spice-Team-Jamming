@@ -620,7 +620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: -8018583356832734379, guid: 4308d9ef026dc044fa79ce7cf34d826f, type: 3}
-  amount: 1000
+  amount: 10000
   target: {fileID: 1289037196}
 --- !u!4 &2053821135
 Transform:
@@ -630,8 +630,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2053821133}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -39.64, y: 0, z: 43.26}
-  m_LocalScale: {x: 20.7, y: 20.7, z: 20.7}
+  m_LocalPosition: {x: -1.8, y: 0, z: -7.3}
+  m_LocalScale: {x: 38.52, y: 38.52, z: 38.52}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}

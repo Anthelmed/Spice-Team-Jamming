@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Jobs;
 
 namespace Mobs
 {
@@ -12,7 +13,7 @@ namespace Mobs
 
         public Transform target;
 
-        public Transform[] transforms;
+        public TransformAccessArray transforms;
 
         private float Radius
         {
@@ -31,7 +32,7 @@ namespace Mobs
             var radius = Radius;
             var center = transform.position;
 
-            transforms = new Transform[amount];
+            var transArray = new Transform[amount];
 
             for (int i = 0; i < amount; ++i)
             {
@@ -39,8 +40,15 @@ namespace Mobs
                 var position = center + new Vector3(offset.x, 0, offset.y);
 
                 var mob = Instantiate(prefab, position, Quaternion.identity);
-                transforms[i] = mob.transform;
+                transArray[i] = mob.transform;
             }
+
+            transforms = new TransformAccessArray(transArray);
+        }
+
+        private void OnDestroy()
+        {
+            transforms.Dispose();
         }
 
         private void Update()
@@ -48,22 +56,13 @@ namespace Mobs
             if (!target)
                 return;
 
-            for (int i = 0; i < transforms.Length; ++i)
+            new Jobs.MoveMobsJob
             {
-                var trans = transforms[i];
-
-                var direction = target.position - trans.position;
-                if (direction.sqrMagnitude > Mathf.Epsilon)
-                {
-                    direction.Normalize();
-                    direction *= prefab.speed;
-
-                    var desiredRotation = Quaternion.LookRotation(direction, Vector3.up);
-                    trans.rotation = Quaternion.RotateTowards(transform.rotation, desiredRotation, prefab.angularSpeed * Time.deltaTime);
-                }
-
-                trans.position += direction * Time.deltaTime;
-            }
+                angularSpeed = prefab.angularSpeed,
+                speed = prefab.speed,
+                target = target.position,
+                dt = Time.deltaTime
+            }.Schedule(transforms);
         }
 
         private void OnDrawGizmosSelected()
