@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6227244657494089269}
+  - component: {fileID: 1695272244649760277}
+  - component: {fileID: 3254206215208585877}
   m_Layer: 0
   m_Name: Controler
   m_TagString: Untagged
@@ -31,3 +33,103 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1695272244649760277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3831745192983052572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 0a8fdc4d69e296647af4ef54e1d3b8bf,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 19204312-67dd-49bf-8d09-085e90319e90
+    m_ActionName: Menu/New action
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 014518c0-27d9-4f68-b469-a0ec34e22a8c
+    m_ActionName: Map/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3254206215208585877}
+        m_TargetAssemblyTypeName: _3C.Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnMovementAsked
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9e5eaff9-e69d-45ed-b3c5-291672875e9e
+    m_ActionName: Gameplay/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3254206215208585877}
+        m_TargetAssemblyTypeName: _3C.Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnMeleeAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4272a9d0-b9dc-487e-a66e-f4e214cd7cec
+    m_ActionName: Gameplay/MeleeAttack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3254206215208585877}
+        m_TargetAssemblyTypeName: _3C.Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnRangeAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ded65995-5a7a-45e9-b1c1-bc740da46e26
+    m_ActionName: Gameplay/RangeAttack[/Mouse/rightButton]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Gameplay
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &3254206215208585877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3831745192983052572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c0f2da36cd34e3bb1d48d9ad2af1093, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PlayerCharacter: {fileID: 0}
