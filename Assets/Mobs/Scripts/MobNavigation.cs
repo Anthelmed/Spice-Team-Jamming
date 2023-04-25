@@ -16,6 +16,7 @@ namespace Mobs
         public float avoidanceStrength = 1f;
         public float viewRadius = 5f;
         public float cohesionStrength = 1f;
+        public float alignementStrength = 1f;
 
         private void OnDrawGizmosSelected()
         {

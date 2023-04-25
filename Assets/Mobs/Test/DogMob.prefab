@@ -52,6 +52,7 @@ MonoBehaviour:
   avoidanceStrength: 1
   viewRadius: 5
   cohesionStrength: 0.25
+  alignementStrength: 0.5
 --- !u!33 &6387678164699145861
 MeshFilter:
   m_ObjectHideFlags: 0

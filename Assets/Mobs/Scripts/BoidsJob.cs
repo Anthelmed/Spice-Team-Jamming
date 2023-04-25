@@ -26,7 +26,7 @@ namespace Mobs.Jobs
         public float avoidanceStrength;
 
         public float viewRadiusSq;
-        //public float alignementStrength;
+        public float alignementStrength;
         public float cohesionStrength;
 
         [BurstCompile]
@@ -44,6 +44,7 @@ namespace Mobs.Jobs
             // Avoidance
             float2 avoidance = float2.zero;
             float2 cohesion = float2.zero;
+            float2 alignement = float2.zero;
             int numNeighbours = 0;
             float2 toBoid;
             float distSq;
@@ -58,16 +59,23 @@ namespace Mobs.Jobs
                 else if (distSq < viewRadiusSq)
                 {
                     cohesion += boids[i].position;
+                    alignement += boids[i].velocity;
                     ++numNeighbours;
                 }
             }
 
             if (numNeighbours > 0)
+            {
                 cohesion = (cohesion / numNeighbours) - boid.position;
+                alignement /= numNeighbours;
+            }
             else
+            {
                 cohesion = 0f;
+                alignement = 0f;
+            }
 
-            newVelocity[index] = targetVelocity + avoidanceStrength * avoidance + cohesion * cohesionStrength;
+            newVelocity[index] = targetVelocity + avoidanceStrength * avoidance + cohesion * cohesionStrength + alignement * alignementStrength;
         }
     }
 }

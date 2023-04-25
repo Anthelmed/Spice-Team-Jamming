@@ -86,6 +86,7 @@ namespace Mobs
                 avoidanceStrength = prefab.avoidanceStrength,
                 viewRadiusSq = prefab.viewRadius * prefab.viewRadius,
                 cohesionStrength = prefab.cohesionStrength,
+                alignementStrength = prefab.alignementStrength
             }.Schedule(boids.Length, boids.Length / 16 + 16);
 
             m_moveJobHandle = new Jobs.MoveMobsJob
