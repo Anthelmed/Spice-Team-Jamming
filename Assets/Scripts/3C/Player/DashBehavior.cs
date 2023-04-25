@@ -11,6 +11,10 @@ namespace _3C.Player
         [ShowIf("m_HasOvershootFrame")]
         [SerializeField] private float m_OvershootDistance;
         
+        [ShowIf("m_HasOvershootFrame")]
+        [SerializeField] private bool m_HasOvershootPauseFrame;
+        
+        
         [SerializeField] private bool m_HasBounceFrame;
         [ShowIf("m_HasBounceFrame")]
         [SerializeField] private float m_BounceDistance;
@@ -47,6 +51,10 @@ namespace _3C.Player
             {
                 transform.position -= transform.forward * m_OvershootDistance;
                 yield return null;
+                if (m_HasOvershootPauseFrame)
+                {
+                    yield return null;
+                }
             }
             
             for (float time = 0; time < m_Duration; time += Time.deltaTime)
