@@ -63,6 +63,7 @@ namespace Mobs
 
         private void OnDestroy()
         {
+            m_moveJobHandle.Complete();
             transforms.Dispose();
             boids.Dispose();
             targetSpeed.Dispose();
@@ -73,12 +74,17 @@ namespace Mobs
             if (!target)
                 return;
 
+            m_moveJobHandle.Complete();
+
+
             var dependency = new Jobs.CalculateBoidsRules
             {
                 boids = boids,
                 newVelocity = targetSpeed,
-                targetPosition = new float2(target.position.x, target.position.z)
-            }.Schedule(boids.Length, boids.Length / 8 + 8);
+                targetPosition = new float2(target.position.x, target.position.z),
+                avoidanceRadiusSq = prefab.avoidanceRadius * prefab.avoidanceRadius,
+                avoidanceStrength = prefab.avoidanceStrength
+            }.Schedule(boids.Length, boids.Length / 16 + 16);
 
             m_moveJobHandle = new Jobs.MoveMobsJob
             {
@@ -90,10 +96,9 @@ namespace Mobs
             }.Schedule(transforms, dependency);
         }
 
-        private void LateUpdate()
-        {
-            m_moveJobHandle.Complete();
-        }
+        //private void LateUpdate()
+        //{
+        //}
 
         private void OnDrawGizmosSelected()
         {

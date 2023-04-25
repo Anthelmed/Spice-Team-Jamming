@@ -22,8 +22,8 @@ namespace Mobs.Jobs
 
         public float2 targetPosition;
 
-        //public float avoidanceRadius;
-        //public float avoidanceStrength;
+        public float avoidanceRadiusSq;
+        public float avoidanceStrength;
 
         //public float viewRadius;
         //public float alignementStrength;
@@ -35,12 +35,27 @@ namespace Mobs.Jobs
             var boid = boids[index];
             var targetVelocity = boid.velocity;
 
+            // Follow target
             var toTarget = targetPosition - boid.position;
             toTarget /= math.max(math.length(toTarget), 1f);
 
             targetVelocity += toTarget;
 
-            newVelocity[index] = targetVelocity;
+            // Avoidance
+            float2 avoidance = float2.zero;
+            float2 toBoid;
+            float distSq;
+            for (int i = 0 ; i < boids.Length; ++i)
+            {
+                toBoid = boids[i].position - boid.position;
+                distSq = math.lengthsq(toBoid);
+                if (distSq < avoidanceRadiusSq)
+                {
+                    avoidance -= toBoid;
+                }
+            }
+
+            newVelocity[index] = targetVelocity + avoidanceStrength * avoidance;
         }
     }
 }
