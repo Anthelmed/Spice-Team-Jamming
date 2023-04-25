@@ -178,6 +178,12 @@
       },
       "url": "https://packages.unity.com"
     },
+    "ga.fuquna.vatbaker": {
+      "version": "file:ga.fuquna.vatbaker",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
