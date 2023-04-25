@@ -8,6 +8,6 @@ namespace Mobs
     public class MobNavigation : MonoBehaviour
     {
         public float speed = 1;
-        public float angularSpeed = 360f*2f;
+        public float acceleration = 1f;
     }
 }

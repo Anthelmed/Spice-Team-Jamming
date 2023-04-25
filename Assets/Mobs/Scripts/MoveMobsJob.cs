@@ -15,7 +15,7 @@ namespace Mobs.Jobs
         [ReadOnly] public NativeArray<float2> targetSpeed;
 
         public float maxSpeed;
-        public float angularSpeed;
+        public float acceleration;
         public float dt;
 
         [BurstCompile]
@@ -24,17 +24,17 @@ namespace Mobs.Jobs
             var boid = boids[index];
 
             // Set the velocity clamped
-            boid.velocity = targetSpeed[index];
-            if (math.lengthsq(boid.velocity) > (maxSpeed * maxSpeed))
+            var wantedVelocity = targetSpeed[index];
+            if (math.lengthsq(wantedVelocity) > (maxSpeed * maxSpeed))
             {
-                boid.velocity = math.normalize(boid.velocity) * maxSpeed;
+                wantedVelocity = math.normalize(wantedVelocity) * maxSpeed;
             }
 
+            boid.velocity = math.lerp(boid.velocity, wantedVelocity, acceleration * dt);
             boid.position += boid.velocity * dt;
 
             transform.position = new Vector3(boid.position.x, 0, boid.position.y);
-            var lookTarget = Quaternion.LookRotation(new Vector3(boid.velocity.x, 0, boid.velocity.y), Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookTarget, angularSpeed * dt);
+            transform.rotation = Quaternion.LookRotation(new Vector3(boid.velocity.x, 0, boid.velocity.y), Vector3.up);
 
             boids[index] = boid;
         }

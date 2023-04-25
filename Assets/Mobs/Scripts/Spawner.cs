@@ -85,7 +85,7 @@ namespace Mobs
                 boids = boids,
                 targetSpeed = targetSpeed,
                 maxSpeed = prefab.speed,
-                angularSpeed = prefab.angularSpeed,
+                acceleration = prefab.acceleration,
                 dt = Time.deltaTime
             }.Schedule(transforms, dependency);
         }

@@ -619,7 +619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a948efd39f396fc4c84261ccb14da230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: -8018583356832734379, guid: 4308d9ef026dc044fa79ce7cf34d826f, type: 3}
+  prefab: {fileID: 5169067536393848540, guid: 4308d9ef026dc044fa79ce7cf34d826f, type: 3}
   amount: 1000
   target: {fileID: 1289037196}
 --- !u!4 &2053821135
