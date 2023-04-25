@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5344828a8dab247a92f2393448a6e2, type: 3}
+  m_Name: PlayerAttackOne
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: aa28540b760f6fa42be92fb318527f48, type: 3}
+  - {fileID: 8300000, guid: 7d47debed84d01b49883e5701a184366, type: 3}
+  - {fileID: 8300000, guid: b80a930a5b373f24480d984baae1ffb3, type: 3}
+  - {fileID: 8300000, guid: d289780c9edb49741b9445cafe6a732a, type: 3}
