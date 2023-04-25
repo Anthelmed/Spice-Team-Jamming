@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
+using Unity.Jobs;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Jobs;
 
@@ -13,7 +16,11 @@ namespace Mobs
 
         public Transform target;
 
-        public TransformAccessArray transforms;
+        private TransformAccessArray transforms;
+        private NativeArray<Jobs.Boid> boids;
+        private NativeArray<float2> targetSpeed;
+
+        private JobHandle m_moveJobHandle;
 
         private float Radius
         {
@@ -33,14 +40,22 @@ namespace Mobs
             var center = transform.position;
 
             var transArray = new Transform[amount];
+            boids = new NativeArray<Jobs.Boid>(amount, Allocator.Persistent, NativeArrayOptions.UninitializedMemory);
+            targetSpeed = new NativeArray<float2>(amount, Allocator.Persistent, NativeArrayOptions.UninitializedMemory);
 
             for (int i = 0; i < amount; ++i)
             {
-                var offset = Random.insideUnitCircle * radius;
+                var offset = UnityEngine.Random.insideUnitCircle * radius;
                 var position = center + new Vector3(offset.x, 0, offset.y);
 
                 var mob = Instantiate(prefab, position, Quaternion.identity);
-                transArray[i] = mob.transform;
+                var trans = mob.transform;
+                transArray[i] = trans;
+                boids[i] = new Jobs.Boid
+                {
+                    position = new float2(trans.position.x, trans.position.z),
+                    velocity = float2.zero
+                };
             }
 
             transforms = new TransformAccessArray(transArray);
@@ -49,6 +64,8 @@ namespace Mobs
         private void OnDestroy()
         {
             transforms.Dispose();
+            boids.Dispose();
+            targetSpeed.Dispose();
         }
 
         private void Update()
@@ -56,13 +73,26 @@ namespace Mobs
             if (!target)
                 return;
 
-            new Jobs.MoveMobsJob
+            var dependency = new Jobs.CalculateBoidsRules
             {
+                boids = boids,
+                newVelocity = targetSpeed,
+                targetPosition = new float2(target.position.x, target.position.z)
+            }.Schedule(boids.Length, boids.Length / 8 + 8);
+
+            m_moveJobHandle = new Jobs.MoveMobsJob
+            {
+                boids = boids,
+                targetSpeed = targetSpeed,
+                maxSpeed = prefab.speed,
                 angularSpeed = prefab.angularSpeed,
-                speed = prefab.speed,
-                target = target.position,
                 dt = Time.deltaTime
-            }.Schedule(transforms);
+            }.Schedule(transforms, dependency);
+        }
+
+        private void LateUpdate()
+        {
+            m_moveJobHandle.Complete();
         }
 
         private void OnDrawGizmosSelected()

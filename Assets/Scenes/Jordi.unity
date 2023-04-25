@@ -620,7 +620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: -8018583356832734379, guid: 4308d9ef026dc044fa79ce7cf34d826f, type: 3}
-  amount: 10000
+  amount: 1000
   target: {fileID: 1289037196}
 --- !u!4 &2053821135
 Transform:
