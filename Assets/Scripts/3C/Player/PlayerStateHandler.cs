@@ -8,12 +8,14 @@ namespace _3C.Player
     {
         Moving,
         Dashing,
+        Attacking,
     }
     
     public class PlayerStateHandler : MonoBehaviour
     {
         [SerializeField] private PlayerMovement m_PlayerMovement;
         [SerializeField] private DashBehavior m_DashBehavior;
+        [SerializeField] private PlayerMeleeAttack m_PlayerMeleeAttack;
 
         private PlayerState m_CurrentState;
 
@@ -31,44 +33,38 @@ namespace _3C.Player
         {
             m_PlayerMovement.enabled = true;
             m_DashBehavior.enabled = false;
+            m_PlayerMeleeAttack.enabled = false;
         }
 
         private void OnEnable()
         {
-            m_DashBehavior.OnDashEnded += OnDashEnded;
+            m_DashBehavior.OnDashEnded += ResetToMovement;
+            m_PlayerMeleeAttack.OnAttackSerieEnded += ResetToMovement;
         }
 
         private void OnDisable()
         {
-            m_DashBehavior.OnDashEnded -= OnDashEnded;
+            m_DashBehavior.OnDashEnded -= ResetToMovement;
+            m_PlayerMeleeAttack.OnAttackSerieEnded -= ResetToMovement;
+
         }
 
-        private void OnDashEnded()
+        private void ResetToMovement()
         {
             CurrentState = PlayerState.Moving;
         }
 
         private void OnStateChange(PlayerState _currentState, PlayerState _nextState)
         {
-            switch (_currentState)
-            {
-                case PlayerState.Moving:
-                    m_PlayerMovement.enabled = false;
-                    break;
-                case PlayerState.Dashing:
-                    m_DashBehavior.enabled = false;
-                    break;
-            }
-
-            switch (_nextState)
-            {
-                case PlayerState.Moving:
-                    m_PlayerMovement.enabled = true;
-                    break;
-                case PlayerState.Dashing:
-                    m_DashBehavior.enabled = true;
-                    break;
-            }
+            GetBehaviorFromState(_currentState).StopState();
+            GetBehaviorFromState(_nextState).StartState();
         }
+
+        private PlayerStateBehavior GetBehaviorFromState(PlayerState _state) => _state switch
+        {
+            PlayerState.Moving => m_PlayerMovement,
+            PlayerState.Dashing => m_DashBehavior,
+            PlayerState.Attacking => m_PlayerMeleeAttack,
+        };
     }
 }

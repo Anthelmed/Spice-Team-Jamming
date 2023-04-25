@@ -31,7 +31,7 @@ namespace _3C.Player
 
         public void OnMeleeAttack(InputAction.CallbackContext _context)
         {
-            
+            m_PlayerStateHandler.CurrentState = PlayerState.Attacking;
         }
 
         public void OnRangeAttack(InputAction.CallbackContext _context)

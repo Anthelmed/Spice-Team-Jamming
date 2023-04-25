@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 7279425899133959930}
   - component: {fileID: 5055351189083160623}
   - component: {fileID: 1378663455144616290}
+  - component: {fileID: 7435578533157156006}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -133,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlayerMovement: {fileID: 5055351189083160623}
   m_DashBehavior: {fileID: 1378663455144616290}
+  m_PlayerMeleeAttack: {fileID: 7435578533157156006}
 --- !u!114 &5055351189083160623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,6 +195,20 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7435578533157156006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5761272857374477472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b124f6d6f9d0489495b00244336ecc34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MainAttackTriggerParams: 643134471
+  m_Animator: {fileID: 3427079456811530617}
 --- !u!1001 &3684078406265532883
 PrefabInstance:
   m_ObjectHideFlags: 0

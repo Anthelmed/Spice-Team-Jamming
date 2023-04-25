@@ -40,5 +40,11 @@ namespace _3C.Player
             transform.LookAt(transform.position + m_CurrentMovement.X0Y());
             m_Animator.SetFloat(m_SpeedAnimatorParam, m_CurrentMovement.magnitude);
         }
+
+        public override void StopState()
+        {
+            base.StopState();
+            m_Rigidbody.velocity = Vector3.zero;
+        }
     }
 }
