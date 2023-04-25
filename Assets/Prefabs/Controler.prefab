@@ -115,6 +115,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ded65995-5a7a-45e9-b1c1-bc740da46e26
     m_ActionName: Gameplay/RangeAttack[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3254206215208585877}
+        m_TargetAssemblyTypeName: _3C.Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d93b9b1d-7f8e-43f2-88c1-a3c00764750d
+    m_ActionName: Gameplay/Dash[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -132,4 +148,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0f2da36cd34e3bb1d48d9ad2af1093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlayerCharacter: {fileID: 0}
+  m_PlayerMovement: {fileID: 0}
+  m_PlayerStateHandler: {fileID: 0}
