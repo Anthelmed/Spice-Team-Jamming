@@ -6,7 +6,7 @@ namespace _3C.Player
 {
     
     [RequireComponent(typeof(Rigidbody))]
-    public class PlayerCharacter : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] private float m_Speed;
         [Min(0)]
