@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=852c0b1f00071754886a563d72ecb599&amp;type=3#GlobalStyle" />
+    <Style src="project://database/Assets/UI/Styles/MenuStyle.uss?fileID=7433441132597879392&amp;guid=c135cb31704957747ab227c1731b131d&amp;type=3#MenuStyle" />
+    <Style src="project://database/Assets/UI/Styles/SettingsMenuStyle.uss?fileID=7433441132597879392&amp;guid=322427022c814ca44acde71ae90b97c0&amp;type=3#SettingsMenuStyle" />
+    <ui:VisualElement name="Overlay" />
+    <ui:VisualElement name="SettingsMenu" class="menu-main-element">
+        <ui:VisualElement name="SettingsMenuTitle" class="menu-title">
+            <ui:Label tabindex="-1" text="Settings" display-tooltip-when-elided="true" name="SettingsMenuTitleLabel" class="menu-title-label" />
+        </ui:VisualElement>
+        <ui:VisualElement name="SettingsMenuButtons">
+            <ui:Button name="SettingsMenuButtonControls" text="Controls" class="menu-button" />
+            <ui:Button name="SettingsMenuButtonAudio" text="Audio" class="menu-button" />
+            <ui:Button name="SettingsMenuButtonGraphics" text="Graphics" class="menu-button" />
+            <ui:Button name="SettingsMenuButtonAccessibility" text="Accessibility" class="menu-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
