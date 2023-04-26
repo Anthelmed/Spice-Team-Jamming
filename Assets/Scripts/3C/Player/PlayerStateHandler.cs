@@ -106,7 +106,11 @@ namespace _3C.Player
 
         public void OnInputAdded(InputType _input)
         {
-            if (!ShouldCurrentStateBeAborted(_input)) return;
+            if (!ShouldCurrentStateBeAborted(_input))
+            {
+                m_CurrentStateBehavior.OnInput(_input);
+                return;
+            }
             
             CurrentState = (m_CurrentState, _input) switch
             {
@@ -124,6 +128,7 @@ namespace _3C.Player
                 (PlayerState.Attacking, InputType.MovementCanceled) or (PlayerState.Attacking, InputType.MovementPerformed) => false,
                 (PlayerState.Dashing, _) => false,
                 (PlayerState.Moving, InputType.MovementPerformed) or (PlayerState.Moving, InputType.MovementCanceled) => false,
+                (PlayerState.Attacking, InputType.AttackPerformed) => false,
                 _ => true,
             };
         }

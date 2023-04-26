@@ -6,7 +6,8 @@ namespace _3C.Player
     public interface IStateHandler
     {
         void OnStateEnded();
-        void StartCoroutine(IEnumerator _coroutine);
+        Coroutine StartCoroutine(IEnumerator _coroutine);
+        void StopCoroutine(Coroutine _coroutine);
         void StopAllCoroutines();
         GameObject gameObject { get; }
     }

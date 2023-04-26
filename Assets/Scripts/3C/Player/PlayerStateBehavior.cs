@@ -23,5 +23,7 @@ namespace _3C.Player
         public virtual void Update() {}
 
         public virtual void OnValidate() {}
+
+        public virtual void OnInput(InputType inputType) { }
     }
 }

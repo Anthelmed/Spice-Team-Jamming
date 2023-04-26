@@ -27,7 +27,7 @@ namespace _3C.Player
         {
             if (_context.phase == InputActionPhase.Performed)
             {
-                StackInputIfNotTop(InputType.DashPerformed);
+                StackInput(InputType.DashPerformed);
             }
         }
 
@@ -35,7 +35,7 @@ namespace _3C.Player
         {
             if (_context.phase == InputActionPhase.Performed)
             {
-                StackInputIfNotTop(InputType.AttackPerformed);
+                StackInput(InputType.AttackPerformed);
             }
         }
 
@@ -51,6 +51,11 @@ namespace _3C.Player
                 return;
             }
             
+            StackInput(_input);
+        }
+
+        private void StackInput(InputType _input)
+        {
             GameplayData.s_PlayerInputs.InputStack.Add(_input);
             GameplayData.s_PlayerStateHandler.OnInputAdded(_input);
         }
