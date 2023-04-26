@@ -8,6 +8,10 @@ namespace _3C.Player
     [Serializable]
     public class DashBehavior : PlayerStateBehavior
     {
+        [AnimatorParam("m_Animator")]
+        [SerializeField] private int m_DashTriggerParam;
+        [SerializeField] private Animator m_Animator;
+        
         [SerializeField] private bool m_HasOvershootFrame;
         [ShowIf("m_HasOvershootFrame")]
         [SerializeField] private float m_OvershootDistance;
@@ -41,6 +45,7 @@ namespace _3C.Player
         public override void StartState()
         {
             m_StateHandler.StartCoroutine(c_Dashing());
+            m_Animator.SetTrigger(m_DashTriggerParam);
         }
 
         public override void StopState()

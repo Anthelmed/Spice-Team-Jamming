@@ -19,6 +19,8 @@ namespace _3C.Player
         [Header("Animation")]
         [AnimatorParam("m_Animator")]
         [SerializeField] private int m_SpeedAnimatorParam;
+        [AnimatorParam("m_Animator")]
+        [SerializeField] private int m_MovementTriggerParam;
         [SerializeField] private Animator m_Animator;
 
         [HideInInspector]
@@ -56,6 +58,11 @@ namespace _3C.Player
         {
             m_Rigidbody.velocity = Vector3.zero;
             ChangeAnimatorSpeedParameter(0);
+        }
+
+        public override void StartState()
+        {
+            m_Animator.SetTrigger(m_MovementTriggerParam);
         }
     }
 }

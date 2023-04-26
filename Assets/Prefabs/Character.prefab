@@ -134,9 +134,12 @@ MonoBehaviour:
     m_Speed: 5
     m_MovementDamping: 8
     m_SpeedAnimatorParam: -823668238
+    m_MovementTriggerParam: 229373857
     m_Animator: {fileID: 3427079456811530617}
     Movement: {x: 0, y: 0}
   m_DashBehavior:
+    m_DashTriggerParam: -1043442331
+    m_Animator: {fileID: 3427079456811530617}
     m_HasOvershootFrame: 1
     m_OvershootDistance: 0
     m_HasOvershootPauseFrame: 1
