@@ -1,0 +1,60 @@
+.menu-main-element {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.menu-title {
+    width: 600px;
+    height: 128px;
+    position: absolute;
+    left: 100px;
+    top: 100px;
+    background-image: url('project://database/Assets/UI/Textures/Ribbon.png?fileID=2800000&guid=c1bbd763c7324d344a631533f712280d&type=3#Ribbon');
+    justify-content: center;
+    align-items: center;
+    -unity-background-image-tint-color: var(--title-background-tint);
+}
+
+.menu-title-label {
+    width: 100%;
+    height: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 30px;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    -unity-text-align: middle-center;
+    font-size: var(--title-font-size);
+    -unity-font: var(--rowdies-font-regular);
+    color: var(--title-text-color);
+}
+
+.menu-button {
+    width: 398px;
+    height: 100px;
+    margin-bottom: 25px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-image: url('project://database/Assets/UI/Textures/Button.png?fileID=2800000&guid=39146f4ae7969b44398fecb7a74931bc&type=3#Button');
+    font-size: var(--button-font-size);
+    -unity-font: var(--rowdies-font-regular);
+    color: var(--button-text-color);
+    -unity-text-align: middle-center;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    -unity-background-image-tint-color: var(--button-background-tint);
+}
