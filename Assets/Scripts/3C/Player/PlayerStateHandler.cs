@@ -18,6 +18,9 @@ namespace _3C.Player
     
     public class PlayerStateHandler : MonoBehaviour, IStateHandler
     {
+        [Header("Handler Settings")]
+        [SerializeField] private int m_InputStackSize;
+        
         [Header("State Settings")]
         [SerializeField] private PlayerMovement m_PlayerMovement;
         [SerializeField] private DashBehavior m_DashBehavior;
@@ -55,6 +58,7 @@ namespace _3C.Player
         {
             GameplayData.s_PlayerStateHandler = this;
             GameplayData.s_PlayerInputs = m_PlayerInputs;
+            m_PlayerInputs.InputStack = new(m_InputStackSize);
             foreach (var playerStateBehavior in StatesBehaviors)
             {
                 playerStateBehavior.Awake(this);
@@ -74,6 +78,7 @@ namespace _3C.Player
             PlayerState.Moving => m_PlayerMovement,
             PlayerState.Dashing => m_DashBehavior,
             PlayerState.Attacking => m_PlayerMeleeAttack,
+            _ => null,
         };
 
         public void OnStateEnded()
@@ -97,6 +102,30 @@ namespace _3C.Player
             {
                 playerStateBehavior.OnValidate();
             }
+        }
+
+        public void OnInputAdded(InputType _input)
+        {
+            if (!ShouldCurrentStateBeAborted(_input)) return;
+            
+            CurrentState = (m_CurrentState, _input) switch
+            {
+                (PlayerState.Moving, InputType.AttackPerformed) => PlayerState.Attacking,
+                (PlayerState.Moving, InputType.DashPerformed) => PlayerState.Dashing,
+                (PlayerState.Attacking, InputType.DashPerformed) => PlayerState.Dashing,
+                _ => throw new Exception($" {m_CurrentState} - {_input} is not handled"),
+            };
+        }
+
+        private bool ShouldCurrentStateBeAborted(InputType _input)
+        {
+            return (m_CurrentState, _input) switch
+            {
+                (PlayerState.Attacking, InputType.MovementCanceled) or (PlayerState.Attacking, InputType.MovementPerformed) => false,
+                (PlayerState.Dashing, _) => false,
+                (PlayerState.Moving, InputType.MovementPerformed) or (PlayerState.Moving, InputType.MovementCanceled) => false,
+                _ => true,
+            };
         }
     }
 }

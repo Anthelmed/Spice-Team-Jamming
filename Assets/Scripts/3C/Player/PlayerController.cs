@@ -10,15 +10,24 @@ namespace _3C.Player
     {
         public void OnMovementAsked(InputAction.CallbackContext _context)
         {
+            switch (_context.phase)
+            {
+                case InputActionPhase.Performed:
+                    StackInputIfNotTop(InputType.MovementPerformed);
+                    break;
+                case InputActionPhase.Canceled:
+                    StackInputIfNotTop(InputType.MovementCanceled);
+                    break;
+            }
+
             GameplayData.s_PlayerInputs.Movement = _context.ReadValue<Vector2>();
-            Debug.Log("On Movement Asked");
         }
 
         public void OnDash(InputAction.CallbackContext _context)
         {
             if (_context.phase == InputActionPhase.Performed)
             {
-                GameplayData.s_PlayerStateHandler.CurrentState = PlayerState.Dashing;
+                StackInputIfNotTop(InputType.DashPerformed);
             }
         }
 
@@ -26,13 +35,24 @@ namespace _3C.Player
         {
             if (_context.phase == InputActionPhase.Performed)
             {
-                GameplayData.s_PlayerStateHandler.CurrentState = PlayerState.Attacking;
+                StackInputIfNotTop(InputType.AttackPerformed);
             }
         }
 
         public void OnRangeAttack(InputAction.CallbackContext _context)
         {
             
+        }
+
+        private void StackInputIfNotTop(InputType _input)
+        {
+            if (!GameplayData.s_PlayerInputs.InputStack.IsEmpty &&GameplayData.s_PlayerInputs.InputStack.Top == _input)
+            {
+                return;
+            }
+            
+            GameplayData.s_PlayerInputs.InputStack.Add(_input);
+            GameplayData.s_PlayerStateHandler.OnInputAdded(_input);
         }
     }
 }

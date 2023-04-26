@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29367b00162245c487e75ad1240e9dbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_InputStackSize: 32
   m_PlayerMovement:
     m_Speed: 5
     m_MovementDamping: 8
@@ -171,6 +172,7 @@ MonoBehaviour:
     m_MainAttackTriggerParams: 643134471
     m_Animator: {fileID: 3427079456811530617}
     m_CurrentlyAttacking: 0
+  m_CurrentState: 0
 --- !u!1001 &3684078406265532883
 PrefabInstance:
   m_ObjectHideFlags: 0
