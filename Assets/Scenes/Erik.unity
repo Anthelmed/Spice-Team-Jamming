@@ -409,11 +409,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2243334194748537, guid: eac1ae59bef618847b73c10b4d795403, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000021954934
+      value: -0.00000002195493
       objectReference: {fileID: 0}
     - target: {fileID: 2243334194748537, guid: eac1ae59bef618847b73c10b4d795403, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000013568895
+      value: 0.000000013568893
       objectReference: {fileID: 0}
     - target: {fileID: 445589202552034109, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
@@ -475,6 +475,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4162673794576891586, guid: eac1ae59bef618847b73c10b4d795403,
+        type: 3}
+      propertyPath: m_PlayerMeleeAttack.m_InputWaitDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162673794576891586, guid: eac1ae59bef618847b73c10b4d795403,
+        type: 3}
+      propertyPath: m_PlayerMeleeAttack.m_AttackTriggers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4202057811293341206, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -503,12 +513,12 @@ PrefabInstance:
     - target: {fileID: 5312326701685609516, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000021954934
+      value: -0.00000002195493
       objectReference: {fileID: 0}
     - target: {fileID: 5312326701685609516, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000013568895
+      value: 0.000000013568893
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

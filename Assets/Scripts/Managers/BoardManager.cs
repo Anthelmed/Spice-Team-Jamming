@@ -60,6 +60,8 @@ public class BoardManager : MonoBehaviour
         _biomePrefabHolders.Add(Biome.Mountain, mountainPrefabHolder);
         _biomePrefabHolders.Add(Biome.Forest, forestPrefabHolder);
         _biomePrefabHolders.Add(Biome.Water, waterPrefabHolder);
+        
+        noiseOffset = Random.Range(-100f, 100f);
     }
     
     private void Start()

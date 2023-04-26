@@ -5,8 +5,13 @@ using UnityEngine;
 
 namespace _3C.Player
 {
+    [Serializable]
     public class DashBehavior : PlayerStateBehavior
     {
+        [AnimatorParam("m_Animator")]
+        [SerializeField] private int m_DashTriggerParam;
+        [SerializeField] private Animator m_Animator;
+        
         [SerializeField] private bool m_HasOvershootFrame;
         [ShowIf("m_HasOvershootFrame")]
         [SerializeField] private float m_OvershootDistance;
@@ -24,12 +29,12 @@ namespace _3C.Player
         [SerializeField] private AnimationCurve m_DistanceCurve;
         
         private float m_InverseDuration;
+        private Transform m_Transform;
 
-        public Action OnDashEnded;
-
-        private void Awake()
+        protected override void Init(IStateHandler _stateHandler)
         {
             UpdateInnerValues();
+            m_Transform = _stateHandler.gameObject.transform;
         }
 
         private void UpdateInnerValues()
@@ -37,19 +42,25 @@ namespace _3C.Player
             m_InverseDuration = 1 / m_Duration;
         }
 
-        private void OnEnable()
+        public override void StartState()
         {
-            StartCoroutine(c_Dashing());
+            m_StateHandler.StartCoroutine(c_Dashing());
+            m_Animator.SetTrigger(m_DashTriggerParam);
+        }
+
+        public override void StopState()
+        {
+            m_StateHandler.StopAllCoroutines();
         }
 
         private IEnumerator c_Dashing()
         {
-            Vector3 start = transform.position;
-            Vector3 end = transform.position + transform.forward * m_Distance;
+            Vector3 start = m_Transform.position;
+            Vector3 end = m_Transform.position + m_Transform.forward * m_Distance;
 
             if (m_HasOvershootFrame)
             {
-                transform.position -= transform.forward * m_OvershootDistance;
+                m_Transform.position -= m_Transform.forward * m_OvershootDistance;
                 yield return null;
                 if (m_HasOvershootPauseFrame)
                 {
@@ -62,26 +73,21 @@ namespace _3C.Player
                 float ratio = time * m_InverseDuration;
                 float remappedRatio = m_DistanceCurve.Evaluate(ratio);
 
-                transform.position = Vector3.LerpUnclamped(start, end, remappedRatio);
+                m_Transform.position = Vector3.LerpUnclamped(start, end, remappedRatio);
                 yield return null;
             }
             
             if (m_HasBounceFrame)
             {
-                transform.position += transform.forward * m_BounceDistance;
+                m_Transform.position += m_Transform.forward * m_BounceDistance;
                 yield return null;
             }
             
-            transform.position = end;
-            OnDashEnded?.Invoke();
+            m_Transform.position = end;
+            m_StateHandler.OnStateEnded();
         }
 
-        private void OnDisable()
-        {
-            StopAllCoroutines();
-        }
-
-        private void OnValidate()
+        public override void OnValidate()
         {
             UpdateInnerValues();
         }
