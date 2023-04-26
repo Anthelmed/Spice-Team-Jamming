@@ -336,6 +336,9 @@
         },
         {
             "m_Id": "765fee7b30d34ba48f25d94841df0bf1"
+        },
+        {
+            "m_Id": "4c51758144864f939c8dcfe6371d2201"
         }
     ],
     "m_GroupDatas": [],
@@ -1613,6 +1616,9 @@
         "m_Blocks": [
             {
                 "m_Id": "2f5a2d3a8b684d05a73c860ab84de3e0"
+            },
+            {
+                "m_Id": "4c51758144864f939c8dcfe6371d2201"
             }
         ]
     },
@@ -4431,6 +4437,40 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "4c51758144864f939c8dcfe6371d2201",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "SurfaceDescription.Alpha",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "a5421a80fced4efe95a281c468baa4bb"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "SurfaceDescription.Alpha"
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
     "m_ObjectId": "4c624c61931d480ba53b253c3c17396d",
     "m_Id": 1,
@@ -5042,7 +5082,7 @@
         "m_Id": "11e811de428f4025bfcaeca4f3fec4b1"
     },
     "m_AllowMaterialOverride": false,
-    "m_SurfaceType": 0,
+    "m_SurfaceType": 1,
     "m_ZTestMode": 4,
     "m_ZWriteControl": 1,
     "m_AlphaMode": 0,
@@ -7712,6 +7752,21 @@
         "e32": 0.0,
         "e33": 1.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "a5421a80fced4efe95a281c468baa4bb",
+    "m_Id": 0,
+    "m_DisplayName": "Alpha",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Alpha",
+    "m_StageCapability": 2,
+    "m_Value": 1.0,
+    "m_DefaultValue": 1.0,
+    "m_Labels": []
 }
 
 {
