@@ -18,8 +18,10 @@ public class KnightBehaviour : MonoBehaviour
 
     [Header("Parameters")]
     [SerializeField] private Vector2 m_attackRange = Vector2.up;
+    [SerializeField] private float m_attackCooldown = 2f;
 
     private static readonly int SPEED = Animator.StringToHash("Speed");
+    private static readonly int ATTACK = Animator.StringToHash("Attack");
 
     private Vector3 m_lastPosition;
 
@@ -29,12 +31,15 @@ public class KnightBehaviour : MonoBehaviour
         GoToTarget,
         CombatIdle,
         Retreat,
+        Attack,
     }
 
     private State m_state = State.Idle;
     private State m_nextState = State.Idle;
     private bool m_lookAtTarget = false;
     private bool m_alignWithMovement = false;
+    private bool m_animationFinished = false;
+    private float m_currentAttackCooldown = 0f;
 
     private void OnValidate()
     {
@@ -53,6 +58,9 @@ public class KnightBehaviour : MonoBehaviour
 
     private void Update()
     {
+        // Update cooldowns
+        m_currentAttackCooldown -= Time.deltaTime;
+
         // Update before just in case
         UpdateTransition();
 
@@ -69,6 +77,9 @@ public class KnightBehaviour : MonoBehaviour
                 break;
             case State.Retreat:
                 Retreat_Update();
+                break;
+            case State.Attack:
+                Attack_Update();
                 break;
         }
 
@@ -113,6 +124,9 @@ public class KnightBehaviour : MonoBehaviour
             case State.Retreat:
                 Retreat_Exit();
                 break;
+            case State.Attack:
+                Attack_Exit();
+                break;
         }
 
         switch (m_nextState)
@@ -126,9 +140,17 @@ public class KnightBehaviour : MonoBehaviour
             case State.Retreat:
                 Retreat_Enter();
                 break;
+            case State.Attack:
+                Attack_Enter();
+                break;
         }
 
         m_state = m_nextState;
+    }
+
+    private void OnAnimationFinished()
+    {
+        m_animationFinished = true;
     }
 
     private void OnDrawGizmosSelected()
@@ -211,6 +233,12 @@ public class KnightBehaviour : MonoBehaviour
             m_nextState = State.Retreat;
             return;
         }
+
+        if (m_currentAttackCooldown < 0f)
+        {
+            m_currentAttackCooldown = m_attackCooldown;
+            m_nextState = State.Attack;
+        }
     }
 
     private void CombatIdle_Exit()
@@ -244,6 +272,25 @@ public class KnightBehaviour : MonoBehaviour
     private void Retreat_Exit()
     {
         m_alignWithMovement = false;
+    }
+    #endregion
+
+    #region Attack
+    private void Attack_Enter()
+    {
+        m_animator.SetTrigger(ATTACK);
+        m_animationFinished = false;
+    }
+
+    private void Attack_Update()
+    {
+        if (m_animationFinished)
+            m_nextState = State.CombatIdle;
+    }
+
+    private void Attack_Exit()
+    {
+        m_animationFinished = false;
     }
     #endregion
     #endregion
