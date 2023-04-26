@@ -5,17 +5,17 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
 public class KnightBehaviour : MonoBehaviour
 {
     public Transform target;
 
     [SerializeField] private NavMeshAgent m_agent;
-    [SerializeField] private Rigidbody m_rigidbody;
     [SerializeField] private Animator m_animator;
 
     private static readonly int SPEED = Animator.StringToHash("Speed");
+
+    private Vector3 m_lastPosition;
 
     private enum State
     {
@@ -29,7 +29,6 @@ public class KnightBehaviour : MonoBehaviour
     private void OnValidate()
     {
         m_agent = GetComponent<NavMeshAgent>();
-        m_rigidbody = GetComponent<Rigidbody>();
         m_animator = GetComponent<Animator>();
     }
     private void Reset()
@@ -37,10 +36,13 @@ public class KnightBehaviour : MonoBehaviour
         OnValidate();
     }
 
+    private void Start()
+    {
+        m_lastPosition = transform.position;
+    }
+
     private void Update()
     {
-        m_animator.SetFloat(SPEED, m_rigidbody.velocity.magnitude);
-
         // Update before just in case
         UpdateTransition();
 
@@ -56,6 +58,10 @@ public class KnightBehaviour : MonoBehaviour
 
         // Update after to pick changes during the update
         UpdateTransition();
+
+        var movement = transform.position - m_lastPosition;
+        m_lastPosition = transform.position;
+        m_animator.SetFloat(SPEED, movement.magnitude / Time.deltaTime);
     }
 
     private void UpdateTransition()
