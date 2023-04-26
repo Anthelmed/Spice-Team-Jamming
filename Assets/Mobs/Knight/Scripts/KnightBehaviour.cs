@@ -27,12 +27,14 @@ public class KnightBehaviour : MonoBehaviour
     {
         Idle,
         GoToTarget,
-        CombatIdle
+        CombatIdle,
+        Retreat,
     }
 
     private State m_state = State.Idle;
     private State m_nextState = State.Idle;
     private bool m_lookAtTarget = false;
+    private bool m_alignWithMovement = false;
 
     private void OnValidate()
     {
@@ -65,6 +67,9 @@ public class KnightBehaviour : MonoBehaviour
             case State.CombatIdle:
                 CombatIdle_Update();
                 break;
+            case State.Retreat:
+                Retreat_Update();
+                break;
         }
 
         // Update after to pick changes during the update
@@ -83,6 +88,13 @@ public class KnightBehaviour : MonoBehaviour
                 Quaternion.LookRotation(target.position - transform.position),
                 m_agent.angularSpeed * Time.deltaTime);
         }
+        if (m_alignWithMovement)
+        {
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                Quaternion.LookRotation(movement),
+                m_agent.angularSpeed * Time.deltaTime);
+        }
     }
 
     private void UpdateTransition()
@@ -98,6 +110,9 @@ public class KnightBehaviour : MonoBehaviour
             case State.CombatIdle:
                 CombatIdle_Exit();
                 break;
+            case State.Retreat:
+                Retreat_Exit();
+                break;
         }
 
         switch (m_nextState)
@@ -107,6 +122,9 @@ public class KnightBehaviour : MonoBehaviour
                 break;
             case State.CombatIdle:
                 CombatIdle_Enter();
+                break;
+            case State.Retreat:
+                Retreat_Enter();
                 break;
         }
 
@@ -181,9 +199,16 @@ public class KnightBehaviour : MonoBehaviour
             return;
         }
 
-        if ((target.position - transform.position).sqrMagnitude > (m_attackRange.y * m_attackRange.y))
+        var targetDistSq = (target.position - transform.position).sqrMagnitude;
+        if (targetDistSq > (m_attackRange.y * m_attackRange.y))
         {
             m_nextState = State.GoToTarget;
+            return;
+        }
+
+        if (targetDistSq < (m_attackRange.x * m_attackRange.x))
+        {
+            m_nextState = State.Retreat;
             return;
         }
     }
@@ -191,6 +216,34 @@ public class KnightBehaviour : MonoBehaviour
     private void CombatIdle_Exit()
     {
         m_lookAtTarget = false;
+    }
+    #endregion
+
+    #region Retreat
+    private void Retreat_Enter()
+    {
+        m_alignWithMovement = true;
+    }
+
+    private void Retreat_Update()
+    {
+        if (!target)
+        {
+            m_nextState = State.Idle;
+            return;
+        }
+
+        var fromTarget = (transform.position - target.position);
+        var distance = fromTarget.magnitude;
+        m_agent.velocity = (transform.position - target.position) / distance * m_agent.speed;
+
+        if (distance > m_attackRange.x)
+            m_nextState = State.CombatIdle;
+    }
+
+    private void Retreat_Exit()
+    {
+        m_alignWithMovement = false;
     }
     #endregion
     #endregion
