@@ -125,8 +125,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   m_agent: {fileID: 4482205200788809980}
-  m_rigidbody: {fileID: 6531370487428734259}
   m_animator: {fileID: 8952618470742183899}
+  m_attackRange: {x: 1.5, y: 3}
 --- !u!195 &4482205200788809980
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -136,7 +136,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8952618470749584487}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 1
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
