@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace _3C.Player
 {
+    [Serializable]
     public class PlayerMeleeAttack : PlayerStateBehavior
     {
         [Header("Animation")]
@@ -13,23 +14,29 @@ namespace _3C.Player
         [SerializeField] private Animator m_Animator;
 
         public Action OnAttackSerieEnded;
+
+        [Header("Debug")]
+        [SerializeField, ReadOnly]
+        private bool m_CurrentlyAttacking;
         
         public override void StartState()
         {
-            base.StartState();
-            PlayNextAttack();
+            if (!m_CurrentlyAttacking)
+            {
+                PlayNextAttack();
+            }
         }
 
         private void PlayNextAttack()
         {
+            m_CurrentlyAttacking = true;
             m_Animator.SetTrigger(m_MainAttackTriggerParams);
-            StartCoroutine(c_WaitFor(0.5f));
         }
 
-        private IEnumerator c_WaitFor(float _waitTime)
+        public void OnAttackAnimationEnded()
         {
-            yield return new WaitForSeconds(_waitTime);
-            OnAttackSerieEnded?.Invoke();
+            m_CurrentlyAttacking = false;
+            m_StateHandler.OnStateEnded();
         }
     }
 }
