@@ -57,7 +57,7 @@ namespace _3C.Player
         private void Awake()
         {
             GameplayData.s_PlayerStateHandler = this;
-            GameplayData.s_PlayerInputs = m_PlayerInputs;
+            GameplayData.s_PlayerInputs = m_PlayerInputs = new PlayerInputs();
             m_PlayerInputs.InputStack = new(m_InputStackSize);
             foreach (var playerStateBehavior in StatesBehaviors)
             {

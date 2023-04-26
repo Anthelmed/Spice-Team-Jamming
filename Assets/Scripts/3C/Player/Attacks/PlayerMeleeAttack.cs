@@ -62,7 +62,6 @@ namespace _3C.Player
             }
             else
             {
-                Debug.Log(GameplayData.s_PlayerInputs.InputStack.Top);
                 if (GameplayData.s_PlayerInputs.InputStack.Top == InputType.AttackPerformed)
                 {
                     m_WaitForInputCoroutine = m_StateHandler.StartCoroutine(c_WaitForInput());
