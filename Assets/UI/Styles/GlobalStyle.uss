@@ -8,7 +8,7 @@
     --button-background-tint: rgb(131, 101, 126);
     --rowdies-font-regular: url('project://database/Assets/Fonts/Rowdies/Rowdies-Regular.ttf?fileID=12800000&guid=2cea9ff495f9b4a4daed12e48f24ef32&type=3#Rowdies-Regular');
     --montserrat-font-regular: url('project://database/Assets/Fonts/Montserrat/Montserrat-Regular.ttf?fileID=12800000&guid=95cc2332f1c404c4e86ccc0a5d4d2616&type=3#Montserrat-Regular');
-    --montserrat-font-bold: url('project://database/Assets/Fonts/Montserrat/Montserrat-Bold.ttf');
+    --montserrat-font-bold: url('project://database/Assets/Fonts/Montserrat/Montserrat-Bold.ttf?fileID=12800000&guid=5f840e1af5ef1174089c0c7f44033efa&type=3#Montserrat-Bold');
     -unity-font-definition: initial;
 }
 
@@ -18,7 +18,7 @@
     top: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(30, 30, 30, 0.5);
+    background-color: rgba(30, 30, 30, 0.7);
 }
 
 .square-button {

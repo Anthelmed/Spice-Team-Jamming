@@ -61,16 +61,16 @@
 
 .menu-action-helpers {
     position: absolute;
-    right: 50px;
-    bottom: 50px;
-    flex-direction: row-reverse;
+    bottom: 100px;
+    flex-direction: column;
+    left: 100px;
 }
 
 .menu-action-helper {
     align-items: center;
-    justify-content: flex-end;
-    flex-direction: row-reverse;
-    margin-left: 40px;
+    justify-content: flex-start;
+    flex-direction: row;
+    margin-top: 25px;
 }
 
 .menu-action-helper-icon {
@@ -78,7 +78,10 @@
     height: 50px;
     background-image: url('project://database/Assets/UI/Textures/SquareButton.png?fileID=2800000&guid=daece4c02aca5df409861f29d70b9556&type=3#SquareButton');
     -unity-background-image-tint-color: var(--button-background-tint);
-    margin-left: 20px;
+    margin-left: 0;
+    margin-right: 25px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .menu-action-helper-icon-label {
@@ -110,5 +113,5 @@
     padding-top: 0;
     padding-bottom: 0;
     -unity-text-align: middle-right;
-    font-size: 18px;
+    font-size: 22px;
 }
