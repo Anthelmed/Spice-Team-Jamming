@@ -42,7 +42,7 @@ namespace _3C.Player
             m_InverseDuration = 1 / m_Duration;
         }
 
-        public override void StartState()
+        public override void StartState(PlayerState _previousState)
         {
             m_StateHandler.StartCoroutine(c_Dashing());
             m_Animator.SetTrigger(m_DashTriggerParam);

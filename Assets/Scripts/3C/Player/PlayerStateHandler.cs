@@ -57,7 +57,7 @@ namespace _3C.Player
         private void Awake()
         {
             GameplayData.s_PlayerStateHandler = this;
-            GameplayData.s_PlayerInputs = m_PlayerInputs;
+            GameplayData.s_PlayerInputs = m_PlayerInputs = new PlayerInputs();
             m_PlayerInputs.InputStack = new(m_InputStackSize);
             foreach (var playerStateBehavior in StatesBehaviors)
             {
@@ -70,7 +70,7 @@ namespace _3C.Player
         {
             m_CurrentStateBehavior?.StopState();
             m_CurrentStateBehavior = GetBehaviorFromState(_nextState); 
-            m_CurrentStateBehavior.StartState();
+            m_CurrentStateBehavior.StartState(_currentState);
         }
 
         private PlayerStateBehavior GetBehaviorFromState(PlayerState _state) => _state switch

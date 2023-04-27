@@ -16,7 +16,7 @@ namespace _3C.Player
 
         protected virtual void Init(IStateHandler _stateHandler) {}
         
-        public virtual void StartState() {}
+        public virtual void StartState(PlayerState _previousState) {}
 
         public virtual void StopState() {}
         

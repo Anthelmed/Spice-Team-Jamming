@@ -55,6 +55,16 @@ namespace Utilities.DataStructure
             }
         }
 
+        public T GetTop(int _backIndex)
+        {
+            if (_backIndex >= m_End)
+            {
+                throw new Exception($"Can't get top({_backIndex}) because Count = {Count}");
+            }
+
+            return m_Data[m_End - 1 - _backIndex];
+        }
+        
         public void Clear()
         {
             m_End = 0;
@@ -70,5 +80,7 @@ namespace Utilities.DataStructure
                 }
             }
         }
+
+        public int Count => m_End;
     }
 }
