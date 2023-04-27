@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.InputSystem;
+
 public class GameManager : MonoBehaviour
 {
     public enum GameState
@@ -182,24 +184,45 @@ public class GameManager : MonoBehaviour
         loadingScreenVisibilityEvent(false);
     }
 
-    public void TogglePause()// for testing only
+
+
+    public void OnTogglePause(InputAction.CallbackContext _context)
     {
+        if (_context.phase == InputActionPhase.Performed)
+            switch (currentGameState)
+            {
 
-        switch (currentGameState)
+                case GameState.battle:
+                    {
+                        TransitionToState(GameState.pause);
+                    }
+                    break;
+                case GameState.pause:
+                    {
+                        TransitionToState(GameState.battle);
+                    }
+                    break;
+            }
+    }
+    public void OnTileClicked(InputAction.CallbackContext _context)
+    {
+        if (_context.phase == InputActionPhase.Performed)
         {
-
-            case GameState.battle:
-                {
-                    TransitionToState(GameState.pause);
-                }
-                break;
-            case GameState.pause:
-                {
-                    TransitionToState(GameState.battle);
-                }
-                break;
+          // wait for the hold
         }
     }
+
+    public void OnTileReleased(InputAction.CallbackContext _context)
+    {
+        if (_context.phase == InputActionPhase.Canceled)
+        {
+            // either cancel or raycast and load the selected scene
+        }
+    }
+
+
+
+
     /// <summary>
     /// //debbuggin stuff below here
     /// </summary>
