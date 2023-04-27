@@ -45,7 +45,7 @@ namespace _3C.Player
         public override void StartState(PlayerState _previousState)
         {
             m_StateHandler.StartCoroutine(c_Dashing());
-            m_Animator.SetTrigger(m_DashTriggerParam);
+            //m_Animator?.SetTrigger(m_DashTriggerParam);
         }
 
         public override void StopState()

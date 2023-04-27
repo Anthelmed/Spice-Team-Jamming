@@ -50,8 +50,7 @@ namespace _3C.Player
 
         private void ChangeAnimatorSpeedParameter(float _value)
         {
-            m_Animator.SetFloat(m_SpeedAnimatorParam, _value);
-
+            //m_Animator?.SetFloat(m_SpeedAnimatorParam, _value);
         }
 
         public override void StopState()
@@ -62,7 +61,7 @@ namespace _3C.Player
 
         public override void StartState(PlayerState _previousState)
         {
-            m_Animator.SetTrigger(m_MovementTriggerParam);
+            //m_Animator?.SetTrigger(m_MovementTriggerParam);
         }
     }
 }
