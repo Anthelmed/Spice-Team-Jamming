@@ -12,8 +12,10 @@ public class VatAnimationDriver : MonoBehaviour
 
     private MaterialPropertyBlock m_mpb;
     private int m_currentAnimation = -1;
+    private Vector4 m_previousData;
 
     private readonly int ANIM_DATA = Shader.PropertyToID("_AnimData");
+    private readonly int PREV_ANIM_DATA = Shader.PropertyToID("_PrevAnimData");
 
     private void OnValidate()
     {
@@ -39,6 +41,8 @@ public class VatAnimationDriver : MonoBehaviour
         var data = animationData.animations[desiredAnimation];
         data.w = Time.timeSinceLevelLoad;
         m_mpb.SetVector(ANIM_DATA, data);
+        m_mpb.SetVector(PREV_ANIM_DATA, m_previousData);
+        m_previousData = data;
         m_renderer.SetPropertyBlock(m_mpb);
     }
 }
