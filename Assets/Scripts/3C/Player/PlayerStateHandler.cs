@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+using DefaultNamespace.Audio;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -25,6 +26,12 @@ namespace _3C.Player
         [SerializeField] private PlayerMovement m_PlayerMovement;
         [SerializeField] private DashBehavior m_DashBehavior;
         [SerializeField] private PlayerMeleeAttack m_PlayerMeleeAttack;
+
+        [Header("Componens")]
+        [SerializeField] private Animator m_Animator;
+        [SerializeField] private PlayerSounds m_Sounds;
+
+        public PlayerSounds PlayerSoundsInstance => m_Sounds;
 
         private PlayerInputs m_PlayerInputs = new();
         
@@ -56,6 +63,11 @@ namespace _3C.Player
 
         private void Awake()
         {
+            if (m_Animator)
+            {
+                Debug.LogWarning("The state machine is thought for animated based character so watch out");
+            }
+            
             GameplayData.s_PlayerStateHandler = this;
             GameplayData.s_PlayerInputs = m_PlayerInputs = new PlayerInputs();
             m_PlayerInputs.InputStack = new(m_InputStackSize);

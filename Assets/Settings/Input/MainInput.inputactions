@@ -34,9 +34,9 @@
             "id": "e0853514-78b5-448b-8134-f7cdf29dd75d",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Select",
                     "type": "Button",
-                    "id": "014518c0-27d9-4f68-b469-a0ec34e22a8c",
+                    "id": "94cdf750-6324-4585-8075-cfd1fa1f0c58",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -46,12 +46,23 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "ce1bb0f7-fe07-4342-906f-4c05545211a4",
-                    "path": "",
+                    "id": "b2d70ad9-d2ef-4844-8281-ad27a4b78d82",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "New action",
+                    "groups": "KeyboardMouse",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "474b7151-7d4d-4e72-8ffc-dd200079f5ac",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -92,6 +103,15 @@
                     "name": "Dash",
                     "type": "Button",
                     "id": "d93b9b1d-7f8e-43f2-88c1-a3c00764750d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "4184d08c-d774-4c84-887e-a734e8fb6342",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -239,6 +259,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3f265182-76ca-43e8-8a12-3173ba84c55e",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd959ddb-4b9c-4cf3-a72a-863ca75cd71f",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

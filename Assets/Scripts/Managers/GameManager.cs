@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.InputSystem;
+
 public class GameManager : MonoBehaviour
 {
     public enum GameState
@@ -13,10 +15,6 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField] string testBattleMapName;
-    [SerializeField] UIPanel startScreen;
-    [SerializeField] UIPanel pauseScreen;
-    [SerializeField] UIPanel loadingScreen;
-    [SerializeField] Transform panelParent;
     [SerializeField] GameObject mapGraphics;
     UIPanel[] allPanels;
   
@@ -26,6 +24,11 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     float pauseCoolDown;
+
+    public event Action<bool> loadingScreenVisibilityEvent = delegate { };
+    public event Action<bool> startScreenVisibilityEvent = delegate { };
+    public event Action<bool> pauseScreenVisibilityEvent = delegate { };
+
 
     private void Awake()
     {
@@ -38,7 +41,7 @@ public class GameManager : MonoBehaviour
         }
 
         HideAllPanels();
-        startScreen.Show();
+        startScreenVisibilityEvent(true);
     }
 
     public void StartGame()
@@ -69,7 +72,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.pause:
                 {
-                    pauseScreen.Hide();
+                    pauseScreenVisibilityEvent(false);
                 }
                 break;
             default:
@@ -88,7 +91,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.pause:
                 {
-                    pauseScreen.Show();
+                    pauseScreenVisibilityEvent(true);
                     //switch input map
                 }
                 break;
@@ -153,7 +156,7 @@ public class GameManager : MonoBehaviour
     IEnumerator LoadScene(String sceneToLoad)
     {
         foreach (var panel in allPanels) panel.Hide();
-        loadingScreen.Show();
+        loadingScreenVisibilityEvent(true);
          AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
 
         while (!asyncLoad.isDone)
@@ -168,39 +171,58 @@ public class GameManager : MonoBehaviour
         mapGraphics.SetActive(false); /// do this in the map script. just the graphics should get turned off
 
         TransitionToState(GameState.battle);
-        loadingScreen.Hide();
+        loadingScreenVisibilityEvent(false);
         
     }
 
 
-    private void OnValidate()
-    {
-        allPanels = panelParent.GetComponentsInChildren<UIPanel>();
-    }
     [ContextMenu(" hide all panels")]
     public void HideAllPanels()
     {
-        foreach (var panel in allPanels) panel.Hide();
+        startScreenVisibilityEvent(false);
+        pauseScreenVisibilityEvent(false);
+        loadingScreenVisibilityEvent(false);
     }
 
-    public void TogglePause()// for testing only
+
+
+    public void OnTogglePause(InputAction.CallbackContext _context)
     {
+        if (_context.phase == InputActionPhase.Performed)
+            switch (currentGameState)
+            {
 
-        switch (currentGameState)
+                case GameState.battle:
+                    {
+                        TransitionToState(GameState.pause);
+                    }
+                    break;
+                case GameState.pause:
+                    {
+                        TransitionToState(GameState.battle);
+                    }
+                    break;
+            }
+    }
+    public void OnTileClicked(InputAction.CallbackContext _context)
+    {
+        if (_context.phase == InputActionPhase.Performed)
         {
-
-            case GameState.battle:
-                {
-                    TransitionToState(GameState.pause);
-                }
-                break;
-            case GameState.pause:
-                {
-                    TransitionToState(GameState.battle);
-                }
-                break;
+          // wait for the hold
         }
     }
+
+    public void OnTileReleased(InputAction.CallbackContext _context)
+    {
+        if (_context.phase == InputActionPhase.Canceled)
+        {
+            // either cancel or raycast and load the selected scene
+        }
+    }
+
+
+
+
     /// <summary>
     /// //debbuggin stuff below here
     /// </summary>

@@ -12,6 +12,16 @@ namespace _3C.Player
     {
         [Header("Settings")]
         [SerializeField] private float m_InputWaitDelay;
+
+        [SerializeField] private Collider m_WeaponCollider;
+
+        [SerializeField] private float m_AttackDuration;
+        [SerializeField] private float m_VFX_Start;
+
+        [SerializeField] private ParticleSystem[] m_VFX;
+        
+        
+        
         
         [Header("Animation")]
         [AnimatorParam("m_Animator")]
@@ -37,13 +47,15 @@ namespace _3C.Player
         private PlayerState m_PreviousState;
 
         private Coroutine m_WaitForInputCoroutine;
+        private Coroutine m_AttackCoroutine;
 
         private bool IsWaitingForInput => m_WaitForInputCoroutine != null;
 
         public override void StartState(PlayerState _previousState)
         {
-            m_Animator.SetTrigger(m_StartAttackTriggerParam);
+            //m_Animator?.SetTrigger(m_StartAttackTriggerParam);
             m_WaitForInputCoroutine = null;
+            m_AttackCoroutine = null;
             m_AttackIndex = 0;
             m_PreviousState = _previousState;
             PlayNextAttack();
@@ -52,7 +64,25 @@ namespace _3C.Player
         private void PlayNextAttack()
         {
             m_IsAttackAsked = false;
-            m_Animator.SetTrigger(TriggerParameterFromAttackIndex);
+            //m_WeaponCollider.enabled = true;
+            m_StateHandler.PlayerSoundsInstance.PlayAttackSound();
+            if (m_Animator == null)
+            {
+                m_AttackCoroutine = m_StateHandler.StartCoroutine(c_AttackDuration());
+            }
+            else
+            {
+                //m_Animator?.SetTrigger(TriggerParameterFromAttackIndex);
+            }
+        }
+
+        private IEnumerator c_AttackDuration()
+        {
+            yield return new WaitForSeconds(m_VFX_Start);
+            m_VFX[m_AttackIndex].Play();
+            yield return new WaitForSeconds(m_AttackDuration - m_VFX_Start);
+            OnAttackAnimationEnded();
+            m_AttackCoroutine = null;
         }
 
         public void OnAttackAnimationEnded()
@@ -64,6 +94,7 @@ namespace _3C.Player
             }
             else
             {
+                //m_WeaponCollider.enabled = false;
                 var lastInput = GameplayData.s_PlayerInputs.InputStack.Top;
                 if (lastInput == InputType.MovementCanceled)
                 {
@@ -103,11 +134,33 @@ namespace _3C.Player
             ExitState();
         }
 
+        private void StateCleaning()
+        {
+            //m_Animator?.SetTrigger(m_EndAttackTriggerParam);
+            //m_WeaponCollider.enabled = false;
+            m_VFX[m_AttackIndex].Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            if (m_WaitForInputCoroutine != null)
+            {
+                m_StateHandler.StopCoroutine(m_WaitForInputCoroutine);
+                m_WaitForInputCoroutine = null;
+            }
+
+            if (m_AttackCoroutine != null)
+            {
+                m_StateHandler.StopCoroutine(m_AttackCoroutine);
+                m_AttackCoroutine = null;
+            }
+        }
+        
         private void ExitState()
         {
-            m_Animator.SetTrigger(m_EndAttackTriggerParam);
             m_StateHandler.OnStateEnded();
-            m_WaitForInputCoroutine = null;
+            StateCleaning();
+        }
+
+        public override void StopState()
+        {
+            StateCleaning();
         }
 
         public override void OnInput(InputType inputType)
