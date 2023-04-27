@@ -65,6 +65,7 @@ namespace _3C.Player
         {
             m_IsAttackAsked = false;
             //m_WeaponCollider.enabled = true;
+            m_StateHandler.PlayerSoundsInstance.PlayAttackSound();
             if (m_Animator == null)
             {
                 m_AttackCoroutine = m_StateHandler.StartCoroutine(c_AttackDuration());

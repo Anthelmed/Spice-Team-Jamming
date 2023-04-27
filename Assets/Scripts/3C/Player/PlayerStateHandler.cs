@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+using DefaultNamespace.Audio;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -28,7 +29,9 @@ namespace _3C.Player
 
         [Header("Componens")]
         [SerializeField] private Animator m_Animator;
-        
+        [SerializeField] private PlayerSounds m_Sounds;
+
+        public PlayerSounds PlayerSoundsInstance => m_Sounds;
 
         private PlayerInputs m_PlayerInputs = new();
         

@@ -68,6 +68,8 @@ namespace _3C.Player
                 }
             }
             
+            m_StateHandler.PlayerSoundsInstance.PlayDashSound();
+
             for (float time = 0; time < m_Duration; time += Time.deltaTime)
             {
                 float ratio = time * m_InverseDuration;
