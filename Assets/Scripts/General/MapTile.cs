@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameTile : MonoBehaviour
 {
-    // [SerializeField] private Transform spawnPoint;
-    // [SerializeField] private GameObject highlight;
+    [SerializeField] private Transform centerPoint;
+    [SerializeField] private GameObject highlight;
     // [SerializeField] private GameObject spawnVFX;
     
     [SerializeField] private Biome biome;
@@ -47,13 +47,15 @@ public class GameTile : MonoBehaviour
 
     public void Highlight()
     {
-        if (!_isObstacle)
-            isHighlighted = true;
+        highlight.SetActive(true);
+        // if (!_isObstacle)
+        //     isHighlighted = true;
     }
 
     public void Unhighlight()
     {
-        isHighlighted = false;
+        highlight.SetActive(false);
+        // isHighlighted = false;
     }
 
     // private void OnDrawGizmos()
