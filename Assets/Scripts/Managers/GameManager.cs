@@ -13,10 +13,6 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField] string testBattleMapName;
-    [SerializeField] UIPanel startScreen;
-    [SerializeField] UIPanel pauseScreen;
-    [SerializeField] UIPanel loadingScreen;
-    [SerializeField] Transform panelParent;
     [SerializeField] GameObject mapGraphics;
     UIPanel[] allPanels;
   
@@ -27,9 +23,9 @@ public class GameManager : MonoBehaviour
 
     float pauseCoolDown;
 
-    public Action<bool> loadingScreenVisibilityEvent = delegate { };
-    public Action<bool> startScreenVisibilityEvent = delegate { };
-    public Action<bool> pauseScreenVisibilityEvent = delegate { };
+    public event Action<bool> loadingScreenVisibilityEvent = delegate { };
+    public event Action<bool> startScreenVisibilityEvent = delegate { };
+    public event Action<bool> pauseScreenVisibilityEvent = delegate { };
 
 
     private void Awake()
@@ -43,7 +39,7 @@ public class GameManager : MonoBehaviour
         }
 
         HideAllPanels();
-        startScreen.Show();
+        startScreenVisibilityEvent(true);
     }
 
     public void StartGame()
@@ -74,7 +70,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.pause:
                 {
-                    pauseScreen.Hide();
+                    pauseScreenVisibilityEvent(false);
                 }
                 break;
             default:
@@ -93,7 +89,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.pause:
                 {
-                    pauseScreen.Show();
+                    pauseScreenVisibilityEvent(true);
                     //switch input map
                 }
                 break;
@@ -158,7 +154,7 @@ public class GameManager : MonoBehaviour
     IEnumerator LoadScene(String sceneToLoad)
     {
         foreach (var panel in allPanels) panel.Hide();
-        loadingScreen.Show();
+        loadingScreenVisibilityEvent(true);
          AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
 
         while (!asyncLoad.isDone)
@@ -173,19 +169,17 @@ public class GameManager : MonoBehaviour
         mapGraphics.SetActive(false); /// do this in the map script. just the graphics should get turned off
 
         TransitionToState(GameState.battle);
-        loadingScreen.Hide();
+        loadingScreenVisibilityEvent(false);
         
     }
 
 
-    private void OnValidate()
-    {
-        allPanels = panelParent.GetComponentsInChildren<UIPanel>();
-    }
     [ContextMenu(" hide all panels")]
     public void HideAllPanels()
     {
-        foreach (var panel in allPanels) panel.Hide();
+        startScreenVisibilityEvent(false);
+        pauseScreenVisibilityEvent(false);
+        loadingScreenVisibilityEvent(false);
     }
 
     public void TogglePause()// for testing only
