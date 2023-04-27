@@ -138,6 +138,7 @@ namespace _3C.Player
         {
             //m_Animator?.SetTrigger(m_EndAttackTriggerParam);
             //m_WeaponCollider.enabled = false;
+            m_VFX[m_AttackIndex].Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             if (m_WaitForInputCoroutine != null)
             {
                 m_StateHandler.StopCoroutine(m_WaitForInputCoroutine);
