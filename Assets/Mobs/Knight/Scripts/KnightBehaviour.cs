@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Profiling;
 
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Target))]
 public class KnightBehaviour : MonoBehaviour
 {
     [Header("Public stuff")]
@@ -14,10 +16,12 @@ public class KnightBehaviour : MonoBehaviour
     [Header("Referencies")]
     [SerializeField] private NavMeshAgent m_agent;
     [SerializeField] private AnimationDriver m_animator;
+    [SerializeField] private Target m_targetting;
 
     [Header("Parameters")]
     [SerializeField] private Vector2 m_attackRange = Vector2.up;
     [SerializeField] private float m_attackCooldown = 2f;
+    [SerializeField] private int m_targetQueryRate = 60;
 
     private Vector3 m_lastPosition;
 
@@ -25,6 +29,7 @@ public class KnightBehaviour : MonoBehaviour
     {
         Idle,
         GoToTarget,
+        Queueing,
         CombatIdle,
         Retreat,
         Attack,
@@ -35,13 +40,19 @@ public class KnightBehaviour : MonoBehaviour
     private bool m_lookAtTarget = false;
     private bool m_alignWithMovement = false;
     private float m_currentAttackCooldown = 0f;
+    private int m_queryTurn;
+    private bool m_shouldQueryAdvanceBlocked = false;
+    private bool m_advanceBlocked = false;
+    private bool m_queryNow = false;
 
     private static readonly float COS_ATTACK = Mathf.Cos(15);
+    private static readonly float COS_BLOCKED = Mathf.Cos(45);
 
     private void OnValidate()
     {
         m_agent = GetComponent<NavMeshAgent>();
         m_animator = GetComponent<AnimationDriver>();
+        m_targetting = GetComponent<Target>();
     }
     private void Reset()
     {
@@ -51,6 +62,7 @@ public class KnightBehaviour : MonoBehaviour
     private void Start()
     {
         m_lastPosition = transform.position;
+        m_queryTurn = UnityEngine.Random.Range(0, m_targetQueryRate);
     }
 
     private void Update()
@@ -61,6 +73,9 @@ public class KnightBehaviour : MonoBehaviour
         // Update before just in case
         UpdateTransition();
 
+        // Update targetting info so it's ready for the update
+        QueryTargets();
+
         switch (m_state)
         {
             case State.Idle:
@@ -68,6 +83,9 @@ public class KnightBehaviour : MonoBehaviour
                 break;
             case State.GoToTarget:
                 GoToTarget_Update();
+                break;
+            case State.Queueing:
+                Queueing_Update();
                 break;
             case State.CombatIdle:
                 CombatIdle_Update();
@@ -83,6 +101,11 @@ public class KnightBehaviour : MonoBehaviour
         // Update after to pick changes during the update
         UpdateTransition();
 
+        UpdateMovement();
+    }
+
+    private void UpdateMovement()
+    {
         // Update the animations
         var movement = transform.position - m_lastPosition;
         m_lastPosition = transform.position;
@@ -105,6 +128,38 @@ public class KnightBehaviour : MonoBehaviour
         }
     }
 
+    private void QueryTargets()
+    {
+        // Only update when forced or when it's our turn to do so
+        if (!m_queryNow)
+            return;
+        if ((Time.frameCount % m_targetQueryRate) != m_queryTurn)
+            return;
+        Profiler.BeginSample("Query");
+
+        // Check if there are enemies in front
+        if (m_shouldQueryAdvanceBlocked)
+        {
+            m_advanceBlocked = false;
+            if (target)
+            {
+                var toTarget = (target.position - transform.position).normalized;
+                var nearbyAllies = Target.QueryTargets(transform.position, 1.5f, false, m_targetting.team);
+                for (int i = 0; i < nearbyAllies.Count; ++i)
+                {
+                    if (nearbyAllies[i] == m_targetting) continue;
+                    if (Vector3.Dot((nearbyAllies[i].transform.position - transform.position).normalized, toTarget) > COS_BLOCKED)
+                    {
+                        m_advanceBlocked = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        Profiler.EndSample();
+    }
+
     private void UpdateTransition()
     {
         if (m_state == m_nextState)
@@ -114,6 +169,9 @@ public class KnightBehaviour : MonoBehaviour
         {
             case State.GoToTarget:
                 GoToTarget_Exit();
+                break;
+            case State.Queueing:
+                Queueing_Exit();
                 break;
             case State.CombatIdle:
                 CombatIdle_Exit();
@@ -127,6 +185,9 @@ public class KnightBehaviour : MonoBehaviour
         {
             case State.GoToTarget:
                 GoToTarget_Enter();
+                break;
+            case State.Queueing:
+                Queueing_Enter();
                 break;
             case State.CombatIdle:
                 CombatIdle_Enter();
@@ -165,6 +226,9 @@ public class KnightBehaviour : MonoBehaviour
         // Set the destination to start moving
         m_agent.SetDestination(target.position);
         m_agent.updateRotation = true;
+        m_shouldQueryAdvanceBlocked = true;
+        // Query immediately so we don't even start moving
+        m_queryNow = true;
     }
 
     private void GoToTarget_Update()
@@ -172,6 +236,12 @@ public class KnightBehaviour : MonoBehaviour
         if (!target)
         {
             m_nextState = State.Idle;
+            return;
+        }
+
+        if (m_advanceBlocked)
+        {
+            m_nextState = State.Queueing;
             return;
         }
 
@@ -193,6 +263,27 @@ public class KnightBehaviour : MonoBehaviour
     {
         m_agent.ResetPath();
         m_agent.updateRotation = false;
+        m_shouldQueryAdvanceBlocked = true;
+    }
+    #endregion
+
+    #region Queueing
+    private void Queueing_Enter()
+    {
+        m_shouldQueryAdvanceBlocked = true;
+        m_lookAtTarget = true;
+    }
+
+    private void Queueing_Update()
+    {
+        if (!m_advanceBlocked)
+            m_nextState = State.GoToTarget;
+    }
+
+    private void Queueing_Exit()
+    {
+        m_shouldQueryAdvanceBlocked = false;
+        m_lookAtTarget = false;
     }
     #endregion
 

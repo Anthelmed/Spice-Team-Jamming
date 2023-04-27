@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4267980471527948688}
   - component: {fileID: 3375943028849785920}
   - component: {fileID: 6538165166137921107}
+  - component: {fileID: 7832915831287416507}
   m_Layer: 0
   m_Name: FirePawnVAT
   m_TagString: Untagged
@@ -53,8 +54,10 @@ MonoBehaviour:
   target: {fileID: 0}
   m_agent: {fileID: 4267980471527948688}
   m_animator: {fileID: 1519625491630453480}
+  m_targetting: {fileID: 7832915831287416507}
   m_attackRange: {x: 1, y: 2}
   m_attackCooldown: 3
+  m_targetQueryRate: 60
 --- !u!114 &1519625491630453480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,3 +198,17 @@ CapsuleCollider:
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!114 &7832915831287416507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4572756395023113474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0337c8dfaf378a74a9d489a2c118a8aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 1
+  isMain: 0
