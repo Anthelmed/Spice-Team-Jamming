@@ -64,7 +64,7 @@ public class VatAnimationDriver : AnimationDriver
     public override void SetSpeed(float speed)
     {
         if (HasAnimationFinished())
-            SwitchAnimation(speed < 1f ? AnimationID.Idle : AnimationID.Walk);
+            SwitchAnimation(speed < 0.5f ? AnimationID.Idle : AnimationID.Walk);
     }
 
     public override void TriggerAttack()

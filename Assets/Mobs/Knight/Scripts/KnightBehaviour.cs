@@ -144,7 +144,7 @@ public class KnightBehaviour : MonoBehaviour
             if (target)
             {
                 var toTarget = (target.position - transform.position).normalized;
-                var nearbyAllies = Target.QueryTargets(transform.position, 1.5f, false, m_targetting.team);
+                var nearbyAllies = Target.QueryTargets(transform.position, 1.5f, m_targetting.isMain, m_targetting.team);
                 for (int i = 0; i < nearbyAllies.Count; ++i)
                 {
                     if (nearbyAllies[i] == m_targetting) continue;
