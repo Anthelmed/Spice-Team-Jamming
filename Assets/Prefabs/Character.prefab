@@ -109,6 +109,8 @@ GameObject:
   - component: {fileID: 7453645051298376443}
   - component: {fileID: 6923100904402264462}
   - component: {fileID: 7279425899133959930}
+  - component: {fileID: 1782962883110624016}
+  - component: {fileID: 412046645469499385}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -132,6 +134,7 @@ Transform:
   - {fileID: 4783978352822228367}
   - {fileID: 1134181180571201404}
   - {fileID: 8664759534292641249}
+  - {fileID: 2213136729091861939}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -154,7 +157,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -241,7 +244,7 @@ MonoBehaviour:
       m_RotationOrder: 4
   m_PlayerMeleeAttack:
     m_InputWaitDelay: 0.5
-    m_WeaponCollider: {fileID: 0}
+    m_WeaponCollider: {fileID: 7819967878936673827}
     m_AttackDuration: 0.5
     m_VFX_Start: 0.1
     m_VFX:
@@ -257,6 +260,115 @@ MonoBehaviour:
   m_Animator: {fileID: 0}
   m_Sounds: {fileID: 8188397984285573184}
   m_CurrentState: 0
+--- !u!114 &1782962883110624016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5761272857374477472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0337c8dfaf378a74a9d489a2c118a8aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 3
+  isMain: 1
+--- !u!114 &412046645469499385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5761272857374477472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 845df4a83a1c4e8fa9f3a104d125febf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 3
+  m_MaxHealth: 999
+  m_CurrentHealth: 0
+  m_OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHealed:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &7187431065340155038
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2213136729091861939}
+  - component: {fileID: 7819967878936673827}
+  - component: {fileID: 7518698054020727578}
+  m_Layer: 0
+  m_Name: WeaponTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2213136729091861939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7187431065340155038}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.42, z: 1.627}
+  m_LocalScale: {x: 3.2021873, y: 3.2021873, z: 3.2021873}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 7390912607918933550}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &7819967878936673827
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7187431065340155038}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7518698054020727578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7187431065340155038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9da757614e34a81bab8d9d45dd576d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Damage: 1
+  team: 3
 --- !u!1001 &402762768143152386
 PrefabInstance:
   m_ObjectHideFlags: 0
