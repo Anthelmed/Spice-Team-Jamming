@@ -27,6 +27,11 @@ public class GameManager : MonoBehaviour
 
     float pauseCoolDown;
 
+    public Action<bool> loadingScreenVisibilityEvent = delegate { };
+    public Action<bool> startScreenVisibilityEvent = delegate { };
+    public Action<bool> pauseScreenVisibilityEvent = delegate { };
+
+
     private void Awake()
     {
         if (instance != null && instance != this)
