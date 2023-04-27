@@ -267,10 +267,10 @@ MonoBehaviour:
   m_OnDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8952618470749584487}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 7452282385981792572}
+        m_TargetAssemblyTypeName: KnightBehaviour, Assembly-CSharp
+        m_MethodName: OnDeath
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

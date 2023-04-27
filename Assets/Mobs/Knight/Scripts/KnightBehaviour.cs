@@ -48,6 +48,11 @@ public class KnightBehaviour : MonoBehaviour
     private static readonly float COS_ATTACK = Mathf.Cos(15);
     private static readonly float COS_BLOCKED = Mathf.Cos(45);
 
+    public void OnDeath()
+    {
+        Destroy(gameObject);
+    }
+
     private void OnValidate()
     {
         m_agent = GetComponent<NavMeshAgent>();
