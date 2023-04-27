@@ -8,6 +8,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 99e4578b4f76c8d4bbfa50b223186c77, type: 3}
+  attackHitRange: {x: 0.25, y: 0.5}
   animations:
   - vertexVat: {fileID: 2800000, guid: 19b829fd789fd7e4bbaed54ed2b5bc45, type: 2}
     normalVat: {fileID: 2800000, guid: b60d35ddb56406743995772346d8bb5f, type: 2}

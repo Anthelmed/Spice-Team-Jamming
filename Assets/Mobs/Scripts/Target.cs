@@ -1,3 +1,5 @@
+using DefaultNamespace.HealthSystem.Damageable;
+using DefaultNamespace.HealthSystem.Damager;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -62,6 +64,24 @@ public class Target : MonoBehaviour
         {
             if ((targets[i].transform.position - center).sqrMagnitude < maxDistanceSq)
                 m_reusableListForQueries.Add(targets[i]);
+        }
+    }
+
+    private void Reset()
+    {
+        OnValidate();
+    }
+
+    private void OnValidate()
+    {
+        foreach (var damager in GetComponentsInChildren<ColliderDamager>())
+        {
+            damager.team = team;
+        }
+
+        foreach (var health in GetComponentsInChildren<HealthHolder>())
+        {
+            health.team = team;
         }
     }
 

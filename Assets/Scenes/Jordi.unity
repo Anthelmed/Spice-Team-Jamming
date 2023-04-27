@@ -252,6 +252,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestKnight Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8952618470749584487, guid: b8dfa718579963040a63150838a2dab2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8952618470749937665, guid: b8dfa718579963040a63150838a2dab2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2458,6 +2463,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirePawnVAT_01
       objectReference: {fileID: 0}
+    - target: {fileID: 4572756395023113474, guid: 179c813d5c45e6a4b953d50ae92c6649,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6754272615614627475, guid: 179c813d5c45e6a4b953d50ae92c6649,
         type: 3}
       propertyPath: target
@@ -2891,6 +2901,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FirePawnVAT
+      objectReference: {fileID: 0}
+    - target: {fileID: 4572756395023113474, guid: 179c813d5c45e6a4b953d50ae92c6649,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6754272615614627475, guid: 179c813d5c45e6a4b953d50ae92c6649,
         type: 3}

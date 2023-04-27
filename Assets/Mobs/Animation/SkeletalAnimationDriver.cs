@@ -8,6 +8,7 @@ public class SkeletalAnimationDriver : AnimationDriver
     [SerializeField] private Animator m_animator;
 
     private bool m_animationFinished;
+    private bool m_hitFrame;
 
     private static readonly int SPEED = Animator.StringToHash("Speed");
     private static readonly int ATTACK = Animator.StringToHash("Attack");
@@ -29,6 +30,16 @@ public class SkeletalAnimationDriver : AnimationDriver
         m_animationFinished = true;
     }
 
+    private void HitRangeStarts()
+    {
+        m_hitFrame = true;
+    }
+
+    private void HitRangeEnds()
+    {
+        m_hitFrame = false;
+    }
+
     public override bool HasAnimationFinished()
     {
         return m_animationFinished;
@@ -43,6 +54,7 @@ public class SkeletalAnimationDriver : AnimationDriver
     {
         m_animator.SetTrigger(ATTACK);
         m_animationFinished = false;
+        m_hitFrame = false;
     }
 
     public override void TriggerHit()
@@ -55,5 +67,10 @@ public class SkeletalAnimationDriver : AnimationDriver
     {
         m_animator.SetTrigger(DEATH);
         m_animationFinished = false;
+    }
+
+    public override bool IsDamagingFrame()
+    {
+        return m_hitFrame;
     }
 }

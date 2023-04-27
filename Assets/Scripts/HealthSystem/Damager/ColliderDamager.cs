@@ -9,11 +9,13 @@ namespace DefaultNamespace.HealthSystem.Damager
         [SerializeField]
         private int m_Damage;
 
+        public Target.Team team;
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent<IDamageable>(out var damageable))
             {
-                damageable.TakeDamage(m_Damage);
+                damageable.TakeDamage(m_Damage, team);
             }
         }
     }

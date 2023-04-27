@@ -17,6 +17,7 @@ public class KnightBehaviour : MonoBehaviour
     [SerializeField] private NavMeshAgent m_agent;
     [SerializeField] private AnimationDriver m_animator;
     [SerializeField] private Target m_targetting;
+    [SerializeField] private Collider m_attackCollider;
 
     [Header("Parameters")]
     [SerializeField] private Vector2 m_attackRange = Vector2.up;
@@ -37,7 +38,7 @@ public class KnightBehaviour : MonoBehaviour
         Death
     }
 
-    private State m_state = State.Idle;
+    [SerializeField] private State m_state = State.Idle;
     private State m_nextState = State.Idle;
     private bool m_lookAtTarget = false;
     private bool m_alignWithMovement = false;
@@ -75,6 +76,7 @@ public class KnightBehaviour : MonoBehaviour
     {
         m_lastPosition = transform.position;
         m_queryTurn = UnityEngine.Random.Range(0, m_targetQueryRate);
+        m_attackCollider.enabled = false;
     }
 
     private void Update()
@@ -196,6 +198,9 @@ public class KnightBehaviour : MonoBehaviour
                 break;
             case State.Retreat:
                 Retreat_Exit();
+                break;
+            case State.Attack:
+                Attack_Exit();
                 break;
         }
 
@@ -392,8 +397,17 @@ public class KnightBehaviour : MonoBehaviour
 
     private void Attack_Update()
     {
+        if (m_attackCollider)
+            m_attackCollider.enabled = m_animator.IsDamagingFrame();
+
         if (m_animator.HasAnimationFinished())
             m_nextState = State.CombatIdle;
+    }
+
+    private void Attack_Exit()
+    {
+        if (m_attackCollider)
+            m_attackCollider.enabled = false;
     }
     #endregion
 

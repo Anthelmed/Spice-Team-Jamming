@@ -16,6 +16,7 @@ public class CombineVatData : ScriptedImporter
         public float duration;
     }
 
+    public Vector2 attackHitRange = Vector2.up;
     public Animation[] animations = new Animation[0];
 
     public override void OnImportAsset(AssetImportContext ctx)
@@ -67,6 +68,7 @@ public class CombineVatData : ScriptedImporter
 
         resultObject.vertexVat = newVertex;
         resultObject.normalVat = newNormal;
+        resultObject.attackHitRange = attackHitRange;
 
         resultObject.animations = new Vector4[animations.Length];
         offset = 0;

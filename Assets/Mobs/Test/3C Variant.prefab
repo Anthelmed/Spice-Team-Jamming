@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Damage: 1
+  team: 3
 --- !u!1001 &1767299244920414760
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -77,11 +78,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2243334194748537, guid: eac1ae59bef618847b73c10b4d795403, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000160859
+      value: -0.000000016085902
       objectReference: {fileID: 0}
     - target: {fileID: 2243334194748537, guid: eac1ae59bef618847b73c10b4d795403, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000061076464
+      value: 0.0000000061076473
       objectReference: {fileID: 0}
     - target: {fileID: 445589202552034109, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
@@ -156,12 +157,12 @@ PrefabInstance:
     - target: {fileID: 5312326701685609516, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000160859
+      value: -0.000000016085902
       objectReference: {fileID: 0}
     - target: {fileID: 5312326701685609516, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000061076464
+      value: 0.0000000061076473
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -175,6 +176,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6699544853706094848}
+    - targetCorrespondingSourceObject: {fileID: 1384111041978993816, guid: eac1ae59bef618847b73c10b4d795403,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4751343762614562281}
   m_SourcePrefab: {fileID: 100100000, guid: eac1ae59bef618847b73c10b4d795403, type: 3}
 --- !u!1 &843278021184368304 stripped
 GameObject:
@@ -196,6 +201,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team: 3
   isMain: 1
+--- !u!114 &4751343762614562281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843278021184368304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 845df4a83a1c4e8fa9f3a104d125febf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 3
+  m_MaxHealth: 999
+  m_CurrentHealth: 0
+  m_OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHealed:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &2510193964284879934 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4202057811293341206, guid: eac1ae59bef618847b73c10b4d795403,

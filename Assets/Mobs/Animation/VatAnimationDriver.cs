@@ -11,7 +11,7 @@ public class VatAnimationDriver : AnimationDriver
     [SerializeField] private MeshRenderer m_renderer;
 
     private MaterialPropertyBlock m_mpb;
-    [SerializeField] private int m_currentAnimation = -1;
+    private int m_currentAnimation = -1;
     private Vector4 m_previousData;
     private float m_specialAnimationEnds;
 
@@ -88,5 +88,18 @@ public class VatAnimationDriver : AnimationDriver
     {
         m_specialAnimationEnds = Time.timeSinceLevelLoad + animationData.animations[(int)AnimationID.Hit].x * 0.5f - transitionDuration;
         SwitchAnimation(AnimationID.Hit);
+    }
+
+    public override bool IsDamagingFrame()
+    {
+        var time = Time.timeSinceLevelLoad;
+        if (m_currentAnimation == (int)AnimationID.Attack
+            && time >= m_previousData.w + animationData.attackHitRange.x
+            && time <= m_previousData.w + animationData.attackHitRange.y)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
