@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.AssetImporters;
 
-[ScriptedImporter(0, "vat")]
+[ScriptedImporter(1, "vat")]
 public class CombineVatData : ScriptedImporter
 {
     [System.Serializable]
@@ -32,7 +32,7 @@ public class CombineVatData : ScriptedImporter
 
         foreach (var anim in animations)
         {
-            totalHeight += anim.vertexVat.height;
+            totalHeight += anim.vertexVat.height + 1;
         }
 
         // Create the combined textures
@@ -52,8 +52,10 @@ public class CombineVatData : ScriptedImporter
                     newVertex.SetPixel(i, j + offset, anim.vertexVat.GetPixel(i, j));
                     newNormal.SetPixel(i, j + offset, anim.normalVat.GetPixel(i, j));
                 }
+                newVertex.SetPixel(i, anim.vertexVat.height + offset, anim.vertexVat.GetPixel(i, 0));
+                newNormal.SetPixel(i, anim.vertexVat.height + offset, anim.normalVat.GetPixel(i, 0));
             }
-            offset += anim.vertexVat.height;
+            offset += anim.vertexVat.height + 1;
         }
 
         newVertex.Apply(false, true);
@@ -71,7 +73,7 @@ public class CombineVatData : ScriptedImporter
         for (int i = 0; i < animations.Length; ++i)
         {
             resultObject.animations[i] = new Vector4(animations[i].duration, animations[i].fps, offset);
-            offset += animations[i].vertexVat.height;
+            offset += animations[i].vertexVat.height + 1;
         }
 
         // Setup the results for Unity
