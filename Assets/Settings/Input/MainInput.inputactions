@@ -36,7 +36,25 @@
                 {
                     "name": "Select",
                     "type": "Button",
+                    "id": "1cde1ff8-6430-4bf8-a4b4-2025270bce2f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Confirm",
+                    "type": "Button",
                     "id": "94cdf750-6324-4585-8075-cfd1fa1f0c58",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Back",
+                    "type": "Button",
+                    "id": "2e73b6a7-fd0e-4cbb-94d2-c5967ccebe85",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -46,12 +64,23 @@
             "bindings": [
                 {
                     "name": "",
+                    "id": "76f2e749-4c91-4f1d-8d25-6604f51f3e97",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "b2d70ad9-d2ef-4844-8281-ad27a4b78d82",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "Select",
+                    "action": "Confirm",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -62,7 +91,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Select",
+                    "action": "Confirm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "df5b8dd5-4ac0-41f4-9445-71cb6bc67b96",
+                    "path": "*/{Back}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7cc8aeb1-6e35-4611-a2c8-1048eac1e925",
+                    "path": "*/{Cancel}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Back",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -112,6 +163,15 @@
                     "name": "Pause",
                     "type": "Button",
                     "id": "4184d08c-d774-4c84-887e-a734e8fb6342",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Open Map",
+                    "type": "Button",
+                    "id": "9703b7d1-0cc6-473d-a8a0-5c1ccee68150",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -188,7 +248,7 @@
                 {
                     "name": "",
                     "id": "27fe6c6f-7422-44be-ac89-c6f2676bd4a5",
-                    "path": "<Gamepad>/leftTrigger",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -243,7 +303,7 @@
                 {
                     "name": "",
                     "id": "003f20bc-879b-4020-a5a4-ddcc3d294dc5",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
@@ -264,8 +324,19 @@
                 },
                 {
                     "name": "",
+                    "id": "5657dfaf-d415-4b39-aed4-62f2e4ec7efb",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "3f265182-76ca-43e8-8a12-3173ba84c55e",
-                    "path": "<Keyboard>/tab",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
@@ -281,6 +352,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b0749097-4729-4958-9036-8a22381abe9e",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Open Map",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "167ccdf7-8edb-4b12-88b0-09b8e8eefe10",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Open Map",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
