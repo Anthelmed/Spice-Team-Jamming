@@ -64,7 +64,7 @@ namespace _3C.Player
         private void PlayNextAttack()
         {
             m_IsAttackAsked = false;
-            //m_WeaponCollider.enabled = true;
+            m_WeaponCollider.enabled = true;
             m_StateHandler.PlayerSoundsInstance.PlayAttackSound();
             if (m_Animator == null)
             {
@@ -94,7 +94,7 @@ namespace _3C.Player
             }
             else
             {
-                //m_WeaponCollider.enabled = false;
+                m_WeaponCollider.enabled = false;
                 var lastInput = GameplayData.s_PlayerInputs.InputStack.Top;
                 if (lastInput == InputType.MovementCanceled)
                 {
@@ -137,7 +137,7 @@ namespace _3C.Player
         private void StateCleaning()
         {
             //m_Animator?.SetTrigger(m_EndAttackTriggerParam);
-            //m_WeaponCollider.enabled = false;
+            m_WeaponCollider.enabled = false;
             m_VFX[m_AttackIndex].Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             if (m_WaitForInputCoroutine != null)
             {
