@@ -4039,6 +4039,7 @@ GameObject:
   - component: {fileID: 1275033896}
   - component: {fileID: 1275033895}
   - component: {fileID: 1275033894}
+  - component: {fileID: 1275033897}
   m_Layer: 0
   m_Name: FirePawnVAT
   m_TagString: Untagged
@@ -4112,6 +4113,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1275033897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275033893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ce4fd728007da64e8a6a9ab07d6453b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationData: {fileID: 7239065423396753691, guid: 0628e36e1859f344b907c533a0078c11,
+    type: 3}
+  desiredAnimation: 0
+  m_renderer: {fileID: 1275033894}
 --- !u!1 &1372245734
 GameObject:
   m_ObjectHideFlags: 0
@@ -6172,12 +6189,12 @@ PrefabInstance:
     - target: {fileID: 1765777192518057553, guid: aa6f300edfddd8249873ed9412fd482f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000021954934
+      value: 0.000000021954936
       objectReference: {fileID: 0}
     - target: {fileID: 1765777192518057553, guid: aa6f300edfddd8249873ed9412fd482f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000013568895
+      value: -0.000000013568896
       objectReference: {fileID: 0}
     - target: {fileID: 2209499713400549653, guid: aa6f300edfddd8249873ed9412fd482f,
         type: 3}
@@ -6242,12 +6259,12 @@ PrefabInstance:
     - target: {fileID: 5854567030279583236, guid: aa6f300edfddd8249873ed9412fd482f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000021954934
+      value: 0.000000021954936
       objectReference: {fileID: 0}
     - target: {fileID: 5854567030279583236, guid: aa6f300edfddd8249873ed9412fd482f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000013568895
+      value: -0.000000013568896
       objectReference: {fileID: 0}
     - target: {fileID: 7766639372470695041, guid: aa6f300edfddd8249873ed9412fd482f,
         type: 3}
