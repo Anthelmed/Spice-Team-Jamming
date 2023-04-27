@@ -79,12 +79,13 @@ public class BoardManager : MonoBehaviour
         }
         
         // Vector3 localScale = fieldPrefab.transform.localScale;
-        float xSize = 1;
-        float zSize = 1;
+        float xSize = 20;
+        float zSize = 20;
         int xMax = MapTiles.GetLength(0);
         int zMax = MapTiles.GetLength(1);
         int xLoc = Mathf.Min(Mathf.Max(0, (int) Math.Round(pos.x / xSize)), xMax);
         int zLoc = Mathf.Min(Mathf.Max(0, (int) Math.Round(pos.z / zSize)), zMax);
+        Debug.Log(xLoc + ", " + zLoc);
         // int zLoc =  (int) Math.Round(pos.z / zSize);
         return new int[2] { xLoc, zLoc };
             
@@ -253,6 +254,7 @@ public class BoardManager : MonoBehaviour
                     // We can rotate the tile [0, 90, 180, 270] degrees to get more variation
                     GameObject go = Instantiate(currentPrefab, pos, Quaternion.identity, _transform);
                     var tile = go.GetComponentInChildren<GameTile>();
+                    tile.IsObstacle = true;
                     MapTiles[x, y] = tile;
 
 
