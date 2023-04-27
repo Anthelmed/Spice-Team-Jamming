@@ -48,8 +48,8 @@ public class KnightBehaviour : MonoBehaviour
     private bool m_advanceBlocked = false;
     private bool m_queryNow = false;
 
-    private static readonly float COS_ATTACK = Mathf.Cos(15);
-    private static readonly float COS_BLOCKED = Mathf.Cos(45);
+    private static readonly float COS_ATTACK = Mathf.Cos(15 * Mathf.Deg2Rad);
+    private static readonly float COS_BLOCKED = Mathf.Cos(45 * Mathf.Deg2Rad);
 
     public void OnDeath()
     {
