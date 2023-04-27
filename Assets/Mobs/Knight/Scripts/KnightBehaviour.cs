@@ -36,6 +36,8 @@ public class KnightBehaviour : MonoBehaviour
     private bool m_alignWithMovement = false;
     private float m_currentAttackCooldown = 0f;
 
+    private static readonly float COS_ATTACK = Mathf.Cos(15);
+
     private void OnValidate()
     {
         m_agent = GetComponent<NavMeshAgent>();
@@ -208,7 +210,8 @@ public class KnightBehaviour : MonoBehaviour
             return;
         }
 
-        var targetDistSq = (target.position - transform.position).sqrMagnitude;
+        var toTarget = target.position - transform.position;
+        var targetDistSq = toTarget.sqrMagnitude;
         if (targetDistSq > (m_attackRange.y * m_attackRange.y))
         {
             m_nextState = State.GoToTarget;
@@ -223,8 +226,12 @@ public class KnightBehaviour : MonoBehaviour
 
         if (m_currentAttackCooldown < 0f)
         {
-            m_currentAttackCooldown = m_attackCooldown;
-            m_nextState = State.Attack;
+            var dot = Vector3.Dot(toTarget.normalized, transform.forward);
+            if (dot > COS_ATTACK)
+            {
+                m_currentAttackCooldown = m_attackCooldown;
+                m_nextState = State.Attack;
+            }
         }
     }
 
