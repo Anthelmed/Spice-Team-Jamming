@@ -1,0 +1,23 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=852c0b1f00071754886a563d72ecb599&amp;type=3#GlobalStyle" />
+    <Style src="project://database/Assets/UI/Styles/MapStyle.uss?fileID=7433441132597879392&amp;guid=daa017c1ae808c247acdd8a4d503a891&amp;type=3#MapStyle" />
+    <ui:VisualElement name="Map" class="main-element auto-reference" style="top: -1px; right: 0; left: 0; bottom: 2px;">
+        <ui:VisualElement name="MapActionHelpers" class="action-helpers">
+            <ui:VisualElement name="LevelSelectionActionHelperSelect" class="action-helper">
+                <ui:VisualElement name="LevelSelectionActionHelperSelectIcon" class="action-helper-icon">
+                    <ui:Label tabindex="-1" text="A" display-tooltip-when-elided="true" name="LevelSelectionActionHelperSelectIconLabel" class="action-helper-icon-label" />
+                </ui:VisualElement>
+                <ui:Label tabindex="-1" text="Select" display-tooltip-when-elided="true" name="LevelSelectionActionHelperSelectLabel" class="action-helper-label" />
+            </ui:VisualElement>
+            <ui:VisualElement name="LevelSelectionActionHelperBack" class="action-helper">
+                <ui:VisualElement name="LevelSelectionActionHelperBackIcon" class="action-helper-icon">
+                    <ui:Label tabindex="-1" text="B" display-tooltip-when-elided="true" name="LevelSelectionActionHelperBackIconLabel" class="action-helper-icon-label" />
+                </ui:VisualElement>
+                <ui:Label tabindex="-1" text="Back" display-tooltip-when-elided="true" name="LevelSelectionActionHelperBackLabel" class="action-helper-label" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="MapTileInfo">
+            <ui:Label tabindex="-1" text="Tile Info" display-tooltip-when-elided="true" name="MapTileInfoSubTitle" class="sub-title" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

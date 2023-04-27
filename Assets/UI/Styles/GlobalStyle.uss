@@ -1,15 +1,16 @@
 :root {
-    --margin: 50px;
-    --title-font-size: 38px;
-    --title-text-color: rgb(253, 240, 250);
-    --title-background-tint: rgb(131, 101, 126);
+    --primary-color-1: rgb(142, 101, 136);
+    --primary-color-2: rgb(134, 219, 165);
+    --title-font-size: 36px;
+    --title-background-tint: var(--primary-color-2);
     --button-font-size: 30px;
-    --button-text-color: rgb(253, 240, 250);
-    --button-background-tint: rgb(131, 101, 126);
+    --button-background-tint: var(--primary-color-2);
+    --background-background-tint: var(--primary-color-2);
     --rowdies-font-regular: url('project://database/Assets/Fonts/Rowdies/Rowdies-Regular.ttf?fileID=12800000&guid=2cea9ff495f9b4a4daed12e48f24ef32&type=3#Rowdies-Regular');
     --montserrat-font-regular: url('project://database/Assets/Fonts/Montserrat/Montserrat-Regular.ttf?fileID=12800000&guid=95cc2332f1c404c4e86ccc0a5d4d2616&type=3#Montserrat-Regular');
     --montserrat-font-bold: url('project://database/Assets/Fonts/Montserrat/Montserrat-Bold.ttf?fileID=12800000&guid=5f840e1af5ef1174089c0c7f44033efa&type=3#Montserrat-Bold');
     -unity-font-definition: initial;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 #Overlay {
@@ -21,11 +22,125 @@
     background-color: rgba(30, 30, 30, 0.7);
 }
 
+.main-element {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.title {
+    width: 600px;
+    height: 128px;
+    position: absolute;
+    left: 100px;
+    top: 50px;
+    background-image: url('project://database/Assets/UI/Textures/Ribbon.png?fileID=2800000&guid=c1bbd763c7324d344a631533f712280d&type=3#Ribbon');
+    justify-content: center;
+    align-items: center;
+    -unity-background-image-tint-color: var(--button-background-tint);
+}
+
+.title-label {
+    width: 100%;
+    height: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 30px;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    -unity-text-align: middle-center;
+    font-size: var(--title-font-size);
+    -unity-font: var(--rowdies-font-regular);
+    -unity-background-image-tint-color: var(--title-text-color);
+}
+
+.button {
+    width: 398px;
+    height: 100px;
+    margin-bottom: 25px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-image: url('project://database/Assets/UI/Textures/Button.png?fileID=2800000&guid=39146f4ae7969b44398fecb7a74931bc&type=3#Button');
+    font-size: var(--button-font-size);
+    -unity-font: var(--rowdies-font-regular);
+    -unity-text-align: middle-center;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    -unity-background-image-tint-color: var(--button-background-tint);
+}
+
+.action-helpers {
+    position: absolute;
+    bottom: 50px;
+    flex-direction: column;
+    left: 100px;
+}
+
+.action-helper {
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    margin-top: 25px;
+}
+
+.action-helper-icon {
+    width: 50px;
+    height: 50px;
+    background-image: url('project://database/Assets/UI/Textures/SquareButton.png?fileID=2800000&guid=daece4c02aca5df409861f29d70b9556&type=3#SquareButton');
+    -unity-background-image-tint-color: var(--button-background-tint);
+    margin-left: 0;
+    margin-right: 25px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.action-helper-icon-label {
+    -unity-font: var(--rowdies-font-regular);
+    font-size: 20px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    -unity-text-align: middle-center;
+    height: 100%;
+}
+
+.action-helper-label {
+    height: 50px;
+    -unity-font: var(--montserrat-font-bold);
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    -unity-text-align: middle-right;
+    font-size: 22px;
+}
+
 .square-button {
     width: 100px;
     height: 100px;
     font-size: var(--button-font-size);
-    color: var(--button-text-color);
     background-image: url('project://database/Assets/UI/Textures/SquareButton.png?fileID=2800000&guid=daece4c02aca5df409861f29d70b9556&type=3#SquareButton');
     -unity-background-image-tint-color: var(--button-background-tint);
     -unity-font: var(--rowdies-font-regular);
@@ -37,4 +152,27 @@
     padding-right: 0;
     padding-top: 0;
     padding-bottom: 0;
+}
+
+.sub-title {
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    -unity-font: var(--montserrat-font-bold);
+    -unity-text-align: middle-center;
+    height: 100px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 28px;
 }

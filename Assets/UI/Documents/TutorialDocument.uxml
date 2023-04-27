@@ -1,0 +1,21 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=852c0b1f00071754886a563d72ecb599&amp;type=3#GlobalStyle" />
+    <Style src="project://database/Assets/UI/Styles/TutorialStyle.uss?fileID=7433441132597879392&amp;guid=932f34492c56a0e4ab93ef26a51fbb30&amp;type=3#TutorialStyle" />
+    <ui:VisualElement name="Tutorial" class="main-element auto-reference">
+        <ui:VisualElement name="Overlay" />
+        <ui:VisualElement name="TutorialTitle" class="title">
+            <ui:Label tabindex="-1" text="[Hint Name]" display-tooltip-when-elided="true" name="TutorialTitleLabel" class="title-label auto-reference" />
+        </ui:VisualElement>
+        <ui:VisualElement name="TutorialInfo" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+            <ui:Label tabindex="-1" text="[Hint SubTitle]" display-tooltip-when-elided="true" name="TutorialInfoSubTitle" class="sub-title auto-reference" />
+        </ui:VisualElement>
+        <ui:VisualElement name="TutorialActionHelpers" class="action-helpers">
+            <ui:VisualElement name="TutorialActionHelperBack" class="action-helper">
+                <ui:VisualElement name="TutorialActionHelperBackIcon" class="action-helper-icon">
+                    <ui:Label tabindex="-1" text="B" display-tooltip-when-elided="true" name="TutorialActionHelperBackIconLabel" class="action-helper-icon-label" />
+                </ui:VisualElement>
+                <ui:Label tabindex="-1" text="Back" display-tooltip-when-elided="true" name="TutorialActionHelperBackLabel" class="action-helper-label" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

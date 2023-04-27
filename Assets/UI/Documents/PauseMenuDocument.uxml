@@ -1,17 +1,16 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Styles/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=852c0b1f00071754886a563d72ecb599&amp;type=3#GlobalStyle" />
     <Style src="project://database/Assets/UI/Styles/PauseMenuStyle.uss?fileID=7433441132597879392&amp;guid=3c9198b01f2096b499fd6f97d0c48542&amp;type=3#PauseMenuStyle" />
-    <Style src="project://database/Assets/UI/Styles/MenuStyle.uss?fileID=7433441132597879392&amp;guid=c135cb31704957747ab227c1731b131d&amp;type=3#MenuStyle" />
-    <ui:VisualElement name="Overlay" />
-    <ui:VisualElement name="PauseMenu" class="menu-main-element">
-        <ui:VisualElement name="PauseMenuTitle" class="menu-title">
-            <ui:Label tabindex="-1" text="Paused" display-tooltip-when-elided="true" name="PauseMenuTitleLabel" class="menu-title-label" />
+    <ui:VisualElement name="PauseMenu" class="main-element auto-reference">
+        <ui:VisualElement name="Overlay" />
+        <ui:VisualElement name="PauseMenuTitle" class="title">
+            <ui:Label tabindex="-1" text="Paused" display-tooltip-when-elided="true" name="PauseMenuTitleLabel" class="title-label" />
         </ui:VisualElement>
         <ui:VisualElement name="PauseMenuButtons">
-            <ui:Button name="PauseMenuButtonResume" text="Resume" class="menu-button" />
-            <ui:Button name="PauseMenuButtonSettings" text="Settings" class="menu-button" />
-            <ui:Button name="PauseMenuButtonMainMenu" text="Return to Main Menu" class="menu-button" />
-            <ui:Button name="PauseMenuButtonQuit" text="Quit" class="menu-button" />
+            <ui:Button name="PauseMenuButtonResume" text="Resume" class="button auto-reference" />
+            <ui:Button name="PauseMenuButtonSettings" text="Settings" class="button auto-reference" />
+            <ui:Button name="PauseMenuButtonMainMenu" text="Return to Main Menu" class="button auto-reference" />
+            <ui:Button name="PauseMenuButtonQuit" text="Quit" class="button auto-reference" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
