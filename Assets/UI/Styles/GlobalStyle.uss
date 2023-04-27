@@ -8,6 +8,7 @@
     --button-background-tint: rgb(131, 101, 126);
     --rowdies-font-regular: url('project://database/Assets/Fonts/Rowdies/Rowdies-Regular.ttf?fileID=12800000&guid=2cea9ff495f9b4a4daed12e48f24ef32&type=3#Rowdies-Regular');
     --montserrat-font-regular: url('project://database/Assets/Fonts/Montserrat/Montserrat-Regular.ttf?fileID=12800000&guid=95cc2332f1c404c4e86ccc0a5d4d2616&type=3#Montserrat-Regular');
+    --montserrat-font-bold: url('project://database/Assets/Fonts/Montserrat/Montserrat-Bold.ttf');
     -unity-font-definition: initial;
 }
 
@@ -18,4 +19,22 @@
     right: 0;
     bottom: 0;
     background-color: rgba(30, 30, 30, 0.5);
+}
+
+.square-button {
+    width: 100px;
+    height: 100px;
+    font-size: var(--button-font-size);
+    color: var(--button-text-color);
+    background-image: url('project://database/Assets/UI/Textures/SquareButton.png?fileID=2800000&guid=daece4c02aca5df409861f29d70b9556&type=3#SquareButton');
+    -unity-background-image-tint-color: var(--button-background-tint);
+    -unity-font: var(--rowdies-font-regular);
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }

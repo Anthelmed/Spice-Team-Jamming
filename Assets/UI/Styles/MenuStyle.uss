@@ -58,3 +58,57 @@
     border-bottom-width: 0;
     -unity-background-image-tint-color: var(--button-background-tint);
 }
+
+.menu-action-helpers {
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+    flex-direction: row-reverse;
+}
+
+.menu-action-helper {
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+    margin-left: 40px;
+}
+
+.menu-action-helper-icon {
+    width: 50px;
+    height: 50px;
+    background-image: url('project://database/Assets/UI/Textures/SquareButton.png?fileID=2800000&guid=daece4c02aca5df409861f29d70b9556&type=3#SquareButton');
+    -unity-background-image-tint-color: var(--button-background-tint);
+    margin-left: 20px;
+}
+
+.menu-action-helper-icon-label {
+    -unity-font: var(--rowdies-font-regular);
+    font-size: 20px;
+    color: var(--button-text-color);
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    -unity-text-align: middle-center;
+    height: 100%;
+}
+
+.menu-action-helper-label {
+    height: 50px;
+    -unity-font: var(--montserrat-font-bold);
+    color: var(--button-text-color);
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    -unity-text-align: middle-right;
+    font-size: 18px;
+}

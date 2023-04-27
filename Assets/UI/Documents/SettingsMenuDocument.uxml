@@ -13,5 +13,19 @@
             <ui:Button name="SettingsMenuButtonGraphics" text="Graphics" class="menu-button" />
             <ui:Button name="SettingsMenuButtonAccessibility" text="Accessibility" class="menu-button" />
         </ui:VisualElement>
+        <ui:VisualElement name="SettingsMenuActionHelpers" class="menu-action-helpers">
+            <ui:VisualElement name="SettingsMenuActionHelperBack" class="menu-action-helper">
+                <ui:VisualElement name="SettingsMenuActionHelperBackIcon" class="menu-action-helper-icon">
+                    <ui:Label tabindex="-1" text="B" display-tooltip-when-elided="true" name="SettingsMenuActionHelperBackIconLabel" class="menu-action-helper-icon-label" />
+                </ui:VisualElement>
+                <ui:Label tabindex="-1" text="Back" display-tooltip-when-elided="true" name="SettingsMenuActionHelperBackLabel" class="menu-action-helper-label" />
+            </ui:VisualElement>
+            <ui:VisualElement name="SettingsMenuActionHelperSelect" class="menu-action-helper">
+                <ui:VisualElement name="SettingsMenuActionHelperSelectIcon" class="menu-action-helper-icon">
+                    <ui:Label tabindex="-1" text="A" display-tooltip-when-elided="true" name="SettingsMenuActionHelperSelectIconLabel" class="menu-action-helper-icon-label" />
+                </ui:VisualElement>
+                <ui:Label tabindex="-1" text="Select" display-tooltip-when-elided="true" name="SettingsMenuActionHelperSelectLabel" class="menu-action-helper-label" />
+            </ui:VisualElement>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
