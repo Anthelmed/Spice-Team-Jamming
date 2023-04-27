@@ -60,7 +60,7 @@ namespace _3C.Player
             ChangeAnimatorSpeedParameter(0);
         }
 
-        public override void StartState()
+        public override void StartState(PlayerState _previousState)
         {
             m_Animator.SetTrigger(m_MovementTriggerParam);
         }

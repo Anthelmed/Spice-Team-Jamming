@@ -3,6 +3,7 @@ using System.Collections;
 using DefaultNamespace;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace _3C.Player
 {
@@ -28,22 +29,23 @@ namespace _3C.Player
         [SerializeField] private int m_ThirdAttackTrigger;
         
         [SerializeField] private Animator m_Animator;
-
-
-
+        
         private bool m_IsAttackAsked;
 
         private int m_AttackIndex = 0;
+
+        private PlayerState m_PreviousState;
 
         private Coroutine m_WaitForInputCoroutine;
 
         private bool IsWaitingForInput => m_WaitForInputCoroutine != null;
 
-        public override void StartState()
+        public override void StartState(PlayerState _previousState)
         {
             m_Animator.SetTrigger(m_StartAttackTriggerParam);
             m_WaitForInputCoroutine = null;
             m_AttackIndex = 0;
+            m_PreviousState = _previousState;
             PlayNextAttack();
         }
 
@@ -62,14 +64,27 @@ namespace _3C.Player
             }
             else
             {
-                if (GameplayData.s_PlayerInputs.InputStack.Top == InputType.AttackPerformed)
+                var lastInput = GameplayData.s_PlayerInputs.InputStack.Top;
+                if (lastInput == InputType.MovementCanceled)
                 {
                     m_WaitForInputCoroutine = m_StateHandler.StartCoroutine(c_WaitForInput());
+                    return;
                 }
-                else
+
+                if (lastInput == InputType.AttackPerformed)
                 {
-                    ExitState();
+                    if (GameplayData.s_PlayerInputs.InputStack.Count >= 1 && 
+                        GameplayData.s_PlayerInputs.InputStack.GetTop(1) == InputType.MovementPerformed)
+                    {
+                        ExitState();
+                        return;
+                        
+                    }
+                    m_WaitForInputCoroutine = m_StateHandler.StartCoroutine(c_WaitForInput());
+                    return;
                 }
+
+                ExitState();
             }
         }
 
@@ -99,8 +114,13 @@ namespace _3C.Player
         {
             if (IsWaitingForInput)
             {
+                if (inputType == InputType.MovementCanceled)
+                {
+                    return;
+                }
                 m_StateHandler.StopCoroutine(m_WaitForInputCoroutine);
                 m_WaitForInputCoroutine = null;
+
                 if (inputType != InputType.AttackPerformed)
                 {
                     ExitState();
