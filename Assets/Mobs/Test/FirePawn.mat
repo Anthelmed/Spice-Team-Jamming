@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_DogMob
+  m_Name: FirePawn
   m_Shader: {fileID: -6465566751694194690, guid: 563f8747be58fee4289f2fed2f3d0a4b,
     type: 3}
   m_Parent: {fileID: 0}
@@ -38,7 +38,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseColor:
-        m_Texture: {fileID: 2800000, guid: 5b981358eaa6be84dbe67e39c78e448b, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -74,7 +74,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalVat:
-        m_Texture: {fileID: 2800000, guid: f57d7a90f82ebf140b473b4961e271ad, type: 2}
+        m_Texture: {fileID: 2800000, guid: 97768c8ad43a0e8408baa3884ed21396, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -90,7 +90,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VertexVat:
-        m_Texture: {fileID: 2800000, guid: 2f294d7860b66274b8f816a8517b0afb, type: 2}
+        m_Texture: {fileID: 2800000, guid: 6c1c76868d7023641bd56179bd5dea66, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -139,7 +139,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _AnimData: {r: 2.5, g: 1, b: 10, a: 0}
+    - _AnimData: {r: 0.9583334, g: 5, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
