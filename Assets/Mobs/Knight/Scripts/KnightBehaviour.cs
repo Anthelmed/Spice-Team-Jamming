@@ -134,10 +134,14 @@ public class KnightBehaviour : MonoBehaviour
         // Update the rotation
         if (m_lookAtTarget)
         {
-            transform.rotation = Quaternion.RotateTowards(
-                transform.rotation,
-                Quaternion.LookRotation(target.position - transform.position),
-                m_agent.angularSpeed * Time.deltaTime);
+            var toTarget = (target.position - transform.position).normalized;
+            if (Vector3.Dot(toTarget, transform.forward) < 0.99f)
+            {
+                transform.rotation = Quaternion.RotateTowards(
+                    transform.rotation,
+                    Quaternion.LookRotation(toTarget),
+                    m_agent.angularSpeed * Time.deltaTime);
+            }
         }
         if (m_alignWithMovement)
         {
