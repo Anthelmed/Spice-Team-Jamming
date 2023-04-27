@@ -36,7 +36,9 @@ public class VatAnimationDriver : MonoBehaviour
             return;
 
         m_currentAnimation = desiredAnimation;
-        m_mpb.SetVector(ANIM_DATA, animationData.animations[desiredAnimation]);
+        var data = animationData.animations[desiredAnimation];
+        data.w = Time.timeSinceLevelLoad;
+        m_mpb.SetVector(ANIM_DATA, data);
         m_renderer.SetPropertyBlock(m_mpb);
     }
 }
