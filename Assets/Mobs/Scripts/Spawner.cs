@@ -11,7 +11,7 @@ namespace Mobs
     [AddComponentMenu("Mobs/Spawner")]
     public class Spawner : MonoBehaviour
     {
-        public MobNavigation prefab;
+        public KnightBehaviour prefab;
         public int amount = 1000;
 
         public Transform target;
@@ -49,6 +49,7 @@ namespace Mobs
                 var position = center + new Vector3(offset.x, 0, offset.y);
 
                 var mob = Instantiate(prefab, position, Quaternion.identity);
+                mob.target = target;
                 var trans = mob.transform;
                 transArray[i] = trans;
                 boids[i] = new Jobs.Boid
@@ -69,35 +70,35 @@ namespace Mobs
             targetSpeed.Dispose();
         }
 
-        private void Update()
-        {
-            if (!target)
-                return;
+        //private void Update()
+        //{
+        //    if (!target)
+        //        return;
 
-            m_moveJobHandle.Complete();
+        //    m_moveJobHandle.Complete();
 
 
-            var dependency = new Jobs.CalculateBoidsRules
-            {
-                boids = boids,
-                newVelocity = targetSpeed,
-                targetPosition = new float2(target.position.x, target.position.z),
-                avoidanceRadiusSq = prefab.avoidanceRadius * prefab.avoidanceRadius,
-                avoidanceStrength = prefab.avoidanceStrength,
-                viewRadiusSq = prefab.viewRadius * prefab.viewRadius,
-                cohesionStrength = prefab.cohesionStrength,
-                alignementStrength = prefab.alignementStrength
-            }.Schedule(boids.Length, boids.Length / 16 + 16);
+        //    var dependency = new Jobs.CalculateBoidsRules
+        //    {
+        //        boids = boids,
+        //        newVelocity = targetSpeed,
+        //        targetPosition = new float2(target.position.x, target.position.z),
+        //        avoidanceRadiusSq = prefab.avoidanceRadius * prefab.avoidanceRadius,
+        //        avoidanceStrength = prefab.avoidanceStrength,
+        //        viewRadiusSq = prefab.viewRadius * prefab.viewRadius,
+        //        cohesionStrength = prefab.cohesionStrength,
+        //        alignementStrength = prefab.alignementStrength
+        //    }.Schedule(boids.Length, boids.Length / 16 + 16);
 
-            m_moveJobHandle = new Jobs.MoveMobsJob
-            {
-                boids = boids,
-                targetSpeed = targetSpeed,
-                maxSpeed = prefab.speed,
-                acceleration = prefab.acceleration,
-                dt = Time.deltaTime
-            }.Schedule(transforms, dependency);
-        }
+        //    m_moveJobHandle = new Jobs.MoveMobsJob
+        //    {
+        //        boids = boids,
+        //        targetSpeed = targetSpeed,
+        //        maxSpeed = prefab.speed,
+        //        acceleration = prefab.acceleration,
+        //        dt = Time.deltaTime
+        //    }.Schedule(transforms, dependency);
+        //}
 
         private void OnDrawGizmosSelected()
         {
