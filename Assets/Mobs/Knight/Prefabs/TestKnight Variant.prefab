@@ -106,6 +106,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3531440109231608636}
+    - targetCorrespondingSourceObject: {fileID: 2066896392038628118, guid: 45288819fde2143449a96207b14db0bb,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3654377984457820123}
   m_SourcePrefab: {fileID: 100100000, guid: 45288819fde2143449a96207b14db0bb, type: 3}
 --- !u!95 &8952618470742183899 stripped
 Animator:
@@ -135,7 +139,7 @@ MonoBehaviour:
   m_agent: {fileID: 4482205200788809980}
   m_animator: {fileID: 3960113178247246151}
   m_targetting: {fileID: 3531440109231608636}
-  m_attackRange: {x: 1.5, y: 3}
+  m_attackRange: {x: 1.5, y: 2.5}
   m_attackCooldown: 2
   m_targetQueryRate: 60
 --- !u!114 &3960113178247246151
@@ -237,3 +241,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team: 1
   isMain: 1
+--- !u!114 &3654377984457820123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8952618470749584487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 845df4a83a1c4e8fa9f3a104d125febf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxHealth: 5
+  m_CurrentHealth: 0
+  m_OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHealed:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8952618470749584487}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
