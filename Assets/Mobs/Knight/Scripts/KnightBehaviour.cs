@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(Animator))]
 public class KnightBehaviour : MonoBehaviour
 {
     [Header("Public stuff")]
@@ -14,14 +13,11 @@ public class KnightBehaviour : MonoBehaviour
 
     [Header("Referencies")]
     [SerializeField] private NavMeshAgent m_agent;
-    [SerializeField] private Animator m_animator;
+    [SerializeField] private AnimationDriver m_animator;
 
     [Header("Parameters")]
     [SerializeField] private Vector2 m_attackRange = Vector2.up;
     [SerializeField] private float m_attackCooldown = 2f;
-
-    private static readonly int SPEED = Animator.StringToHash("Speed");
-    private static readonly int ATTACK = Animator.StringToHash("Attack");
 
     private Vector3 m_lastPosition;
 
@@ -38,13 +34,12 @@ public class KnightBehaviour : MonoBehaviour
     private State m_nextState = State.Idle;
     private bool m_lookAtTarget = false;
     private bool m_alignWithMovement = false;
-    private bool m_animationFinished = false;
     private float m_currentAttackCooldown = 0f;
 
     private void OnValidate()
     {
         m_agent = GetComponent<NavMeshAgent>();
-        m_animator = GetComponent<Animator>();
+        m_animator = GetComponent<AnimationDriver>();
     }
     private void Reset()
     {
@@ -89,7 +84,7 @@ public class KnightBehaviour : MonoBehaviour
         // Update the animations
         var movement = transform.position - m_lastPosition;
         m_lastPosition = transform.position;
-        m_animator.SetFloat(SPEED, movement.magnitude / Time.deltaTime);
+        m_animator.SetSpeed(movement.magnitude / Time.deltaTime);
 
         // Update the rotation
         if (m_lookAtTarget)
@@ -124,9 +119,6 @@ public class KnightBehaviour : MonoBehaviour
             case State.Retreat:
                 Retreat_Exit();
                 break;
-            case State.Attack:
-                Attack_Exit();
-                break;
         }
 
         switch (m_nextState)
@@ -146,11 +138,6 @@ public class KnightBehaviour : MonoBehaviour
         }
 
         m_state = m_nextState;
-    }
-
-    private void OnAnimationFinished()
-    {
-        m_animationFinished = true;
     }
 
     private void OnDrawGizmosSelected()
@@ -278,19 +265,13 @@ public class KnightBehaviour : MonoBehaviour
     #region Attack
     private void Attack_Enter()
     {
-        m_animator.SetTrigger(ATTACK);
-        m_animationFinished = false;
+        m_animator.TriggerAttack();
     }
 
     private void Attack_Update()
     {
-        if (m_animationFinished)
+        if (m_animator.HasAnimationFinished())
             m_nextState = State.CombatIdle;
-    }
-
-    private void Attack_Exit()
-    {
-        m_animationFinished = false;
     }
     #endregion
     #endregion

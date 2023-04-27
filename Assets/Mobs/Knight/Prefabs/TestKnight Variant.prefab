@@ -89,6 +89,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2066896392038628118, guid: 45288819fde2143449a96207b14db0bb,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 3960113178247246151}
+    - targetCorrespondingSourceObject: {fileID: 2066896392038628118, guid: 45288819fde2143449a96207b14db0bb,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 4482205200788809980}
     - targetCorrespondingSourceObject: {fileID: 2066896392038628118, guid: 45288819fde2143449a96207b14db0bb,
         type: 3}
@@ -125,8 +129,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   m_agent: {fileID: 4482205200788809980}
-  m_animator: {fileID: 8952618470742183899}
+  m_animator: {fileID: 3960113178247246151}
   m_attackRange: {x: 1.5, y: 3}
+  m_attackCooldown: 2
+--- !u!114 &3960113178247246151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8952618470749584487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734011eda3818514d903bc087e7cbe24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_animator: {fileID: 8952618470742183899}
 --- !u!195 &4482205200788809980
 NavMeshAgent:
   m_ObjectHideFlags: 0
