@@ -73,7 +73,7 @@ namespace _3C.Player
 
                 if (lastInput == InputType.AttackPerformed)
                 {
-                    if (GameplayData.s_PlayerInputs.InputStack.Count >= 1 && 
+                    if (GameplayData.s_PlayerInputs.InputStack.Count >= 2 && 
                         GameplayData.s_PlayerInputs.InputStack.GetTop(1) == InputType.MovementPerformed)
                     {
                         ExitState();
