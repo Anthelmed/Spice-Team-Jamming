@@ -77,4 +77,16 @@ public class VatAnimationDriver : AnimationDriver
     {
         return m_specialAnimationEnds < Time.timeSinceLevelLoad;
     }
+
+    public override void TriggerHit()
+    {
+        m_specialAnimationEnds = Time.timeSinceLevelLoad + animationData.animations[(int)AnimationID.Hit].x - transitionDuration;
+        SwitchAnimation(AnimationID.Hit);
+    }
+
+    public override void TriggerDeath()
+    {
+        m_specialAnimationEnds = Time.timeSinceLevelLoad + animationData.animations[(int)AnimationID.Hit].x * 0.5f - transitionDuration;
+        SwitchAnimation(AnimationID.Hit);
+    }
 }

@@ -33,6 +33,8 @@ public class KnightBehaviour : MonoBehaviour
         CombatIdle,
         Retreat,
         Attack,
+        Hit,
+        Death
     }
 
     private State m_state = State.Idle;
@@ -50,7 +52,12 @@ public class KnightBehaviour : MonoBehaviour
 
     public void OnDeath()
     {
-        Destroy(gameObject);
+        m_nextState = State.Death;
+    }
+
+    public void OnHit()
+    {
+        m_nextState = State.Hit;
     }
 
     private void OnValidate()
@@ -100,6 +107,12 @@ public class KnightBehaviour : MonoBehaviour
                 break;
             case State.Attack:
                 Attack_Update();
+                break;
+            case State.Hit:
+                Hit_Update();
+                break;
+            case State.Death:
+                Death_Update();
                 break;
         }
 
@@ -202,6 +215,12 @@ public class KnightBehaviour : MonoBehaviour
                 break;
             case State.Attack:
                 Attack_Enter();
+                break;
+            case State.Hit:
+                Hit_Enter();
+                break;
+            case State.Death:
+                Death_Enter();
                 break;
         }
 
@@ -375,6 +394,32 @@ public class KnightBehaviour : MonoBehaviour
     {
         if (m_animator.HasAnimationFinished())
             m_nextState = State.CombatIdle;
+    }
+    #endregion
+
+    #region Hit
+    private void Hit_Enter()
+    {
+        m_animator.TriggerHit();
+    }
+
+    private void Hit_Update()
+    {
+        if (m_animator.HasAnimationFinished())
+            m_nextState = State.CombatIdle;
+    }
+    #endregion
+
+    #region Death
+    private void Death_Enter()
+    {
+        m_animator.TriggerDeath();
+    }
+
+    private void Death_Update()
+    {
+        if (m_animator.HasAnimationFinished())
+            Destroy(gameObject);
     }
     #endregion
     #endregion

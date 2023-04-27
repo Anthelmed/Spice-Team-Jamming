@@ -11,6 +11,8 @@ public class SkeletalAnimationDriver : AnimationDriver
 
     private static readonly int SPEED = Animator.StringToHash("Speed");
     private static readonly int ATTACK = Animator.StringToHash("Attack");
+    private static readonly int HIT = Animator.StringToHash("Hit");
+    private static readonly int DEATH = Animator.StringToHash("Death");
 
     private void OnValidate()
     {
@@ -40,6 +42,18 @@ public class SkeletalAnimationDriver : AnimationDriver
     public override void TriggerAttack()
     {
         m_animator.SetTrigger(ATTACK);
+        m_animationFinished = false;
+    }
+
+    public override void TriggerHit()
+    {
+        m_animator.SetTrigger(HIT);
+        m_animationFinished = false;
+    }
+
+    public override void TriggerDeath()
+    {
+        m_animator.SetTrigger(DEATH);
         m_animationFinished = false;
     }
 }
