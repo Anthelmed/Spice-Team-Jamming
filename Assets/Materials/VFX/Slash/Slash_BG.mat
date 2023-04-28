@@ -93,6 +93,6 @@ Material:
     - _BurnColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1.2214078, g: 1.2214078, b: 1.2214078, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _PanningSpeedXYmaintexZWdisplacementtex: {r: 1, g: 0, b: 0, a: 0}
+    - _PanningSpeedXYmaintexZWdisplacementtex: {r: 2, g: 0, b: 0, a: 0}
     - _Secondarypanningspeed: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
