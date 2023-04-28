@@ -6,8 +6,7 @@ namespace DefaultNamespace.HealthSystem.Damager
 {
     public class ColliderDamager : MonoBehaviour
     {
-        [SerializeField]
-        private int m_Damage;
+        public int Damage;
 
         public Target.Team team;
 
@@ -15,7 +14,7 @@ namespace DefaultNamespace.HealthSystem.Damager
         {
             if (other.TryGetComponent<IDamageable>(out var damageable))
             {
-                damageable.TakeDamage(m_Damage, team);
+                damageable.TakeDamage(Damage, team);
             }
         }
     }

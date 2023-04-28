@@ -43,6 +43,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1134181180571201404}
+  - component: {fileID: 1158905776164586155}
   m_Layer: 0
   m_Name: MeleeWeapon
   m_TagString: Untagged
@@ -58,13 +59,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3374954979237122839}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2213136729091861939}
   m_Father: {fileID: 7390912607918933550}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1158905776164586155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3374954979237122839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d6c909f5a24ca0b89016a79e780547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Angle: 90
 --- !u!1 &5580938836615341466
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +149,6 @@ Transform:
   - {fileID: 4783978352822228367}
   - {fileID: 1134181180571201404}
   - {fileID: 8664759534292641249}
-  - {fileID: 2213136729091861939}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -252,14 +266,41 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   m_PlayerMeleeAttack:
-    m_InputWaitDelay: 0.5
-    m_WeaponCollider: {fileID: 7819967878936673827}
-    m_AttackDuration: 0.5
+    m_InputWaitDelay: 0
+    m_AttackDuration: 0.3
     m_VFX_Start: 0
+    m_WeaponMovementCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BaseDamage: 1
+    m_SuccessfullComboDamage: 3
     m_VFX:
     - {fileID: 332763085616677012}
     - {fileID: 6984686526992778381}
     - {fileID: 7666370331218966136}
+    m_WeaponMovement: {fileID: 1158905776164586155}
+    m_Damager: {fileID: 7518698054020727578}
     m_StartAttackTriggerParam: 966611383
     m_EndAttackTriggerParam: 960102711
     m_FirstAttackTrigger: -356409821
@@ -322,7 +363,7 @@ GameObject:
   - component: {fileID: 7819967878936673827}
   - component: {fileID: 7518698054020727578}
   m_Layer: 0
-  m_Name: WeaponTrigger
+  m_Name: MeleeCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -335,12 +376,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7187431065340155038}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.42, z: 1.627}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.42, z: 2.22}
   m_LocalScale: {x: 3.2021873, y: 3.2021873, z: 3.2021873}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 7390912607918933550}
+  m_Father: {fileID: 1134181180571201404}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &7819967878936673827
@@ -362,7 +403,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7518698054020727578
 MonoBehaviour:
@@ -376,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9da757614e34a81bab8d9d45dd576d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Damage: 1
+  Damage: 0
   team: 3
 --- !u!1001 &402762768143152386
 PrefabInstance:

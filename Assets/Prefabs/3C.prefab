@@ -436,16 +436,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
-    - target: {fileID: 7279425899133959930, guid: a88553ad196ac3142aa555fdad264908,
-        type: 3}
-      propertyPath: m_PlayerMeleeAttack.m_AttackDuration
-      value: 0.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 7279425899133959930, guid: a88553ad196ac3142aa555fdad264908,
-        type: 3}
-      propertyPath: m_PlayerMeleeAttack.m_InputWaitDelay
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 7390912607918933550, guid: a88553ad196ac3142aa555fdad264908,
         type: 3}
       propertyPath: m_RootOrder

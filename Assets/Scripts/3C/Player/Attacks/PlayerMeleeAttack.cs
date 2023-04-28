@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using _3C.Player.Weapons;
 using DefaultNamespace;
+using DefaultNamespace.HealthSystem.Damager;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,17 +14,19 @@ namespace _3C.Player
     {
         [Header("Settings")]
         [SerializeField] private float m_InputWaitDelay;
-
-        [SerializeField] private Collider m_WeaponCollider;
-
+        
         [SerializeField] private float m_AttackDuration;
         [SerializeField] private float m_VFX_Start;
+        [SerializeField] private AnimationCurve m_WeaponMovementCurve;
+        
+        [SerializeField] private int m_BaseDamage;
+        [SerializeField] private int m_SuccessfullComboDamage;
 
+        [Header("Components")]
         [SerializeField] private ParticleSystem[] m_VFX;
-        
-        
-        
-        
+        [SerializeField] private AWeaponMovement m_WeaponMovement;
+        [SerializeField] private ColliderDamager m_Damager;
+
         [Header("Animation")]
         [AnimatorParam("m_Animator")]
         [SerializeField] private int m_StartAttackTriggerParam;
@@ -64,7 +68,8 @@ namespace _3C.Player
         private void PlayNextAttack()
         {
             m_IsAttackAsked = false;
-            m_WeaponCollider.enabled = true;
+            m_Damager.Damage = m_AttackIndex == 2 ? m_SuccessfullComboDamage : m_BaseDamage;
+            m_WeaponMovement.TriggerWeaponMovement(m_AttackDuration, m_WeaponMovementCurve);
             m_StateHandler.PlayerSoundsInstance.PlayAttackSound();
             if (m_Animator == null)
             {
@@ -94,7 +99,7 @@ namespace _3C.Player
             }
             else
             {
-                m_WeaponCollider.enabled = false;
+                m_WeaponMovement.StopWeaponMovement();
                 var lastInput = GameplayData.s_PlayerInputs.InputStack.Top;
                 if (lastInput == InputType.MovementCanceled)
                 {
@@ -137,7 +142,7 @@ namespace _3C.Player
         private void StateCleaning()
         {
             //m_Animator?.SetTrigger(m_EndAttackTriggerParam);
-            m_WeaponCollider.enabled = false;
+            m_WeaponMovement.StopWeaponMovement();
             m_VFX[m_AttackIndex].Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             if (m_WaitForInputCoroutine != null)
             {
