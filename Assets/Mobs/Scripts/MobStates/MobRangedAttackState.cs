@@ -10,6 +10,8 @@ public class MobRangedAttackState : MobAI.IMobState
         data.projectile.target = data.TargetTransform.position;
         data.projectile.gameObject.SetActive(true);
 
+        data.ShouldQueryTargets = true;
+
         data.animator.TriggerRangedAttack();
         if (data.sounds) data.sounds.PlayRangeSound();
     }
@@ -22,5 +24,6 @@ public class MobRangedAttackState : MobAI.IMobState
 
     public void Exit(MobAI.Data data)
     {
+        data.ShouldQueryTargets = false;
     }
 }

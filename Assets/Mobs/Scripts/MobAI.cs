@@ -236,15 +236,20 @@ public class MobAI : MonoBehaviour
             }
 
             // If it's close enough that's the one we attack
-            if (farDistance < m_data.smallTargetDistance)
+            if (farDistance < m_data.meleeRange)
                 m_data.Target = farTarget;
 
             // If not try to get any enemy that's in range
             if (!m_data.Target)
             {
-                m_data.Target = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out _, ~m_data.targetting.team,
+                var newTarget = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out var closeDistance, ~m_data.targetting.team,
                     maxPriority: m_data.huntMainTargets ? Targetable.Priority.Medium : Targetable.Priority.High, 
                     minPriority: Targetable.Priority.Medium);
+
+                if (!farTarget || closeDistance < m_data.meleeRange)
+                    m_data.Target = newTarget;
+                else if (farDistance < m_data.smallTargetDistance)
+                    m_data.Target = farTarget;
             }
 
             // As a backup, find vegetation to burn :devil:
