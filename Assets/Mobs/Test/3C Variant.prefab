@@ -112,6 +112,11 @@ PrefabInstance:
       propertyPath: team
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4935705226419018536, guid: eac1ae59bef618847b73c10b4d795403,
+        type: 3}
+      propertyPath: priority
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5312326701685609516, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
       propertyPath: m_LocalPosition.y
