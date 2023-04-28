@@ -30,7 +30,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioMixer bgmMixer;
     [SerializeField] AudioMixerSnapshot overWorldSnapshot;
     [SerializeField] AudioMixerSnapshot battleSnapshot;
+    [SerializeField] AudioMixerSnapshot pauseSnapShot;
+    [SerializeField] AudioMixerSnapshot blendedSnapshot;
 
+    [Header("Music")]
+    [SerializeField] bool shouldPlayBGM;
     [SerializeField] float transitionTime =3;
 
     int currentMobSource = 0;
@@ -42,6 +46,7 @@ public class AudioManager : MonoBehaviour
     [Header("tension weights")]
     [SerializeField] float enemyWeight = 0.7f;
     [SerializeField] float playerWeight = 0.3f;
+
 
     public void UpdateTension()
     {
@@ -79,23 +84,69 @@ public class AudioManager : MonoBehaviour
         playerSfxSources = playerSfxSourceParent.GetComponentsInChildren<AudioSource>();
         mobSfxSources = mobSfxSourceParent.GetComponentsInChildren<AudioSource> ();
 
-        StartBGM();
+        if (shouldPlayBGM) StartBGM();
     }
 
+
+    private void Start()
+    {
+        GameManager.instance.OnGameStateChanged += HandleGameStateChange;
+    }
     private void StartBGM()
     {
-        //set up mixer snapshots and play both loops
+       levelBgmSource.Play();
+        overworldBgmSource.Play();
+        tensionSource.Play();
+    }
+    void HandleGameStateChange(GameState state)
+    {
+        switch (state)
+        {
+            case GameState.title:
+                break;
+            case GameState.map:
+                {
+                    TransitionToMapMusic();
+                }
+                break;
+            case GameState.level:
+                {
+                    TransitionToLevelMusic();
+                }
+                break;
+            case GameState.pause:
+                {
+                    TransitionToPauseMusic();
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     public void TransitionToMapMusic()
     {
-       
+        overWorldSnapshot.TransitionTo(1);
     }
 
     public void TransitionToLevelMusic()
     {
-        overWorldSnapshot.TransitionTo(transitionTime);
+        StartCoroutine(CompleteFade());
+        blendedSnapshot.TransitionTo(transitionTime);
+       
     }
+
+    public void TransitionToPauseMusic()
+    {
+        battleSnapshot.TransitionTo(transitionTime);
+    }
+
+    IEnumerator CompleteFade() // fake us an Scurve fade
+    {
+        yield return new WaitForSeconds(transitionTime +1f);
+        battleSnapshot.TransitionTo(transitionTime);
+    }
+
 
     public void PlaySingleClip(string clipName, SFXCategory category, float pitchVariance, float volumeVariance)
     {

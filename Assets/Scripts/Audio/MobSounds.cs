@@ -53,5 +53,22 @@ namespace DefaultNamespace.Audio
         }
 
 
+        //public void PlayUIClick()
+        //{
+        //    m_AudioManager = AudioManager.instance;
+        //    if (m_AudioManager == null) return;
+        //    m_AudioManager.PlaySingleClip("uiClick", SFXCategory.ui, 0, 0);
+        //}
+
+        //public void PlayUIConfirm()
+        //{
+        //    if (m_AudioManager == null) return;
+        //    m_AudioManager.PlaySingleClip("uiPositive", SFXCategory.ui, 0, 0);
+        //}
+        //public void PlayUIDecline()
+        //{
+        //    if (m_AudioManager == null) return;
+        //    m_AudioManager.PlaySingleClip("uiNegative", SFXCategory.ui, 0, 0);
+        //}
     }
 }
