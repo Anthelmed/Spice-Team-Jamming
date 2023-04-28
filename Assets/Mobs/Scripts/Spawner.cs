@@ -14,8 +14,6 @@ namespace Mobs
         public MobAI prefab;
         public int amount = 1000;
 
-        public Targetable target;
-
         private float Radius
         {
             get
@@ -39,8 +37,6 @@ namespace Mobs
                 var position = center + new Vector3(offset.x, 0, offset.y);
 
                 var mob = Instantiate(prefab, position, Quaternion.identity);
-                mob.target = target;
-                var trans = mob.transform;
             }
         }
 
