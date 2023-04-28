@@ -116,6 +116,12 @@ namespace _3C.Player
             }
         }
 
+        private void OnDrawGizmos()
+        {
+            m_PlayerMovement?.OnDrawGizmos();
+            m_CurrentStateBehavior?.OnDrawGizmos();
+        }
+
         public void OnInputAdded(InputType _input)
         {
             if (!ShouldCurrentStateBeAborted(_input))

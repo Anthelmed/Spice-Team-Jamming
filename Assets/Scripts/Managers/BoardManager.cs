@@ -28,6 +28,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private BiomePrefabHolder forestPrefabHolder;
     [SerializeField] private BiomePrefabHolder waterPrefabHolder;
     [SerializeField] private float sameBiomeChance = 0.5f;
+    [SerializeField] private List<Biome> spawnableBiomes = new List<Biome>();
 
     private Dictionary<Biome, BiomePrefabHolder> _biomePrefabHolders = new Dictionary<Biome, BiomePrefabHolder>();
 
@@ -166,11 +167,10 @@ public class BoardManager : MonoBehaviour
         Biome? currentRandomBiome = null;
         if (neighbouringBiomes.Count == 0)
         {
-            do
-            {
-                currentRandomBiome = (Biome) Random.Range(0, Enum.GetNames(typeof(Biome)).Length);
 
-            } while (currentRandomBiome == Biome.Water);
+            var randomIdex = Random.Range(0, spawnableBiomes.Count);
+            currentRandomBiome = spawnableBiomes[randomIdex];
+
 
             return currentRandomBiome.Value;
         }
@@ -184,11 +184,10 @@ public class BoardManager : MonoBehaviour
             return mostNeighbouringBiome;
         }
 
-        do
-        {
-            currentRandomBiome = (Biome) Random.Range(0, Enum.GetNames(typeof(Biome)).Length);
-
-        } while (currentRandomBiome == Biome.Water);
+ 
+        var randIndex = Random.Range(0, spawnableBiomes.Count);
+        currentRandomBiome = spawnableBiomes[randIndex];
+            
         
         return currentRandomBiome.Value;
         

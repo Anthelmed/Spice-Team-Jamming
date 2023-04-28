@@ -25,5 +25,7 @@ namespace _3C.Player
         public virtual void OnValidate() {}
 
         public virtual void OnInput(InputType inputType) { }
+        
+        public virtual void OnDrawGizmos() {}
     }
 }
