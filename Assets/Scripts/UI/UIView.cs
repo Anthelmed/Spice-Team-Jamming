@@ -8,7 +8,7 @@ using Random = Unity.Mathematics.Random;
 
 namespace SpiceTeamJamming.UI
 {
-	public abstract class UIGeneric : MonoBehaviour
+	public abstract class UIView : MonoBehaviour
 	{
 		private readonly Color _baseColorButton = new (0.5254902f, 0.8588235f, 0.6470588f);
 		private readonly Color _actionColorButton = new (0.5254902f, 0.7607843f, 0.572549f);
@@ -22,6 +22,7 @@ namespace SpiceTeamJamming.UI
 		private readonly Func<float, float> _fadeEasing = Easing.OutQuad;
 		
 		protected abstract VisualElement MainElement { get; }
+		protected abstract UIRouter.RouteType Route { get; }
 
 		private Random _random;
 		
@@ -33,13 +34,20 @@ namespace SpiceTeamJamming.UI
 		private UIButtonManipulator[] _buttonManipulators;
 		private readonly Dictionary<VisualElement, UIButtonManipulator> _elementToButtonManipulatorBridge = new ();
 
-		private void Awake()
+		protected virtual void Awake()
 		{
 			UIAnimationsUtils.FadeOut(MainElement, 0, Easing.Linear);
 
 			_random = new Random((uint)GetInstanceID());
+			
+			UIRouter.ConfigureRoute(Route, this);
 		}
-		
+
+		private void OnDestroy()
+		{
+			UIRouter.ClearRoute(Route);
+		}
+
 		protected void OnVisibilityChanged(bool value)
 		{
 			if (value)
@@ -61,7 +69,7 @@ namespace SpiceTeamJamming.UI
 		{
 			UIAnimationsUtils.FadeOut(MainElement, FadeOutDurationMS, _fadeEasing);
 		}
-
+		
 		protected abstract void DisplaceElementsRandomly();
 
 		protected void InitializeButtonsManipulators(Button[] buttons)

@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 
 namespace UIToolkitAutoReferences
 {
-    public class PauseMenuDocumentAutoReferences : MonoBehaviour
+    public class PauseMenuDocument1AutoReferences : MonoBehaviour
     {
         [SerializeField] private UIDocument uiDocument;
         

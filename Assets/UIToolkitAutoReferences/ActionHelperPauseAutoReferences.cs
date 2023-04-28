@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 
 namespace UIToolkitAutoReferences
 {
-    public class MapDocumentAutoReferences : MonoBehaviour
+    public class ActionHelperPauseAutoReferences : MonoBehaviour
     {
         [SerializeField] private UIDocument uiDocument;
         
@@ -17,19 +17,10 @@ namespace UIToolkitAutoReferences
 		private VisualElement RootVisualElement => _rootVisualElement ??=
 			uiDocument.rootVisualElement;
 
-		private VisualElement _map;
-		private VisualElement _actionHelperSelect;
 		private VisualElement _actionHelperPause;
-		private VisualElement _mapTileInfo;
 
-		public VisualElement Map => _map ??=
-			RootVisualElement.Q<VisualElement>("Map");
-		public VisualElement ActionHelperSelect => _actionHelperSelect ??=
-			RootVisualElement.Q<VisualElement>("ActionHelperSelect");
 		public VisualElement ActionHelperPause => _actionHelperPause ??=
 			RootVisualElement.Q<VisualElement>("ActionHelperPause");
-		public VisualElement MapTileInfo => _mapTileInfo ??=
-			RootVisualElement.Q<VisualElement>("MapTileInfo");
 
 		private void Start()
 		{

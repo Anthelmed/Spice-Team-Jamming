@@ -23,8 +23,8 @@ namespace UIToolkitAutoReferences
 		private Button _settingsMenuButtonAudio;
 		private Button _settingsMenuButtonGraphics;
 		private Button _settingsMenuButtonAccessibility;
-		private VisualElement _settingsMenuActionHelperSelect;
-		private VisualElement _settingsMenuActionHelperBack;
+		private VisualElement _actionHelperSelect;
+		private VisualElement _actionHelperBack;
 
 		public VisualElement SettingsMenu => _settingsMenu ??=
 			RootVisualElement.Q<VisualElement>("SettingsMenu");
@@ -38,10 +38,10 @@ namespace UIToolkitAutoReferences
 			RootVisualElement.Q<Button>("SettingsMenuButtonGraphics");
 		public Button SettingsMenuButtonAccessibility => _settingsMenuButtonAccessibility ??=
 			RootVisualElement.Q<Button>("SettingsMenuButtonAccessibility");
-		public VisualElement SettingsMenuActionHelperSelect => _settingsMenuActionHelperSelect ??=
-			RootVisualElement.Q<VisualElement>("SettingsMenuActionHelperSelect");
-		public VisualElement SettingsMenuActionHelperBack => _settingsMenuActionHelperBack ??=
-			RootVisualElement.Q<VisualElement>("SettingsMenuActionHelperBack");
+		public VisualElement ActionHelperSelect => _actionHelperSelect ??=
+			RootVisualElement.Q<VisualElement>("ActionHelperSelect");
+		public VisualElement ActionHelperBack => _actionHelperBack ??=
+			RootVisualElement.Q<VisualElement>("ActionHelperBack");
 
 		private void Start()
 		{

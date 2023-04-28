@@ -18,15 +18,27 @@ namespace UIToolkitAutoReferences
 			uiDocument.rootVisualElement;
 
 		private VisualElement _tutorial;
+		private VisualElement _tutorialTitle;
 		private Label _tutorialTitleLabel;
+		private VisualElement _tutorialInfo;
 		private Label _tutorialInfoSubTitle;
+		private Label _tutorialInfoText;
+		private VisualElement _actionHelperBack;
 
 		public VisualElement Tutorial => _tutorial ??=
 			RootVisualElement.Q<VisualElement>("Tutorial");
+		public VisualElement TutorialTitle => _tutorialTitle ??=
+			RootVisualElement.Q<VisualElement>("TutorialTitle");
 		public Label TutorialTitleLabel => _tutorialTitleLabel ??=
 			RootVisualElement.Q<Label>("TutorialTitleLabel");
+		public VisualElement TutorialInfo => _tutorialInfo ??=
+			RootVisualElement.Q<VisualElement>("TutorialInfo");
 		public Label TutorialInfoSubTitle => _tutorialInfoSubTitle ??=
 			RootVisualElement.Q<Label>("TutorialInfoSubTitle");
+		public Label TutorialInfoText => _tutorialInfoText ??=
+			RootVisualElement.Q<Label>("TutorialInfoText");
+		public VisualElement ActionHelperBack => _actionHelperBack ??=
+			RootVisualElement.Q<VisualElement>("ActionHelperBack");
 
 		private void Start()
 		{

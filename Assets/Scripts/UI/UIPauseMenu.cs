@@ -4,17 +4,18 @@ using UnityEngine.UIElements;
 
 namespace SpiceTeamJamming.UI
 {
-	public class UIPauseMenu : UIGeneric
+	public class UIPauseMenu : UIMenu
 	{
 		[Space]
 		[SerializeField] private GameManager gameManager;
 		[SerializeField] private PauseMenuDocumentAutoReferences elementsReferences;
-		[SerializeField] private UISettingsMenu settingsMenu;
 
 		protected override VisualElement MainElement => elementsReferences.PauseMenu;
+		protected override UIRouter.RouteType Route => UIRouter.RouteType.Pause;
 		
-		private void OnEnable()
+		protected override void OnEnable()
 		{
+			base.OnEnable();
 			//Bind OnVisibilityChanged;
 			
 			elementsReferences.PauseMenuButtonResume.clicked += OnResumeButtonPressed;
@@ -31,8 +32,9 @@ namespace SpiceTeamJamming.UI
 			});
 		}
 		
-		private void OnDisable()
+		protected override void OnDisable()
 		{
+			base.OnDisable();
 			//Unbind OnVisibilityChanged;
 			
 			elementsReferences.PauseMenuButtonResume.clicked -= OnResumeButtonPressed;
@@ -45,23 +47,22 @@ namespace SpiceTeamJamming.UI
 		
 		private void OnResumeButtonPressed()
 		{
-			
+			UIRouter.GoToPreviousRoute();
 		}
 		
 		private void OnSettingsButtonPressed()
 		{
-			Hide();
-			settingsMenu.Show();
+			UIRouter.GoToRoute(UIRouter.RouteType.Settings);
 		}
 		
 		private void OnMainMenuButtonPressed()
 		{
-			
+			UIRouter.GoToRoute(UIRouter.RouteType.Main);
 		}
 		
 		private void OnQuitButtonPressed()
 		{
-			
+			Application.Quit();
 		}
 		
 		protected override void DisplaceElementsRandomly()
@@ -71,6 +72,8 @@ namespace SpiceTeamJamming.UI
 			DisplaceElementRandomly(elementsReferences.PauseMenuButtonSettings);
 			DisplaceElementRandomly(elementsReferences.PauseMenuButtonMainMenu);
 			DisplaceElementRandomly(elementsReferences.PauseMenuButtonQuit);
+			DisplaceElementRandomly(elementsReferences.ActionHelperSelect);
+			DisplaceElementRandomly(elementsReferences.ActionHelperBack);
 		}
 	}
 }

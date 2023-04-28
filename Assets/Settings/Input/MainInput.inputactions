@@ -6,9 +6,9 @@
             "id": "6b73412e-d694-493f-b945-185a2ed44b7a",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Back",
                     "type": "Button",
-                    "id": "19204312-67dd-49bf-8d09-085e90319e90",
+                    "id": "dbb94164-7c5f-4a9a-8e0a-ada0522d8617",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -18,12 +18,23 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "b719430d-5d41-47f1-a76b-16492c5d56ec",
-                    "path": "",
+                    "id": "feea6738-fad4-4f05-b3da-cad0ab71341a",
+                    "path": "*/{Back}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d3172a06-8829-4591-a73c-5a5236446106",
+                    "path": "*/{Cancel}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Back",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
