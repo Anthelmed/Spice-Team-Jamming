@@ -6049,15 +6049,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2243334194748537, guid: eac1ae59bef618847b73c10b4d795403, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.46918464
+      value: 0.4691846
       objectReference: {fileID: 0}
     - target: {fileID: 2243334194748537, guid: eac1ae59bef618847b73c10b4d795403, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 2.72209e-15
+      value: -0.000000026318435
       objectReference: {fileID: 0}
     - target: {fileID: 2243334194748537, guid: eac1ae59bef618847b73c10b4d795403, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -6.692222e-16
+      value: 0.000000013982791
       objectReference: {fileID: 0}
     - target: {fileID: 238305663221829718, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
@@ -6068,11 +6068,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 3C
-      objectReference: {fileID: 0}
-    - target: {fileID: 1362105215883382312, guid: eac1ae59bef618847b73c10b4d795403,
-        type: 3}
-      propertyPath: BoneChains.Array.size
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2320334535718811902, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
@@ -6172,42 +6167,17 @@ PrefabInstance:
     - target: {fileID: 5312326701685609516, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.46918464
+      value: 0.4691846
       objectReference: {fileID: 0}
     - target: {fileID: 5312326701685609516, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 2.72209e-15
+      value: -0.000000026318435
       objectReference: {fileID: 0}
     - target: {fileID: 5312326701685609516, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -6.692222e-16
-      objectReference: {fileID: 0}
-    - target: {fileID: 6660908856886799166, guid: eac1ae59bef618847b73c10b4d795403,
-        type: 3}
-      propertyPath: LockRotationX
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6660908856886799166, guid: eac1ae59bef618847b73c10b4d795403,
-        type: 3}
-      propertyPath: LockRotationY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6660908856886799166, guid: eac1ae59bef618847b73c10b4d795403,
-        type: 3}
-      propertyPath: LockRotationZ
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6660908856886799166, guid: eac1ae59bef618847b73c10b4d795403,
-        type: 3}
-      propertyPath: BoneChains.Array.data[0].AnimationBlendCurveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6660908856886799166, guid: eac1ae59bef618847b73c10b4d795403,
-        type: 3}
-      propertyPath: BoneChains.Array.data[0].LengthStiffnessCurveType
-      value: 4
+      value: 0.000000013982791
       objectReference: {fileID: 0}
     - target: {fileID: 8665136223057287489, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
