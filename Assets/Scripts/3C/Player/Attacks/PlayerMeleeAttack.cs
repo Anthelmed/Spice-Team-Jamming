@@ -3,6 +3,7 @@ using System.Collections;
 using _3C.Player.Weapons;
 using DefaultNamespace;
 using DefaultNamespace.HealthSystem.Damager;
+using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,6 +15,11 @@ namespace _3C.Player
     {
         [Header("Settings")]
         [SerializeField] private float m_InputWaitDelay;
+
+        [SerializeField] private float m_DashSpeed;
+        [SerializeField] private float m_DashDuration;
+        [SerializeField] private AnimationCurve m_DashCurve;
+        
         
         [SerializeField] private float m_AttackDuration;
         [SerializeField] private float m_VFX_Start;
@@ -50,8 +56,15 @@ namespace _3C.Player
         
         private Coroutine m_WaitForInputCoroutine;
         private Coroutine m_AttackCoroutine;
+        private Tween m_DashTween;
+        private Transform m_Transform;
 
         private bool IsWaitingForInput => m_WaitForInputCoroutine != null;
+
+        protected override void Init(IStateHandler _stateHandler)
+        {
+            m_Transform = _stateHandler.gameObject.transform;
+        }
 
         public override void StartState()
         {
@@ -72,6 +85,13 @@ namespace _3C.Player
             if (m_Animator == null)
             {
                 m_AttackCoroutine = m_StateHandler.StartCoroutine(c_AttackDuration());
+                m_DashTween = m_Transform.DOMove(
+                    m_Transform.position + m_Transform.forward * m_DashSpeed * m_DashDuration, m_DashDuration
+                    ).SetEase(m_DashCurve);
+                m_DashTween.onComplete += () =>
+                {
+                    m_StateHandler.OnMovementStateChanged(true);
+                };
             }
             else
             {
@@ -134,6 +154,12 @@ namespace _3C.Player
             {
                 m_StateHandler.StopCoroutine(m_AttackCoroutine);
                 m_AttackCoroutine = null;
+            }
+
+            if (m_DashTween != null)
+            {
+                m_DashTween.Kill();
+                m_DashTween = null;
             }
         }
         

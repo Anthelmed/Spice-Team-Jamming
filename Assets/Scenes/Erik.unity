@@ -482,11 +482,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4162673794576891586, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
-      propertyPath: m_PlayerMeleeAttack.m_InputWaitDelay
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4162673794576891586, guid: eac1ae59bef618847b73c10b4d795403,
-        type: 3}
       propertyPath: m_PlayerMeleeAttack.m_AttackTriggers.Array.size
       value: 1
       objectReference: {fileID: 0}
