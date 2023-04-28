@@ -6,7 +6,8 @@ public class MobGoToTargetState : MobAI.IMobState
 {
     public void Enter(MobAI.Data data)
     {
-        data.agent.SetDestination(data.TargetTransform.position);
+        if (data.TargetTransform)
+            data.agent.SetDestination(data.TargetTransform.position);
         data.agent.updateRotation = true;
         data.ShouldQueryAdvanceBlocked = true;
         data.ShouldQueryTargets = true;
