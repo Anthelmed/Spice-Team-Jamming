@@ -288,7 +288,7 @@ public class MobAI : MonoBehaviour
             if (m_data.Target)
             {
                 var toTarget = (m_data.TargetTransform.position - transform.position).normalized;
-                var nearbyAllies = Targetable.QueryTargets(transform.position, 3, m_data.targetting.team, minPriority: m_data.targetting.priority);
+                var nearbyAllies = Targetable.QueryTargets(transform.position, 1.5f, m_data.targetting.team, minPriority: m_data.targetting.priority);
                 for (int i = 0; i < nearbyAllies.Count; ++i)
                 {
                     if (nearbyAllies[i] == m_data.targetting) continue;

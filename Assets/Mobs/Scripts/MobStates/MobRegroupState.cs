@@ -25,12 +25,6 @@ public class MobRegroupState : MobAI.IMobState
             return;
         }
 
-        if (data.AdvanceBlocked)
-        {
-            data.NextState = MobAI.State.Queueing;
-            return;
-        }
-
         // Update the navigation path if the current one is too outdated
         if ((data.agent.destination - data.RegroupPosition).sqrMagnitude > (data.agent.radius * data.agent.radius))
         {
