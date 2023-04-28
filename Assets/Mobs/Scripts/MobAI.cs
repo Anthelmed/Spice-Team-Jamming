@@ -31,6 +31,7 @@ public class MobAI : MonoBehaviour
         public int targetQueryRate = 60;
         public float smallTargetDistance = 10f;
         public float regroupDistance = 5f;
+        public float regroupOffset;
 
         [Header("Behaviour toggles")]
         public bool huntMainTargets = false;
@@ -40,6 +41,7 @@ public class MobAI : MonoBehaviour
         [Header("Current test")]
         public Transform leader;
         public float LeaderDistance { get; set; }
+        public Vector3 RegroupPosition { get; set; }
 
         private Targetable m_target;
         public Targetable Target { get => m_target; 
@@ -167,7 +169,8 @@ public class MobAI : MonoBehaviour
 
         if (m_data.leader)
         {
-            m_data.LeaderDistance = Vector3.Distance(transform.position, m_data.leader.position);
+            m_data.RegroupPosition = m_data.leader.position + m_data.leader.forward * m_data.regroupOffset;
+            m_data.LeaderDistance = Vector3.Distance(transform.position, m_data.RegroupPosition);
         }
         else m_data.LeaderDistance = 0f;
 
