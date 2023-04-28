@@ -8,7 +8,7 @@ namespace DefaultNamespace.HealthSystem.Damager
     {
         public int Damage;
 
-        public Target.Team team;
+        public Targetable.Team team;
 
         private void OnTriggerEnter(Collider other)
         {

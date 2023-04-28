@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Target : MonoBehaviour
+public class Targetable : MonoBehaviour
 {
     public enum Team
     {
@@ -18,26 +18,26 @@ public class Target : MonoBehaviour
     public Team team = Team.Nature;
     public bool isMain;
 
-    private static List<Target>[] m_targets = new List<Target>[]
+    private static List<Targetable>[] m_targets = new List<Targetable>[]
     {
-        new List<Target>(),
-        new List<Target>(),
-        new List<Target>(),
-        new List<Target>(),
+        new List<Targetable>(),
+        new List<Targetable>(),
+        new List<Targetable>(),
+        new List<Targetable>(),
     };
 
-    private static List<Target>[] m_mainTargets = new List<Target>[]
+    private static List<Targetable>[] m_mainTargets = new List<Targetable>[]
     {
-        new List<Target>(),
-        new List<Target>(),
-        new List<Target>(),
-        new List<Target>(),
+        new List<Targetable>(),
+        new List<Targetable>(),
+        new List<Targetable>(),
+        new List<Targetable>(),
     };
 
     // Reuse this one to avoid allocations
-    private static List<Target> m_reusableListForQueries = new List<Target>();
+    private static List<Targetable> m_reusableListForQueries = new List<Targetable>();
 
-    public static List<Target> QueryTargets(Vector3 center, float maxDistance, bool mainTargets, params Team[] teams)
+    public static List<Targetable> QueryTargets(Vector3 center, float maxDistance, bool mainTargets, params Team[] teams)
     {
         if (mainTargets)
             QueryTargets_internal(center, maxDistance, m_mainTargets, teams);
@@ -47,7 +47,7 @@ public class Target : MonoBehaviour
         return m_reusableListForQueries;
     }
 
-    private static void QueryTargets_internal(Vector3 center, float maxDistance, List<Target>[] targets, Team[] teams)
+    private static void QueryTargets_internal(Vector3 center, float maxDistance, List<Targetable>[] targets, Team[] teams)
     {
         m_reusableListForQueries.Clear();
 
@@ -58,7 +58,7 @@ public class Target : MonoBehaviour
         }
     }
 
-    private static void FindTargetsInRange(Vector3 center, float maxDistanceSq, List<Target> targets)
+    private static void FindTargetsInRange(Vector3 center, float maxDistanceSq, List<Targetable> targets)
     {
         for (int i = 0; i < targets.Count; ++i)
         {

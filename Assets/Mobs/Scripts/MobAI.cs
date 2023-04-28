@@ -7,8 +7,8 @@ using UnityEngine.AI;
 using UnityEngine.Profiling;
 
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(Target))]
-public class KnightBehaviour : MonoBehaviour
+[RequireComponent(typeof(Targetable))]
+public class MobAI : MonoBehaviour
 {
     [Header("Public stuff")]
     public Transform target;
@@ -16,7 +16,7 @@ public class KnightBehaviour : MonoBehaviour
     [Header("Referencies")]
     [SerializeField] private NavMeshAgent m_agent;
     [SerializeField] private AnimationDriver m_animator;
-    [SerializeField] private Target m_targetting;
+    [SerializeField] private Targetable m_targetting;
     [SerializeField] private Collider m_attackCollider;
 
     [Header("Parameters")]
@@ -64,8 +64,8 @@ public class KnightBehaviour : MonoBehaviour
     private void OnValidate()
     {
         m_agent = GetComponent<NavMeshAgent>();
-        m_animator = GetComponent<AnimationDriver>();
-        m_targetting = GetComponent<Target>();
+        m_animator = GetComponentInChildren<AnimationDriver>();
+        m_targetting = GetComponent<Targetable>();
     }
     private void Reset()
     {
@@ -168,7 +168,7 @@ public class KnightBehaviour : MonoBehaviour
             if (target)
             {
                 var toTarget = (target.position - transform.position).normalized;
-                var nearbyAllies = Target.QueryTargets(transform.position, 1.5f, m_targetting.isMain, m_targetting.team);
+                var nearbyAllies = Targetable.QueryTargets(transform.position, 1.5f, m_targetting.isMain, m_targetting.team);
                 for (int i = 0; i < nearbyAllies.Count; ++i)
                 {
                     if (nearbyAllies[i] == m_targetting) continue;

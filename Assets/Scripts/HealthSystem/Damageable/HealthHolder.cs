@@ -7,7 +7,7 @@ namespace DefaultNamespace.HealthSystem.Damageable
 {
     public class HealthHolder : MonoBehaviour, IDamageable
     {
-        public Target.Team team;
+        public Targetable.Team team;
         [SerializeField] private int m_MaxHealth;
 
         [ReadOnly]
@@ -23,7 +23,7 @@ namespace DefaultNamespace.HealthSystem.Damageable
             m_CurrentHealth = m_MaxHealth;
         }
 
-        public void TakeDamage(int _damage, Target.Team _team)
+        public void TakeDamage(int _damage, Targetable.Team _team)
         {
             // Don't receive damage from allies
             if (_team == team) return;
