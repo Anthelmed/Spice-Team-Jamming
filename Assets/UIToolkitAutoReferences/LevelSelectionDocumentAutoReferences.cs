@@ -14,20 +14,18 @@ namespace UIToolkitAutoReferences
         
         private VisualElement _rootVisualElement;
 
+		private VisualElement RootVisualElement => _rootVisualElement ??=
+			uiDocument.rootVisualElement;
+
 		private VisualElement _levelSelection;
 
 		public VisualElement LevelSelection => _levelSelection ??=
-			_rootVisualElement.Q<VisualElement>("LevelSelection");
+			RootVisualElement.Q<VisualElement>("LevelSelection");
 
-		private void Awake()
+		private void Start()
 		{
 			if (uiDocument == null)
-            {
                 Debug.LogError($"uiDocument field empty in {name} component", this);
-				return;
-			}
-
-			_rootVisualElement = uiDocument.rootVisualElement;
 		}
     }
 }

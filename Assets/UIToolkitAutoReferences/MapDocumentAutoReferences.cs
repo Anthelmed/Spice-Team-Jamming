@@ -14,20 +14,18 @@ namespace UIToolkitAutoReferences
         
         private VisualElement _rootVisualElement;
 
+		private VisualElement RootVisualElement => _rootVisualElement ??=
+			uiDocument.rootVisualElement;
+
 		private VisualElement _map;
 
 		public VisualElement Map => _map ??=
-			_rootVisualElement.Q<VisualElement>("Map");
+			RootVisualElement.Q<VisualElement>("Map");
 
-		private void Awake()
+		private void Start()
 		{
 			if (uiDocument == null)
-            {
                 Debug.LogError($"uiDocument field empty in {name} component", this);
-				return;
-			}
-
-			_rootVisualElement = uiDocument.rootVisualElement;
 		}
     }
 }
