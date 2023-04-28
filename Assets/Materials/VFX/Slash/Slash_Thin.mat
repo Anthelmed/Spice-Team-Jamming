@@ -90,7 +90,7 @@ Material:
     - _VertexOffsetAmount: 0
     m_Colors:
     - _BurnColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 4.90566, g: 4.349855, b: 3.5404058, a: 1}
+    - _Color: {r: 3.5444038, g: 4.328504, b: 4.90566, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _PanningSpeedXYmaintexZWdisplacementtex: {r: 0, g: 0, b: 0, a: 0}
     - _Secondarypanningspeed: {r: 0, g: 0, b: 0, a: 0}
