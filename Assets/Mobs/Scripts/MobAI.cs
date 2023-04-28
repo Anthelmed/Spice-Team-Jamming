@@ -128,15 +128,16 @@ public class MobAI : MonoBehaviour
     private void Update()
     {
         // Discard invalid targets
-        if (m_data.Target && !m_data.Target.enabled)
+        if (m_data.Target && !m_data.Target.isActiveAndEnabled)
             m_data.Target = null;
 
         // Update target info
         if (m_data.TargetTransform)
         {
             var toTarget = m_data.TargetTransform.position - transform.position;
-            m_data.TargetDistance = toTarget.magnitude;
-            m_data.ToTargetCos = Vector3.Dot(toTarget / Mathf.Max(0.001f, m_data.TargetDistance), transform.forward);
+            var dist = toTarget.magnitude;
+            m_data.ToTargetCos = Vector3.Dot(toTarget / Mathf.Max(0.001f, dist), transform.forward);
+            m_data.TargetDistance = dist - m_data.Target.radius;
         }
         else
         {

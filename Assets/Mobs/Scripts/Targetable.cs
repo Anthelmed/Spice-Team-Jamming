@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.UI;
 
+[SelectionBase]
 public class Targetable : MonoBehaviour
 {
     [Flags]
@@ -29,8 +30,7 @@ public class Targetable : MonoBehaviour
     }
 
     public Priority priority = Priority.Medium;
-
-    private static readonly Team[] m_teams = new Team[] { Team.Nature, Team.Fire, Team.Ice, Team.Wizard };
+    public float radius = 0.5f;
 
     private static List<Targetable> m_allTargets = new List<Targetable>();
 
