@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationData: {fileID: 7239065423396753691, guid: dc36db07b0ec4ac46bcac5c995b60d81,
     type: 3}
-  transitionDuration: 0.25
+  transitionDuration: 0.1
   m_renderer: {fileID: 3023089927820173501}
 --- !u!1001 &285535586752974213
 PrefabInstance:
@@ -112,7 +112,7 @@ PrefabInstance:
     - target: {fileID: 3713566029389570041, guid: ce306a084314e7c45bfb270fab518cb0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3713566029389570041, guid: ce306a084314e7c45bfb270fab518cb0,
         type: 3}
@@ -167,7 +167,7 @@ PrefabInstance:
     - target: {fileID: 4456989002479530567, guid: ce306a084314e7c45bfb270fab518cb0,
         type: 3}
       propertyPath: m_Name
-      value: FirePawn Variant
+      value: FirePawn
       objectReference: {fileID: 0}
     - target: {fileID: 5315648498737710978, guid: ce306a084314e7c45bfb270fab518cb0,
         type: 3}
