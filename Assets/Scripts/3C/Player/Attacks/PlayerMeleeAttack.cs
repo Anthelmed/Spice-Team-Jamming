@@ -3,6 +3,7 @@ using System.Collections;
 using _3C.Player.Weapons;
 using DefaultNamespace;
 using DefaultNamespace.HealthSystem.Damager;
+using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,6 +15,11 @@ namespace _3C.Player
     {
         [Header("Settings")]
         [SerializeField] private float m_InputWaitDelay;
+
+        [SerializeField] private float m_DashSpeed;
+        [SerializeField] private float m_DashDuration;
+        [SerializeField] private AnimationCurve m_DashCurve;
+        
         
         [SerializeField] private float m_AttackDuration;
         [SerializeField] private float m_VFX_Start;
@@ -47,33 +53,45 @@ namespace _3C.Player
         private bool m_IsAttackAsked;
 
         private int m_AttackIndex = 0;
-
-        private PlayerState m_PreviousState;
-
+        
         private Coroutine m_WaitForInputCoroutine;
         private Coroutine m_AttackCoroutine;
+        private Tween m_DashTween;
+        private Transform m_Transform;
 
         private bool IsWaitingForInput => m_WaitForInputCoroutine != null;
 
-        public override void StartState(PlayerState _previousState)
+        protected override void Init(IStateHandler _stateHandler)
+        {
+            m_Transform = _stateHandler.gameObject.transform;
+        }
+
+        public override void StartState()
         {
             //m_Animator?.SetTrigger(m_StartAttackTriggerParam);
             m_WaitForInputCoroutine = null;
             m_AttackCoroutine = null;
             m_AttackIndex = 0;
-            m_PreviousState = _previousState;
             PlayNextAttack();
         }
 
         private void PlayNextAttack()
         {
             m_IsAttackAsked = false;
+            m_StateHandler.OnMovementStateChanged(false);
             m_Damager.Damage = m_AttackIndex == 2 ? m_SuccessfullComboDamage : m_BaseDamage;
             m_WeaponMovement.TriggerWeaponMovement(m_AttackDuration, m_WeaponMovementCurve);
             m_StateHandler.PlayerSoundsInstance.PlayAttackSound();
             if (m_Animator == null)
             {
                 m_AttackCoroutine = m_StateHandler.StartCoroutine(c_AttackDuration());
+                m_DashTween = m_Transform.DOMove(
+                    m_Transform.position + m_Transform.forward * m_DashSpeed * m_DashDuration, m_DashDuration
+                    ).SetEase(m_DashCurve);
+                m_DashTween.onComplete += () =>
+                {
+                    m_StateHandler.OnMovementStateChanged(true);
+                };
             }
             else
             {
@@ -99,28 +117,9 @@ namespace _3C.Player
             }
             else
             {
+                m_StateHandler.OnMovementStateChanged(true);
                 m_WeaponMovement.StopWeaponMovement();
-                var lastInput = GameplayData.s_PlayerInputs.InputStack.Top;
-                if (lastInput == InputType.MovementCanceled)
-                {
-                    m_WaitForInputCoroutine = m_StateHandler.StartCoroutine(c_WaitForInput());
-                    return;
-                }
-
-                if (lastInput == InputType.AttackPerformed)
-                {
-                    if (GameplayData.s_PlayerInputs.InputStack.Count >= 2 && 
-                        GameplayData.s_PlayerInputs.InputStack.GetTop(1) == InputType.MovementPerformed)
-                    {
-                        ExitState();
-                        return;
-                        
-                    }
-                    m_WaitForInputCoroutine = m_StateHandler.StartCoroutine(c_WaitForInput());
-                    return;
-                }
-
-                ExitState();
+                m_WaitForInputCoroutine = m_StateHandler.StartCoroutine(c_WaitForInput());
             }
         }
 
@@ -142,6 +141,7 @@ namespace _3C.Player
         private void StateCleaning()
         {
             //m_Animator?.SetTrigger(m_EndAttackTriggerParam);
+            m_StateHandler.OnMovementStateChanged(true);
             m_WeaponMovement.StopWeaponMovement();
             m_VFX[m_AttackIndex].Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             if (m_WaitForInputCoroutine != null)
@@ -154,6 +154,12 @@ namespace _3C.Player
             {
                 m_StateHandler.StopCoroutine(m_AttackCoroutine);
                 m_AttackCoroutine = null;
+            }
+
+            if (m_DashTween != null)
+            {
+                m_DashTween.Kill();
+                m_DashTween = null;
             }
         }
         
@@ -172,25 +178,22 @@ namespace _3C.Player
         {
             if (IsWaitingForInput)
             {
-                if (inputType == InputType.MovementCanceled)
+                if (inputType != InputType.AttackPerformed)
                 {
                     return;
                 }
                 m_StateHandler.StopCoroutine(m_WaitForInputCoroutine);
                 m_WaitForInputCoroutine = null;
-
-                if (inputType != InputType.AttackPerformed)
-                {
-                    ExitState();
-                }
-                else
-                {
-                    IncrementAttackIndex();
-                    PlayNextAttack();
-                }
+                
+                IncrementAttackIndex();
+                PlayNextAttack();
             }
             else
             {
+                if (inputType == InputType.MovementPerformed)
+                {
+                    m_IsAttackAsked = false;
+                }
                 if (inputType == InputType.AttackPerformed)
                 {
                     m_IsAttackAsked = true;

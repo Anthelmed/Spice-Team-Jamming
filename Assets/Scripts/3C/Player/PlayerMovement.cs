@@ -31,6 +31,7 @@ namespace _3C.Player
         private Vector2 m_CurrentMovement;
         private Vector2 m_LookAtDirection;
         private Transform m_Transform;
+        private bool m_Enabled;
 
         private Vector3 CurrentWorldSpeed => (m_CurrentMovement * m_Speed).X0Y();  
 
@@ -43,6 +44,11 @@ namespace _3C.Player
 
         public override void Update()
         {
+            if (!m_Enabled)
+            {
+                return;
+            }
+            
             Movement = GameplayData.s_PlayerInputs.Movement;
             m_CurrentMovement = Vector2.LerpUnclamped(m_CurrentMovement, Movement, Time.deltaTime * m_MovementDamping);
             if (Movement == Vector2.zero)
@@ -66,12 +72,14 @@ namespace _3C.Player
 
         public override void StopState()
         {
+            m_Enabled = false;
             m_Rigidbody.velocity = Vector3.zero;
             ChangeAnimatorSpeedParameter(0);
         }
 
-        public override void StartState(PlayerState _previousState)
+        public override void StartState()
         {
+            m_Enabled = true;
             //m_Animator?.SetTrigger(m_MovementTriggerParam);
         }
 

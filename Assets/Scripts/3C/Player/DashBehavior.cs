@@ -42,7 +42,7 @@ namespace _3C.Player
             m_InverseDuration = 1 / m_Duration;
         }
 
-        public override void StartState(PlayerState _previousState)
+        public override void StartState()
         {
             m_StateHandler.StartCoroutine(c_Dashing());
             //m_Animator?.SetTrigger(m_DashTriggerParam);
@@ -55,6 +55,7 @@ namespace _3C.Player
 
         private IEnumerator c_Dashing()
         {
+            m_StateHandler.OnMovementStateChanged(false);
             Vector3 start = m_Transform.position;
             Vector3 end = m_Transform.position + m_Transform.forward * m_Distance;
 
@@ -86,6 +87,7 @@ namespace _3C.Player
             }
             
             m_Transform.position = end;
+            m_StateHandler.OnMovementStateChanged(true);
             m_StateHandler.OnStateEnded();
         }
 
