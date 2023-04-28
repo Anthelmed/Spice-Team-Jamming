@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845df4a83a1c4e8fa9f3a104d125febf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
+  team: 1
   m_MaxHealth: 2
   m_CurrentHealth: 0
   m_OnTakeDamage:
@@ -84,5 +84,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0337c8dfaf378a74a9d489a2c118a8aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
-  isMain: 0
+  team: 1
+  priority: 1
