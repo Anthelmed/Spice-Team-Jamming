@@ -46,4 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackOneSound: PlayerAttackOne
   dashSound: playerDash
-  rangedSound: 
+  rangedSound: rangedAttack
+  deathSound: playerMagicalDeath
+  damageSound: playerDamage
+  healSound: heal

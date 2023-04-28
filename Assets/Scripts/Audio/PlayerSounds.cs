@@ -21,28 +21,34 @@ namespace DefaultNamespace.Audio
         }
         public void PlayAttackSound()
         {
+            if (m_AudioManager == null) return;
             m_AudioManager.PlayShuffledSound(attackOneSound, SFXCategory.player, 0.05f, 0.05f);
         }
 
         public void PlayDashSound()
         {
-           m_AudioManager.PlaySingleClip(dashSound, SFXCategory.player, 0.1f, 0.1f);
+            if (m_AudioManager == null) return;
+            m_AudioManager.PlaySingleClip(dashSound, SFXCategory.player, 0.1f, 0.1f);
         }
 
         public void PlayRangeSound()
         {
+            if (m_AudioManager == null) return;
             m_AudioManager.PlaySingleClip(rangedSound, SFXCategory.player, 0.05f, 0.05f);
         }
         public void PlayDamageSound()
         {
+            if (m_AudioManager == null) return;
             m_AudioManager.PlaySingleClip(damageSound, SFXCategory.player, 0.1f, 0.1f);
         }
         public void PlayDeathSound()
         {
+            if (m_AudioManager == null) return;
             m_AudioManager.PlaySingleClip(deathSound, SFXCategory.player, 0, 0);
         }
         public void PlayHealSound()
         {
+            if (m_AudioManager == null) return;
             m_AudioManager.PlaySingleClip(healSound, SFXCategory.player, 0, 0);
         }
 

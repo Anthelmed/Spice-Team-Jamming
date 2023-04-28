@@ -968,6 +968,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7eb57099cdbc5c94c8f386c378183b8a, type: 3}
   - {fileID: 8300000, guid: 46ca19301c18fe1409b15db6c48ea24e, type: 3}
   - {fileID: 8300000, guid: fdec1f466e32dbe40ad9148c78249282, type: 3}
+  - {fileID: 8300000, guid: bdc4ad70de0fa174d88438be359008e4, type: 3}
+  - {fileID: 8300000, guid: 4443165f8c7310c44917d920c4354460, type: 3}
+  - {fileID: 8300000, guid: 599c73a09b1a08a4282c8b13b09d506d, type: 3}
   multiSounds:
   - {fileID: 11400000, guid: 2930a663a6d82704c8cbee617d0f4229, type: 2}
   - {fileID: 11400000, guid: f9d9e66f694d61e4bb7f655314c4785e, type: 2}
