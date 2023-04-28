@@ -17,12 +17,12 @@ namespace _3C.Player
         [SerializeField] private float m_MovementDamping;
         [SerializeField] private float m_RotationDamping;
 
-        [Header("Animation")]
-        [AnimatorParam("m_Animator")]
-        [SerializeField] private int m_SpeedAnimatorParam;
-        [AnimatorParam("m_Animator")]
-        [SerializeField] private int m_MovementTriggerParam;
-        [SerializeField] private Animator m_Animator;
+        // [Header("Animation")]
+        // [AnimatorParam("m_Animator")]
+        // [SerializeField] private int m_SpeedAnimatorParam;
+        // [AnimatorParam("m_Animator")]
+        // [SerializeField] private int m_MovementTriggerParam;
+        // [SerializeField] private Animator m_Animator;
 
         [HideInInspector]
         public Vector2 Movement;
