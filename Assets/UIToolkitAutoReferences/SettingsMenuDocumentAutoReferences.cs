@@ -14,6 +14,9 @@ namespace UIToolkitAutoReferences
         
         private VisualElement _rootVisualElement;
 
+		private VisualElement RootVisualElement => _rootVisualElement ??=
+			uiDocument.rootVisualElement;
+
 		private VisualElement _settingsMenu;
 		private Button _settingsMenuButtonControls;
 		private Button _settingsMenuButtonAudio;
@@ -21,25 +24,20 @@ namespace UIToolkitAutoReferences
 		private Button _settingsMenuButtonAccessibility;
 
 		public VisualElement SettingsMenu => _settingsMenu ??=
-			_rootVisualElement.Q<VisualElement>("SettingsMenu");
+			RootVisualElement.Q<VisualElement>("SettingsMenu");
 		public Button SettingsMenuButtonControls => _settingsMenuButtonControls ??=
-			_rootVisualElement.Q<Button>("SettingsMenuButtonControls");
+			RootVisualElement.Q<Button>("SettingsMenuButtonControls");
 		public Button SettingsMenuButtonAudio => _settingsMenuButtonAudio ??=
-			_rootVisualElement.Q<Button>("SettingsMenuButtonAudio");
+			RootVisualElement.Q<Button>("SettingsMenuButtonAudio");
 		public Button SettingsMenuButtonGraphics => _settingsMenuButtonGraphics ??=
-			_rootVisualElement.Q<Button>("SettingsMenuButtonGraphics");
+			RootVisualElement.Q<Button>("SettingsMenuButtonGraphics");
 		public Button SettingsMenuButtonAccessibility => _settingsMenuButtonAccessibility ??=
-			_rootVisualElement.Q<Button>("SettingsMenuButtonAccessibility");
+			RootVisualElement.Q<Button>("SettingsMenuButtonAccessibility");
 
 		private void Start()
 		{
 			if (uiDocument == null)
-            {
                 Debug.LogError($"uiDocument field empty in {name} component", this);
-				return;
-			}
-
-			_rootVisualElement = uiDocument.rootVisualElement;
 		}
     }
 }

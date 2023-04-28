@@ -14,26 +14,24 @@ namespace UIToolkitAutoReferences
         
         private VisualElement _rootVisualElement;
 
+		private VisualElement RootVisualElement => _rootVisualElement ??=
+			uiDocument.rootVisualElement;
+
 		private VisualElement _tutorial;
 		private Label _tutorialTitleLabel;
 		private Label _tutorialInfoSubTitle;
 
 		public VisualElement Tutorial => _tutorial ??=
-			_rootVisualElement.Q<VisualElement>("Tutorial");
+			RootVisualElement.Q<VisualElement>("Tutorial");
 		public Label TutorialTitleLabel => _tutorialTitleLabel ??=
-			_rootVisualElement.Q<Label>("TutorialTitleLabel");
+			RootVisualElement.Q<Label>("TutorialTitleLabel");
 		public Label TutorialInfoSubTitle => _tutorialInfoSubTitle ??=
-			_rootVisualElement.Q<Label>("TutorialInfoSubTitle");
+			RootVisualElement.Q<Label>("TutorialInfoSubTitle");
 
 		private void Start()
 		{
 			if (uiDocument == null)
-            {
                 Debug.LogError($"uiDocument field empty in {name} component", this);
-				return;
-			}
-
-			_rootVisualElement = uiDocument.rootVisualElement;
 		}
     }
 }

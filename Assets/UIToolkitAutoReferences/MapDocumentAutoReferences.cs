@@ -19,7 +19,7 @@ namespace UIToolkitAutoReferences
 		public VisualElement Map => _map ??=
 			_rootVisualElement.Q<VisualElement>("Map");
 
-		private void Start()
+		private void Awake()
 		{
 			if (uiDocument == null)
             {

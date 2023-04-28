@@ -19,7 +19,7 @@ namespace UIToolkitAutoReferences
 		public VisualElement LevelSelection => _levelSelection ??=
 			_rootVisualElement.Q<VisualElement>("LevelSelection");
 
-		private void Start()
+		private void Awake()
 		{
 			if (uiDocument == null)
             {

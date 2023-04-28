@@ -214,6 +214,9 @@ namespace "+FolderName+@"
         
         private VisualElement _rootVisualElement;
 
+		private VisualElement RootVisualElement => _rootVisualElement ??=
+			uiDocument.rootVisualElement;
+
 "+PrivateElementReferencesVariable+@"
 
 "+PublicElementReferencesVariable+@"
@@ -221,12 +224,7 @@ namespace "+FolderName+@"
 		private void Start()
 		{
 			if (uiDocument == null)
-            {
                 Debug.LogError($""uiDocument field empty in {name} component"", this);
-				return;
-			}
-
-			_rootVisualElement = uiDocument.rootVisualElement;
 		}
     }
 }";
@@ -235,7 +233,7 @@ namespace "+FolderName+@"
 
 		private const string PublicElementReferenceTemplate =
 			@"		public " + ElementTypeVariable + @" "+PublicElementNameVariable+@" => _"+PrivateElementNameVariable+@" ??=
-			_rootVisualElement.Q<"+ElementTypeVariable+@">("""+ElementIDVariable+@""");";
+			RootVisualElement.Q<"+ElementTypeVariable+@">("""+ElementIDVariable+@""");";
 
 		#endregion
 	}

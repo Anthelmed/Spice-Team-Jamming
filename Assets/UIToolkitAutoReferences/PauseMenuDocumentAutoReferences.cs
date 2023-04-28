@@ -14,6 +14,9 @@ namespace UIToolkitAutoReferences
         
         private VisualElement _rootVisualElement;
 
+		private VisualElement RootVisualElement => _rootVisualElement ??=
+			uiDocument.rootVisualElement;
+
 		private VisualElement _pauseMenu;
 		private Button _pauseMenuButtonResume;
 		private Button _pauseMenuButtonSettings;
@@ -21,25 +24,20 @@ namespace UIToolkitAutoReferences
 		private Button _pauseMenuButtonQuit;
 
 		public VisualElement PauseMenu => _pauseMenu ??=
-			_rootVisualElement.Q<VisualElement>("PauseMenu");
+			RootVisualElement.Q<VisualElement>("PauseMenu");
 		public Button PauseMenuButtonResume => _pauseMenuButtonResume ??=
-			_rootVisualElement.Q<Button>("PauseMenuButtonResume");
+			RootVisualElement.Q<Button>("PauseMenuButtonResume");
 		public Button PauseMenuButtonSettings => _pauseMenuButtonSettings ??=
-			_rootVisualElement.Q<Button>("PauseMenuButtonSettings");
+			RootVisualElement.Q<Button>("PauseMenuButtonSettings");
 		public Button PauseMenuButtonMainMenu => _pauseMenuButtonMainMenu ??=
-			_rootVisualElement.Q<Button>("PauseMenuButtonMainMenu");
+			RootVisualElement.Q<Button>("PauseMenuButtonMainMenu");
 		public Button PauseMenuButtonQuit => _pauseMenuButtonQuit ??=
-			_rootVisualElement.Q<Button>("PauseMenuButtonQuit");
+			RootVisualElement.Q<Button>("PauseMenuButtonQuit");
 
 		private void Start()
 		{
 			if (uiDocument == null)
-            {
                 Debug.LogError($"uiDocument field empty in {name} component", this);
-				return;
-			}
-
-			_rootVisualElement = uiDocument.rootVisualElement;
 		}
     }
 }

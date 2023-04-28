@@ -1,11 +1,13 @@
 :root {
-    --primary-color-1: rgb(142, 101, 136);
-    --primary-color-2: rgb(134, 219, 165);
+    --primary-color-1: rgb(134, 219, 165);
+    --primary-color-1-dark: rgb(118, 194, 146);
+    --primary-color-2: rgb(142, 101, 136);
     --title-font-size: 36px;
-    --title-background-tint: var(--primary-color-2);
+    --title-background-tint: var(--primary-color-1);
     --button-font-size: 30px;
-    --button-background-tint: var(--primary-color-2);
-    --background-background-tint: var(--primary-color-2);
+    --button-background-tint: var(--primary-color-1);
+    --button-background-tint-hover: var(--primary-color-1-dark);
+    --background-background-tint: var(--primary-color-1);
     --rowdies-font-regular: url('project://database/Assets/Fonts/Rowdies/Rowdies-Regular.ttf?fileID=12800000&guid=2cea9ff495f9b4a4daed12e48f24ef32&type=3#Rowdies-Regular');
     --montserrat-font-regular: url('project://database/Assets/Fonts/Montserrat/Montserrat-Regular.ttf?fileID=12800000&guid=95cc2332f1c404c4e86ccc0a5d4d2616&type=3#Montserrat-Regular');
     --montserrat-font-bold: url('project://database/Assets/Fonts/Montserrat/Montserrat-Bold.ttf?fileID=12800000&guid=5f840e1af5ef1174089c0c7f44033efa&type=3#Montserrat-Bold');
@@ -28,6 +30,7 @@
     top: 0;
     right: 0;
     bottom: 0;
+    opacity: 0;
 }
 
 .title {
