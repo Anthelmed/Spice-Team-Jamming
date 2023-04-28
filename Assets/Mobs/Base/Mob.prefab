@@ -150,6 +150,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3138952457350015010}
+    - targetCorrespondingSourceObject: {fileID: 4972346852505676956, guid: ce5208cd607f56844bbb6baa8839abe9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3680790464474105194}
+    - targetCorrespondingSourceObject: {fileID: 4972346852505676956, guid: ce5208cd607f56844bbb6baa8839abe9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8494207339473281215}
   m_SourcePrefab: {fileID: 100100000, guid: ce5208cd607f56844bbb6baa8839abe9, type: 3}
 --- !u!1 &6886374805259099623 stripped
 GameObject:
@@ -200,6 +208,56 @@ MonoBehaviour:
   m_attackCooldown: 2
   m_targetQueryRate: 60
   m_state: 0
+--- !u!136 &3680790464474105194
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6886374805259099623}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!54 &8494207339473281215
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6886374805259099623}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &7333592835981510706 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9175562712385452361, guid: ce5208cd607f56844bbb6baa8839abe9,
