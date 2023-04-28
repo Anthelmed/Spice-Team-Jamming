@@ -30,6 +30,7 @@ public class MobAI : MonoBehaviour
         public float attackCooldown = 2f;
         public int targetQueryRate = 60;
         public float smallTargetDistance = 10f;
+        public float bigTargetDistance = 20;
         public float regroupDistance = 5f;
         public float regroupOffset;
 
@@ -243,12 +244,12 @@ public class MobAI : MonoBehaviour
         {
             m_data.Target = null;
             Targetable farTarget = null;
-            float farDistance = 1000f;
+            float farDistance = m_data.bigTargetDistance;
 
             // Get a main enemy
             if (m_data.huntMainTargets)
             {
-                farTarget = Targetable.QueryClosestTarget(transform.position, 1000f, out farDistance, ~m_data.targetting.team,
+                farTarget = Targetable.QueryClosestTarget(transform.position, farDistance, out farDistance, ~m_data.targetting.team,
                 minPriority: Targetable.Priority.High);
             }
 
@@ -265,7 +266,7 @@ public class MobAI : MonoBehaviour
 
                 if (!farTarget || closeDistance < m_data.meleeRange)
                     m_data.Target = newTarget;
-                else if (farDistance < m_data.smallTargetDistance)
+                else
                     m_data.Target = farTarget;
             }
 
@@ -327,10 +328,15 @@ public class MobAI : MonoBehaviour
         }
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, m_data.smallTargetDistance);
+        if (m_data.huntMainTargets)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(transform.position, m_data.bigTargetDistance);
+        }
 
         if (Application.isPlaying && m_data.leader)
         {
-            Gizmos.color = Color.cyan;
+            Gizmos.color = Color.black;
             Gizmos.DrawWireSphere(m_data.RegroupPosition, m_data.regroupDistance);
         }
     }
