@@ -174,7 +174,7 @@ public class MobAI : MonoBehaviour
 
         if (m_shouldQueryTargets)
         {
-            target = Targetable.QueryClosestTarget(transform.position, m_smallTargetDistance, false, ~m_targetting.team, out _);
+            target = Targetable.QueryClosestTarget(transform.position, m_smallTargetDistance, out _, ~m_targetting.team);
         }
 
         // Check if there are enemies in front
@@ -184,7 +184,7 @@ public class MobAI : MonoBehaviour
             if (target)
             {
                 var toTarget = (target.transform.position - transform.position).normalized;
-                var nearbyAllies = Targetable.QueryTargets(transform.position, 1.5f, m_targetting.isMain, m_targetting.team);
+                var nearbyAllies = Targetable.QueryTargets(transform.position, 1.5f, m_targetting.team, minPriority: m_targetting.priority);
                 for (int i = 0; i < nearbyAllies.Count; ++i)
                 {
                     if (nearbyAllies[i] == m_targetting) continue;
