@@ -8,6 +8,7 @@ using UnityEngine.Profiling;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Targetable))]
+[SelectionBase]
 public class MobAI : MonoBehaviour
 {
     [Header("Public stuff")]
@@ -178,6 +179,11 @@ public class MobAI : MonoBehaviour
                         break;
                     }
                 }
+            }
+
+            if (m_advanceBlocked)
+            {
+                Debug.Log("Advance blocked");
             }
         }
 

@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 1
-  team: 2
+  team: 4
 --- !u!1001 &2080130311922483373
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -79,7 +79,12 @@ PrefabInstance:
     - target: {fileID: 433581429227692497, guid: 84c85c506ceacb948b7c416dae605f32,
         type: 3}
       propertyPath: team
-      value: 2
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 433581429227692497, guid: 84c85c506ceacb948b7c416dae605f32,
+        type: 3}
+      propertyPath: isMain
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3602961013157845434, guid: 84c85c506ceacb948b7c416dae605f32,
         type: 3}
@@ -154,7 +159,7 @@ PrefabInstance:
     - target: {fileID: 6394011006567412083, guid: 84c85c506ceacb948b7c416dae605f32,
         type: 3}
       propertyPath: team
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

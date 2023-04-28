@@ -4940,7 +4940,7 @@ PrefabInstance:
     - target: {fileID: 544110165833639826, guid: ce306a084314e7c45bfb270fab518cb0,
         type: 3}
       propertyPath: team
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3713566029389570041, guid: ce306a084314e7c45bfb270fab518cb0,
         type: 3}
@@ -5010,12 +5010,12 @@ PrefabInstance:
     - target: {fileID: 5991835223425298841, guid: ce306a084314e7c45bfb270fab518cb0,
         type: 3}
       propertyPath: team
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6428152281400653616, guid: ce306a084314e7c45bfb270fab518cb0,
         type: 3}
       propertyPath: team
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

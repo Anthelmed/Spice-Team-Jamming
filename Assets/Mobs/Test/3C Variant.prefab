@@ -42,6 +42,11 @@ PrefabInstance:
       propertyPath: field of view
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 3789416798230594338, guid: eac1ae59bef618847b73c10b4d795403,
+        type: 3}
+      propertyPath: team
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4040588146406245546, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
       propertyPath: m_RootOrder
@@ -97,6 +102,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4935705226419018536, guid: eac1ae59bef618847b73c10b4d795403,
+        type: 3}
+      propertyPath: team
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5312326701685609516, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -126,6 +136,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.0000000131128495
+      objectReference: {fileID: 0}
+    - target: {fileID: 6446512225365823425, guid: eac1ae59bef618847b73c10b4d795403,
+        type: 3}
+      propertyPath: team
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
