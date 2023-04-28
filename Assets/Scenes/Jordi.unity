@@ -1820,6 +1820,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireBoi
       objectReference: {fileID: 0}
+    - target: {fileID: 392666264027457097, guid: 46ea08ffd759c7c499d11ffc15a05a77,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 801742576297610231, guid: 46ea08ffd759c7c499d11ffc15a05a77,
         type: 3}
       propertyPath: m_RootOrder
@@ -2748,7 +2753,7 @@ PrefabInstance:
     - target: {fileID: 2347985977382725250, guid: aa6f300edfddd8249873ed9412fd482f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2347985977382725250, guid: aa6f300edfddd8249873ed9412fd482f,
         type: 3}
@@ -3052,7 +3057,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1942882159
 PrefabInstance:
@@ -3225,6 +3230,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireBoi_01
       objectReference: {fileID: 0}
+    - target: {fileID: 392666264027457097, guid: 46ea08ffd759c7c499d11ffc15a05a77,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 801742576297610231, guid: 46ea08ffd759c7c499d11ffc15a05a77,
         type: 3}
       propertyPath: m_RootOrder
@@ -3297,6 +3307,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: IceBoi
+      objectReference: {fileID: 0}
+    - target: {fileID: 2345541762427597993, guid: 08c7b062672a3bb47a00049b14295f1c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3377227534649481495, guid: 08c7b062672a3bb47a00049b14295f1c,
         type: 3}
