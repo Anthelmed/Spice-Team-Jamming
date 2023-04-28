@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 7279425899133959930}
   - component: {fileID: 1782962883110624016}
   - component: {fileID: 412046645469499385}
+  - component: {fileID: 1077894710202307896}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -220,6 +221,8 @@ MonoBehaviour:
     m_MovementDamping: 8
     m_RotationDamping: 10
     Movement: {x: 0, y: 0}
+    IsLookingAtMovement: 1
+    Enabled: 0
   m_DashBehavior:
     m_HasOvershootFrame: 1
     m_OvershootDistance: 0.35
@@ -334,6 +337,7 @@ MonoBehaviour:
     m_WeaponMovement: {fileID: 1158905776164586155}
     m_Damager: {fileID: 7518698054020727578}
   m_Sounds: {fileID: 8188397984285573184}
+  m_Aiming: {fileID: 1077894710202307896}
   m_CurrentState: 0
 --- !u!114 &1782962883110624016
 MonoBehaviour:
@@ -378,6 +382,18 @@ MonoBehaviour:
   m_OnDeath:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1077894710202307896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5761272857374477472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ce62ca2256402685f2089b2f6ccc82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7187431065340155038
 GameObject:
   m_ObjectHideFlags: 0

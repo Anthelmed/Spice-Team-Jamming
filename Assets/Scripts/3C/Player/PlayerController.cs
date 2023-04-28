@@ -3,12 +3,18 @@ using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Interactions;
 
 namespace _3C.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        private Camera m_MainCamera;
+
+        private void Awake()
+        {
+            m_MainCamera = Camera.main;
+        }
+
         public void OnMovementAsked(InputAction.CallbackContext _context)
         {
             switch (_context.phase)
@@ -48,7 +54,7 @@ namespace _3C.Player
         {
             if (_context.phase == InputActionPhase.Performed)
             {
-                StackInput(InputType.MeleeAttackPerformed);
+                StackInput(InputType.AttackPerformed);
             }
         }
 
@@ -75,6 +81,42 @@ namespace _3C.Player
                 {
                     
                 }
+            }
+            
+            switch (_context.phase)
+            {
+                case InputActionPhase.Performed:
+                    StackInputIfNotTop(InputType.FirePerformed);
+                    break;
+                case InputActionPhase.Canceled:
+                    StackInputIfNotTop(InputType.FireEnded);
+                    break;
+            }
+
+            //ChangeAiming(_context);
+
+            // TODO: Handle aiming depending on mouse or gamepad right joystick
+        }
+        
+        private void ChangeAiming(InputAction.CallbackContext _context)
+        {
+            if (_context.phase == InputActionPhase.Canceled)
+            {
+                GameplayData.s_PlayerInputs.AimDirection = Vector2.zero;
+            }
+
+            var gamepadAimInput = _context.ReadValue<Vector2>();
+            if (gamepadAimInput != Vector2.zero)
+            {
+                GameplayData.s_PlayerInputs.AimDirection = gamepadAimInput;
+            }
+
+            Plane plane = new Plane(Vector3.up, Vector3.zero);
+            var ray = m_MainCamera.ScreenPointToRay(Mouse.current.position.value);
+            if (plane.Raycast(ray, out float value))
+            {
+                var direction = ray.GetPoint(value) - GameplayData.s_PlayerStateHandler.transform.position;
+                GameplayData.s_PlayerInputs.AimDirection = direction.normalized;
             }
         }
 
