@@ -17,7 +17,11 @@ public class GameTile : MonoBehaviour
     private bool _isObstacle = false;
     private bool _isSpawnArea = false;
     private bool _isOccupied = false;
-    
+
+
+    public MapTileData mapTileData = new MapTileData();
+
+    public static event Action<MapTileData> MapTileClicked = delegate { };
     public bool IsOccupied
     {
         get => _isOccupied;
@@ -42,7 +46,7 @@ public class GameTile : MonoBehaviour
     }
 
     // public Transform SpawnPoint => spawnPoint;
-    
+
     private bool isHighlighted = false;
 
     public void Highlight()
@@ -58,11 +62,30 @@ public class GameTile : MonoBehaviour
         // isHighlighted = false;
     }
 
+    internal void InitTileData(Biome tileBiome, Vector2Int coords)
+    {
+        mapTileData.tileCoords = coords;
+        mapTileData.biome = tileBiome;
+        mapTileData.tileStatus = WorldTileStatus.neutral;
+    }
+
+    internal void SetTileStatus(WorldTileStatus status)
+    {
+       mapTileData.tileStatus = status;
+    }
+
     // private void OnDrawGizmos()
     // {
     //     if (isHighlighted)
     //         Gizmos.DrawCube(spawnPoint.transform.position, Vector3.one * 0.1f);
     // }
     //
-    
+
+}
+
+public struct MapTileData
+{
+    public Biome biome;
+    public WorldTileStatus tileStatus;
+    public Vector2Int tileCoords;
 }

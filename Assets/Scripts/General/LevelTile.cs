@@ -4,15 +4,15 @@ using UnityEngine;
 using _3C.Player;
 using System;
 
-public class WorldTile : MonoBehaviour
+public class LevelTile : MonoBehaviour
 {
     
-    WorldTilesManager worldTilesManager;
+    LevelTilesManager worldTilesManager;
  
     public Transform teleportPoint;
-    public bool occupied;
+    public bool hasPlayer;
     public bool tileActivated;
-    public WorldTileStatus status;
+    WorldTileStatus status;
     public Vector2Int gridLocation;
     [SerializeField] RenderTexture groundFXPersistantRT;
     [SerializeField] GameObject RTCam;
@@ -24,7 +24,7 @@ public class WorldTile : MonoBehaviour
     }
     private void Start()
     {
-        if (WorldTilesManager.instance != null) worldTilesManager = WorldTilesManager.instance;
+        if (LevelTilesManager.instance != null) worldTilesManager = LevelTilesManager.instance;
 
     }
     public void ActivateGroundFX()
@@ -41,7 +41,7 @@ public class WorldTile : MonoBehaviour
         other.TryGetComponent(out PlayerStateHandler player);
             if (player == null) return;
      
-        occupied = true;
+        hasPlayer = true;
         tileActivated = true;
         worldTilesManager.UpdateActiveTiles(this);
     }
@@ -60,16 +60,22 @@ public class WorldTile : MonoBehaviour
             tileActivated = false;
             if (RTCam != null) RTCam.SetActive(false);
             environmentArt.SetActive(false);
-            occupied = false;
+            hasPlayer = false;
            //tell mobs to go home or whatever
       
     }
 
+    internal void Init(MapTileData mapTileData, Vector2Int gridCoordinates)
+    {
+        status = mapTileData.tileStatus;
+        gridLocation = gridCoordinates;
+    }
 }
 
 public enum WorldTileStatus
 {
-    red,
-    blue, 
-    neutral
+    neutral,
+    contested,
+    burnt,
+    frozen
 }
