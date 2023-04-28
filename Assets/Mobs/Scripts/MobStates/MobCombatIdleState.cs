@@ -18,7 +18,7 @@ public class MobCombatIdleState : MobAI.IMobState
             return;
         }
 
-        if (data.TargetDistance > data.attackRange.y)
+        if (data.TargetDistance > data.meleeRange)
         {
             data.NextState = MobAI.State.GoToTarget;
             return;

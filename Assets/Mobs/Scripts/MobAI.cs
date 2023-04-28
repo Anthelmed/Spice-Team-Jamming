@@ -24,7 +24,7 @@ public class MobAI : MonoBehaviour
         public PlayerSounds sounds;
 
         [Header("Parameters")]
-        public Vector2 attackRange = Vector2.up;
+        public float meleeRange = 1f;
         public float attackCooldown = 2f;
         public int targetQueryRate = 60;
         public float smallTargetDistance = 10f;
@@ -253,9 +253,7 @@ public class MobAI : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, m_data.attackRange.x);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, m_data.attackRange.y);
+        Gizmos.DrawWireSphere(transform.position, m_data.meleeRange);
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, m_data.smallTargetDistance);
     }
