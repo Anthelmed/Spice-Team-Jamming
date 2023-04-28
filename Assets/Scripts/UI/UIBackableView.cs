@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace SpiceTeamJamming.UI
 {
-	public abstract class UIMenu : UIView
+	public abstract class UIBackableView : UIView
 	{
 		[SerializeField] private InputActionReference backInputAction;
 

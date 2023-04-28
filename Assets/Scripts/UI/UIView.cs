@@ -51,9 +51,7 @@ namespace SpiceTeamJamming.UI
 		protected void OnVisibilityChanged(bool value)
 		{
 			if (value)
-				Show();
-			else
-				Hide();
+				UIRouter.GoToRoute(Route);
 		}
 		
 		[ContextMenu("Show")]

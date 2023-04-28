@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace SpiceTeamJamming.UI
 {
-	public class UIPauseMenu : UIMenu
+	public class UIPauseView : UIBackableView
 	{
 		[Space]
 		[SerializeField] private GameManager gameManager;

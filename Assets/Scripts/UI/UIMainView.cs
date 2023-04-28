@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 namespace SpiceTeamJamming.UI
 {
-	public class UIMainMenu : UIView
+	public class UIMainView : UIView
 	{
 		[Space]
 		[SerializeField] private GameManager gameManager;
