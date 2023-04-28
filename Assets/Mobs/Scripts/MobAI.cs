@@ -34,6 +34,11 @@ public class MobAI : MonoBehaviour
         [Header("Behaviour toggles")]
         public bool huntMainTargets = false;
         public bool hasRangedAttack = false;
+        public bool targetVegetation = true;
+
+        [Header("Current test")]
+        public Transform leader;
+        public float LeaderDistance { get; set; }
 
         private Targetable m_target;
         public Targetable Target { get => m_target; 
@@ -81,6 +86,7 @@ public class MobAI : MonoBehaviour
         Uninitialized = 0,
         Idle,
         GoToTarget,
+        Regroup,
         Queueing,
         CombatIdle,
         Attack,
@@ -94,6 +100,7 @@ public class MobAI : MonoBehaviour
         null,
         new MobIdleState(),
         new MobGoToTargetState(),
+        new MobRegroupState(),
         new MobQueueingState(),
         new MobCombatIdleState(),
         new MobAttackState(),
@@ -156,6 +163,12 @@ public class MobAI : MonoBehaviour
             m_data.TargetDistance = 0f;
             m_data.ToTargetCos = 0f;
         }
+
+        if (m_data.leader)
+        {
+            m_data.LeaderDistance = Vector3.Distance(transform.position, m_data.leader.position);
+        }
+        else m_data.LeaderDistance = 0f;
 
         if (m_data.hasRangedAttack)
         {
@@ -253,7 +266,7 @@ public class MobAI : MonoBehaviour
             }
 
             // As a backup, find vegetation to burn :devil:
-            if (!m_data.Target)
+            if (m_data.targetVegetation && !m_data.Target)
             {
                 m_data.Target = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out _, ~m_data.targetting.team,
                     maxPriority: Targetable.Priority.Low);

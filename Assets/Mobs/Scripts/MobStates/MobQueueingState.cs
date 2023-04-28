@@ -12,6 +12,12 @@ public class MobQueueingState : MobAI.IMobState
 
     public void Tick(MobAI.Data data)
     {
+        if (data.LeaderDistance > data.smallTargetDistance)
+        {
+            data.NextState = MobAI.State.Regroup;
+            return;
+        }
+
         if (!data.AdvanceBlocked)
             data.NextState = MobAI.State.GoToTarget;
     }

@@ -124,6 +124,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3138952457350015010, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
         type: 3}
+      propertyPath: m_data.targetVegetation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3138952457350015010, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
+        type: 3}
       propertyPath: m_data.prioritizeMainTargets
       value: 1
       objectReference: {fileID: 0}
