@@ -12,6 +12,7 @@ public class SkeletalAnimationDriver : AnimationDriver
 
     private static readonly int SPEED = Animator.StringToHash("Speed");
     private static readonly int ATTACK = Animator.StringToHash("Attack");
+    private static readonly int RANGED_ATTACK = Animator.StringToHash("RangedAttack");
     private static readonly int HIT = Animator.StringToHash("Hit");
     private static readonly int DEATH = Animator.StringToHash("Death");
 
@@ -55,6 +56,12 @@ public class SkeletalAnimationDriver : AnimationDriver
         m_animator.SetTrigger(ATTACK);
         m_animationFinished = false;
         m_hitFrame = false;
+    }
+
+    public override void TriggerRangedAttack()
+    {
+        m_animator.SetTrigger(RANGED_ATTACK);
+        m_animationFinished = false;
     }
 
     public override void TriggerHit()

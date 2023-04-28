@@ -27,7 +27,7 @@ public class MobGoToTargetState : MobAI.IMobState
         }
 
         // Go to combat if we are close enough
-        if (data.TargetDistance < data.meleeRange)
+        if (data.TargetDistance < data.MaxRange)
         {
             // Use a very small coldown to prevent both enemies attacking at the same time when they get in range
             if (data.CurrentAttackCooldown < 0f)

@@ -18,7 +18,7 @@ public class MobCombatIdleState : MobAI.IMobState
             return;
         }
 
-        if (data.TargetDistance > data.meleeRange)
+        if (data.TargetDistance > data.MaxRange)
         {
             data.NextState = MobAI.State.GoToTarget;
             return;
@@ -27,7 +27,7 @@ public class MobCombatIdleState : MobAI.IMobState
         if (data.CurrentAttackCooldown < 0f && data.ToTargetCos > MobAI.COS_ATTACK)
         {
             data.CurrentAttackCooldown = data.attackCooldown;
-            data.NextState = MobAI.State.Attack;
+            data.NextState = data.UseRanged ? MobAI.State.RangedAttack : MobAI.State.Attack;
         }
     }
 

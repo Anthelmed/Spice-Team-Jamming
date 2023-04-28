@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9da757614e34a81bab8d9d45dd576d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 3
+  Damage: 1
   team: 1
   ignore: 0
 --- !u!1001 &7188382547851979235
@@ -94,6 +94,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3138952457350015010, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
         type: 3}
+      propertyPath: m_data.rangedRage.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3138952457350015010, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
+        type: 3}
+      propertyPath: m_data.rangedRage.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3138952457350015010, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
+        type: 3}
       propertyPath: m_data.attackCollider
       value: 
       objectReference: {fileID: 1476579859432007982}
@@ -101,6 +111,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_data.attackCooldown
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3138952457350015010, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
+        type: 3}
+      propertyPath: m_data.hasRangedAttack
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3138952457350015010, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
         type: 3}

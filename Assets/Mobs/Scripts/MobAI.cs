@@ -22,15 +22,18 @@ public class MobAI : MonoBehaviour
         public Targetable targetting;
         public Collider attackCollider;
         public PlayerSounds sounds;
+        public Projectile projectile;
 
         [Header("Parameters")]
         public float meleeRange = 1f;
+        public Vector2 rangedRage = new Vector2(5f, 7f);
         public float attackCooldown = 2f;
         public int targetQueryRate = 60;
         public float smallTargetDistance = 10f;
 
         [Header("Behaviour toggles")]
         public bool huntMainTargets = false;
+        public bool hasRangedAttack = false;
 
         private Targetable m_target;
         public Targetable Target { get => m_target; 
@@ -46,7 +49,9 @@ public class MobAI : MonoBehaviour
         public Transform TargetTransform { get; private set; }
         public State NextState { get; set; } = State.Idle;
         public float TargetDistance { get; set; } = 0f;
+        public float MaxRange => UseRanged ? rangedRage.y : meleeRange;
         public float ToTargetCos { get; set; } = 0f;
+        public bool UseRanged { get; set; } = false;
         public bool LookAtTarget { get; set; } = false;
         public bool AlignWithMovement { get; set; } = false;
         public float CurrentAttackCooldown { get; set; } = 0f;
@@ -79,6 +84,7 @@ public class MobAI : MonoBehaviour
         Queueing,
         CombatIdle,
         Attack,
+        RangedAttack,
         Hit,
         Death,
     }
@@ -91,6 +97,7 @@ public class MobAI : MonoBehaviour
         new MobQueueingState(),
         new MobCombatIdleState(),
         new MobAttackState(),
+        new MobRangedAttackState(),
         new MobHitState(),
         new MobDeathState(),
     };
@@ -126,6 +133,8 @@ public class MobAI : MonoBehaviour
         m_lastPosition = transform.position;
         m_queryTurn = UnityEngine.Random.Range(0, m_data.targetQueryRate);
         m_data.attackCollider.enabled = false;
+
+        if (m_data.projectile) m_data.projectile.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -147,6 +156,13 @@ public class MobAI : MonoBehaviour
             m_data.TargetDistance = 0f;
             m_data.ToTargetCos = 0f;
         }
+
+        if (m_data.hasRangedAttack)
+        {
+            m_data.UseRanged = m_data.TargetDistance >= m_data.rangedRage.x;
+        }
+        else
+            m_data.UseRanged = false;
 
         // Update cooldowns
         m_data.CurrentAttackCooldown -= Time.deltaTime;
@@ -280,6 +296,13 @@ public class MobAI : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, m_data.meleeRange);
+        if (m_data.hasRangedAttack)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, m_data.rangedRage.x);
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, m_data.rangedRage.y);
+        }
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, m_data.smallTargetDistance);
     }
