@@ -22,33 +22,41 @@ namespace _3C.Player
         
         
         [SerializeField] private float m_AttackDuration;
-        [SerializeField] private float m_VFX_Start;
+        
         [SerializeField] private AnimationCurve m_WeaponMovementCurve;
         
         [SerializeField] private int m_BaseDamage;
         [SerializeField] private int m_SuccessfullComboDamage;
+        
+        [Header("VFX")]
+        [SerializeField] private float m_VFX_Start;
+        [SerializeField] private ParticleSystem[] m_VFX;
+        [SerializeField] private bool m_AreVFXWorldBased;
+        
+        private Transform m_VFXParent;
+
+
 
         [Header("Components")]
-        [SerializeField] private ParticleSystem[] m_VFX;
         [SerializeField] private AWeaponMovement m_WeaponMovement;
         [SerializeField] private ColliderDamager m_Damager;
 
-        [Header("Animation")]
-        [AnimatorParam("m_Animator")]
-        [SerializeField] private int m_StartAttackTriggerParam;
-        [AnimatorParam("m_Animator")]
-        [SerializeField] private int m_EndAttackTriggerParam;
-        
-        [AnimatorParam("m_Animator")]
-        [SerializeField] private int m_FirstAttackTrigger;
-        
-        [AnimatorParam("m_Animator")]
-        [SerializeField] private int m_SecondAttackTrigger;
-        
-        [AnimatorParam("m_Animator")]
-        [SerializeField] private int m_ThirdAttackTrigger;
-        
-        [SerializeField] private Animator m_Animator;
+        // [Header("Animation")]
+        // [AnimatorParam("m_Animator")]
+        // [SerializeField] private int m_StartAttackTriggerParam;
+        // [AnimatorParam("m_Animator")]
+        // [SerializeField] private int m_EndAttackTriggerParam;
+        //
+        // [AnimatorParam("m_Animator")]
+        // [SerializeField] private int m_FirstAttackTrigger;
+        //
+        // [AnimatorParam("m_Animator")]
+        // [SerializeField] private int m_SecondAttackTrigger;
+        //
+        // [AnimatorParam("m_Animator")]
+        // [SerializeField] private int m_ThirdAttackTrigger;
+        //
+        // [SerializeField] private Animator m_Animator;
         
         private bool m_IsAttackAsked;
 
@@ -64,6 +72,7 @@ namespace _3C.Player
         protected override void Init(IStateHandler _stateHandler)
         {
             m_Transform = _stateHandler.gameObject.transform;
+            m_VFXParent = m_VFX[0].transform.parent;
         }
 
         public override void StartState()
@@ -82,7 +91,7 @@ namespace _3C.Player
             m_Damager.Damage = m_AttackIndex == 2 ? m_SuccessfullComboDamage : m_BaseDamage;
             m_WeaponMovement.TriggerWeaponMovement(m_AttackDuration, m_WeaponMovementCurve);
             m_StateHandler.PlayerSoundsInstance.PlayAttackSound();
-            if (m_Animator == null)
+            //if (m_Animator == null)
             {
                 m_AttackCoroutine = m_StateHandler.StartCoroutine(c_AttackDuration());
                 m_DashTween = m_Transform.DOMove(
@@ -93,7 +102,7 @@ namespace _3C.Player
                     m_StateHandler.OnMovementStateChanged(true);
                 };
             }
-            else
+            //else
             {
                 //m_Animator?.SetTrigger(TriggerParameterFromAttackIndex);
             }
@@ -102,14 +111,37 @@ namespace _3C.Player
         private IEnumerator c_AttackDuration()
         {
             yield return new WaitForSeconds(m_VFX_Start);
-            m_VFX[m_AttackIndex].Play();
+            
+            PlayVFX(m_VFX[m_AttackIndex]);
             yield return new WaitForSeconds(m_AttackDuration - m_VFX_Start);
             OnAttackAnimationEnded();
             m_AttackCoroutine = null;
         }
 
+        private void PlayVFX(ParticleSystem particleSystem)
+        {
+            if (m_AreVFXWorldBased)
+            {
+                particleSystem.transform.parent.SetParent(null, true);
+            }
+            
+            particleSystem.Play();
+        }
+
+        private void StopVFX(ParticleSystem particleSystem)
+        {
+            particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            if (m_AreVFXWorldBased)
+            {
+                particleSystem.transform.parent.parent = m_Transform;
+                m_VFXParent.localPosition = Vector3.zero;
+                m_VFXParent.localRotation = Quaternion.identity;
+            }
+        }
+
         public void OnAttackAnimationEnded()
         {
+            StopVFX(m_VFX[m_AttackIndex]);
             if (m_IsAttackAsked)
             {
                 IncrementAttackIndex();
@@ -143,7 +175,7 @@ namespace _3C.Player
             //m_Animator?.SetTrigger(m_EndAttackTriggerParam);
             m_StateHandler.OnMovementStateChanged(true);
             m_WeaponMovement.StopWeaponMovement();
-            m_VFX[m_AttackIndex].Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            StopVFX(m_VFX[m_AttackIndex]);
             if (m_WaitForInputCoroutine != null)
             {
                 m_StateHandler.StopCoroutine(m_WaitForInputCoroutine);
@@ -201,12 +233,12 @@ namespace _3C.Player
             }
         }
 
-        private int TriggerParameterFromAttackIndex => m_AttackIndex switch
-        {
-            0 => m_FirstAttackTrigger,
-            1 => m_SecondAttackTrigger,
-            2 => m_ThirdAttackTrigger,
-            _ => throw new Exception($"Attack Index {m_AttackIndex} not handled")
-        };
+        // private int TriggerParameterFromAttackIndex => m_AttackIndex switch
+        // {
+        //     0 => m_FirstAttackTrigger,
+        //     1 => m_SecondAttackTrigger,
+        //     2 => m_ThirdAttackTrigger,
+        //     _ => throw new Exception($"Attack Index {m_AttackIndex} not handled")
+        // };
     }
 }

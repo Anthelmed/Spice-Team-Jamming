@@ -8,9 +8,9 @@ namespace _3C.Player
     [Serializable]
     public class DashBehavior : PlayerStateBehavior
     {
-        [AnimatorParam("m_Animator")]
-        [SerializeField] private int m_DashTriggerParam;
-        [SerializeField] private Animator m_Animator;
+        // [AnimatorParam("m_Animator")]
+        // [SerializeField] private int m_DashTriggerParam;
+        // [SerializeField] private Animator m_Animator;
         
         [SerializeField] private bool m_HasOvershootFrame;
         [ShowIf("m_HasOvershootFrame")]

@@ -304,7 +304,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     m_AttackDuration: 0.3
-    m_VFX_Start: 0
     m_WeaponMovementCurve:
       serializedVersion: 2
       m_Curve:
@@ -331,18 +330,14 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_BaseDamage: 1
     m_SuccessfullComboDamage: 3
+    m_VFX_Start: 0
     m_VFX:
     - {fileID: 332763085616677012}
     - {fileID: 6984686526992778381}
     - {fileID: 7666370331218966136}
+    m_AreVFXWorldBased: 1
     m_WeaponMovement: {fileID: 1158905776164586155}
     m_Damager: {fileID: 7518698054020727578}
-    m_StartAttackTriggerParam: 966611383
-    m_EndAttackTriggerParam: 960102711
-    m_FirstAttackTrigger: -356409821
-    m_SecondAttackTrigger: -649312477
-    m_ThirdAttackTrigger: 631607388
-    m_Animator: {fileID: 0}
   m_Animator: {fileID: 0}
   m_Sounds: {fileID: 8188397984285573184}
   m_CurrentState: 0

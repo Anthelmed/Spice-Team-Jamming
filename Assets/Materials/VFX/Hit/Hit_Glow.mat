@@ -12,6 +12,8 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _FADING_ON
+  - _SOFTPARTICLES_ON
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords:
   - _FLIPBOOKBLENDING_OFF
@@ -121,8 +123,8 @@ Material:
     - _SecondaryTexture: 1
     - _Smoothness: 0.077
     - _SoftFade: 0
-    - _SoftParticlesEnabled: 0
-    - _SoftParticlesFarFadeDistance: 1
+    - _SoftParticlesEnabled: 1
+    - _SoftParticlesFarFadeDistance: 0.2
     - _SoftParticlesNearFadeDistance: 0
     - _SrcBlend: 5
     - _SrcBlendAlpha: 1
@@ -132,15 +134,15 @@ Material:
     - _VertexOffsetAmount: 0
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0.98039216, g: 0.62352943, b: 0.7264536, a: 1}
+    - _BaseColor: {r: 0.990566, g: 0.5186454, b: 0.6534798, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _BurnColor: {r: 1, g: 1, b: 1, a: 1}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 0.98039216, g: 0.62352943, b: 0.7264536, a: 1}
+    - _Color: {r: 0.99056596, g: 0.5186454, b: 0.65347975, a: 1}
     - _EmissionColor: {r: 2, g: 2, b: 2, a: 1}
     - _PanningSpeedXYmaintexZWdisplacementtex: {r: 0, g: 0, b: 0, a: 0}
     - _Secondarypanningspeed: {r: 0, g: 0, b: 0, a: 0}
-    - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
+    - _SoftParticleFadeParams: {r: 0, g: 5, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6190896963583601567
 MonoBehaviour:

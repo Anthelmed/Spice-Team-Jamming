@@ -20,6 +20,8 @@ public enum Biome
 public class BoardManager : MonoBehaviour
 {
     // TODO move this into level data SO
+
+    [SerializeField] Transform mapGraphicsParent;
     
     [Header ("Biomes")]
     [SerializeField] private BiomePrefabHolder grassPrefabHolder;
@@ -222,7 +224,9 @@ public class BoardManager : MonoBehaviour
 
                 // We can rotate the tile [0, 90, 180, 270] degrees to get more variation
                 GameObject go = Instantiate(currentPrefab, pos, Quaternion.identity, _transform);
+                go.transform.SetParent(mapGraphicsParent);
                 var tile = go.GetComponentInChildren<GameTile>();
+                tile.InitTileData(currentBiome, new Vector2Int(x, y));
 
                 MapTiles[x, y] = tile;
                 
@@ -253,6 +257,8 @@ public class BoardManager : MonoBehaviour
                     // We can rotate the tile [0, 90, 180, 270] degrees to get more variation
                     GameObject go = Instantiate(currentPrefab, pos, Quaternion.identity, _transform);
                     var tile = go.GetComponentInChildren<GameTile>();
+                    go.transform.SetParent(mapGraphicsParent);
+                    tile.InitTileData(currentBiome, new Vector2Int(x,y));
                     tile.IsObstacle = true;
                     MapTiles[x, y] = tile;
 
@@ -278,6 +284,8 @@ public class BoardManager : MonoBehaviour
                     // We can rotate the tile [0, 90, 180, 270] degrees to get more variation
                     GameObject go = Instantiate(currentPrefab, pos, Quaternion.identity, _transform);
                     var tile = go.GetComponentInChildren<GameTile>();
+                    go.transform.SetParent(mapGraphicsParent);
+                    tile.InitTileData(currentBiome, new Vector2Int(x, y));
                     MapTiles[x, y] = tile;
                 }
 
@@ -286,8 +294,9 @@ public class BoardManager : MonoBehaviour
             }
 
         }
-        
+
     }
+
 
     void OnValidate()
     {

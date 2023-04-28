@@ -27,8 +27,7 @@ namespace _3C.Player
         [SerializeField] private DashBehavior m_DashBehavior;
         [SerializeField] private PlayerMeleeAttack m_PlayerMeleeAttack;
 
-        [Header("Componens")]
-        [SerializeField] private Animator m_Animator;
+        [Header("Components")]
         [SerializeField] private PlayerSounds m_Sounds;
 
         public PlayerSounds PlayerSoundsInstance => m_Sounds;
@@ -74,11 +73,6 @@ namespace _3C.Player
 
         private void Awake()
         {
-            if (m_Animator)
-            {
-                Debug.LogWarning("The state machine is thought for animated based character so watch out");
-            }
-            
             GameplayData.s_PlayerStateHandler = this;
             GameplayData.s_PlayerInputs = m_PlayerInputs = new PlayerInputs();
             m_PlayerInputs.InputStack = new(m_InputStackSize);
