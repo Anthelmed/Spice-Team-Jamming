@@ -725,7 +725,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 4113331242230349473, guid: af0374d79e3c12a4f949c406a1962272,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 3cdae52839809434a9075e263fa17b98, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -822,7 +822,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 5001287953217620789, guid: af0374d79e3c12a4f949c406a1962272,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 6800c728aa0fcf440b82e5063f2cf582, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -919,7 +919,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 1534161290905669328, guid: af0374d79e3c12a4f949c406a1962272,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 1ec837459ca7cc844af7a04398971452, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -1039,7 +1039,7 @@ Transform:
   - {fileID: 3590212808450251421}
   - {fileID: 5803001632542200392}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6101249032301722782
 MonoBehaviour:
@@ -1082,6 +1082,9 @@ MonoBehaviour:
   overWorldSnapshot: {fileID: -5883265491258198919, guid: af0374d79e3c12a4f949c406a1962272,
     type: 2}
   battleSnapshot: {fileID: 24500006, guid: af0374d79e3c12a4f949c406a1962272, type: 2}
+  pauseSnapShot: {fileID: -5840381992680404044, guid: a8eb57fe499bc7240b9ead1175178864,
+    type: 2}
+  shouldPlayBGM: 1
   transitionTime: 3
   enemyWeight: 0.7
   playerWeight: 0.3
