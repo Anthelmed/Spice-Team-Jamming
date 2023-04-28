@@ -156,6 +156,11 @@ PrefabInstance:
       propertyPath: m_Acceleration
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 7304046562964798858, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
+        type: 3}
+      propertyPath: avoidancePriority
+      value: 99
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
