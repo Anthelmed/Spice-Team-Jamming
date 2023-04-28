@@ -202,7 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_InputStackSize: 32
   m_PlayerMovement:
-    m_Speed: 5
+    m_Speed: 8
     m_MovementDamping: 8
     m_SpeedAnimatorParam: -823668238
     m_MovementTriggerParam: 229373857
@@ -224,12 +224,21 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        inSlope: 1.1154763
+        outSlope: 1.1237301
+        tangentMode: 69
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.14949884
+      - serializedVersion: 3
+        time: 0.72480124
+        value: 0.81448096
+        inSlope: 1.1237301
+        outSlope: 1.1967862
+        tangentMode: 5
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
         value: 1
@@ -246,7 +255,7 @@ MonoBehaviour:
     m_InputWaitDelay: 0.5
     m_WeaponCollider: {fileID: 7819967878936673827}
     m_AttackDuration: 0.5
-    m_VFX_Start: 0.1
+    m_VFX_Start: 0
     m_VFX:
     - {fileID: 332763085616677012}
     - {fileID: 6984686526992778381}

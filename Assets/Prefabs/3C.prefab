@@ -281,16 +281,6 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.0000000061076464
       objectReference: {fileID: 0}
-    - target: {fileID: 8784328163644698067, guid: 0882fb19615280e4ea7ffe4eadfb0891,
-        type: 3}
-      propertyPath: m_FollowOffset.y
-      value: 8.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 8784328163644698067, guid: 0882fb19615280e4ea7ffe4eadfb0891,
-        type: 3}
-      propertyPath: m_FollowOffset.z
-      value: -9.76
-      objectReference: {fileID: 0}
     - target: {fileID: 9108378881237217391, guid: 0882fb19615280e4ea7ffe4eadfb0891,
         type: 3}
       propertyPath: m_Name
@@ -445,6 +435,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Character
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279425899133959930, guid: a88553ad196ac3142aa555fdad264908,
+        type: 3}
+      propertyPath: m_PlayerMeleeAttack.m_AttackDuration
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279425899133959930, guid: a88553ad196ac3142aa555fdad264908,
+        type: 3}
+      propertyPath: m_PlayerMeleeAttack.m_InputWaitDelay
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7390912607918933550, guid: a88553ad196ac3142aa555fdad264908,
         type: 3}
