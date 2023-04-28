@@ -29,6 +29,9 @@ public class MobGoToTargetState : MobAI.IMobState
         // Go to combat if we are close enough
         if (data.TargetDistance < data.attackRange.y)
         {
+            // Use a very small coldown to prevent both enemies attacking at the same time when they get in range
+            if (data.CurrentAttackCooldown < 0f)
+                data.CurrentAttackCooldown = Random.Range(0f, data.attackCooldown * 0.5f);
             data.NextState = MobAI.State.CombatIdle;
             return;
         }
