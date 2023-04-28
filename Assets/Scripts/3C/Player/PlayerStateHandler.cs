@@ -12,7 +12,7 @@ namespace _3C.Player
     [Serializable]
     public enum PlayerState
     {
-        Moving,
+        IdleMovement,
         Dashing,
         Attacking,
     }
@@ -32,6 +32,17 @@ namespace _3C.Player
         [SerializeField] private PlayerSounds m_Sounds;
 
         public PlayerSounds PlayerSoundsInstance => m_Sounds;
+        public void OnMovementStateChanged(bool _state)
+        {
+            if (_state)
+            {
+                m_PlayerMovement.StartState();
+            }
+            else
+            {
+                m_PlayerMovement.StopState();
+            }
+        }
 
         private PlayerInputs m_PlayerInputs = new();
         
@@ -75,19 +86,20 @@ namespace _3C.Player
             {
                 playerStateBehavior.Awake(this);
             }
-            CurrentState = PlayerState.Moving;
+
+            CurrentState = PlayerState.IdleMovement;
         }
 
         private void OnStateChange(PlayerState _currentState, PlayerState _nextState)
         {
             m_CurrentStateBehavior?.StopState();
             m_CurrentStateBehavior = GetBehaviorFromState(_nextState); 
-            m_CurrentStateBehavior.StartState(_currentState);
+            m_CurrentStateBehavior.StartState();
         }
 
         private PlayerStateBehavior GetBehaviorFromState(PlayerState _state) => _state switch
         {
-            PlayerState.Moving => m_PlayerMovement,
+            PlayerState.IdleMovement => m_PlayerMovement,
             PlayerState.Dashing => m_DashBehavior,
             PlayerState.Attacking => m_PlayerMeleeAttack,
             _ => null,
@@ -95,7 +107,7 @@ namespace _3C.Player
 
         public void OnStateEnded()
         {
-            CurrentState = PlayerState.Moving;
+            CurrentState = PlayerState.IdleMovement;
         }
 
         public void StartCoroutine(IEnumerator _coroutine)
@@ -105,6 +117,10 @@ namespace _3C.Player
 
         private void Update()
         {
+            if (m_CurrentStateBehavior != m_PlayerMovement)
+            {
+                m_PlayerMovement?.Update();
+            }
             m_CurrentStateBehavior?.Update();
         }
 
@@ -132,8 +148,8 @@ namespace _3C.Player
             
             CurrentState = (m_CurrentState, _input) switch
             {
-                (PlayerState.Moving, InputType.AttackPerformed) => PlayerState.Attacking,
-                (PlayerState.Moving, InputType.DashPerformed) => PlayerState.Dashing,
+                (PlayerState.IdleMovement, InputType.AttackPerformed) => PlayerState.Attacking,
+                (PlayerState.IdleMovement, InputType.DashPerformed) => PlayerState.Dashing,
                 (PlayerState.Attacking, InputType.DashPerformed) => PlayerState.Dashing,
                 _ => throw new Exception($" {m_CurrentState} - {_input} is not handled"),
             };
@@ -145,7 +161,7 @@ namespace _3C.Player
             {
                 (PlayerState.Attacking, InputType.MovementCanceled) or (PlayerState.Attacking, InputType.MovementPerformed) => false,
                 (PlayerState.Dashing, _) => false,
-                (PlayerState.Moving, InputType.MovementPerformed) or (PlayerState.Moving, InputType.MovementCanceled) => false,
+                (PlayerState.IdleMovement, InputType.MovementPerformed) or (PlayerState.IdleMovement, InputType.MovementCanceled) => false,
                 (PlayerState.Attacking, InputType.AttackPerformed) => false,
                 _ => true,
             };

@@ -267,7 +267,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   m_PlayerMeleeAttack:
-    m_InputWaitDelay: 0
+    m_InputWaitDelay: 0.2
     m_AttackDuration: 0.3
     m_VFX_Start: 0
     m_WeaponMovementCurve:

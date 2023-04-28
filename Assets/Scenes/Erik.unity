@@ -347,18 +347,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 845855833}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1042480706 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5536115961411469971, guid: eac1ae59bef618847b73c10b4d795403,
-    type: 3}
-  m_PrefabInstance: {fileID: 375412924021747673}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d6c909f5a24ca0b89016a79e780547, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1216240329
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,19 +482,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4162673794576891586, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
-      propertyPath: m_PlayerMeleeAttack.m_AttackDuration
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4162673794576891586, guid: eac1ae59bef618847b73c10b4d795403,
-        type: 3}
       propertyPath: m_PlayerMeleeAttack.m_InputWaitDelay
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4162673794576891586, guid: eac1ae59bef618847b73c10b4d795403,
-        type: 3}
-      propertyPath: m_PlayerMeleeAttack.m_WeaponMovement
-      value: 
-      objectReference: {fileID: 1042480706}
     - target: {fileID: 4162673794576891586, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
       propertyPath: m_PlayerMeleeAttack.m_AttackTriggers.Array.size
