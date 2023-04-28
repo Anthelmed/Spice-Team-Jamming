@@ -218,6 +218,7 @@ MonoBehaviour:
   m_PlayerMovement:
     m_Speed: 8
     m_MovementDamping: 8
+    m_RotationDamping: 10
     m_SpeedAnimatorParam: -823668238
     m_MovementTriggerParam: 229373857
     m_Animator: {fileID: 0}
