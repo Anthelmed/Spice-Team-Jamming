@@ -20,6 +20,8 @@ public enum Biome
 public class BoardManager : MonoBehaviour
 {
     // TODO move this into level data SO
+
+    [SerializeField] Transform mapGraphicsParent;
     
     [Header ("Biomes")]
     [SerializeField] private BiomePrefabHolder grassPrefabHolder;
@@ -28,6 +30,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private BiomePrefabHolder forestPrefabHolder;
     [SerializeField] private BiomePrefabHolder waterPrefabHolder;
     [SerializeField] private float sameBiomeChance = 0.5f;
+    [SerializeField] private List<Biome> spawnableBiomes = new List<Biome>();
 
     private Dictionary<Biome, BiomePrefabHolder> _biomePrefabHolders = new Dictionary<Biome, BiomePrefabHolder>();
 
@@ -79,12 +82,13 @@ public class BoardManager : MonoBehaviour
         }
         
         // Vector3 localScale = fieldPrefab.transform.localScale;
-        float xSize = 1;
-        float zSize = 1;
+        float xSize = 20;
+        float zSize = 20;
         int xMax = MapTiles.GetLength(0);
         int zMax = MapTiles.GetLength(1);
         int xLoc = Mathf.Min(Mathf.Max(0, (int) Math.Round(pos.x / xSize)), xMax);
         int zLoc = Mathf.Min(Mathf.Max(0, (int) Math.Round(pos.z / zSize)), zMax);
+        Debug.Log(xLoc + ", " + zLoc);
         // int zLoc =  (int) Math.Round(pos.z / zSize);
         return new int[2] { xLoc, zLoc };
             
@@ -165,11 +169,10 @@ public class BoardManager : MonoBehaviour
         Biome? currentRandomBiome = null;
         if (neighbouringBiomes.Count == 0)
         {
-            do
-            {
-                currentRandomBiome = (Biome) Random.Range(0, Enum.GetNames(typeof(Biome)).Length);
 
-            } while (currentRandomBiome == Biome.Water);
+            var randomIdex = Random.Range(0, spawnableBiomes.Count);
+            currentRandomBiome = spawnableBiomes[randomIdex];
+
 
             return currentRandomBiome.Value;
         }
@@ -183,11 +186,10 @@ public class BoardManager : MonoBehaviour
             return mostNeighbouringBiome;
         }
 
-        do
-        {
-            currentRandomBiome = (Biome) Random.Range(0, Enum.GetNames(typeof(Biome)).Length);
-
-        } while (currentRandomBiome == Biome.Water);
+ 
+        var randIndex = Random.Range(0, spawnableBiomes.Count);
+        currentRandomBiome = spawnableBiomes[randIndex];
+            
         
         return currentRandomBiome.Value;
         
@@ -222,7 +224,9 @@ public class BoardManager : MonoBehaviour
 
                 // We can rotate the tile [0, 90, 180, 270] degrees to get more variation
                 GameObject go = Instantiate(currentPrefab, pos, Quaternion.identity, _transform);
+                go.transform.SetParent(mapGraphicsParent);
                 var tile = go.GetComponentInChildren<GameTile>();
+                tile.InitTileData(currentBiome, new Vector2Int(x, y));
 
                 MapTiles[x, y] = tile;
                 
@@ -253,6 +257,9 @@ public class BoardManager : MonoBehaviour
                     // We can rotate the tile [0, 90, 180, 270] degrees to get more variation
                     GameObject go = Instantiate(currentPrefab, pos, Quaternion.identity, _transform);
                     var tile = go.GetComponentInChildren<GameTile>();
+                    go.transform.SetParent(mapGraphicsParent);
+                    tile.InitTileData(currentBiome, new Vector2Int(x,y));
+                    tile.IsObstacle = true;
                     MapTiles[x, y] = tile;
 
 
@@ -277,6 +284,8 @@ public class BoardManager : MonoBehaviour
                     // We can rotate the tile [0, 90, 180, 270] degrees to get more variation
                     GameObject go = Instantiate(currentPrefab, pos, Quaternion.identity, _transform);
                     var tile = go.GetComponentInChildren<GameTile>();
+                    go.transform.SetParent(mapGraphicsParent);
+                    tile.InitTileData(currentBiome, new Vector2Int(x, y));
                     MapTiles[x, y] = tile;
                 }
 
@@ -285,8 +294,9 @@ public class BoardManager : MonoBehaviour
             }
 
         }
-        
+
     }
+
 
     void OnValidate()
     {

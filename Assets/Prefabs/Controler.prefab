@@ -64,10 +64,6 @@ MonoBehaviour:
     m_ActionId: 19204312-67dd-49bf-8d09-085e90319e90
     m_ActionName: Menu/New action
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 014518c0-27d9-4f68-b469-a0ec34e22a8c
-    m_ActionName: Map/New action
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3254206215208585877}
         m_TargetAssemblyTypeName: _3C.Player.PlayerController, Assembly-CSharp
@@ -131,6 +127,98 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d93b9b1d-7f8e-43f2-88c1-a3c00764750d
     m_ActionName: Gameplay/Dash[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnTileClicked
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnTileReleased
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 94cdf750-6324-4585-8075-cfd1fa1f0c58
+    m_ActionName: Map/Select[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnTogglePause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4184d08c-d774-4c84-887e-a734e8fb6342
+    m_ActionName: Gameplay/Pause[/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3254206215208585877}
+        m_TargetAssemblyTypeName: _3C.Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d93b9b1d-7f8e-43f2-88c1-a3c00764750d
+    m_ActionName: Gameplay/Dash[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3254206215208585877}
+        m_TargetAssemblyTypeName: _3C.Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d93b9b1d-7f8e-43f2-88c1-a3c00764750d
+    m_ActionName: Gameplay/Dash[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3254206215208585877}
+        m_TargetAssemblyTypeName: _3C.Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d93b9b1d-7f8e-43f2-88c1-a3c00764750d
+    m_ActionName: Gameplay/Dash[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -148,5 +236,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0f2da36cd34e3bb1d48d9ad2af1093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlayerMovement: {fileID: 0}
-  m_PlayerStateHandler: {fileID: 0}

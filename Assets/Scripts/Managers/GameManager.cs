@@ -2,35 +2,35 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.InputSystem;
+
 public class GameManager : MonoBehaviour
 {
     public enum GameState
     {
         title,
-        overworld,
-        battle,
+        map,
+        level,
         pause
     }
 
-    [SerializeField] string testBattleMapName;
-    [SerializeField] UIPanel startScreen;
-    [SerializeField] UIPanel pauseScreen;
-    [SerializeField] UIPanel loadingScreen;
-    [SerializeField] Transform panelParent;
+    [SerializeField] string battleSceneName;
+    [SerializeField] Camera mapCamera;
+    [SerializeField] GameObject playerPrefab;
+    [SerializeField] Vector2Int mapDestination;
     [SerializeField] GameObject mapGraphics;
-    UIPanel[] allPanels;
+
   
     GameState currentGameState;
-    String currentBattleScene;
 
     public static GameManager instance;
 
-    float pauseCoolDown;
+    public event Action<bool> loadingScreenVisibilityEvent = delegate { };
+    public event Action<bool> startScreenVisibilityEvent = delegate { };
+    public event Action<bool> pauseScreenVisibilityEvent = delegate { };
 
-    public Action<bool> loadingScreenVisibilityEvent = delegate { };
-    public Action<bool> startScreenVisibilityEvent = delegate { };
-    public Action<bool> pauseScreenVisibilityEvent = delegate { };
-
+    GameObject loadedPlayer;
+    bool battleMapLoaded;
 
     private void Awake()
     {
@@ -43,15 +43,16 @@ public class GameManager : MonoBehaviour
         }
 
         HideAllPanels();
-        startScreen.Show();
+        startScreenVisibilityEvent(true);
     }
 
+ 
     public void StartGame()
     {
         if (currentGameState == GameState.title)
         {
             HideAllPanels();
-            TransitionToState(GameState.overworld);
+            TransitionToState(GameState.map);
         }
     }
     
@@ -62,19 +63,24 @@ public class GameManager : MonoBehaviour
         currentGameState = newState;
         OnStateEnter(newState, tmpInitialState);
     }
+
+    /// <summary>
+    /// /state
+    /// </summary>
+
     public void OnStateExit(GameState state, GameState toState)
     {
         switch (state)
         {
             case GameState.title:
                 break;
-            case GameState.overworld:
+            case GameState.map:
                 break;
-            case GameState.battle:
+            case GameState.level:
                 break;
             case GameState.pause:
                 {
-                    pauseScreen.Hide();
+                    pauseScreenVisibilityEvent(false);
                 }
                 break;
             default:
@@ -87,13 +93,20 @@ public class GameManager : MonoBehaviour
         {
             case GameState.title:
                 break;
-            case GameState.overworld:
+            case GameState.map:
+                {
+                    mapCamera.gameObject.SetActive(true);
+                   
+                }
                 break;
-            case GameState.battle:
+            case GameState.level:
+                {
+                    mapCamera.gameObject.SetActive(false);
+                }
                 break;
             case GameState.pause:
                 {
-                    pauseScreen.Show();
+                    pauseScreenVisibilityEvent(true);
                     //switch input map
                 }
                 break;
@@ -102,63 +115,69 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Update()
+
+     GameTile clickedTile;
+     bool isHoldingDown = false;
+     float holdTimer;
+     float holdDownDuration = 1.0f;
+
+
+    void Update()
     {
+
         switch (currentGameState)
         {
             case GameState.title:
+                break;
+            case GameState.map:
                 {
-                    //on press any key start gameplay
+                    if (Mouse.current.leftButton.wasPressedThisFrame)
+                    {
+                        Vector2 mousePosition = Mouse.current.position.ReadValue();
+                        Ray ray = mapCamera.ScreenPointToRay(mousePosition);
+                        RaycastHit hit;
+
+                        if (Physics.Raycast(ray, out hit))
+                        {
+                            GameObject hitObject = hit.collider.gameObject;
+                            Debug.Log("Clicked on " + hitObject.name);
+                            hitObject.TryGetComponent(out GameTile tile);
+
+                        if (tile != null)
+                        {
+                                print("found game tile on object");
+                                // Player clicked on a tile, start the timer
+                                clickedTile = tile;
+                                mapDestination = clickedTile.mapTileData.tileCoords;
+                                TryTransitionToLevel();
+                            }
+                    }
+              
+                }
                 }
                 break;
-            case GameState.overworld:
-                {
-                    //on click tile load scene
-                }
-                break;
-            case GameState.battle:
-                {
-                    // if (pausePressed)
-                  //  TransitionToState(GameState.pause);
-                }
+            case GameState.level:
                 break;
             case GameState.pause:
-                {
-                  //   if (pausePressed)
-                  //   TransitionToState(GameState.battle);
-                  //switch input map
-                }
                 break;
             default:
                 break;
-        }
+        }  
     }
 
 
-    public void LoadBattleMap(string sceneName)
+    public void LoadLevel(string sceneName)
     {
-        if (currentGameState == GameState.battle) return;
+        if (currentGameState == GameState.level) return;
 
         Scene scene = SceneManager.GetSceneByName(sceneName);
         print("scene index" + scene.buildIndex);
-        StartCoroutine(LoadScene(sceneName));
-
+        StartCoroutine(LoadLevelScene(sceneName));
     }
 
-    public void ReturnToOverworld()
+    IEnumerator LoadLevelScene(String sceneToLoad)
     {
-        if (currentGameState == GameState.battle && currentBattleScene != null)
-        {
-            SceneManager.UnloadSceneAsync(currentBattleScene);
-            TransitionToState(GameState.battle);
-            mapGraphics.SetActive(true); /// do this in the map script. just the graphics should get turned off
-        }
-    }
-
-    IEnumerator LoadScene(String sceneToLoad)
-    {
-        foreach (var panel in allPanels) panel.Hide();
-        loadingScreen.Show();
+        loadingScreenVisibilityEvent(true);
          AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
 
         while (!asyncLoad.isDone)
@@ -166,54 +185,110 @@ public class GameManager : MonoBehaviour
             print("loading scene");
             yield return null;
         }
-        currentBattleScene = sceneToLoad;
 
         yield return new WaitForSeconds(1);
 
-        mapGraphics.SetActive(false); /// do this in the map script. just the graphics should get turned off
-
-        TransitionToState(GameState.battle);
-        loadingScreen.Hide();
-        
+        if (LevelTilesManager.instance == null)
+        {
+            print("world map not generated! tile manager not found");
+            yield return null;
+        }
+        LevelTilesManager.instance.GenerateTiles();
+        TransitionToLevel();
+        battleMapLoaded = true;
     }
 
-
-    private void OnValidate()
+    public void TransitionToMap()
     {
-        allPanels = panelParent.GetComponentsInChildren<UIPanel>();
+        if (currentGameState != GameState.level) return;
+        if (loadedPlayer != null) loadedPlayer.SetActive(false);
+
+        LevelTilesManager.instance.SleepAllTiles();
+
+        mapGraphics.SetActive(true); /// do this better
+        TransitionToState(GameState.map);
     }
+
+    void TryTransitionToLevel()
+    {
+        if (battleMapLoaded) TransitionToLevel();
+        else LoadLevel(battleSceneName); // this ends up being async that's why it's like this
+    }
+    void TransitionToLevel()
+    {
+
+        var spawnTile = LevelTilesManager.instance.GetTileAtGridPosition(mapDestination);
+        spawnTile.WakeUp();
+        var spawnPos = spawnTile.teleportPoint.position;
+ 
+        if (loadedPlayer == null)
+        {
+         loadedPlayer = Instantiate(playerPrefab, spawnPos, Quaternion.identity);
+        }
+        else
+        {
+            loadedPlayer.transform.position = spawnPos;
+            if (!loadedPlayer.activeInHierarchy) loadedPlayer.SetActive(true);
+
+        }
+      
+        mapGraphics.SetActive(false); /// do this better
+
+        TransitionToState(GameState.level);
+        loadingScreenVisibilityEvent(false);
+
+    }
+
+
     [ContextMenu(" hide all panels")]
     public void HideAllPanels()
     {
-        foreach (var panel in allPanels) panel.Hide();
+        startScreenVisibilityEvent(false);
+        pauseScreenVisibilityEvent(false);
+        loadingScreenVisibilityEvent(false);
     }
 
-    public void TogglePause()// for testing only
+    public void OnTogglePause(InputAction.CallbackContext _context)
     {
+        if (_context.phase == InputActionPhase.Performed)
+            switch (currentGameState)
+            {
 
-        switch (currentGameState)
-        {
-
-            case GameState.battle:
-                {
-                    TransitionToState(GameState.pause);
-                }
-                break;
-            case GameState.pause:
-                {
-                    TransitionToState(GameState.battle);
-                }
-                break;
-        }
+                case GameState.level:
+                    {
+                        TransitionToState(GameState.pause);
+                    }
+                    break;
+                case GameState.pause:
+                    {
+                        TransitionToState(GameState.level);
+                    }
+                    break;
+            }
     }
-    /// <summary>
-    /// //debbuggin stuff below here
-    /// </summary>
+
+
+    public void TeleportPlayerToMapPoint(Vector2Int gridCoords)
+    {
+        if (LevelTilesManager.instance == null) return;
+
+        var desinationTile = LevelTilesManager.instance.GetTileAtGridPosition(gridCoords);
+
+        playerPrefab.transform.position = desinationTile.teleportPoint.position;
+        playerPrefab.transform.rotation = desinationTile.teleportPoint.rotation;
+
+        //or this?
+        //var spawnPos = WorldTilesManager.instance.GetTileAtGridPosition(mapDestination).teleportPoint.position;
+        //Instantiate(playerPrefab, spawnPos, Quaternion.identity);
+
+    }
+
+    [ContextMenu(" load test scene")]
     public void LoadTestScene()
     {
-        LoadBattleMap(testBattleMapName);
+        LoadLevel(battleSceneName);
     }
-
+  
 
 
 

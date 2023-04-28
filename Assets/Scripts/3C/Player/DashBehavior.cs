@@ -8,9 +8,9 @@ namespace _3C.Player
     [Serializable]
     public class DashBehavior : PlayerStateBehavior
     {
-        [AnimatorParam("m_Animator")]
-        [SerializeField] private int m_DashTriggerParam;
-        [SerializeField] private Animator m_Animator;
+        // [AnimatorParam("m_Animator")]
+        // [SerializeField] private int m_DashTriggerParam;
+        // [SerializeField] private Animator m_Animator;
         
         [SerializeField] private bool m_HasOvershootFrame;
         [ShowIf("m_HasOvershootFrame")]
@@ -42,10 +42,10 @@ namespace _3C.Player
             m_InverseDuration = 1 / m_Duration;
         }
 
-        public override void StartState(PlayerState _previousState)
+        public override void StartState()
         {
             m_StateHandler.StartCoroutine(c_Dashing());
-            m_Animator.SetTrigger(m_DashTriggerParam);
+            //m_Animator?.SetTrigger(m_DashTriggerParam);
         }
 
         public override void StopState()
@@ -55,6 +55,7 @@ namespace _3C.Player
 
         private IEnumerator c_Dashing()
         {
+            m_StateHandler.OnMovementStateChanged(false);
             Vector3 start = m_Transform.position;
             Vector3 end = m_Transform.position + m_Transform.forward * m_Distance;
 
@@ -68,6 +69,8 @@ namespace _3C.Player
                 }
             }
             
+            m_StateHandler.PlayerSoundsInstance.PlayDashSound();
+
             for (float time = 0; time < m_Duration; time += Time.deltaTime)
             {
                 float ratio = time * m_InverseDuration;
@@ -84,6 +87,7 @@ namespace _3C.Player
             }
             
             m_Transform.position = end;
+            m_StateHandler.OnMovementStateChanged(true);
             m_StateHandler.OnStateEnded();
         }
 

@@ -87,10 +87,8 @@ public class AudioManager : MonoBehaviour
 
     public void PlayShuffledSound(string soundName, SFXCategory category, float pitchVariance, float volumeVariance)
     {
-        print("called multisound from audio manager");
         if (multiSoundDict.ContainsKey(soundName))
         {
-            print("foudn the multi sound");
             var tempClip = multiSoundDict[soundName].GetShuffledClip();
             if (tempClip != null) RouteClipToSourcesAndPlay(tempClip, category, pitchVariance, volumeVariance);
         }

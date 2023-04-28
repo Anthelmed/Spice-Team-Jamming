@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/AlexTestAdditiveLoad.unity
-    guid: 6562599dd78e4b24f932a9967ff9efc5
+    path: Assets/Scenes/AlexTestBattleScene.unity
+    guid: 91eb3e6583346054e966071b6bdfcb93
   m_configObjects: {}
