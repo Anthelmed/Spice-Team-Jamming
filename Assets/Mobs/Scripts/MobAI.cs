@@ -30,7 +30,7 @@ public class MobAI : MonoBehaviour
         public float smallTargetDistance = 10f;
 
         [Header("Behaviour toggles")]
-        public bool prioritizeMainTargets = false;
+        public bool huntMainTargets = false;
 
         private Targetable m_target;
         public Targetable Target { get => m_target; 
@@ -208,14 +208,27 @@ public class MobAI : MonoBehaviour
 
         if (m_data.ShouldQueryTargets)
         {
-            // Try to get enemies in range
-            m_data.Target = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out _, ~m_data.targetting.team, 
-                minPriority: m_data.prioritizeMainTargets ? Targetable.Priority.High : Targetable.Priority.Medium);
+            m_data.Target = null;
+            Targetable farTarget = null;
+            float farDistance = 1000f;
 
-            if (!m_data.Target && m_data.prioritizeMainTargets)
+            // Get a main enemy
+            if (m_data.huntMainTargets)
+            {
+                farTarget = Targetable.QueryClosestTarget(transform.position, 1000f, out farDistance, ~m_data.targetting.team,
+                minPriority: Targetable.Priority.High);
+            }
+
+            // If it's close enough that's the one we attack
+            if (farDistance < m_data.smallTargetDistance)
+                m_data.Target = farTarget;
+
+            // If not try to get any enemy that's in range
+            if (!m_data.Target)
             {
                 m_data.Target = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out _, ~m_data.targetting.team,
-                    maxPriority: Targetable.Priority.Medium, minPriority: Targetable.Priority.Medium);
+                    maxPriority: m_data.huntMainTargets ? Targetable.Priority.Medium : Targetable.Priority.High, 
+                    minPriority: Targetable.Priority.Medium);
             }
 
             // As a backup, find vegetation to burn :devil:
@@ -224,6 +237,10 @@ public class MobAI : MonoBehaviour
                 m_data.Target = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out _, ~m_data.targetting.team,
                     maxPriority: Targetable.Priority.Low);
             }
+
+            // Nothing was close, use the target that was far away
+            if (!m_data.Target)
+                m_data.Target = farTarget;
         }
 
         // Check if there are enemies in front
