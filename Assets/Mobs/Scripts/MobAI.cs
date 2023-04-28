@@ -152,7 +152,7 @@ public class MobAI : MonoBehaviour
         UpdateTransition();
 
         // Update targetting info so it's ready for the update
-        QueryTargets();
+        RunQueries();
 
         // Run the update
         m_states[(int)m_state]?.Tick(m_data);
@@ -193,7 +193,7 @@ public class MobAI : MonoBehaviour
         }
     }
 
-    private void QueryTargets()
+    private void RunQueries()
     {
         // Only update when forced or when it's our turn to do so
         if (!m_data.QueryNow && (Time.frameCount % m_data.targetQueryRate) != m_queryTurn)
@@ -205,7 +205,16 @@ public class MobAI : MonoBehaviour
 
         if (m_data.ShouldQueryTargets)
         {
-            m_data.Target = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out _, ~m_data.targetting.team);
+            // Try to get enemies in range
+            m_data.Target = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out _, ~m_data.targetting.team, 
+                minPriority: Targetable.Priority.Medium);
+
+            // As a backup, find vegetation to burn :devil:
+            if (!m_data.Target)
+            {
+                m_data.Target = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out _, ~m_data.targetting.team,
+                    maxPriority: Targetable.Priority.Low);
+            }
         }
 
         // Check if there are enemies in front
