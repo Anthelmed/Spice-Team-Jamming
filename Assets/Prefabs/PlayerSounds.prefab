@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcd702a4d9d4394927ff3a89234dc78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackSound: {fileID: 0}
-  m_DashSound: {fileID: 0}
-  m_RangeSound: {fileID: 0}
+  attackOneSound: PlayerAttackOne
+  dashSound: playerDash
+  rangedSound: 

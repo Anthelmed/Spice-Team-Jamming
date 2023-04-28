@@ -4,37 +4,48 @@ namespace DefaultNamespace.Audio
 {
     public class PlayerSounds : MonoBehaviour
     {
-        [SerializeField] private AudioSource m_AttackSound;
-        [SerializeField] private AudioSource m_DashSound;
-        [SerializeField] private AudioSource m_RangeSound;
+        [SerializeField] string attackOneSound = "PlayerAttackOne";
+        [SerializeField] string dashSound = "playerDash";
+        [SerializeField] string rangedSound = "";
+        [SerializeField] string deathSound = "playerMagicalDeath";
+        [SerializeField] string damageSound = "";
+        [SerializeField] string healSound = "";
 
-        public AudioSource AttackSound => m_AttackSound;
 
-        public AudioSource DashSound => m_DashSound;
+        AudioManager m_AudioManager;
 
-        public AudioSource RangeSound => m_RangeSound;
+        private void Start()
+        {
+            if (AudioManager.instance != null) m_AudioManager = AudioManager.instance;
 
+        }
         public void PlayAttackSound()
         {
-            PlaySoundIfPossible(m_AttackSound);
+            m_AudioManager.PlayShuffledSound(attackOneSound, SFXCategory.player, 0.05f, 0.05f);
         }
 
         public void PlayDashSound()
         {
-            PlaySoundIfPossible(m_DashSound);
+           m_AudioManager.PlaySingleClip(dashSound, SFXCategory.player, 0.1f, 0.1f);
         }
 
         public void PlayRangeSound()
         {
-            PlaySoundIfPossible(m_RangeSound);
+            m_AudioManager.PlaySingleClip(rangedSound, SFXCategory.player, 0.05f, 0.05f);
+        }
+        public void PlayDamageSound()
+        {
+            m_AudioManager.PlaySingleClip(damageSound, SFXCategory.player, 0.1f, 0.1f);
+        }
+        public void PlayDeathSound()
+        {
+            m_AudioManager.PlaySingleClip(deathSound, SFXCategory.player, 0, 0);
+        }
+        public void PlayHealSound()
+        {
+            m_AudioManager.PlaySingleClip(healSound, SFXCategory.player, 0, 0);
         }
 
-        private void PlaySoundIfPossible(AudioSource _source)
-        {
-            if (_source != null)
-            {
-                _source.Play();
-            }
-        }
+
     }
 }
