@@ -174,9 +174,7 @@ public class MobAI : MonoBehaviour
 
         if (m_shouldQueryTargets)
         {
-            var newTarget = Targetable.QueryClosestTarget(transform.position, m_smallTargetDistance, false, ~m_targetting.team, out _);
-            if (newTarget)
-                target = newTarget;
+            target = Targetable.QueryClosestTarget(transform.position, m_smallTargetDistance, false, ~m_targetting.team, out _);
         }
 
         // Check if there are enemies in front
