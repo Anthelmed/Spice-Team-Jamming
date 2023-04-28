@@ -295,16 +295,6 @@ public class BoardManager : MonoBehaviour
 
         }
 
-        ////set up the coordinates in data. for some reason this got scrambled when did it on instantiate. i think because of obstacles
-
-        //for (int x = 0; x < MapTiles.GetLength(0); x++)
-        //{
-        //    for (int y = 0; y < MapTiles.GetLength(1); y++)
-        //    {
-        //        GameTile tile = MapTiles[x, y];
-        //        tile.mapTileData.tileCoords = (new Vector2Int(x, y));
-        //    }
-        //}
     }
 
 

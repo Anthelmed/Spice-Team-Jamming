@@ -74,29 +74,52 @@ public class LevelTilesManager : MonoBehaviour
             GameObject.DestroyImmediate(child.gameObject);
         }
 
-        for (int rowIndex = 0; rowIndex < rows; rowIndex++)
+        for (int xIndex = 0; xIndex < rows; xIndex++)
         {
-            for (int columnIndex = 0; columnIndex < columns; columnIndex++)
+            for (int yIndex = 0; yIndex < columns; yIndex++)
             {
-                float xPos = columnIndex * spacing;
-                float zPos = rowIndex * spacing;
-                Vector3 position = new Vector3(xPos, 0.0f, zPos);
+                float xPos = xIndex * spacing;
+                float yPos = yIndex * spacing;
+                Vector3 position = new Vector3(xPos, 0.0f, yPos); //i know i know
 
-                var mapTile = BoardManager.MapTiles[rowIndex, columnIndex];
+                var mapTile = BoardManager.MapTiles[xIndex, yIndex];
                 GameObject prefabToSpawn = GetPrefab(mapTile);
 
                 GameObject spawnedObject = Instantiate(prefabToSpawn, position, Quaternion.identity);
-                spawnedObject.gameObject.name = "Tile " + columnIndex + " / " + rowIndex;
+                spawnedObject.gameObject.name = "Tile " + xIndex + " _ " + yIndex;
                 spawnedObject.transform.SetParent(transform);
                 var tile = spawnedObject.GetComponent<LevelTile>();
-                
-                Vector2Int gridCoordinates = new Vector2Int(columnIndex, rowIndex);
-       
+
+                Vector2Int gridCoordinates = new Vector2Int(xIndex, yIndex);
+
                 gridTiles.Add(gridCoordinates, tile);
                 tile.Init(mapTile.mapTileData, gridCoordinates);
                 tile.Sleep();
             }
         }
+        //for (int columnIndex = 0; columnIndex < columns; columnIndex++)
+        //{
+        //    for (int rowIndex = 0; rowIndex < rows; rowIndex++)
+        //    {
+        //        float xPos = columnIndex * spacing;
+        //        float zPos = rowIndex * spacing;
+        //        Vector3 position = new Vector3(xPos, 0.0f, zPos);
+
+        //        var mapTile = BoardManager.MapTiles[rowIndex, columnIndex];
+        //        GameObject prefabToSpawn = GetPrefab(mapTile);
+
+        //        GameObject spawnedObject = Instantiate(prefabToSpawn, position, Quaternion.identity);
+        //        spawnedObject.gameObject.name = "Tile " + rowIndex + " / " + columnIndex;
+        //        spawnedObject.transform.SetParent(transform);
+        //        var tile = spawnedObject.GetComponent<LevelTile>();
+
+        //        Vector2Int gridCoordinates = new Vector2Int(columnIndex, rowIndex);
+
+        //        gridTiles.Add(gridCoordinates, tile);
+        //        tile.Init(mapTile.mapTileData, gridCoordinates);
+        //        tile.Sleep();
+        //    }
+        //}
 
         foreach (LevelTile tile in gridTiles.Values)
         {
