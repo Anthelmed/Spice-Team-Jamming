@@ -13,7 +13,7 @@ using UnityEngine.Profiling;
 public class MobAI : MonoBehaviour
 {
     [Header("Public stuff")]
-    public Transform target;
+    public Targetable target;
 
     [Header("Referencies")]
     [SerializeField] private NavMeshAgent m_agent;
@@ -26,6 +26,7 @@ public class MobAI : MonoBehaviour
     [SerializeField] private Vector2 m_attackRange = Vector2.up;
     [SerializeField] private float m_attackCooldown = 2f;
     [SerializeField] private int m_targetQueryRate = 60;
+    [SerializeField] private float m_smallTargetDistance = 10f;
 
     private Vector3 m_lastPosition;
 
@@ -38,16 +39,19 @@ public class MobAI : MonoBehaviour
         Retreat,
         Attack,
         Hit,
-        Death
+        Death,
+
+        StatesCount
     }
 
-    [SerializeField] private State m_state = State.Idle;
+    [SerializeField] private State m_state = State.StatesCount;
     private State m_nextState = State.Idle;
     private bool m_lookAtTarget = false;
     private bool m_alignWithMovement = false;
     private float m_currentAttackCooldown = 0f;
     private int m_queryTurn;
     private bool m_shouldQueryAdvanceBlocked = false;
+    private bool m_shouldQueryTargets = false;
     private bool m_advanceBlocked = false;
     private bool m_queryNow = false;
 
@@ -84,6 +88,9 @@ public class MobAI : MonoBehaviour
 
     private void Update()
     {
+        if (target && !target.enabled)
+            target = null;
+
         // Update cooldowns
         m_currentAttackCooldown -= Time.deltaTime;
 
@@ -135,9 +142,9 @@ public class MobAI : MonoBehaviour
         m_animator.SetSpeed(movement.magnitude / Time.deltaTime);
 
         // Update the rotation
-        if (m_lookAtTarget)
+        if (m_lookAtTarget && target)
         {
-            var toTarget = (target.position - transform.position).normalized;
+            var toTarget = (target.transform.position - transform.position).normalized;
             if (Vector3.Dot(toTarget, transform.forward) < 0.99f)
             {
                 transform.rotation = Quaternion.RotateTowards(
@@ -158,11 +165,19 @@ public class MobAI : MonoBehaviour
     private void QueryTargets()
     {
         // Only update when forced or when it's our turn to do so
-        if (!m_queryNow)
+        if (!m_queryNow && (Time.frameCount % m_targetQueryRate) != m_queryTurn)
             return;
-        if ((Time.frameCount % m_targetQueryRate) != m_queryTurn)
-            return;
+
+        m_queryNow = false;
+
         Profiler.BeginSample("Query");
+
+        if (m_shouldQueryTargets)
+        {
+            var newTarget = Targetable.QueryClosestTarget(transform.position, m_smallTargetDistance, false, ~m_targetting.team, out _);
+            if (newTarget)
+                target = newTarget;
+        }
 
         // Check if there are enemies in front
         if (m_shouldQueryAdvanceBlocked)
@@ -170,7 +185,7 @@ public class MobAI : MonoBehaviour
             m_advanceBlocked = false;
             if (target)
             {
-                var toTarget = (target.position - transform.position).normalized;
+                var toTarget = (target.transform.position - transform.position).normalized;
                 var nearbyAllies = Targetable.QueryTargets(transform.position, 1.5f, m_targetting.isMain, m_targetting.team);
                 for (int i = 0; i < nearbyAllies.Count; ++i)
                 {
@@ -181,11 +196,6 @@ public class MobAI : MonoBehaviour
                         break;
                     }
                 }
-            }
-
-            if (m_advanceBlocked)
-            {
-                Debug.Log("Advance blocked");
             }
         }
 
@@ -199,6 +209,9 @@ public class MobAI : MonoBehaviour
 
         switch (m_state)
         {
+            case State.Idle:
+                Idle_Exit();
+                break;
             case State.GoToTarget:
                 GoToTarget_Exit();
                 break;
@@ -218,6 +231,9 @@ public class MobAI : MonoBehaviour
 
         switch (m_nextState)
         {
+            case State.Idle:
+                Idle_Enter();
+                break;
             case State.GoToTarget:
                 GoToTarget_Enter();
                 break;
@@ -250,14 +266,28 @@ public class MobAI : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, m_attackRange.x);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, m_attackRange.y);
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, m_smallTargetDistance);
     }
 
     #region States
     #region Idle
+    private void Idle_Enter()
+    {
+        m_shouldQueryTargets = true;
+        // If we're here, we lost our target, let's try to find it as soon as possible
+        m_queryNow = true;
+    }
+
     private void Idle_Update()
     {
         if (target)
             m_nextState = State.GoToTarget;
+    }
+
+    private void Idle_Exit()
+    {
+        m_shouldQueryTargets = false;
     }
     #endregion
 
@@ -265,10 +295,10 @@ public class MobAI : MonoBehaviour
     private void GoToTarget_Enter()
     {
         // Set the destination to start moving
-        m_agent.SetDestination(target.position);
+        m_agent.SetDestination(target.transform.position);
         m_agent.updateRotation = true;
         m_shouldQueryAdvanceBlocked = true;
-        // Query immediately so we don't even start moving
+        m_shouldQueryTargets = true;
         m_queryNow = true;
     }
 
@@ -287,16 +317,16 @@ public class MobAI : MonoBehaviour
         }
 
         // Go to combat if we are close enough
-        if ((target.position - transform.position).sqrMagnitude < (m_attackRange.y * m_attackRange.y))
+        if ((target.transform.position - transform.position).sqrMagnitude < (m_attackRange.y * m_attackRange.y))
         {
             m_nextState = State.CombatIdle;
             return;
         }
 
         // Update the navigation path if the current one is too outdated
-        if ((m_agent.destination - target.position).sqrMagnitude > (m_agent.radius * m_agent.radius))
+        if ((m_agent.destination - target.transform.position).sqrMagnitude > (m_agent.radius * m_agent.radius))
         {
-            m_agent.SetDestination(target.position);
+            m_agent.SetDestination(target.transform.position);
         }
     }
 
@@ -304,7 +334,8 @@ public class MobAI : MonoBehaviour
     {
         m_agent.ResetPath();
         m_agent.updateRotation = false;
-        m_shouldQueryAdvanceBlocked = true;
+        m_shouldQueryAdvanceBlocked = false;
+        m_shouldQueryTargets = false;
     }
     #endregion
 
@@ -342,7 +373,7 @@ public class MobAI : MonoBehaviour
             return;
         }
 
-        var toTarget = target.position - transform.position;
+        var toTarget = target.transform.position - transform.position;
         var targetDistSq = toTarget.sqrMagnitude;
         if (targetDistSq > (m_attackRange.y * m_attackRange.y))
         {
@@ -387,9 +418,9 @@ public class MobAI : MonoBehaviour
             return;
         }
 
-        var fromTarget = (transform.position - target.position);
+        var fromTarget = (transform.position - target.transform.position);
         var distance = fromTarget.magnitude;
-        m_agent.velocity = (transform.position - target.position) / distance * m_agent.speed;
+        m_agent.velocity = (transform.position - target.transform.position) / distance * m_agent.speed;
 
         if (distance > m_attackRange.x)
             m_nextState = State.CombatIdle;

@@ -204,10 +204,12 @@ MonoBehaviour:
   m_animator: {fileID: 0}
   m_targetting: {fileID: 7333592835981510706}
   m_attackCollider: {fileID: 0}
+  m_sounds: {fileID: 0}
   m_attackRange: {x: 0, y: 1}
   m_attackCooldown: 2
   m_targetQueryRate: 60
-  m_state: 0
+  m_smallTargetDistance: 10
+  m_state: 8
 --- !u!136 &3680790464474105194
 CapsuleCollider:
   m_ObjectHideFlags: 0

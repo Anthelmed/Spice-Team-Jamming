@@ -14,7 +14,7 @@ namespace Mobs
         public MobAI prefab;
         public int amount = 1000;
 
-        public Transform target;
+        public Targetable target;
 
         private float Radius
         {
