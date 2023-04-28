@@ -68,6 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 1
   team: 1
+  ignore: 0
 --- !u!1001 &7082814781366103968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -174,7 +175,7 @@ PrefabInstance:
     - target: {fileID: 7304046562964798858, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
         type: 3}
       propertyPath: m_Acceleration
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7304046562964798858, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
         type: 3}
