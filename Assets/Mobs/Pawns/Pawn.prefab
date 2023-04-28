@@ -78,13 +78,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3138952457350015010, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
         type: 3}
+      propertyPath: m_attackRange.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3138952457350015010, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
+        type: 3}
       propertyPath: m_attackCollider
       value: 
       objectReference: {fileID: 6045148717642154075}
     - target: {fileID: 5891282415284875353, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5891282415284875353, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
         type: 3}
@@ -139,7 +144,7 @@ PrefabInstance:
     - target: {fileID: 6886374805259099623, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
         type: 3}
       propertyPath: m_Name
-      value: Pawn Variant
+      value: Pawn
       objectReference: {fileID: 0}
     - target: {fileID: 7304046562964798858, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
         type: 3}
