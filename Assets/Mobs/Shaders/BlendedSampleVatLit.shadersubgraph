@@ -634,7 +634,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "22e64be0de784d94b764392eba6d2d67",
     "m_Id": 0,
-    "m_DisplayName": "Vector1",
+    "m_DisplayName": "VertexID",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -1000,10 +1000,10 @@
     "m_Guid": {
         "m_GuidSerialized": "d4f58b53-9b75-4e8a-947e-967d6fd5ee25"
     },
-    "m_Name": "Vector1",
+    "m_Name": "VertexID",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Vector1",
-    "m_DefaultReferenceName": "_Vector1",
+    "m_RefNameGeneratedByDisplayName": "VertexID",
+    "m_DefaultReferenceName": "_VertexID",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -1913,10 +1913,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -584.999755859375,
-            "y": -342.99993896484377,
-            "width": 0.0,
-            "height": 0.0
+            "x": -673.3333740234375,
+            "y": -398.66668701171877,
+            "width": 152.6666259765625,
+            "height": 36.0
         }
     },
     "m_Slots": [
@@ -1968,10 +1968,10 @@
     "m_Guid": {
         "m_GuidSerialized": "227a3dff-b997-4321-9471-494268e9561c"
     },
-    "m_Name": "Vector1 (1)",
+    "m_Name": "Time",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Vector1 (1)",
-    "m_DefaultReferenceName": "_Vector1_1",
+    "m_RefNameGeneratedByDisplayName": "Time",
+    "m_DefaultReferenceName": "_Time",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -2001,10 +2001,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -562.9998168945313,
-            "y": -238.99996948242188,
-            "width": 0.0,
-            "height": 0.0
+            "x": -689.3333740234375,
+            "y": -445.33331298828127,
+            "width": 116.6666259765625,
+            "height": 36.0
         }
     },
     "m_Slots": [
@@ -2366,7 +2366,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "f71e11e5fa764b4491c539148841ca44",
     "m_Id": 0,
-    "m_DisplayName": "Vector1 (1)",
+    "m_DisplayName": "Time",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -2528,10 +2528,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -562.9998168945313,
-            "y": -208.99996948242188,
-            "width": 0.0,
-            "height": 0.0
+            "x": -705.3333740234375,
+            "y": -262.66668701171877,
+            "width": 132.6666259765625,
+            "height": 35.99998474121094
         }
     },
     "m_Slots": [

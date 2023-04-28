@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: dc36db07b0ec4ac46bcac5c995b60d81
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 99e4578b4f76c8d4bbfa50b223186c77, type: 3}
+  attackHitRange: {x: 0.25, y: 0.75}
+  animations:
+  - vertexVat: {fileID: 2800000, guid: df46d99826f303c47a178aca2f3cd0ea, type: 2}
+    normalVat: {fileID: 2800000, guid: a8a43bc18789aaa4ea2b20ef89ab619f, type: 2}
+    fps: 30
+    duration: 3.833333
+  - vertexVat: {fileID: 2800000, guid: fbeaedd7972907e4f85f122a844b8fb6, type: 2}
+    normalVat: {fileID: 2800000, guid: 13dc0518421fc624a84f98c18642f321, type: 2}
+    fps: 30
+    duration: 0.9583334
+  - vertexVat: {fileID: 2800000, guid: 7c71933f8a8fa1f4eb14581613777d20, type: 2}
+    normalVat: {fileID: 2800000, guid: 8f6fe2b2d7fa33840a9bfaf53fcccf90, type: 2}
+    fps: 30
+    duration: 2.25
+  - vertexVat: {fileID: 2800000, guid: 831e72ea2206d2d4c9e613072d42027d, type: 2}
+    normalVat: {fileID: 2800000, guid: c87745e51a585114d9eaa2cc9bd767f5, type: 2}
+    fps: 30
+    duration: 1.3333334
