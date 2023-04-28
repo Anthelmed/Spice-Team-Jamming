@@ -26,7 +26,7 @@ namespace DefaultNamespace.HealthSystem.Damageable
         public void TakeDamage(int _damage, Targetable.Team _team)
         {
             // Don't receive damage from allies
-            if (_team == team) return;
+            if (_team.HasFlag(team)) return;
 
             m_CurrentHealth -= _damage;
             if (m_CurrentHealth <= 0)

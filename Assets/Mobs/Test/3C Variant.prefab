@@ -47,6 +47,11 @@ PrefabInstance:
       propertyPath: team
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3789416798230594338, guid: eac1ae59bef618847b73c10b4d795403,
+        type: 3}
+      propertyPath: ignore
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4040588146406245546, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
       propertyPath: m_RootOrder
