@@ -14,7 +14,7 @@ public class MobGoToTargetState : MobAI.IMobState
     }
     public void Tick(MobAI.Data data)
     {
-        if (data.LeaderDistance > data.smallTargetDistance)
+        if (data.LeaderDistance > data.regroupDistance)
         {
             data.NextState = MobAI.State.Regroup;
             return;

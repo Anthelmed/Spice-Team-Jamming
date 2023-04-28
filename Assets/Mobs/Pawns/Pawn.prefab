@@ -97,6 +97,11 @@ PrefabInstance:
       propertyPath: m_data.attackCollider
       value: 
       objectReference: {fileID: 6045148717642154075}
+    - target: {fileID: 3138952457350015010, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
+        type: 3}
+      propertyPath: m_data.regroupDistance
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4286957307657902224, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
         type: 3}
       propertyPath: m_OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Mode

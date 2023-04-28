@@ -30,6 +30,7 @@ public class MobAI : MonoBehaviour
         public float attackCooldown = 2f;
         public int targetQueryRate = 60;
         public float smallTargetDistance = 10f;
+        public float regroupDistance = 5f;
 
         [Header("Behaviour toggles")]
         public bool huntMainTargets = false;

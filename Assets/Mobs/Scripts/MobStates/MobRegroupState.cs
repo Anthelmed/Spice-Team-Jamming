@@ -26,7 +26,7 @@ public class MobRegroupState : MobAI.IMobState
         }
 
         // Go to combat if we are close enough
-        if (data.LeaderDistance < data.smallTargetDistance * 0.5f)
+        if (data.LeaderDistance < data.regroupDistance * 0.5f)
         {
             data.NextState = MobAI.State.Idle;
             return;
