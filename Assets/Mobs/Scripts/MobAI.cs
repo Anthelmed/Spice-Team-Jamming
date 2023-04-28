@@ -1,3 +1,4 @@
+using DefaultNamespace.Audio;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ public class MobAI : MonoBehaviour
     [SerializeField] private AnimationDriver m_animator;
     [SerializeField] private Targetable m_targetting;
     [SerializeField] private Collider m_attackCollider;
+    [SerializeField] private PlayerSounds m_sounds;
 
     [Header("Parameters")]
     [SerializeField] private Vector2 m_attackRange = Vector2.up;
@@ -403,6 +405,7 @@ public class MobAI : MonoBehaviour
     private void Attack_Enter()
     {
         m_animator.TriggerAttack();
+        if (m_sounds) m_sounds.PlayAttackSound();
     }
 
     private void Attack_Update()
@@ -425,6 +428,7 @@ public class MobAI : MonoBehaviour
     private void Hit_Enter()
     {
         m_animator.TriggerHit();
+        if (m_sounds) m_sounds.PlayDamageSound();
     }
 
     private void Hit_Update()
@@ -438,6 +442,7 @@ public class MobAI : MonoBehaviour
     private void Death_Enter()
     {
         m_animator.TriggerDeath();
+        if (m_sounds) m_sounds.PlayDeathSound();
     }
 
     private void Death_Update()
