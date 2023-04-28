@@ -29,6 +29,9 @@ public class MobAI : MonoBehaviour
         public int targetQueryRate = 60;
         public float smallTargetDistance = 10f;
 
+        [Header("Behaviour toggles")]
+        public bool prioritizeMainTargets = false;
+
         private Targetable m_target;
         public Targetable Target { get => m_target; 
             set
@@ -207,7 +210,13 @@ public class MobAI : MonoBehaviour
         {
             // Try to get enemies in range
             m_data.Target = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out _, ~m_data.targetting.team, 
-                minPriority: Targetable.Priority.Medium);
+                minPriority: m_data.prioritizeMainTargets ? Targetable.Priority.High : Targetable.Priority.Medium);
+
+            if (!m_data.Target && m_data.prioritizeMainTargets)
+            {
+                m_data.Target = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out _, ~m_data.targetting.team,
+                    maxPriority: Targetable.Priority.Medium, minPriority: Targetable.Priority.Medium);
+            }
 
             // As a backup, find vegetation to burn :devil:
             if (!m_data.Target)
