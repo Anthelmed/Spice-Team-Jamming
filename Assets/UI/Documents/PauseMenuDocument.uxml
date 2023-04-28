@@ -3,7 +3,7 @@
     <Style src="project://database/Assets/UI/Styles/PauseMenuStyle.uss?fileID=7433441132597879392&amp;guid=3c9198b01f2096b499fd6f97d0c48542&amp;type=3#PauseMenuStyle" />
     <ui:VisualElement name="PauseMenu" class="main-element auto-reference">
         <ui:VisualElement name="Overlay" />
-        <ui:VisualElement name="PauseMenuTitle" class="title">
+        <ui:VisualElement name="PauseMenuTitle" class="title auto-reference">
             <ui:Label tabindex="-1" text="Paused" display-tooltip-when-elided="true" name="PauseMenuTitleLabel" class="title-label" />
         </ui:VisualElement>
         <ui:VisualElement name="PauseMenuButtons">

@@ -3,24 +3,24 @@
     <Style src="project://database/Assets/UI/Styles/LevelSelectionStyle.uss?fileID=7433441132597879392&amp;guid=19ab89a4b2c2b5749bfaaf1eae8406c2&amp;type=3#LevelSelectionStyle" />
     <ui:VisualElement name="LevelSelection" class="main-element auto-reference" style="top: -1px; right: 0; left: 0; bottom: 2px;">
         <ui:VisualElement name="Overlay" />
-        <ui:VisualElement name="LevelSelectionTitle" class="title">
+        <ui:VisualElement name="LevelSelectionTitle" class="title auto-reference">
             <ui:Label tabindex="-1" text="Level Selection" display-tooltip-when-elided="true" name="LevelSelectionTitleLabel" class="title-label" />
         </ui:VisualElement>
         <ui:VisualElement name="LevelSelectionActionHelpers" class="action-helpers">
-            <ui:VisualElement name="LevelSelectionActionHelperSelect" class="action-helper">
+            <ui:VisualElement name="LevelSelectionActionHelperSelect" class="action-helper auto-reference">
                 <ui:VisualElement name="LevelSelectionActionHelperSelectIcon" class="action-helper-icon">
                     <ui:Label tabindex="-1" text="A" display-tooltip-when-elided="true" name="LevelSelectionActionHelperSelectIconLabel" class="action-helper-icon-label" />
                 </ui:VisualElement>
                 <ui:Label tabindex="-1" text="Select" display-tooltip-when-elided="true" name="LevelSelectionActionHelperSelectLabel" class="action-helper-label" />
             </ui:VisualElement>
-            <ui:VisualElement name="LevelSelectionActionHelperBack" class="action-helper">
+            <ui:VisualElement name="LevelSelectionActionHelperBack" class="action-helper auto-reference">
                 <ui:VisualElement name="LevelSelectionActionHelperBackIcon" class="action-helper-icon">
                     <ui:Label tabindex="-1" text="B" display-tooltip-when-elided="true" name="LevelSelectionActionHelperBackIconLabel" class="action-helper-icon-label" />
                 </ui:VisualElement>
                 <ui:Label tabindex="-1" text="Back" display-tooltip-when-elided="true" name="LevelSelectionActionHelperBackLabel" class="action-helper-label" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="LevelSelectionInfo">
+        <ui:VisualElement name="LevelSelectionInfo" class="auto-reference">
             <ui:Label tabindex="-1" text="Level Info" display-tooltip-when-elided="true" name="LevelSelectionInfoSubTitle" class="sub-title" />
         </ui:VisualElement>
     </ui:VisualElement>

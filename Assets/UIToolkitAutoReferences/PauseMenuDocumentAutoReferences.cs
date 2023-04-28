@@ -18,6 +18,7 @@ namespace UIToolkitAutoReferences
 			uiDocument.rootVisualElement;
 
 		private VisualElement _pauseMenu;
+		private VisualElement _pauseMenuTitle;
 		private Button _pauseMenuButtonResume;
 		private Button _pauseMenuButtonSettings;
 		private Button _pauseMenuButtonMainMenu;
@@ -25,6 +26,8 @@ namespace UIToolkitAutoReferences
 
 		public VisualElement PauseMenu => _pauseMenu ??=
 			RootVisualElement.Q<VisualElement>("PauseMenu");
+		public VisualElement PauseMenuTitle => _pauseMenuTitle ??=
+			RootVisualElement.Q<VisualElement>("PauseMenuTitle");
 		public Button PauseMenuButtonResume => _pauseMenuButtonResume ??=
 			RootVisualElement.Q<Button>("PauseMenuButtonResume");
 		public Button PauseMenuButtonSettings => _pauseMenuButtonSettings ??=

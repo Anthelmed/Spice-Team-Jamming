@@ -1,89 +1,57 @@
-﻿using System;
-using UIToolkitAutoReferences;
+﻿using UIToolkitAutoReferences;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.UIElements.Experimental;
 
 namespace SpiceTeamJamming.UI
 {
-	public class UIPauseMenu : MonoBehaviour
+	public class UIPauseMenu : UIGeneric
 	{
+		[Space]
 		[SerializeField] private GameManager gameManager;
 		[SerializeField] private PauseMenuDocumentAutoReferences elementsReferences;
+		[SerializeField] private UISettingsMenu settingsMenu;
 
-		[Header("Colors")] 
-		[SerializeField] private Color baseColorButton;
-		[SerializeField] private Color hoverColorButton;
-
-		private Button[] _buttons;
-		private UIButtonManipulator[] _buttonManipulators;
+		protected override VisualElement MainElement => elementsReferences.PauseMenu;
 		
-		private void Awake()
-		{
-			UIAnimationsUtils.FadeOut(elementsReferences.PauseMenu, 0, Easing.Linear);
-
-			_buttons = new[]
-			{
-				elementsReferences.PauseMenuButtonResume,
-				elementsReferences.PauseMenuButtonSettings,
-				elementsReferences.PauseMenuButtonMainMenu,
-				elementsReferences.PauseMenuButtonQuit
-			};
-			_buttonManipulators = new UIButtonManipulator[_buttons.Length];
-		}
-
 		private void OnEnable()
 		{
-			//gameManager.pauseScreenVisibilityEvent += OnPauseScreenVisibilityChanged;
+			//Bind OnVisibilityChanged;
 			
 			elementsReferences.PauseMenuButtonResume.clicked += OnResumeButtonPressed;
 			elementsReferences.PauseMenuButtonSettings.clicked += OnSettingsButtonPressed;
 			elementsReferences.PauseMenuButtonMainMenu.clicked += OnMainMenuButtonPressed;
 			elementsReferences.PauseMenuButtonQuit.clicked += OnQuitButtonPressed;
-
-			for (var index = 0; index < _buttons.Length; index++)
+			
+			InitializeButtonsManipulators(new[]
 			{
-				var button = _buttons[index];
-				var buttonManipulator = new UIButtonManipulator(button, baseColorButton, hoverColorButton);
-				
-				button.AddManipulator(buttonManipulator);
-				_buttonManipulators[index] = buttonManipulator;
-			}
+				elementsReferences.PauseMenuButtonResume,
+				elementsReferences.PauseMenuButtonSettings,
+				elementsReferences.PauseMenuButtonMainMenu,
+				elementsReferences.PauseMenuButtonQuit
+			});
 		}
 		
 		private void OnDisable()
 		{
-			//gameManager.pauseScreenVisibilityEvent -= OnPauseScreenVisibilityChanged;
+			//Unbind OnVisibilityChanged;
 			
 			elementsReferences.PauseMenuButtonResume.clicked -= OnResumeButtonPressed;
 			elementsReferences.PauseMenuButtonSettings.clicked -= OnSettingsButtonPressed;
 			elementsReferences.PauseMenuButtonMainMenu.clicked -= OnMainMenuButtonPressed;
 			elementsReferences.PauseMenuButtonQuit.clicked -= OnQuitButtonPressed;
-			
-			for (var index = 0; index < _buttons.Length; index++)
-			{
-				var button = _buttons[index];
-				
-				button.RemoveManipulator(_buttonManipulators[index]);
-			}
-		}
 
-		private void OnPauseScreenVisibilityChanged(bool value)
-		{
-			if (value)
-				Show();
-			else
-				Hide();
+			ClearButtonsManipulators();
 		}
 		
 		private void OnResumeButtonPressed()
 		{
-			//gameManager.TogglePause();
+			
 		}
 		
 		private void OnSettingsButtonPressed()
 		{
-			
+			Hide();
+			settingsMenu.Show();
 		}
 		
 		private void OnMainMenuButtonPressed()
@@ -95,17 +63,14 @@ namespace SpiceTeamJamming.UI
 		{
 			
 		}
-
-		[ContextMenu("Show")]
-		private void Show()
+		
+		protected override void DisplaceElementsRandomly()
 		{
-			UIAnimationsUtils.FadeIn(elementsReferences.PauseMenu, 300, Easing.InOutQuad);
-		}
-
-		[ContextMenu("Hide")]
-		private void Hide()
-		{
-			UIAnimationsUtils.FadeOut(elementsReferences.PauseMenu, 150, Easing.InOutQuad);
+			DisplaceElementRandomly(elementsReferences.PauseMenuTitle);
+			DisplaceElementRandomly(elementsReferences.PauseMenuButtonResume);
+			DisplaceElementRandomly(elementsReferences.PauseMenuButtonSettings);
+			DisplaceElementRandomly(elementsReferences.PauseMenuButtonMainMenu);
+			DisplaceElementRandomly(elementsReferences.PauseMenuButtonQuit);
 		}
 	}
 }

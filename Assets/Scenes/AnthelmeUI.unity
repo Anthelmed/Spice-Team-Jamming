@@ -123,6 +123,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &208870954 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9012453062371259684, guid: c75a351953cde87498bbc7fffa763b78,
+    type: 3}
+  m_PrefabInstance: {fileID: 1320811684}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 228a3d8aef6fbe0419d127552e77daaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &292237363
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,18 +242,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6242465510847268600, guid: c75a351953cde87498bbc7fffa763b78,
         type: 3}
+      propertyPath: minMaxAngle.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242465510847268600, guid: c75a351953cde87498bbc7fffa763b78,
+        type: 3}
+      propertyPath: minMaxAngle.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242465510847268600, guid: c75a351953cde87498bbc7fffa763b78,
+        type: 3}
+      propertyPath: minMaxScale.x
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242465510847268600, guid: c75a351953cde87498bbc7fffa763b78,
+        type: 3}
+      propertyPath: minMaxScale.y
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242465510847268600, guid: c75a351953cde87498bbc7fffa763b78,
+        type: 3}
       propertyPath: baseColorButton.a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6242465510847268600, guid: c75a351953cde87498bbc7fffa763b78,
         type: 3}
       propertyPath: baseColorButton.b
-      value: 0.64705884
+      value: 0.6470588
       objectReference: {fileID: 0}
     - target: {fileID: 6242465510847268600, guid: c75a351953cde87498bbc7fffa763b78,
         type: 3}
       propertyPath: baseColorButton.g
-      value: 0.85882354
+      value: 0.8588235
       objectReference: {fileID: 0}
     - target: {fileID: 6242465510847268600, guid: c75a351953cde87498bbc7fffa763b78,
         type: 3}
@@ -250,13 +282,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6242465510847268600, guid: c75a351953cde87498bbc7fffa763b78,
         type: 3}
+      propertyPath: elementsReferences
+      value: 
+      objectReference: {fileID: 208870954}
+    - target: {fileID: 6242465510847268600, guid: c75a351953cde87498bbc7fffa763b78,
+        type: 3}
       propertyPath: hoverColorButton.a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6242465510847268600, guid: c75a351953cde87498bbc7fffa763b78,
         type: 3}
       propertyPath: hoverColorButton.b
-      value: 0.57254905
+      value: 0.572549
       objectReference: {fileID: 0}
     - target: {fileID: 6242465510847268600, guid: c75a351953cde87498bbc7fffa763b78,
         type: 3}
@@ -266,7 +303,17 @@ PrefabInstance:
     - target: {fileID: 6242465510847268600, guid: c75a351953cde87498bbc7fffa763b78,
         type: 3}
       propertyPath: hoverColorButton.r
-      value: 0.4627451
+      value: 0.5254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242465510847268600, guid: c75a351953cde87498bbc7fffa763b78,
+        type: 3}
+      propertyPath: minMaxTranslation.x
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242465510847268600, guid: c75a351953cde87498bbc7fffa763b78,
+        type: 3}
+      propertyPath: minMaxTranslation.y
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7445841688588465937, guid: c75a351953cde87498bbc7fffa763b78,
         type: 3}

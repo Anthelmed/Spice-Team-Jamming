@@ -18,9 +18,18 @@ namespace UIToolkitAutoReferences
 			uiDocument.rootVisualElement;
 
 		private VisualElement _map;
+		private VisualElement _levelSelectionActionHelperSelect;
+		private VisualElement _levelSelectionActionHelperBack;
+		private VisualElement _mapTileInfo;
 
 		public VisualElement Map => _map ??=
 			RootVisualElement.Q<VisualElement>("Map");
+		public VisualElement LevelSelectionActionHelperSelect => _levelSelectionActionHelperSelect ??=
+			RootVisualElement.Q<VisualElement>("LevelSelectionActionHelperSelect");
+		public VisualElement LevelSelectionActionHelperBack => _levelSelectionActionHelperBack ??=
+			RootVisualElement.Q<VisualElement>("LevelSelectionActionHelperBack");
+		public VisualElement MapTileInfo => _mapTileInfo ??=
+			RootVisualElement.Q<VisualElement>("MapTileInfo");
 
 		private void Start()
 		{

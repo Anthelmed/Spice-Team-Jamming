@@ -3,7 +3,7 @@
     <Style src="project://database/Assets/UI/Styles/SettingsMenuStyle.uss?fileID=7433441132597879392&amp;guid=322427022c814ca44acde71ae90b97c0&amp;type=3#SettingsMenuStyle" />
     <ui:VisualElement name="SettingsMenu" class="main-element auto-reference">
         <ui:VisualElement name="Overlay" />
-        <ui:VisualElement name="SettingsMenuTitle" class="title">
+        <ui:VisualElement name="SettingsMenuTitle" class="title auto-reference">
             <ui:Label tabindex="-1" text="Settings" display-tooltip-when-elided="true" name="SettingsMenuTitleLabel" class="title-label" />
         </ui:VisualElement>
         <ui:VisualElement name="SettingsMenuButtons">
@@ -13,13 +13,13 @@
             <ui:Button name="SettingsMenuButtonAccessibility" text="Accessibility" class="button auto-reference" />
         </ui:VisualElement>
         <ui:VisualElement name="SettingsMenuActionHelpers" class="action-helpers">
-            <ui:VisualElement name="SettingsMenuActionHelperSelect" class="action-helper">
+            <ui:VisualElement name="SettingsMenuActionHelperSelect" class="action-helper auto-reference">
                 <ui:VisualElement name="SettingsMenuActionHelperSelectIcon" class="action-helper-icon">
                     <ui:Label tabindex="-1" text="A" display-tooltip-when-elided="true" name="SettingsMenuActionHelperSelectIconLabel" class="action-helper-icon-label" />
                 </ui:VisualElement>
                 <ui:Label tabindex="-1" text="Select" display-tooltip-when-elided="true" name="SettingsMenuActionHelperSelectLabel" class="action-helper-label" />
             </ui:VisualElement>
-            <ui:VisualElement name="SettingsMenuActionHelperBack" class="action-helper">
+            <ui:VisualElement name="SettingsMenuActionHelperBack" class="action-helper auto-reference">
                 <ui:VisualElement name="SettingsMenuActionHelperBackIcon" class="action-helper-icon">
                     <ui:Label tabindex="-1" text="B" display-tooltip-when-elided="true" name="SettingsMenuActionHelperBackIconLabel" class="action-helper-icon-label" />
                 </ui:VisualElement>

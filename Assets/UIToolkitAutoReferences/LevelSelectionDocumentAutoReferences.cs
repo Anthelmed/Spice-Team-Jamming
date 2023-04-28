@@ -18,9 +18,21 @@ namespace UIToolkitAutoReferences
 			uiDocument.rootVisualElement;
 
 		private VisualElement _levelSelection;
+		private VisualElement _levelSelectionTitle;
+		private VisualElement _levelSelectionActionHelperSelect;
+		private VisualElement _levelSelectionActionHelperBack;
+		private VisualElement _levelSelectionInfo;
 
 		public VisualElement LevelSelection => _levelSelection ??=
 			RootVisualElement.Q<VisualElement>("LevelSelection");
+		public VisualElement LevelSelectionTitle => _levelSelectionTitle ??=
+			RootVisualElement.Q<VisualElement>("LevelSelectionTitle");
+		public VisualElement LevelSelectionActionHelperSelect => _levelSelectionActionHelperSelect ??=
+			RootVisualElement.Q<VisualElement>("LevelSelectionActionHelperSelect");
+		public VisualElement LevelSelectionActionHelperBack => _levelSelectionActionHelperBack ??=
+			RootVisualElement.Q<VisualElement>("LevelSelectionActionHelperBack");
+		public VisualElement LevelSelectionInfo => _levelSelectionInfo ??=
+			RootVisualElement.Q<VisualElement>("LevelSelectionInfo");
 
 		private void Start()
 		{

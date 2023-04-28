@@ -38,7 +38,7 @@
     height: 128px;
     position: absolute;
     left: 100px;
-    top: 50px;
+    top: 100px;
     background-image: url('project://database/Assets/UI/Textures/Ribbon.png?fileID=2800000&guid=c1bbd763c7324d344a631533f712280d&type=3#Ribbon');
     justify-content: center;
     align-items: center;
@@ -83,19 +83,6 @@
     border-top-width: 0;
     border-bottom-width: 0;
     -unity-background-image-tint-color: var(--button-background-tint);
-    scale: 1 1;
-    transition-property: all, scale;
-    transition-duration: 0s, 150ms;
-    transition-timing-function: ease, ease-in-out;
-    transition-delay: 0s, 0s;
-}
-
-.button:hover {
-    scale: 1.025 1.025;
-    transition-property: all, scale;
-    transition-duration: 0s, 300ms;
-    transition-timing-function: ease, ease-in-out;
-    transition-delay: 0s, 0s;
 }
 
 .action-helpers {
