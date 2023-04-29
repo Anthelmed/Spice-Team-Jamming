@@ -11,7 +11,7 @@ namespace SpiceTeamJamming.UI
 
 		protected override VisualElement MainElement => elementsReferences.PauseMenu;
 		protected override UIRouter.RouteType Route => UIRouter.RouteType.Pause;
-		protected override VisualElement BackButton => elementsReferences.ActionHelperBack;
+		protected override Button BackButton => elementsReferences.ActionHelperBack;
 		
 		protected override void OnEnable()
 		{

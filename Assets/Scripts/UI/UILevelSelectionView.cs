@@ -14,7 +14,7 @@ namespace SpiceTeamJamming.UI
 		
 		protected override VisualElement MainElement => elementsReferences.LevelSelection;
 		protected override UIRouter.RouteType Route => UIRouter.RouteType.LevelSelection;
-		protected override VisualElement BackButton => elementsReferences.ActionHelperBack;
+		protected override Button BackButton => elementsReferences.ActionHelperBack;
 		
 		protected override void OnEnable()
 		{

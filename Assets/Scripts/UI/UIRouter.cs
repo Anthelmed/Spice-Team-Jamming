@@ -22,7 +22,7 @@ namespace SpiceTeamJamming.UI
 
         private static readonly Dictionary<RouteType, UIView> _routeToViewBridge = new();
 
-        private static Stack<RouteType> _routesHistory = new ();
+        private static readonly Stack<RouteType> _routesHistoric = new ();
         private static RouteType _currentRoute = RouteType.Main;
 
         public static RouteType CurrentRoute => _currentRoute;
@@ -43,9 +43,12 @@ namespace SpiceTeamJamming.UI
             _routeToViewBridge.Remove(route);
         }
 
-        public static void GoToRoute(RouteType route)
+        public static void GoToRoute(RouteType route, bool saveToHistoric = true)
         {
             if (!_routeToViewBridge.ContainsKey(route)) return;
+
+            var leavingRoute = _currentRoute;
+            var enteringRoute = route;
             
             var leavingView = _routeToViewBridge[_currentRoute];
             var enteringView = _routeToViewBridge[route];
@@ -53,18 +56,20 @@ namespace SpiceTeamJamming.UI
             leavingView.Hide();
             enteringView.Show();
             
-            _routesHistory.Push(_currentRoute);
+            if (saveToHistoric)
+                _routesHistoric.Push(_currentRoute);
+            
             _currentRoute = route;
             
-            RouteChangeEvent?.Invoke(_routesHistory.Peek(), _currentRoute);
+            RouteChangeEvent?.Invoke(leavingRoute, enteringRoute);
         }
 
         public static void GoToPreviousRoute()
         {
-            if (_routesHistory.Count == 0) return;
+            if (_routesHistoric.Count == 0) return;
         
-            var previousRoute = _routesHistory.Pop();
-            GoToRoute(previousRoute);
+            var previousRoute = _routesHistoric.Pop();
+            GoToRoute(previousRoute, false);
         }
     }
 }

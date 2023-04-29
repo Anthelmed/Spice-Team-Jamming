@@ -21,6 +21,7 @@ namespace UIToolkitAutoReferences
 		private VisualElement _actionHelperSelect;
 		private Button _actionHelperPause;
 		private VisualElement _mapTileInfo;
+		private VisualElement _mapBalanceIndicator;
 
 		public VisualElement Map => _map ??=
 			RootVisualElement.Q<VisualElement>("Map");
@@ -30,6 +31,8 @@ namespace UIToolkitAutoReferences
 			RootVisualElement.Q<Button>("ActionHelperPause");
 		public VisualElement MapTileInfo => _mapTileInfo ??=
 			RootVisualElement.Q<VisualElement>("MapTileInfo");
+		public VisualElement MapBalanceIndicator => _mapBalanceIndicator ??=
+			RootVisualElement.Q<VisualElement>("MapBalanceIndicator");
 
 		private void Start()
 		{

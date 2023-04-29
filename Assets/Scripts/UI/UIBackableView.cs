@@ -9,20 +9,20 @@ namespace SpiceTeamJamming.UI
 	{
 		[SerializeField] private InputActionReference backInputAction;
 
-		protected abstract VisualElement BackButton { get; }
+		protected abstract Button BackButton { get; }
 		
 		protected virtual void OnEnable()
 		{
 			backInputAction.action.Enable();
 			backInputAction.action.performed += OnBackActionPerformed;
-			BackButton.RegisterCallback<PointerUpEvent>(OnPointerReleased);
+			BackButton.clicked += OnBackButtonPressed;
 		}
 		
 		protected virtual void OnDisable()
 		{
 			backInputAction.action.Disable();
 			backInputAction.action.performed -= OnBackActionPerformed;
-			BackButton.UnregisterCallback<PointerUpEvent>(OnPointerReleased);
+			BackButton.clicked -= OnBackButtonPressed;
 		}
 
 		private void OnBackActionPerformed(InputAction.CallbackContext _)
@@ -30,7 +30,7 @@ namespace SpiceTeamJamming.UI
 			GoBack();
 		}
 
-		private void OnPointerReleased(PointerUpEvent _)
+		private void OnBackButtonPressed()
 		{
 			GoBack();
 		}
