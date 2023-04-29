@@ -86,7 +86,7 @@ namespace Units
 
         public override void TriggerAttack()
         {
-            if (m_sounds) m_sounds.PlayAttackSound();
+            if (m_sounds && m_unit.Visible) m_sounds.PlayAttackSound();
 
             m_specialAnimationEnds = Time.timeSinceLevelLoad + animationData.animations[(int)AnimationID.Attack].x - transitionDuration;
             SwitchAnimation(AnimationID.Attack);
@@ -94,7 +94,7 @@ namespace Units
 
         public override void TriggerDeath()
         {
-            if (m_sounds) m_sounds.PlayDeathSound();
+            if (m_sounds && m_unit.Visible) m_sounds.PlayDeathSound();
 
             m_specialAnimationEnds = Time.timeSinceLevelLoad + animationData.animations[(int)AnimationID.Hit].x * 0.5f - transitionDuration;
             SwitchAnimation(AnimationID.Hit);
@@ -102,7 +102,7 @@ namespace Units
 
         public override void TriggerHit()
         {
-            if (m_sounds) m_sounds.PlayDamageSound();
+            if (m_sounds && m_unit.Visible) m_sounds.PlayDamageSound();
 
             m_specialAnimationEnds = Time.timeSinceLevelLoad + animationData.animations[(int)AnimationID.Hit].x - transitionDuration;
             SwitchAnimation(AnimationID.Hit);
@@ -110,7 +110,7 @@ namespace Units
 
         public override void TriggerRangedAttack()
         {
-            if (m_sounds) m_sounds.PlayAttackSound();
+            if (m_sounds && m_unit.Visible) m_sounds.PlayAttackSound();
 
             m_specialAnimationEnds = Time.timeSinceLevelLoad + animationData.animations[(int)AnimationID.Attack].x - transitionDuration;
             SwitchAnimation(AnimationID.Attack);

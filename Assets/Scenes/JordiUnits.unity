@@ -1659,7 +1659,7 @@ PrefabInstance:
     - target: {fileID: 3359370446990772076, guid: e0a47cc0c5f1c824188f477f4ab82985,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.880966
+      value: 8.13
       objectReference: {fileID: 0}
     - target: {fileID: 3359370446990772076, guid: e0a47cc0c5f1c824188f477f4ab82985,
         type: 3}
@@ -1669,7 +1669,7 @@ PrefabInstance:
     - target: {fileID: 3359370446990772076, guid: e0a47cc0c5f1c824188f477f4ab82985,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.6326904
+      value: 12.69
       objectReference: {fileID: 0}
     - target: {fileID: 3359370446990772076, guid: e0a47cc0c5f1c824188f477f4ab82985,
         type: 3}
@@ -1720,6 +1720,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: IcePawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421825497093091036, guid: e0a47cc0c5f1c824188f477f4ab82985,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

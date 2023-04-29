@@ -13,6 +13,7 @@ namespace Units
         {
             public Perception perception;
             public Locomotion locomotion;
+            public MobVisuals visuals;
 
             public State NextState { get; set; }
         }
@@ -72,6 +73,7 @@ namespace Units
         {
             m_data.perception = GetComponentInChildren<Perception>();
             m_data.locomotion = GetComponentInChildren<Locomotion>();
+            m_data.visuals = GetComponentInChildren<MobVisuals>();
         }
 
         private void Reset()

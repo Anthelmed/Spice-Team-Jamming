@@ -8,6 +8,7 @@ namespace Units
     {
         public void Enter(Mob.Data data)
         {
+            if (data.visuals) data.visuals.TriggerHit();
         }
 
         public void Exit(Mob.Data data)
@@ -16,6 +17,8 @@ namespace Units
 
         public void Tick(Mob.Data data)
         {
+            if (!data.visuals || data.visuals.HasAnimationFinished())
+                data.NextState = Mob.State.CombatIdle;
         }
     }
 }
