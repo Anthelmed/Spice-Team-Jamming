@@ -21,7 +21,8 @@ namespace DefaultNamespace.Audio
         private void Start()
         {
             if (AudioManager.instance != null) m_AudioManager = AudioManager.instance;
-            vegetation.OnTreeStateChanged += HandleTreeStateChange;
+            if (vegetation != null) vegetation.OnTreeStateChanged += HandleTreeStateChange;
+
         }
 
         void HandleTreeStateChange(Targetable.Team team)
