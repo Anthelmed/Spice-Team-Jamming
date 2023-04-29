@@ -12,7 +12,7 @@ namespace SpiceTeamJamming.UI
 
 		protected override VisualElement MainElement => elementsReferences.SettingsMenu;
 		protected override UIRouter.RouteType Route => UIRouter.RouteType.Settings;
-		protected override VisualElement BackButton => elementsReferences.ActionHelperBack;
+		protected override Button BackButton => elementsReferences.ActionHelperBack;
 		
 		protected override void OnEnable()
 		{
@@ -75,7 +75,5 @@ namespace SpiceTeamJamming.UI
 			DisplaceElementRandomly(elementsReferences.ActionHelperSelect);
 			DisplaceElementRandomly(elementsReferences.ActionHelperBack);
 		}
-		
-		
 	}
 }

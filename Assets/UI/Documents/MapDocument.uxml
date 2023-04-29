@@ -12,6 +12,6 @@
         <ui:VisualElement name="MapTileInfo" class="auto-reference">
             <ui:Label tabindex="-1" text="Tile Info" display-tooltip-when-elided="true" name="MapTileInfoSubTitle" class="sub-title" />
         </ui:VisualElement>
-        <ui:VisualElement name="MapBalanceIndicator" />
+        <ui:VisualElement name="MapBalanceIndicator" class="auto-reference" />
     </ui:VisualElement>
 </ui:UXML>
