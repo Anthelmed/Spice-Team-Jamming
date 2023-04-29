@@ -20,7 +20,7 @@ namespace Units
         protected override void OnValidate()
         {
             base.OnValidate();
-            if (!m_sounds) m_sounds = transform.parent.gameObject.GetComponentInChildren<MobSounds>();
+            if (!m_sounds && transform.parent) m_sounds = transform.parent.gameObject.GetComponentInChildren<MobSounds>();
         }
     }
 }

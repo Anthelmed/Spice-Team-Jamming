@@ -10,7 +10,7 @@ namespace Units
         public VatData animationData;
         public float transitionDuration = 0.25f;
 
-        [SerializeField] private MeshRenderer m_renderer;
+        [HideInInspector] [SerializeField] private MeshRenderer m_renderer;
 
         private MaterialPropertyBlock m_mpb;
         private int m_currentAnimation = -1;
