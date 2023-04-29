@@ -17,12 +17,11 @@ namespace _3C.Player
         [SerializeField] private float m_MovementDamping;
         [SerializeField] private float m_RotationDamping;
 
-        // [Header("Animation")]
-        // [AnimatorParam("m_Animator")]
-        // [SerializeField] private int m_SpeedAnimatorParam;
-        // [AnimatorParam("m_Animator")]
-        // [SerializeField] private int m_MovementTriggerParam;
-        // [SerializeField] private Animator m_Animator;
+        [Header("Animation")]
+        [AnimatorParam("m_Animator")]
+        [SerializeField] private int m_SpeedAnimatorParam;
+        [SerializeField] private float m_AnimatorSpeedMultiplier;
+        [SerializeField] private Animator m_Animator;
 
         [HideInInspector]
         public Vector2 Movement;
@@ -59,7 +58,7 @@ namespace _3C.Player
 
             
             m_Rigidbody.velocity = CurrentWorldSpeed;
-            ChangeAnimatorSpeedParameter(m_CurrentMovement.magnitude);
+            ChangeAnimatorSpeedParameter(m_CurrentMovement.magnitude * m_AnimatorSpeedMultiplier);
 
             if (!IsLookingAtMovement) return;
             
@@ -76,7 +75,7 @@ namespace _3C.Player
 
         private void ChangeAnimatorSpeedParameter(float _value)
         {
-            //m_Animator?.SetFloat(m_SpeedAnimatorParam, _value);
+            m_Animator?.SetFloat(m_SpeedAnimatorParam, _value);
         }
 
         public override void StopState()
