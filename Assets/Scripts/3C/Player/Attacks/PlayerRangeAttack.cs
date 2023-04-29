@@ -51,7 +51,6 @@ namespace _3C.Player
         {
             m_StateHandler.OnAimingStateChanged(false);
             StateCleaning();
-            PostAttackCleaning();
         }
 
         private void StateCleaning()
@@ -66,16 +65,21 @@ namespace _3C.Player
         {
             if (inputType == InputType.AimCanceled)
             {
-                m_StateHandler.OnStateEnded();
                 TriggerAttack();
+                m_StateHandler.OnStateEnded();
                 //TODO: TriggerAttackAfterDelay
             }
         }
+        
+        
 
         private void TriggerAttack()
         {
             StateCleaning();
+            PostAttackCleaning();
             m_Damager.Damage = m_BaseDamage;
+            m_AttackHolder.transform.localPosition = Vector3.zero;
+            m_AttackHolder.transform.localRotation = Quaternion.identity;
             m_AttackHolder.SetParent(null, true);
             m_RangeWeaponMovement.TriggerWeaponMovement(m_AttackDuration, m_AttackAnimationCurve);
             foreach (var particleSystem in m_VFXToPlay)
@@ -94,9 +98,10 @@ namespace _3C.Player
 
         private void PostAttackCleaning()
         {
-            m_RangeWeaponMovement.transform.localPosition = Vector3.zero;
-            m_RangeWeaponMovement.transform.localRotation = Quaternion.identity;
-            m_AttackHolder.SetParent(m_Transform, true);
+            m_RangeWeaponMovement.StopWeaponMovement();
+            m_AttackHolder.SetParent(m_Transform, false);
+            m_AttackHolder.transform.localPosition = Vector3.zero;
+            m_AttackHolder.transform.localRotation = Quaternion.identity;
             foreach (var particleSystem in m_VFXToPlay)
             {
                 particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
