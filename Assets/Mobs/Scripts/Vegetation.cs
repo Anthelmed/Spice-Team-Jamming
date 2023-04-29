@@ -2,6 +2,7 @@ using DefaultNamespace.HealthSystem.Damageable;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(HealthHolder))]
 [RequireComponent(typeof(Targetable))]
@@ -12,6 +13,7 @@ public class Vegetation : MonoBehaviour
     [SerializeField] private Targetable m_targetable;
     [SerializeField] private HealthHolder m_health;
 
+    public event Action<Targetable.Team> OnTreeStateChanged = delegate { };
     private void Reset()
     {
         OnValidate();
@@ -35,16 +37,19 @@ public class Vegetation : MonoBehaviour
         {
             m_states.SetNatureState();
             m_targetable.CurrentTeam = Targetable.Team.Nature;
+            OnTreeStateChanged(Targetable.Team.Nature);
         }
         else if (enemyTeam.HasFlag(Targetable.Team.Fire))
         {
             m_states.SetBurntState();
             m_targetable.CurrentTeam = Targetable.Team.Fire;
+            OnTreeStateChanged(Targetable.Team.Fire);
         }
         else if (enemyTeam.HasFlag(Targetable.Team.Ice))
         {
             m_states.SetFrozenState();
             m_targetable.CurrentTeam = Targetable.Team.Ice;
+            OnTreeStateChanged(Targetable.Team.Ice);
         }
     }
 }
