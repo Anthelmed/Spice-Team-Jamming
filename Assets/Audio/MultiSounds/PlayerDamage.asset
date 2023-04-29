@@ -10,12 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a5344828a8dab247a92f2393448a6e2, type: 3}
-  m_Name: IceEnemyAttacks
+  m_Name: PlayerDamage
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: bdd01648da340224c81193c17be096be, type: 3}
-  - {fileID: 8300000, guid: 5f199528bbbf9f84a90fe56f6128daf3, type: 3}
-  - {fileID: 8300000, guid: 17194a0349feb37498f418b352da3f88, type: 3}
-  - {fileID: 8300000, guid: 3b082b8d029002a4181778226ed408be, type: 3}
-  hasCooldown: 1
-  coolDownTime: 0.1
+  - {fileID: 8300000, guid: 1c1a6671db0f9e541a8a6727a9218ae2, type: 3}
+  - {fileID: 8300000, guid: 22bea3a33fca90f42b7a0124b1022c3f, type: 3}
+  - {fileID: 8300000, guid: dff2886ee0af488419ba2b36efb39856, type: 3}
