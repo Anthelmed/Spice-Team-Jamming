@@ -73,10 +73,25 @@ PrefabInstance:
       propertyPath: m_immuneTo
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5727073914390734949, guid: 96355d43fe4bc5b4ab0e32e518173755,
+        type: 3}
+      propertyPath: m_debugColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727073914390734949, guid: 96355d43fe4bc5b4ab0e32e518173755,
+        type: 3}
+      propertyPath: m_debugColor.g
+      value: 0.90450716
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727073914390734949, guid: 96355d43fe4bc5b4ab0e32e518173755,
+        type: 3}
+      propertyPath: m_debugColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8562886529106873376, guid: 96355d43fe4bc5b4ab0e32e518173755,
         type: 3}
       propertyPath: m_Name
-      value: IcePawn Variant
+      value: IcePawn
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -84,7 +99,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3218894895242519952, guid: 96355d43fe4bc5b4ab0e32e518173755,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3410606429149553095}
+      addedObject: {fileID: 8229527392123311971}
     - targetCorrespondingSourceObject: {fileID: 3218894895242519952, guid: 96355d43fe4bc5b4ab0e32e518173755,
         type: 3}
       insertIndex: -1
@@ -170,13 +185,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b712e17d6d6947f48afa7862f796c98d, type: 3}
---- !u!4 &3410606429149553095 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3270112778466378555, guid: b712e17d6d6947f48afa7862f796c98d,
-    type: 3}
-  m_PrefabInstance: {fileID: 6869363480549332056}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8033825415099594644 stripped
+--- !u!114 &3610811939225076016 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7874772523520300392, guid: b712e17d6d6947f48afa7862f796c98d,
     type: 3}
@@ -188,6 +197,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ce2d1a7c610a343806c66d8fcd18d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &8229527392123311971 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3270112778466378555, guid: b712e17d6d6947f48afa7862f796c98d,
+    type: 3}
+  m_PrefabInstance: {fileID: 6869363480549332056}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7238645732175626219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -265,7 +280,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_sounds
       value: 
-      objectReference: {fileID: 8033825415099594644}
+      objectReference: {fileID: 3610811939225076016}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
