@@ -25,7 +25,7 @@ namespace Units
         public void Tick(Mob.Data data)
         {
             // TODO: If leader too far, Regroup
-            // TODO: If missing target, Idle
+            if (!data.perception || !data.perception.Target) data.NextState = Mob.State.Idle;
             // TODO: If close enough, fight
         }
     }
