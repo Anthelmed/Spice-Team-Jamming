@@ -20,6 +20,6 @@ namespace _3C.Player
         public Vector2 AimDirection  = Vector2.zero;
 
         public DumbFixedSizeStack<InputType> InputStack;
-        public bool IsUsingCursorPositionForAim;
+        public bool IsUsingCursorPositionForAim = true;
     }
 }
