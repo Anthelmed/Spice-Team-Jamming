@@ -22,7 +22,7 @@ namespace DefaultNamespace.Audio
         public void PlayAttackSound()
         {
             if (m_AudioManager == null) return;
-            m_AudioManager.PlayShuffledSound(attackOneSound, SFXCategory.mob, 0.05f, 0.05f);
+            m_AudioManager.PlayShuffledSound(attackOneSound, SFXCategory.mob, 0.15f, 0.15f);
         }
 
         public void PlayDashSound()
@@ -43,8 +43,8 @@ namespace DefaultNamespace.Audio
         }
         public void PlayDeathSound()
         {
-            if (m_AudioManager == null) return;
-            m_AudioManager.PlaySingleClip(deathSound, SFXCategory.mob, 0, 0);
+        //    if (m_AudioManager == null) return;
+          //  m_AudioManager.PlaySingleClip(deathSound, SFXCategory.mob, 0, 0);
         }
         public void PlayHealSound()
         {

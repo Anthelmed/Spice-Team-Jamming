@@ -34,12 +34,12 @@ namespace DefaultNamespace.Audio
         public void PlayRangeSound()
         {
             if (m_AudioManager == null) return;
-            m_AudioManager.PlaySingleClip(rangedSound, SFXCategory.player, 0.05f, 0.05f);
+            m_AudioManager.PlayShuffledSound(rangedSound, SFXCategory.player, 0.05f, 0.05f);
         }
         public void PlayDamageSound()
         {
             if (m_AudioManager == null) return;
-            m_AudioManager.PlaySingleClip(damageSound, SFXCategory.player, 0.1f, 0.1f);
+            m_AudioManager.PlayShuffledSound(damageSound, SFXCategory.player, 0.15f, 0.05f);
         }
         public void PlayDeathSound()
         {
