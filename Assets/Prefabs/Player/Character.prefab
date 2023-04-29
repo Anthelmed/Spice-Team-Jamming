@@ -156,6 +156,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     m_PostDashDelay: 0
+    m_VFX: {fileID: 2717888372220823215}
   m_PlayerMeleeAttack:
     m_AttacksSettings:
     - InputWaitDelay: 0.3
@@ -547,6 +548,12 @@ PrefabInstance:
 --- !u!4 &1213797132289279288 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1450978355387112680, guid: 8abde405a98efe34181cf83be9595d1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 358791740936460752}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2717888372220823215 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2399660200085659519, guid: 8abde405a98efe34181cf83be9595d1e,
     type: 3}
   m_PrefabInstance: {fileID: 358791740936460752}
   m_PrefabAsset: {fileID: 0}
