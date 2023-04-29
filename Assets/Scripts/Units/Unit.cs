@@ -14,7 +14,7 @@ namespace Units
     }
 
     [SelectionBase]
-    public sealed class Unit : MonoBehaviour
+    public class Unit : MonoBehaviour
     {
         public enum Type
         {
