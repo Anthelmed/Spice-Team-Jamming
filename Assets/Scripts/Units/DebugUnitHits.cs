@@ -8,6 +8,10 @@ public class DebugUnitHits : MonoBehaviour
     public void LogHit(float damage, Unit other, Vector3 hitPosition)
     {
         var otherName = other ? other.name : "<null>";
-        Debug.Log($"{name}: {damage} points by {otherName} at {hitPosition}");
+        Debug.Log($"{name}: {damage} damage by {otherName} at {hitPosition}");
+    }
+    public void LogHeal(float damage)
+    {
+        Debug.Log($"{name}: {damage}");
     }
 }

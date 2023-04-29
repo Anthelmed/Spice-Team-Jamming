@@ -31,6 +31,7 @@ namespace Units
 
         [Header("Events")]
         public UnityEvent<float, Unit, Vector3> onHit;
+        public UnityEvent<float> onHeal;
 
         private float m_currentHealth;
 
@@ -40,6 +41,12 @@ namespace Units
 
             m_currentHealth -= damage;
             onHit?.Invoke(damage, other, hitPosition);
+        }
+
+        public void Heal(float amount)
+        {
+            m_currentHealth = Mathf.Min(m_maxHealth, m_currentHealth + amount);
+            onHeal.Invoke(amount);
         }
 
         private void Awake()

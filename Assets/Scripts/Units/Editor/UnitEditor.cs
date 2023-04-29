@@ -9,6 +9,7 @@ namespace Units
     public class UnitEditor : Editor
     {
         bool hitFoldout = false;
+        bool healFoldout = false;
         float amount = 1f;
         Unit other;
 
@@ -34,6 +35,18 @@ namespace Units
                 other = EditorGUILayout.ObjectField("Other", other, typeof(Unit), true) as Unit;
                 if (GUILayout.Button("Hit!"))
                     unit.TakeHit(amount, other, other.transform.position);
+
+                EditorGUI.indentLevel--;
+            }
+
+            healFoldout = EditorGUILayout.Foldout(healFoldout, "Heal", true);
+            if (healFoldout)
+            {
+                EditorGUI.indentLevel++;
+
+                amount = EditorGUILayout.FloatField("Amount", amount);
+                if (GUILayout.Button("Heal!"))
+                    unit.Heal(amount);
 
                 EditorGUI.indentLevel--;
             }
