@@ -30,8 +30,10 @@ namespace _3C.Player
         [SerializeField] private float m_Distance;
         [SerializeField] private AnimationCurve m_DistanceCurve;
         [SerializeField] private float m_PostDashDelay;
-        
-        
+
+        [SerializeField] private ParticleSystem m_VFX;
+
+
         private float m_InverseDuration;
         private Transform m_Transform;
 
@@ -63,6 +65,7 @@ namespace _3C.Player
             m_StateHandler.SetOrientationToUseMovement();
             Vector3 start = m_Transform.position;
             Vector3 end = m_Transform.position + m_Transform.forward * m_Distance;
+            m_VFX.Play();
 
             if (m_HasOvershootFrame)
             {

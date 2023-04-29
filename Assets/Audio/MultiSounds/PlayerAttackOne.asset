@@ -17,3 +17,5 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7d47debed84d01b49883e5701a184366, type: 3}
   - {fileID: 8300000, guid: b80a930a5b373f24480d984baae1ffb3, type: 3}
   - {fileID: 8300000, guid: d289780c9edb49741b9445cafe6a732a, type: 3}
+  hasCooldown: 0
+  coolDownTime: 0.1

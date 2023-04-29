@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
         type: 3}
@@ -100,16 +100,38 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7731695316458686031}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1258742480468266777}
   m_SourcePrefab: {fileID: 100100000, guid: 7c7cc8d39e1629241b17ec14f165f2ff, type: 3}
+--- !u!4 &537473991241876908 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3640019452817120155, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 3888453483192835639}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &913093154883551600 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -5089777082947723449, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 3888453483192835639}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1030746455483815681 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4919200007937210058, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
     type: 3}
   m_PrefabInstance: {fileID: 3888453483192835639}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2644691631019701439 stripped
+--- !u!4 &1946464354820471534 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 1244500729896790664, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
+  m_CorrespondingSourceObject: {fileID: 3383809517033514201, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 3888453483192835639}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3467273465663420240 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8797582791956518553, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
     type: 3}
   m_PrefabInstance: {fileID: 3888453483192835639}
   m_PrefabAsset: {fileID: 0}
@@ -131,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2880a4508a3ffde40b68c339503404a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpdateMode: 2
+  UpdateMode: 0
   TwoDDistanceCheck: 0
   TwoDPositionInfluence: 0
   TwoDRotationInfluence: 0
@@ -180,6 +202,18 @@ MonoBehaviour:
     - {fileID: 4955889792848731134}
     - {fileID: 8211547616420851019}
     - {fileID: 1030746455483815681}
+    - {fileID: 7631929108674295312}
+    - {fileID: 537473991241876908}
+    - {fileID: 7932756864635155938}
+    - {fileID: 1946464354820471534}
+    - {fileID: 7465242766976712379}
+    - {fileID: 8407485269861973078}
+    - {fileID: 8491889590735473695}
+    - {fileID: 913093154883551600}
+    - {fileID: 7943778589592183048}
+    - {fileID: 3467273465663420240}
+    - {fileID: 6871523987786989024}
+    - {fileID: 8349857850721096162}
     EffectorReaction: 1
     LooseRoot: 0
     ParamsOverride: {fileID: 0}
@@ -313,7 +347,7 @@ MonoBehaviour:
     EnableBoingKitCollision: 0
     EnableUnityCollision: 0
     EnableInterChainCollision: 0
-    Gravity: {x: 0, y: 0, z: 0}
+    Gravity: {x: 0, y: 25, z: 0}
     SquashAndStretchCurveType: 2
     SquashAndStretchCustomCurve:
       serializedVersion: 2
@@ -341,10 +375,11 @@ MonoBehaviour:
       m_RotationOrder: 4
     MaxSquash: 1.1
     MaxStretch: 2
-  - Root: {fileID: 2644691631019701439}
-    Exclusion: []
+  - Root: {fileID: 7932756864635155938}
+    Exclusion:
+    - {fileID: 8407485269861973078}
     EffectorReaction: 1
-    LooseRoot: 0
+    LooseRoot: 1
     ParamsOverride: {fileID: 0}
     AnimationBlendCurveType: 4
     AnimationBlendCustomCurve:
@@ -371,7 +406,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    LengthStiffnessCurveType: 0
+    LengthStiffnessCurveType: 3
     LengthStiffnessCustomCurve:
       serializedVersion: 2
       m_Curve:
@@ -396,24 +431,24 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    PoseStiffnessCurveType: 0
+    PoseStiffnessCurveType: 7
     PoseStiffnessCustomCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        value: 0.83997345
+        inSlope: -0.5326309
+        outSlope: -0.5326309
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        value: 0.30734253
+        inSlope: -0.07666666
+        outSlope: -0.07666666
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -508,7 +543,7 @@ MonoBehaviour:
   MaxCollisionResolutionSpeed: 3
   BoingColliders: []
   UnityColliders: []
-  DebugDrawRawBones: 0
+  DebugDrawRawBones: 1
   DebugDrawTargetBones: 0
   DebugDrawBoingBones: 0
   DebugDrawFinalBones: 0
@@ -528,7 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2880a4508a3ffde40b68c339503404a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpdateMode: 2
+  UpdateMode: 0
   TwoDDistanceCheck: 0
   TwoDPositionInfluence: 0
   TwoDRotationInfluence: 0
@@ -540,8 +575,8 @@ MonoBehaviour:
   LockTranslationX: 0
   LockTranslationY: 1
   LockTranslationZ: 0
-  RotationLockSpace: 0
-  LockRotationX: 0
+  RotationLockSpace: 1
+  LockRotationX: 1
   LockRotationY: 1
   LockRotationZ: 0
   Params:
@@ -601,7 +636,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    LengthStiffnessCurveType: 0
+    LengthStiffnessCurveType: 4
     LengthStiffnessCustomCurve:
       serializedVersion: 2
       m_Curve:
@@ -626,7 +661,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    PoseStiffnessCurveType: 0
+    PoseStiffnessCurveType: 4
     PoseStiffnessCustomCurve:
       serializedVersion: 2
       m_Curve:
@@ -651,7 +686,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxBendAngleCap: 180
+    MaxBendAngleCap: 33.7
     BendAngleCapCurveType: 0
     BendAngleCapCustomCurve:
       serializedVersion: 2
@@ -739,13 +774,34 @@ MonoBehaviour:
   BoingColliders: []
   UnityColliders: []
   DebugDrawRawBones: 0
-  DebugDrawTargetBones: 0
+  DebugDrawTargetBones: 1
   DebugDrawBoingBones: 0
   DebugDrawFinalBones: 0
   DebugDrawColliders: 0
   DebugDrawChainBounds: 0
   DebugDrawBoneNames: 0
   DebugDrawLengthFromRoot: 0
+--- !u!95 &1258742480468266777
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4123016900200096614}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 894cfea4cad26214f94ecfc1ea440c15, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &4955889792848731134 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8156111649618347465, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
@@ -758,15 +814,63 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3888453483192835639}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &6871523987786989024 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1537414674687417385, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 3888453483192835639}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7465242766976712379 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3283316090961813364, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 3888453483192835639}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7533958164821613961 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -2487270263804247106, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
     type: 3}
   m_PrefabInstance: {fileID: 3888453483192835639}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &7631929108674295312 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6637321521518372903, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 3888453483192835639}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7932756864635155938 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2602975572916671531, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 3888453483192835639}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7943778589592183048 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2608860316713861313, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 3888453483192835639}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8211547616420851019 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4900981665178760060, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 3888453483192835639}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8349857850721096162 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4173103274734776363, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 3888453483192835639}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8407485269861973078 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4513754056763284895, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 3888453483192835639}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8491889590735473695 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4625143218012869160, guid: 7c7cc8d39e1629241b17ec14f165f2ff,
     type: 3}
   m_PrefabInstance: {fileID: 3888453483192835639}
   m_PrefabAsset: {fileID: 0}

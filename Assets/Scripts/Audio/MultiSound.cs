@@ -8,6 +8,8 @@ public class MultiSound : ScriptableObject
 {
     public AudioClip[] clips;
     int lastIndex;
+    public bool hasCooldown = true;
+   public float coolDownTime = 0.1f;
 
     public AudioClip GetShuffledClip()
     { 
