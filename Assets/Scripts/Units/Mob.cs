@@ -12,6 +12,7 @@ namespace Units
         public class Data
         {
             public Perception perception;
+            public Locomotion locomotion;
 
             public State NextState { get; set; }
         }
@@ -70,6 +71,7 @@ namespace Units
         private void OnValidate()
         {
             m_data.perception = GetComponentInChildren<Perception>();
+            m_data.locomotion = GetComponentInChildren<Locomotion>();
         }
 
         private void Reset()

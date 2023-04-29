@@ -8,16 +8,22 @@ namespace Units
     {
         public void Enter(Mob.Data data)
         {
-            // TODO: Set destination in locomotion
+            if (data.locomotion && data.perception && data.perception.Target)
+            {
+                
             // TODO: Locomotion look in direction of movement
+            }
 
             if (data.perception) data.perception.QueryTargetEnabled = true;
         }
 
         public void Exit(Mob.Data data)
         {
-            // TODO: Locomotion clear destination
-            // TODO: Locomotion stop rotation
+            if (data.locomotion)
+            {
+                data.locomotion.Destination = null;
+                // TODO: Locomotion stop rotation
+            }
 
             if (data.perception) data.perception.QueryTargetEnabled = false;
         }
@@ -25,7 +31,12 @@ namespace Units
         public void Tick(Mob.Data data)
         {
             // TODO: If leader too far, Regroup
-            if (!data.perception || !data.perception.Target) data.NextState = Mob.State.Idle;
+
+            if (!data.perception || !data.perception.Target) 
+                data.NextState = Mob.State.Idle;
+            else 
+                data.locomotion.Destination = data.perception.Target.transform;
+
             // TODO: If close enough, fight
         }
     }
