@@ -6,7 +6,22 @@ namespace Units
 {
     public sealed class DummyWorld : MonoBehaviour
     {
-        public static DummyWorld Instance { get; private set; }
+        private static DummyWorld m_instance;
+        public static DummyWorld Instance 
+        {
+            get
+            {
+                if (m_instance)
+                    return m_instance;
+
+                m_instance = FindObjectOfType<DummyWorld>();
+                return m_instance;
+            }
+            private set
+            {
+                m_instance = value;
+            }
+        }
 
         public bool visible = true;
 
