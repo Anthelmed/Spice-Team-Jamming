@@ -5,6 +5,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(HealthHolder))]
 [RequireComponent(typeof(Targetable))]
+[SelectionBase]
 public class Vegetation : MonoBehaviour
 {
     [SerializeField] private TreeStateExample m_states;

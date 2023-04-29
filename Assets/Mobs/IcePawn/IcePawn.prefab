@@ -205,6 +205,11 @@ PrefabInstance:
       propertyPath: team
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 544110165833639826, guid: ce306a084314e7c45bfb270fab518cb0,
+        type: 3}
+      propertyPath: m_team
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3713566029389570041, guid: ce306a084314e7c45bfb270fab518cb0,
         type: 3}
       propertyPath: m_RootOrder
@@ -285,6 +290,11 @@ PrefabInstance:
       propertyPath: m_data.animator
       value: 
       objectReference: {fileID: 4763624763943536649}
+    - target: {fileID: 5315648498737710978, guid: ce306a084314e7c45bfb270fab518cb0,
+        type: 3}
+      propertyPath: m_data.regroupDistance
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5991835223425298841, guid: ce306a084314e7c45bfb270fab518cb0,
         type: 3}
       propertyPath: team

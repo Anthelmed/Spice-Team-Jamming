@@ -1,3 +1,4 @@
+using AmplifyShaderEditor;
 using DefaultNamespace.Audio;
 using System;
 using System.Collections;
@@ -271,15 +272,26 @@ public class MobAI : MonoBehaviour
             }
 
             // As a backup, find vegetation to burn :devil:
+            float vegetationDistance = 1000f;
+            Targetable vegetationTarget = null;
             if (m_data.targetVegetation && !m_data.Target)
             {
-                m_data.Target = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out _, ~m_data.targetting.CurrentTeam,
+                vegetationTarget = Targetable.QueryClosestTarget(transform.position, 1000f, out vegetationDistance, ~m_data.targetting.CurrentTeam,
                     maxPriority: Targetable.Priority.Low);
+
+                if (vegetationDistance < m_data.smallTargetDistance)
+                    m_data.Target = vegetationTarget;
             }
 
             // Nothing was close, use the target that was far away
             if (!m_data.Target)
                 m_data.Target = farTarget;
+
+            // Last resort for the pawns, far away vegetation
+            if (m_data.huntMainTargets && !m_data.Target)
+            {
+                m_data.Target = vegetationTarget;
+            }
         }
 
         // Check if there are enemies in front
