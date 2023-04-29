@@ -90,6 +90,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        if (GameManager.instance is null) return;
         GameManager.instance.OnGameStateChanged += HandleGameStateChange;
     }
     private void StartBGM()
