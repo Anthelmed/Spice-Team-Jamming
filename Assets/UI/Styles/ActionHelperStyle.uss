@@ -39,6 +39,7 @@
     margin-right: 25px;
     margin-top: 0;
     margin-bottom: 0;
+    -unity-background-scale-mode: scale-to-fit;
 }
 
 .action-helper-icon-label {

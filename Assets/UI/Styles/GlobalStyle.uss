@@ -39,6 +39,7 @@
     justify-content: center;
     align-items: center;
     -unity-background-image-tint-color: var(--primary-color-1);
+    -unity-background-scale-mode: scale-to-fit;
 }
 
 .title-label {
@@ -79,6 +80,7 @@
     border-top-width: 0;
     border-bottom-width: 0;
     -unity-background-image-tint-color: var(--primary-color-1);
+    -unity-background-scale-mode: scale-to-fit;
 }
 
 .square-button {
@@ -96,6 +98,7 @@
     padding-right: 0;
     padding-top: 0;
     padding-bottom: 0;
+    -unity-background-scale-mode: scale-to-fit;
 }
 
 .sub-title {
