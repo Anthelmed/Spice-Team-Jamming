@@ -24,6 +24,7 @@ namespace Units
 
             EditorGUI.BeginDisabledGroup(true);
             EditorGUILayout.FloatField("Current health", unit.CurrentHealth);
+            EditorGUILayout.Toggle("Visible", unit.Visible);
             EditorGUI.EndDisabledGroup();
 
             hitFoldout = EditorGUILayout.Foldout(hitFoldout, "Hit", true);

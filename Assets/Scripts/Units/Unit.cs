@@ -37,6 +37,8 @@ namespace Units
         public UnityEvent<float> onHeal;
         public UnityEvent onDie;
 
+        public bool Visible => DummyWorld.Instance.visible;
+
         private float m_currentHealth;
         private float m_lastHit;
 

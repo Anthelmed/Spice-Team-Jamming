@@ -6,18 +6,9 @@ namespace Units
 {
     public sealed class DummyWorld : MonoBehaviour
     {
-        private static DummyWorld m_instance;
-        public static DummyWorld Instance
-        {
-            get
-            {
-                //if (m_instance)
-                    return m_instance;
+        public static DummyWorld Instance { get; private set; }
 
-                //m_instance = FindObjectOfType<DummyWorld>();
-                //return m_instance;
-            }
-        }
+        public bool visible = true;
 
         private List<Unit> m_vegetation = new List<Unit>();
         private List<Unit> m_pawns = new List<Unit>();
@@ -52,7 +43,7 @@ namespace Units
 
         private void Awake()
         {
-            m_instance = this;
+            Instance = this;
         }
 
 #if UNITY_EDITOR
