@@ -1,0 +1,21 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ActionHelperSelect" src="project://database/Assets/UI/Templates/ActionHelperSelect.uxml?fileID=9197481963319205126&amp;guid=8e57771f9090a704a8635f571821898f&amp;type=3#ActionHelperSelect" />
+    <ui:Template name="ActionHelperBack" src="project://database/Assets/UI/Templates/ActionHelperBack.uxml?fileID=9197481963319205126&amp;guid=a3bf47acfd3a7bb46a4e5d03dee8c3ca&amp;type=3#ActionHelperBack" />
+    <Style src="project://database/Assets/UI/Styles/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=852c0b1f00071754886a563d72ecb599&amp;type=3#GlobalStyle" />
+    <Style src="project://database/Assets/UI/Styles/LevelSelectionStyle.uss?fileID=7433441132597879392&amp;guid=19ab89a4b2c2b5749bfaaf1eae8406c2&amp;type=3#LevelSelectionStyle" />
+    <Style src="project://database/Assets/UI/Styles/ActionHelperStyle.uss?fileID=7433441132597879392&amp;guid=1ee840c4db8243eaa2a9f33057bc878a&amp;type=3#ActionHelperStyle" />
+    <ui:VisualElement name="LevelSelection" class="main-element auto-reference">
+        <ui:VisualElement name="Overlay" />
+        <ui:VisualElement name="LevelSelectionTitle" class="title auto-reference">
+            <ui:Label tabindex="-1" text="Level Selection" display-tooltip-when-elided="true" name="LevelSelectionTitleLabel" class="title-label" />
+        </ui:VisualElement>
+        <ui:VisualElement name="LevelSelectionActionHelpers" class="action-helpers">
+            <ui:Instance template="ActionHelperSelect" name="ActionHelperSelect" />
+            <ui:Instance template="ActionHelperBack" name="ActionHelperBack" />
+        </ui:VisualElement>
+        <ui:VisualElement name="LevelSelectionInfo" class="auto-reference">
+            <ui:Label tabindex="-1" text="Level Info" display-tooltip-when-elided="true" name="LevelSelectionInfoSubTitle" class="sub-title" />
+            <ui:Label tabindex="-1" text="[Level Info Text]" display-tooltip-when-elided="true" name="LevelSelectionInfoText" class="text auto-reference" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
