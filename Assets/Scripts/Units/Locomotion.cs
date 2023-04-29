@@ -42,6 +42,21 @@ namespace Units
 
             var lastSpeed = lastVelocity.magnitude;
             if (m_visuals) m_visuals.SetSpeed(lastSpeed);
+
+            if (LookAtTarget)
+            {
+                trans.rotation = Quaternion.RotateTowards(
+                    trans.rotation,
+                    Quaternion.LookRotation(LookAtTarget.position - m_lastPosition),
+                    m_angularSpeed * Time.deltaTime);
+            }
+            else if (lastSpeed > 0.1f)
+            {
+                trans.rotation = Quaternion.RotateTowards(
+                    trans.rotation,
+                    Quaternion.LookRotation(lastVelocity),
+                    m_angularSpeed * Time.deltaTime);
+            }
         }
 
         private void Reset()
