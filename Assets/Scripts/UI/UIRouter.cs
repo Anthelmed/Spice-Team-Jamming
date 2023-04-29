@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace SpiceTeamJamming.UI
@@ -26,6 +27,8 @@ namespace SpiceTeamJamming.UI
 
         public static RouteType CurrentRoute => _currentRoute;
 
+        public static event Action<RouteType, RouteType> RouteChangeEvent; 
+
         public static void ConfigureRoute(RouteType route, UIView view)
         {
             if (_routeToViewBridge.ContainsKey(route)) return;
@@ -49,9 +52,11 @@ namespace SpiceTeamJamming.UI
         
             leavingView.Hide();
             enteringView.Show();
-
+            
             _routesHistory.Push(_currentRoute);
             _currentRoute = route;
+            
+            RouteChangeEvent?.Invoke(_routesHistory.Peek(), _currentRoute);
         }
 
         public static void GoToPreviousRoute()
