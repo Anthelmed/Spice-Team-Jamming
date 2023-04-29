@@ -3,6 +3,7 @@ using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 namespace _3C.Player
 {
@@ -30,27 +31,60 @@ namespace _3C.Player
                 StackInput(InputType.DashPerformed);
             }
         }
+        
+        // TO-DO: Orient character toward input direction 
+        public void OnLook(InputAction.CallbackContext _context)
+        {
+            // WIP: likely Vector2 readValue 
+            if (_context.phase == InputActionPhase.Started)
+            {
+                StackInput(InputType.AimPerformed);
+            }
+        }
 
+        // TO-DO: Held Melee Attack using InputAction HoldInteraction,
+        // will normal melee attack need Tap interaction?
         public void OnMeleeAttack(InputAction.CallbackContext _context)
         {
             if (_context.phase == InputActionPhase.Performed)
             {
-                StackInput(InputType.AttackPerformed);
+                StackInput(InputType.MeleeAttackPerformed);
             }
         }
 
         public void OnRangeAttack(InputAction.CallbackContext _context)
         {
+            // NOTE: Aim should be it's own function? Should it encompass OnLook?
+            // Plan for implementing a charged ranged attack.
             
+            // Ranged attack:
+            // check if aim button is held down,
+            // if held, wait for shoot input,
+            // when pressed shoot input will perform attack
+            
+            // Charged ranged attack:
+            // check if aim button is held down,
+            // if held, wait for shoot input,
+            // if shoot is held, begin charging,
+            // perform attack when shoot input is released
+            
+            if (_context.interaction is HoldInteraction)
+            {
+                // Order uncertain, phase can only be started if an interaction was passed successfully.
+                // if (_context.phase == InputActionPhase.Started)
+                {
+                    
+                }
+            }
         }
 
         private void StackInputIfNotTop(InputType _input)
         {
-            if (!GameplayData.s_PlayerInputs.InputStack.IsEmpty &&GameplayData.s_PlayerInputs.InputStack.Top == _input)
+            if (!GameplayData.s_PlayerInputs.InputStack.IsEmpty && GameplayData.s_PlayerInputs.InputStack.Top == _input)
             {
                 return;
             }
-            
+
             StackInput(_input);
         }
 
