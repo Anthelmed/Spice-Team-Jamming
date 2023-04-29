@@ -18,7 +18,7 @@ namespace Units
             EditorGUILayout.LabelField("In Game Debug", EditorStyles.boldLabel);
 
             EditorGUI.BeginDisabledGroup(true);
-            EditorGUILayout.IntField("Current health", unit.CurrentHealth);
+            EditorGUILayout.FloatField("Current health", unit.CurrentHealth);
             EditorGUI.EndDisabledGroup();
         }
     }

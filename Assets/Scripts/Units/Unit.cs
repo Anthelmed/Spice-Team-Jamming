@@ -28,7 +28,7 @@ namespace Units
         [SerializeField] [Min(1)] private int m_maxHealth = 10;
         [SerializeField] [Min(0f)] private float m_radius = 0.5f;
 
-        private int m_currentHealth;
+        private float m_currentHealth;
 
         private void Awake()
         {
@@ -36,7 +36,7 @@ namespace Units
         }
 
 #if UNITY_EDITOR
-        public int CurrentHealth => m_currentHealth;
+        public float CurrentHealth => m_currentHealth;
         public float Radius => m_radius;
 #endif
     }
