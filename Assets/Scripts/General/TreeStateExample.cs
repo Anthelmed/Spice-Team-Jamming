@@ -6,8 +6,8 @@ using DG.Tweening;
 
 public class TreeStateExample : MonoBehaviour
 {
-    public Material trunkMaterial;
-    public Material leavesMaterial;
+    public Renderer trunkRenderer;
+    public Renderer leavesRenderer;
     public Transform leavesTransform;
     public Transform[] iceTransforms;
     public ParticleSystem fireParticles;
@@ -18,7 +18,7 @@ public class TreeStateExample : MonoBehaviour
             iceCube.localScale = Vector3.zero;
 
         }
-        trunkMaterial.SetFloat("_TrunkState", 0);
+        trunkRenderer.material.SetFloat("_TrunkState", 0);
 
     }
 
@@ -46,9 +46,9 @@ public class TreeStateExample : MonoBehaviour
     {
         float time = 0;
 
-        leavesMaterial.SetFloat("_IceFireSwitch", 1);
+        leavesRenderer.material.SetFloat("_IceFireSwitch", 1);
         fireParticles.Play();
-        float startState = trunkMaterial.GetFloat("_TrunkState");
+        float startState = trunkRenderer.material.GetFloat("_TrunkState");
 
         leavesTransform.DOKill();
         leavesTransform.DOScale(new Vector3(0, 1, 0), 0.4f).SetEase(Ease.InBack);
@@ -61,7 +61,7 @@ public class TreeStateExample : MonoBehaviour
         }
         while (time < 1)
         {
-            trunkMaterial.SetFloat("_TrunkState", Mathf.Lerp(startState, 1, time));
+            trunkRenderer.material.SetFloat("_TrunkState", Mathf.Lerp(startState, 1, time));
         //    leavesMaterial.SetFloat("_Dissolve", Mathf.Lerp(0, 1, time));
             time += Time.deltaTime / 2;
             yield return null;
@@ -71,8 +71,8 @@ public class TreeStateExample : MonoBehaviour
     {
         fireParticles.Stop();
         float time = 0;
-        leavesMaterial.SetFloat("_IceFireSwitch", 0);
-        float startState = trunkMaterial.GetFloat("_TrunkState");
+        leavesRenderer.material.SetFloat("_IceFireSwitch", 0);
+        float startState = trunkRenderer.material.GetFloat("_TrunkState");
 
         leavesTransform.DOKill();
         leavesTransform.DOScale(new Vector3(0, 1, 0), 0.4f).SetEase(Ease.InBack);
@@ -86,7 +86,7 @@ public class TreeStateExample : MonoBehaviour
 
         while (time < 1)
         {
-            trunkMaterial.SetFloat("_TrunkState", Mathf.Lerp(startState, -1, time));
+            trunkRenderer.material.SetFloat("_TrunkState", Mathf.Lerp(startState, -1, time));
           //  leavesMaterial.SetFloat("_Dissolve", Mathf.Lerp(0, 1, time));
             time += Time.deltaTime / 2;
             yield return null;
@@ -96,9 +96,9 @@ public class TreeStateExample : MonoBehaviour
     {
         float time = 0;
         fireParticles.Stop();
-        float startState = trunkMaterial.GetFloat("_TrunkState");
+        float startState = trunkRenderer.material.GetFloat("_TrunkState");
         leavesTransform.DOKill();
-        leavesMaterial.SetFloat("_Dissolve", 0);
+        leavesRenderer.material.SetFloat("_Dissolve", 0);
         leavesTransform.localScale = new Vector3(0, 1, 0);
         leavesTransform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack).SetDelay(1.5f);
         foreach (var iceCube in iceTransforms)
@@ -109,7 +109,7 @@ public class TreeStateExample : MonoBehaviour
         }
         while (time < 1f)
         {
-            trunkMaterial.SetFloat("_TrunkState", Mathf.Lerp(startState, 0, time));
+            trunkRenderer.material.SetFloat("_TrunkState", Mathf.Lerp(startState, 0, time));
             time += Time.deltaTime / 2;
             yield return null;
         }

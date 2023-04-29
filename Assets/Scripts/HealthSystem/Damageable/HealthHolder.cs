@@ -10,6 +10,7 @@ namespace DefaultNamespace.HealthSystem.Damageable
         public Targetable.Team team;
         [SerializeField] private int m_MaxHealth;
         [SerializeField] private float m_invincibleTime = 0.5f;
+        public int MaxHealth => m_MaxHealth;
 
         [ReadOnly]
         [SerializeField] private int m_CurrentHealth;
@@ -17,7 +18,7 @@ namespace DefaultNamespace.HealthSystem.Damageable
         [SerializeField] private UnityEvent m_OnTakeDamage;
         [SerializeField] private UnityEvent m_OnHealed;
         [SerializeField] private UnityEvent<int> m_OnHealthChanged;
-        [SerializeField] private UnityEvent m_OnDeath;
+        [SerializeField] private UnityEvent<Targetable.Team> m_OnDeath;
 
         private float m_lastHit;
         
@@ -39,7 +40,7 @@ namespace DefaultNamespace.HealthSystem.Damageable
             if (m_CurrentHealth <= 0)
             {
                 m_CurrentHealth = 0;
-                m_OnDeath?.Invoke();
+                m_OnDeath?.Invoke(_team);
             }
             else
             {

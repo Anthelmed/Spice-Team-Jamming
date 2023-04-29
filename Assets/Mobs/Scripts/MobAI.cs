@@ -151,7 +151,7 @@ public class MobAI : MonoBehaviour
     private void Update()
     {
         // Discard invalid targets
-        if (m_data.Target && !m_data.Target.isActiveAndEnabled)
+        if (m_data.Target && (!m_data.Target.isActiveAndEnabled || m_data.Target.CurrentTeam == m_data.targetting.CurrentTeam))
             m_data.Target = null;
 
         // Update target info
@@ -249,7 +249,7 @@ public class MobAI : MonoBehaviour
             // Get a main enemy
             if (m_data.huntMainTargets)
             {
-                farTarget = Targetable.QueryClosestTarget(transform.position, farDistance, out farDistance, ~m_data.targetting.team,
+                farTarget = Targetable.QueryClosestTarget(transform.position, farDistance, out farDistance, ~m_data.targetting.CurrentTeam,
                 minPriority: Targetable.Priority.High);
             }
 
@@ -260,7 +260,7 @@ public class MobAI : MonoBehaviour
             // If not try to get any enemy that's in range
             if (!m_data.Target)
             {
-                var newTarget = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out var closeDistance, ~m_data.targetting.team,
+                var newTarget = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out var closeDistance, ~m_data.targetting.CurrentTeam,
                     maxPriority: m_data.huntMainTargets ? Targetable.Priority.Medium : Targetable.Priority.High, 
                     minPriority: Targetable.Priority.Medium);
 
@@ -273,7 +273,7 @@ public class MobAI : MonoBehaviour
             // As a backup, find vegetation to burn :devil:
             if (m_data.targetVegetation && !m_data.Target)
             {
-                m_data.Target = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out _, ~m_data.targetting.team,
+                m_data.Target = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out _, ~m_data.targetting.CurrentTeam,
                     maxPriority: Targetable.Priority.Low);
             }
 
@@ -289,7 +289,7 @@ public class MobAI : MonoBehaviour
             if (m_data.Target)
             {
                 var toTarget = (m_data.TargetTransform.position - transform.position).normalized;
-                var nearbyAllies = Targetable.QueryTargets(transform.position, 1.5f, m_data.targetting.team, minPriority: m_data.targetting.priority);
+                var nearbyAllies = Targetable.QueryTargets(transform.position, 1.5f, m_data.targetting.CurrentTeam, minPriority: m_data.targetting.priority);
                 for (int i = 0; i < nearbyAllies.Count; ++i)
                 {
                     if (nearbyAllies[i] == m_data.targetting) continue;

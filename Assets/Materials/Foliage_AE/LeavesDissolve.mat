@@ -125,7 +125,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _IceFireSwitch: 0
+    - _IceFireSwitch: 1
     - _Metallic: 0
     - _Noise_Intensity: 0.121
     - _Noise_Tile: 0.15
