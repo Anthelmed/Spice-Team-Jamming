@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4926162719401998550}
   - component: {fileID: 6028688117208421044}
   - component: {fileID: 4716556155417525407}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Particle System_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4836,10 +4836,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8774561540770992247, guid: e4818769e5080db4aa563fdcb677b22f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e4818769e5080db4aa563fdcb677b22f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e4818769e5080db4aa563fdcb677b22f,
         type: 3}
@@ -4906,10 +4911,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8151586163369001530, guid: e4818769e5080db4aa563fdcb677b22f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -4507506131048606285, guid: e4818769e5080db4aa563fdcb677b22f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -2664669195635501840, guid: e4818769e5080db4aa563fdcb677b22f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e4818769e5080db4aa563fdcb677b22f,
         type: 3}
       propertyPath: m_Name
-      value: TreeVisuals Variant
+      value: TreeVisuals
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e4818769e5080db4aa563fdcb677b22f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3821146458364853999, guid: e4818769e5080db4aa563fdcb677b22f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7032823420476312315, guid: e4818769e5080db4aa563fdcb677b22f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128539335865782444, guid: e4818769e5080db4aa563fdcb677b22f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8366589719898449412, guid: e4818769e5080db4aa563fdcb677b22f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4974,7 +5019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9538dbd2f9f665a43859dd40e8dc1fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_heightRange: {x: 0.8, y: 1.2}
+  m_heightRange: {x: 0.8, y: 1.4}
   m_widthRange: {x: 0.8, y: 1.2}
 --- !u!114 &6814460423349609818
 MonoBehaviour:
