@@ -11,23 +11,43 @@ using UnityEngine.InputSystem;
 namespace _3C.Player
 {
     [Serializable]
+    struct AttackSetting
+    {
+        public float InputWaitDelay;
+
+        public float DashSpeed;
+        public float DashDuration;
+        public AnimationCurve DashCurve;
+        
+        
+        public float AttackDuration;
+        
+        public AnimationCurve WeaponMovementCurve;
+        
+        public int BaseDamage;
+    }
+    
+    [Serializable]
     public class PlayerMeleeAttack : PlayerStateBehavior
     {
-        [Header("Settings")]
-        [SerializeField] private float m_InputWaitDelay;
+        // [SerializeField] private float m_InputWaitDelay;
+        //
+        // [SerializeField] private float m_DashSpeed;
+        // [SerializeField] private float m_DashDuration;
+        // [SerializeField] private AnimationCurve m_DashCurve;
+        //
+        //
+        // [SerializeField] private float m_AttackDuration;
+        //
+        // [SerializeField] private AnimationCurve m_WeaponMovementCurve;
+        //
+        // [SerializeField] private int m_BaseDamage;
+        // [SerializeField] private int m_SuccessfullComboDamage;
 
-        [SerializeField] private float m_DashSpeed;
-        [SerializeField] private float m_DashDuration;
-        [SerializeField] private AnimationCurve m_DashCurve;
         
-        
-        [SerializeField] private float m_AttackDuration;
-        
-        [SerializeField] private AnimationCurve m_WeaponMovementCurve;
-        
-        [SerializeField] private int m_BaseDamage;
-        [SerializeField] private int m_SuccessfullComboDamage;
-        
+        [Header("Settings")]
+        [SerializeField] private AttackSetting[] m_AttacksSettings;
+
         [Header("VFX")]
         [SerializeField] private float m_VFX_Start;
         [SerializeField] private ParticleSystem[] m_VFX;
@@ -84,19 +104,21 @@ namespace _3C.Player
             PlayNextAttack();
         }
 
+        private AttackSetting CurrentAttackSettings => m_AttacksSettings[m_AttackIndex];
+        
         private void PlayNextAttack()
         {
             m_IsAttackAsked = false;
             m_StateHandler.OnMovementStateChanged(false);
-            m_Damager.Damage = m_AttackIndex == 2 ? m_SuccessfullComboDamage : m_BaseDamage;
-            m_WeaponMovement.TriggerWeaponMovement(m_AttackDuration, m_WeaponMovementCurve);
+            m_Damager.Damage = CurrentAttackSettings.BaseDamage;
+            m_WeaponMovement.TriggerWeaponMovement(CurrentAttackSettings.AttackDuration, CurrentAttackSettings.WeaponMovementCurve);
             m_StateHandler.PlayerSoundsInstance.PlayAttackSound();
             //if (m_Animator == null)
             {
                 m_AttackCoroutine = m_StateHandler.StartCoroutine(c_AttackDuration());
                 m_DashTween = m_Transform.DOMove(
-                    m_Transform.position + m_Transform.forward * m_DashSpeed * m_DashDuration, m_DashDuration
-                    ).SetEase(m_DashCurve);
+                    m_Transform.position + m_Transform.forward * CurrentAttackSettings.DashSpeed * CurrentAttackSettings.DashDuration, CurrentAttackSettings.DashDuration
+                    ).SetEase(CurrentAttackSettings.DashCurve);
                 m_DashTween.onComplete += () =>
                 {
                     m_StateHandler.OnMovementStateChanged(true);
@@ -113,7 +135,7 @@ namespace _3C.Player
             yield return new WaitForSeconds(m_VFX_Start);
             
             PlayVFX(m_VFX[m_AttackIndex]);
-            yield return new WaitForSeconds(m_AttackDuration - m_VFX_Start);
+            yield return new WaitForSeconds(CurrentAttackSettings.AttackDuration - m_VFX_Start);
             OnAttackAnimationEnded();
             m_AttackCoroutine = null;
         }
@@ -166,7 +188,7 @@ namespace _3C.Player
 
         private IEnumerator c_WaitForInput()
         {
-            yield return new WaitForSeconds(m_InputWaitDelay);
+            yield return new WaitForSeconds(CurrentAttackSettings.InputWaitDelay);
             ExitState();
         }
 

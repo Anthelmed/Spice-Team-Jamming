@@ -154,70 +154,222 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    m_PostDashDelay: 0
   m_PlayerMeleeAttack:
-    m_InputWaitDelay: 0.3
-    m_DashSpeed: 5
-    m_DashDuration: 0.1
-    m_DashCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 1.1154763
-        outSlope: 1.1237301
-        tangentMode: 69
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.14949884
-      - serializedVersion: 3
-        time: 0.72480124
-        value: 0.81448096
-        inSlope: 1.1237301
-        outSlope: 1.1967862
-        tangentMode: 5
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_AttackDuration: 0.3
-    m_WeaponMovementCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BaseDamage: 3
-    m_SuccessfullComboDamage: 2
+    m_AttacksSettings:
+    - InputWaitDelay: 0.3
+      DashSpeed: 5
+      DashDuration: 0.1
+      DashCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 1.1154763
+          outSlope: 1.1237301
+          tangentMode: 69
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.14949884
+        - serializedVersion: 3
+          time: 0.72480124
+          value: 0.81448096
+          inSlope: 1.1237301
+          outSlope: 1.1967862
+          tangentMode: 5
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackDuration: 0.3
+      WeaponMovementCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 1.1154763
+          outSlope: 1.1237301
+          tangentMode: 69
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.14949884
+        - serializedVersion: 3
+          time: 0.72480124
+          value: 0.81448096
+          inSlope: 1.1237301
+          outSlope: 1.1967862
+          tangentMode: 5
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      BaseDamage: 1
+    - InputWaitDelay: 0.3
+      DashSpeed: 5
+      DashDuration: 0.1
+      DashCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 1.1154763
+          outSlope: 1.1237301
+          tangentMode: 69
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.14949884
+        - serializedVersion: 3
+          time: 0.72480124
+          value: 0.81448096
+          inSlope: 1.1237301
+          outSlope: 1.1967862
+          tangentMode: 5
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackDuration: 0.3
+      WeaponMovementCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 1.1154763
+          outSlope: 1.1237301
+          tangentMode: 69
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.14949884
+        - serializedVersion: 3
+          time: 0.72480124
+          value: 0.81448096
+          inSlope: 1.1237301
+          outSlope: 1.1967862
+          tangentMode: 5
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      BaseDamage: 1
+    - InputWaitDelay: 0.3
+      DashSpeed: 5
+      DashDuration: 0.1
+      DashCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 1.1154763
+          outSlope: 1.1237301
+          tangentMode: 69
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.14949884
+        - serializedVersion: 3
+          time: 0.72480124
+          value: 0.81448096
+          inSlope: 1.1237301
+          outSlope: 1.1967862
+          tangentMode: 5
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackDuration: 0.3
+      WeaponMovementCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 1.1154763
+          outSlope: 1.1237301
+          tangentMode: 69
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.14949884
+        - serializedVersion: 3
+          time: 0.72480124
+          value: 0.81448096
+          inSlope: 1.1237301
+          outSlope: 1.1967862
+          tangentMode: 5
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      BaseDamage: 1
     m_VFX_Start: 0
     m_VFX:
     - {fileID: 332763085616677012}
