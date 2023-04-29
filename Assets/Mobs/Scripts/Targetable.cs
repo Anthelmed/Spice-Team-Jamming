@@ -7,6 +7,7 @@ using System.Net.Mail;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.UI;
+using UnityEngine.Serialization;
 
 [SelectionBase]
 public class Targetable : MonoBehaviour
@@ -20,7 +21,18 @@ public class Targetable : MonoBehaviour
         Wizard = 0x08,
     }
 
-    public Team team = Team.Nature;
+    [FormerlySerializedAs("team")]
+    [SerializeField] private Team m_team = Team.Nature;
+
+    public Team CurrentTeam
+    {
+        get => m_team;
+        set
+        {
+            m_team = value;
+            OnValidate();
+        }
+    }
     
     public enum Priority
     {
@@ -46,7 +58,7 @@ public class Targetable : MonoBehaviour
         for (int i = 0; i < m_allTargets.Count; ++i)
         {
             var target = m_allTargets[i];
-            if ((target.team & teams) != 0 &&
+            if ((target.m_team & teams) != 0 &&
                 target.priority >= minPriority && target.priority <= maxPriority &&
                 (target.transform.position - center).sqrMagnitude <= maxDistanceSq)
             {
@@ -68,7 +80,7 @@ public class Targetable : MonoBehaviour
         for (int i = 0; i < m_allTargets.Count; ++i)
         {
             var target = m_allTargets[i];
-            if ((target.team & teams) != 0 &&
+            if ((target.m_team & teams) != 0 &&
                 target.priority >= minPriority && target.priority <= maxPriority)
             {
                 newDistSq = (target.transform.position - center).sqrMagnitude;
@@ -93,12 +105,12 @@ public class Targetable : MonoBehaviour
     {
         foreach (var damager in GetComponentsInChildren<ColliderDamager>())
         {
-            damager.team = team;
+            damager.team = m_team;
         }
 
         foreach (var health in GetComponentsInChildren<HealthHolder>())
         {
-            health.team = team;
+            health.team = m_team;
         }
     }
 

@@ -1,3 +1,4 @@
+using AmplifyShaderEditor;
 using DefaultNamespace.Audio;
 using System;
 using System.Collections;
@@ -151,7 +152,7 @@ public class MobAI : MonoBehaviour
     private void Update()
     {
         // Discard invalid targets
-        if (m_data.Target && !m_data.Target.isActiveAndEnabled)
+        if (m_data.Target && (!m_data.Target.isActiveAndEnabled || m_data.Target.CurrentTeam == m_data.targetting.CurrentTeam))
             m_data.Target = null;
 
         // Update target info
@@ -249,7 +250,7 @@ public class MobAI : MonoBehaviour
             // Get a main enemy
             if (m_data.huntMainTargets)
             {
-                farTarget = Targetable.QueryClosestTarget(transform.position, farDistance, out farDistance, ~m_data.targetting.team,
+                farTarget = Targetable.QueryClosestTarget(transform.position, farDistance, out farDistance, ~m_data.targetting.CurrentTeam,
                 minPriority: Targetable.Priority.High);
             }
 
@@ -260,7 +261,7 @@ public class MobAI : MonoBehaviour
             // If not try to get any enemy that's in range
             if (!m_data.Target)
             {
-                var newTarget = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out var closeDistance, ~m_data.targetting.team,
+                var newTarget = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out var closeDistance, ~m_data.targetting.CurrentTeam,
                     maxPriority: m_data.huntMainTargets ? Targetable.Priority.Medium : Targetable.Priority.High, 
                     minPriority: Targetable.Priority.Medium);
 
@@ -271,15 +272,26 @@ public class MobAI : MonoBehaviour
             }
 
             // As a backup, find vegetation to burn :devil:
+            float vegetationDistance = 1000f;
+            Targetable vegetationTarget = null;
             if (m_data.targetVegetation && !m_data.Target)
             {
-                m_data.Target = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out _, ~m_data.targetting.team,
+                vegetationTarget = Targetable.QueryClosestTarget(transform.position, 1000f, out vegetationDistance, ~m_data.targetting.CurrentTeam,
                     maxPriority: Targetable.Priority.Low);
+
+                if (vegetationDistance < m_data.smallTargetDistance)
+                    m_data.Target = vegetationTarget;
             }
 
             // Nothing was close, use the target that was far away
             if (!m_data.Target)
                 m_data.Target = farTarget;
+
+            // Last resort for the pawns, far away vegetation
+            if (m_data.huntMainTargets && !m_data.Target)
+            {
+                m_data.Target = vegetationTarget;
+            }
         }
 
         // Check if there are enemies in front
@@ -289,7 +301,7 @@ public class MobAI : MonoBehaviour
             if (m_data.Target)
             {
                 var toTarget = (m_data.TargetTransform.position - transform.position).normalized;
-                var nearbyAllies = Targetable.QueryTargets(transform.position, 1.5f, m_data.targetting.team, minPriority: m_data.targetting.priority);
+                var nearbyAllies = Targetable.QueryTargets(transform.position, 1.5f, m_data.targetting.CurrentTeam, minPriority: m_data.targetting.priority);
                 for (int i = 0; i < nearbyAllies.Count; ++i)
                 {
                     if (nearbyAllies[i] == m_data.targetting) continue;

@@ -4839,7 +4839,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e4818769e5080db4aa563fdcb677b22f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e4818769e5080db4aa563fdcb677b22f,
         type: 3}
@@ -5009,6 +5009,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 744799592446080462}
   m_SourcePrefab: {fileID: 100100000, guid: e4818769e5080db4aa563fdcb677b22f, type: 3}
+--- !u!23 &1043230371840001658 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7577739868436781572, guid: e4818769e5080db4aa563fdcb677b22f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1777859458457576326}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1471920699745738455 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e4818769e5080db4aa563fdcb677b22f,
@@ -5027,8 +5033,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0339d7b38aa0a74e919c5b79731f4af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trunkMaterial: {fileID: 2100000, guid: a28034875cc48cc4ba7be28bcf634f98, type: 2}
-  leavesMaterial: {fileID: 2100000, guid: 4eea7181748669042b265d0cb276e02b, type: 2}
+  trunkRenderer: {fileID: 5096829805436222235}
+  leavesRenderer: {fileID: 1043230371840001658}
   leavesTransform: {fileID: 5450836485669665569}
   iceTransforms:
   - {fileID: 4240974181626647333}
@@ -5065,6 +5071,12 @@ Transform:
 --- !u!4 &4894952276508452836 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -2647442669518191518, guid: e4818769e5080db4aa563fdcb677b22f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1777859458457576326}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5096829805436222235 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -2443296848098060131, guid: e4818769e5080db4aa563fdcb677b22f,
     type: 3}
   m_PrefabInstance: {fileID: 1777859458457576326}
   m_PrefabAsset: {fileID: 0}
