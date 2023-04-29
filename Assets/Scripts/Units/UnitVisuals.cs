@@ -13,7 +13,7 @@ namespace Units
             OnValidate();
         }
 
-        private void OnValidate()
+        protected virtual void OnValidate()
         {
             m_unit = GetComponentInParent<Unit>();
         }

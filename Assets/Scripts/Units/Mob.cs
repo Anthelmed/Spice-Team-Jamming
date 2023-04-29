@@ -41,15 +41,16 @@ namespace Units
         private static IState[] m_states = new IState[]
         {
             null,
-            //new MobIdleState(),
-            //new MobGoToTargetState(),
-            //new MobRegroupState(),
-            //new MobQueueingState(),
-            //new MobCombatIdleState(),
-            //new MobAttackState(),
-            //new MobRangedAttackState(),
-            //new MobHitState(),
-            //new MobDeathState(),
+            new MobIdleState(),
+            new MobGoToTargetState(),
+            new MobRegroupState(),
+            new MobQueueingState(),
+            new MobCombatIdleState(),
+            new MobAttackState(),
+            new MobRangedAttackState(),
+            new MobHitState(),
+            new MobDeathState(),
+            null
         };
 
         private State m_state = State.Uninitialized;
