@@ -11,7 +11,7 @@ namespace Units
         Ice
     }
 
-    public class Unit : MonoBehaviour
+    public sealed class Unit : MonoBehaviour
     {
         public enum Type
         {
@@ -24,8 +24,8 @@ namespace Units
         [SerializeField] private Faction m_team;
         [SerializeField] private Faction m_immuneTo;
         [SerializeField] private Type m_type;
-        [SerializeField] private int m_maxHealth;
-        [SerializeField] [Min(0f)] private float m_radius;
+        [SerializeField] [Min(1)] private int m_maxHealth = 10;
+        [SerializeField] [Min(0f)] private float m_radius = 0.5f;
 
         private int m_currentHealth;
 
