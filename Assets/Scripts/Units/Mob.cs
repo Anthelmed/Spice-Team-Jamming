@@ -11,10 +11,12 @@ namespace Units
         [System.Serializable]
         public class Data
         {
+            public Perception perception;
+
             public State NextState { get; set; }
         }
 
-        [SerializeField] private Data m_data = new Data();
+        [HideInInspector] [SerializeField] private Data m_data = new Data();
 
         public interface IState
         {
@@ -67,6 +69,7 @@ namespace Units
 
         private void OnValidate()
         {
+            m_data.perception = GetComponentInChildren<Perception>();
         }
 
         private void Reset()
@@ -102,9 +105,15 @@ namespace Units
                 return;
             }
 
+            if (m_data.perception) m_data.perception.Tick();
+
             UpdateTransition();
             m_states[(int)m_state]?.Tick(m_data);
             UpdateTransition();
         }
+
+#if UNITY_EDITOR
+        public State CurrentState => m_state;
+#endif
     }
 }

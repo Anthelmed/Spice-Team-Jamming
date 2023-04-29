@@ -1274,6 +1274,89 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57ebff844577e314ba4018cbe46eaf51, type: 3}
+--- !u!1001 &1126170769
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3359370446990772076, guid: e0a47cc0c5f1c824188f477f4ab82985,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359370446990772076, guid: e0a47cc0c5f1c824188f477f4ab82985,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359370446990772076, guid: e0a47cc0c5f1c824188f477f4ab82985,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359370446990772076, guid: e0a47cc0c5f1c824188f477f4ab82985,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359370446990772076, guid: e0a47cc0c5f1c824188f477f4ab82985,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359370446990772076, guid: e0a47cc0c5f1c824188f477f4ab82985,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359370446990772076, guid: e0a47cc0c5f1c824188f477f4ab82985,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359370446990772076, guid: e0a47cc0c5f1c824188f477f4ab82985,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359370446990772076, guid: e0a47cc0c5f1c824188f477f4ab82985,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359370446990772076, guid: e0a47cc0c5f1c824188f477f4ab82985,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359370446990772076, guid: e0a47cc0c5f1c824188f477f4ab82985,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595523287014560435, guid: e0a47cc0c5f1c824188f477f4ab82985,
+        type: 3}
+      propertyPath: m_unit
+      value: 
+      objectReference: {fileID: 1768637467}
+    - target: {fileID: 5570822054413945497, guid: e0a47cc0c5f1c824188f477f4ab82985,
+        type: 3}
+      propertyPath: m_type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421825497093091036, guid: e0a47cc0c5f1c824188f477f4ab82985,
+        type: 3}
+      propertyPath: m_Name
+      value: IcePawn_01
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e0a47cc0c5f1c824188f477f4ab82985, type: 3}
 --- !u!1 &1216240329
 GameObject:
   m_ObjectHideFlags: 0
@@ -1938,6 +2021,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae980b192498084c8e6b1999455682f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1486607880 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4900601520753235643, guid: 56fe338f32b569a41882eea8b1664773,
+    type: 3}
+  m_PrefabInstance: {fileID: 8689727864879092448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1571757771
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2299,6 +2388,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1725054246}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1768637467 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5570822054413945497, guid: e0a47cc0c5f1c824188f477f4ab82985,
+    type: 3}
+  m_PrefabInstance: {fileID: 1126170769}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ae980b192498084c8e6b1999455682f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1772211451
 GameObject:
   m_ObjectHideFlags: 0
@@ -2501,6 +2602,55 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa6f300edfddd8249873ed9412fd482f, type: 3}
+--- !u!1 &1804618945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1804618946}
+  - component: {fileID: 1804618947}
+  m_Layer: 0
+  m_Name: PawnPerception
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1804618946
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804618945}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1486607880}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1804618947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804618945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe2959717189fc41aa23a651d47b5d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_unit: {fileID: 1486607879}
+  m_importantTargetRange: 10
+  m_normalTargetRange: 10
+  m_prioritizeImportant: 0
+  m_targetFarVegetation: 0
 --- !u!1001 &1826251838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3301,6 +3451,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirePawn
       objectReference: {fileID: 0}
+    - target: {fileID: 2869645795830373198, guid: 56fe338f32b569a41882eea8b1664773,
+        type: 3}
+      propertyPath: m_data.perception
+      value: 
+      objectReference: {fileID: 1804618947}
     - target: {fileID: 4900601520753235643, guid: 56fe338f32b569a41882eea8b1664773,
         type: 3}
       propertyPath: m_RootOrder
@@ -3358,6 +3513,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4900601520753235643, guid: 56fe338f32b569a41882eea8b1664773,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1804618946}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56fe338f32b569a41882eea8b1664773, type: 3}

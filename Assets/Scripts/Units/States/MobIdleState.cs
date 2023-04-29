@@ -8,14 +8,20 @@ namespace Units
     {
         public void Enter(Mob.Data data)
         {
+            if (data.perception)
+                data.perception.QueryTargetEnabled = true;
         }
 
         public void Exit(Mob.Data data)
         {
+            if (data.perception)
+                data.perception.QueryTargetEnabled = false;
         }
 
         public void Tick(Mob.Data data)
         {
+            // TODO too far from leader, go there
+            // TODO has target, to there
         }
     }
 }
