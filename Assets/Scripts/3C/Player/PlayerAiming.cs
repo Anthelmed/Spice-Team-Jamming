@@ -18,21 +18,23 @@ namespace _3C.Player
 
         private void Update()
         {
-            Plane plane = new Plane(Vector3.up, Vector3.zero);
-            var ray = m_MainCamera.ScreenPointToRay(Mouse.current.position.value);
-            var direction = Vector3.zero;
-            if (plane.Raycast(ray, out float value))
+            var direction = Vector2.zero;
+            if (GameplayData.s_PlayerInputs.IsUsingCursorPositionForAim)
             {
-                direction = ray.GetPoint(value) - GameplayData.s_PlayerStateHandler.transform.position;
-                GameplayData.s_PlayerInputs.AimDirection = direction.normalized;
+                Plane plane = new Plane(Vector3.up, Vector3.zero);
+                var ray = m_MainCamera.ScreenPointToRay(Mouse.current.position.value);
+                if (plane.Raycast(ray, out float value))
+                {
+                    direction = ray.GetPoint(value).XZ() - GameplayData.s_PlayerStateHandler.transform.position.XZ();
+                    GameplayData.s_PlayerInputs.AimDirection = direction.normalized;
+                }
             }
-            
-            // if (GameplayData.s_PlayerInputs.AimDirection == Vector2.zero)
-            // {
-            //     return;
-            // }
-            
-            transform.LookAt(transform.position + direction.XZ().X0Y());
+            else
+            {
+                direction = GameplayData.s_PlayerInputs.AimDirection;
+            }
+
+            transform.LookAt(transform.position + direction.X0Y());
         }
     }
 }

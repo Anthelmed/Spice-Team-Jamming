@@ -46,6 +46,16 @@ namespace _3C.Player
             // {
             //     StackInput(InputType.AimPerformed);
             // }
+
+            if (_context.phase == InputActionPhase.Performed)
+            {
+                GameplayData.s_PlayerInputs.IsUsingCursorPositionForAim = false;
+            } else if (_context.phase == InputActionPhase.Canceled)
+            {
+                GameplayData.s_PlayerInputs.IsUsingCursorPositionForAim = true;
+            }
+
+            GameplayData.s_PlayerInputs.AimDirection = _context.ReadValue<Vector2>();
         }
 
         // TO-DO: Held Melee Attack using InputAction HoldInteraction,
