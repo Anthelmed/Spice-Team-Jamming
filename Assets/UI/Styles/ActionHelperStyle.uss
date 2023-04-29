@@ -1,0 +1,72 @@
+.action-helpers {
+    position: absolute;
+    bottom: 50px;
+    flex-direction: column;
+    left: 100px;
+    align-items: flex-start;
+    align-self: flex-start;
+}
+
+.action-helper {
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    margin-top: 25px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.action-helper-icon {
+    width: 50px;
+    height: 50px;
+    background-image: url('project://database/Assets/UI/Textures/SquareButton.png?fileID=2800000&guid=daece4c02aca5df409861f29d70b9556&type=3#SquareButton');
+    -unity-background-image-tint-color: var(--primary-color-1);
+    margin-left: 0;
+    margin-right: 25px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.action-helper-icon-label {
+    -unity-font: var(--rowdies-font-regular);
+    font-size: 20px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    -unity-text-align: middle-center;
+    height: 100%;
+}
+
+.action-helper-label {
+    height: 50px;
+    -unity-font: var(--montserrat-font-bold);
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    -unity-text-align: middle-right;
+    font-size: 22px;
+}

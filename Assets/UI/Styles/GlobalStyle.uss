@@ -1,0 +1,150 @@
+:root {
+    --primary-color-1: rgb(134, 219, 165);
+    --primary-color-1-dark: rgb(118, 194, 146);
+    --primary-color-2: rgb(142, 101, 136);
+    --title-font-size: 36px;
+    --button-font-size: 30px;
+    --rowdies-font-regular: url('project://database/Assets/Fonts/Rowdies/Rowdies-Regular.ttf?fileID=12800000&guid=2cea9ff495f9b4a4daed12e48f24ef32&type=3#Rowdies-Regular');
+    --montserrat-font-regular: url('project://database/Assets/Fonts/Montserrat/Montserrat-Regular.ttf?fileID=12800000&guid=95cc2332f1c404c4e86ccc0a5d4d2616&type=3#Montserrat-Regular');
+    --montserrat-font-bold: url('project://database/Assets/Fonts/Montserrat/Montserrat-Bold.ttf?fileID=12800000&guid=5f840e1af5ef1174089c0c7f44033efa&type=3#Montserrat-Bold');
+    -unity-font-definition: initial;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+#Overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(30, 30, 30, 0.7);
+}
+
+.main-element {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+}
+
+.title {
+    width: 600px;
+    height: 128px;
+    position: absolute;
+    left: 100px;
+    top: 100px;
+    background-image: url('project://database/Assets/UI/Textures/Ribbon.png?fileID=2800000&guid=c1bbd763c7324d344a631533f712280d&type=3#Ribbon');
+    justify-content: center;
+    align-items: center;
+    -unity-background-image-tint-color: var(--primary-color-1);
+}
+
+.title-label {
+    width: 100%;
+    height: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 30px;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    -unity-text-align: middle-center;
+    font-size: var(--title-font-size);
+    -unity-font: var(--rowdies-font-regular);
+    -unity-background-image-tint-color: var(--title-text-color);
+}
+
+.button {
+    width: 398px;
+    height: 100px;
+    margin-bottom: 25px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-image: url('project://database/Assets/UI/Textures/Button.png?fileID=2800000&guid=39146f4ae7969b44398fecb7a74931bc&type=3#Button');
+    font-size: var(--button-font-size);
+    -unity-font: var(--rowdies-font-regular);
+    -unity-text-align: middle-center;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    -unity-background-image-tint-color: var(--primary-color-1);
+}
+
+.square-button {
+    width: 100px;
+    height: 100px;
+    font-size: var(--button-font-size);
+    background-image: url('project://database/Assets/UI/Textures/SquareButton.png?fileID=2800000&guid=daece4c02aca5df409861f29d70b9556&type=3#SquareButton');
+    -unity-background-image-tint-color: var(--primary-color-1);
+    -unity-font: var(--rowdies-font-regular);
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.sub-title {
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    -unity-font: var(--montserrat-font-bold);
+    -unity-text-align: middle-center;
+    height: 100px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 28px;
+}
+
+.button:focus {
+    -unity-background-image-tint-color: var(--primary-color-1-dark);
+}
+
+.text {
+    flex-grow: 1;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    -unity-font: var(--montserrat-font-regular);
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 0;
+    padding-bottom: 50px;
+    font-size: 22px;
+    white-space: normal;
+    -unity-text-align: upper-left;
+}
