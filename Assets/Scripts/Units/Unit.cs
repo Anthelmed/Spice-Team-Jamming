@@ -24,6 +24,7 @@ namespace Units
             Player
         }
 
+        public Faction Team => m_team;
         [SerializeField] private Faction m_team;
         [SerializeField] private Faction m_immuneTo;
         public Type UnitType => m_type;

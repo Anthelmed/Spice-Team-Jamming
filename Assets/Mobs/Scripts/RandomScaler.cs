@@ -12,6 +12,6 @@ public class RandomScaler : MonoBehaviour
     {
         var height = Random.Range(m_heightRange.x, m_heightRange.y);
         var width = Random.Range(m_widthRange.x, m_widthRange.y);
-        transform.localScale = new Vector3(width, height, width);
+        transform.localScale = Vector3.Scale(transform.localScale, new Vector3(width, height, width));
     }
 }

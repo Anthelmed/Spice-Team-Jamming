@@ -6,7 +6,7 @@ namespace Units
 {
     public abstract class UnitVisuals : MonoBehaviour
     {
-        [HideInInspector][SerializeField] private Unit m_unit;
+        [HideInInspector][SerializeField] protected Unit m_unit;
 
         private void Reset()
         {
@@ -18,7 +18,7 @@ namespace Units
             m_unit = GetComponentInParent<Unit>();
         }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             if (m_unit)
             {
@@ -26,6 +26,9 @@ namespace Units
             }
         }
 
-        protected virtual void OnVisibilityChanged(bool visible) { }
+        protected virtual void OnVisibilityChanged(bool visible) 
+        {
+            gameObject.SetActive(visible);
+        }
     }
 }
