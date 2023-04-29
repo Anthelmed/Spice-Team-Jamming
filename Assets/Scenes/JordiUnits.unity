@@ -892,7 +892,7 @@ MonoBehaviour:
   m_unit: {fileID: 1486607879}
   m_visuals: {fileID: 7874678575937487502}
   m_speed: 8
-  m_acceleration: 16
+  m_acceleration: 30
   m_angularSpeed: 360
 --- !u!4 &845855834 stripped
 Transform:

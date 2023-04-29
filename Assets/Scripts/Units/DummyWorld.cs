@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Targetable;
 
 namespace Units
 {
@@ -31,6 +32,8 @@ namespace Units
         private List<Unit> m_players = new List<Unit>();
 
         private bool m_wasVisible;
+
+        private List<Unit> m_queryResultNoAlloc = new List<Unit>(20);
 
         private List<Unit> GetListForType(Unit.Type type)
         {
@@ -78,6 +81,39 @@ namespace Units
             }
 
             return result;
+        }
+
+        public List<Unit> QueryCircleAll(Vector3 center, float radius)
+        {
+            m_queryResultNoAlloc.Clear();
+
+            QueryCircleAllOfType(center, radius, Unit.Type.Vegetation, true);
+            QueryCircleAllOfType(center, radius, Unit.Type.Pawn, true);
+            QueryCircleAllOfType(center, radius, Unit.Type.Knight, true);
+            QueryCircleAllOfType(center, radius, Unit.Type.Player, true);
+
+            return m_queryResultNoAlloc;
+        }
+
+        public List<Unit> QueryCircleAllOfType(Vector3 center, float radius, Unit.Type type, bool mergePrevious = false)
+        {
+            if (!mergePrevious)
+                m_queryResultNoAlloc.Clear();
+
+            var list = GetListForType(type);
+            for (int i = 0; i < list.Count; ++i)
+            {
+                if (CircleCircleIntersect(center, radius, list[i].transform.position, list[i].Radius))
+                    m_queryResultNoAlloc.Add(list[i]);
+            }
+            return m_queryResultNoAlloc;
+        }
+
+        private bool CircleCircleIntersect(Vector3 center1, float radius1, Vector3 center2, float radius2)
+        {
+            var maxDistSq = radius1 + radius2;
+            maxDistSq *= maxDistSq;
+            return ((center1 - center2).sqrMagnitude < maxDistSq);
         }
 
         private void Awake()
