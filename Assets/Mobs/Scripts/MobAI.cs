@@ -6,70 +6,134 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Profiling;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Targetable))]
 [SelectionBase]
 public class MobAI : MonoBehaviour
 {
-    [Header("Public stuff")]
-    public Transform target;
-
-    [Header("Referencies")]
-    [SerializeField] private NavMeshAgent m_agent;
-    [SerializeField] private AnimationDriver m_animator;
-    [SerializeField] private Targetable m_targetting;
-    [SerializeField] private Collider m_attackCollider;
-    [SerializeField] private PlayerSounds m_sounds;
-
-    [Header("Parameters")]
-    [SerializeField] private Vector2 m_attackRange = Vector2.up;
-    [SerializeField] private float m_attackCooldown = 2f;
-    [SerializeField] private int m_targetQueryRate = 60;
-
-    private Vector3 m_lastPosition;
-
-    private enum State
+    [System.Serializable]
+    public class Data
     {
-        Idle,
-        GoToTarget,
-        Queueing,
-        CombatIdle,
-        Retreat,
-        Attack,
-        Hit,
-        Death
+        [Header("Referencies")]
+        public NavMeshAgent agent;
+        public AnimationDriver animator;
+        public Targetable targetting;
+        public Collider attackCollider;
+        public MobSounds sounds;
+        public Projectile projectile;
+
+        [Header("Parameters")]
+        public float meleeRange = 1f;
+        public Vector2 rangedRage = new Vector2(5f, 7f);
+        public float attackCooldown = 2f;
+        public int targetQueryRate = 60;
+        public float smallTargetDistance = 10f;
+        public float bigTargetDistance = 20;
+        public float regroupDistance = 5f;
+        public float regroupOffset;
+
+        [Header("Behaviour toggles")]
+        public bool huntMainTargets = false;
+        public bool hasRangedAttack = false;
+        public bool targetVegetation = true;
+
+        [Header("Current test")]
+        public Transform leader;
+        public float LeaderDistance { get; set; }
+        public Vector3 RegroupPosition { get; set; }
+
+        private Targetable m_target;
+        public Targetable Target { get => m_target; 
+            set
+            {
+                m_target = value;
+                if (m_target)
+                    TargetTransform = m_target.transform;
+                else
+                    TargetTransform = null;
+            } 
+        }
+        public Transform TargetTransform { get; private set; }
+        public State NextState { get; set; } = State.Idle;
+        public float TargetDistance { get; set; } = 0f;
+        public float MaxRange => UseRanged ? rangedRage.y : meleeRange;
+        public float ToTargetCos { get; set; } = 0f;
+        public bool UseRanged { get; set; } = false;
+        public bool LookAtTarget { get; set; } = false;
+        public bool AlignWithMovement { get; set; } = false;
+        public float CurrentAttackCooldown { get; set; } = 0f;
+        
+        public bool ShouldQueryAdvanceBlocked { get; set; } = false;
+        public bool ShouldQueryTargets { get; set; } = false;
+        public bool AdvanceBlocked { get; set; } = false;
+        public bool QueryNow { get; set; } = false;
+        public bool Destroy { get; set; } = false;
+
     }
 
-    [SerializeField] private State m_state = State.Idle;
-    private State m_nextState = State.Idle;
-    private bool m_lookAtTarget = false;
-    private bool m_alignWithMovement = false;
-    private float m_currentAttackCooldown = 0f;
-    private int m_queryTurn;
-    private bool m_shouldQueryAdvanceBlocked = false;
-    private bool m_advanceBlocked = false;
-    private bool m_queryNow = false;
+    public static readonly float COS_ATTACK = Mathf.Cos(15 * Mathf.Deg2Rad);
+    public static readonly float COS_BLOCKED = Mathf.Cos(45 * Mathf.Deg2Rad);
 
-    private static readonly float COS_ATTACK = Mathf.Cos(15 * Mathf.Deg2Rad);
-    private static readonly float COS_BLOCKED = Mathf.Cos(45 * Mathf.Deg2Rad);
+    [SerializeField] private Data m_data = new Data();
+
+    public interface IMobState
+    {
+        void Enter(Data data);
+        void Tick(Data data);
+        void Exit(Data data);
+    }
+
+    public enum State
+    {
+        Uninitialized = 0,
+        Idle,
+        GoToTarget,
+        Regroup,
+        Queueing,
+        CombatIdle,
+        Attack,
+        RangedAttack,
+        Hit,
+        Death,
+    }
+
+    private static IMobState[] m_states = new IMobState[]
+    {
+        null,
+        new MobIdleState(),
+        new MobGoToTargetState(),
+        new MobRegroupState(),
+        new MobQueueingState(),
+        new MobCombatIdleState(),
+        new MobAttackState(),
+        new MobRangedAttackState(),
+        new MobHitState(),
+        new MobDeathState(),
+    };
+
+    private State m_state = State.Uninitialized;
+    private int m_queryTurn;
+    private Vector3 m_lastPosition;
 
     public void OnDeath()
     {
-        m_nextState = State.Death;
+        m_data.NextState = State.Death;
     }
 
     public void OnHit()
     {
-        m_nextState = State.Hit;
+        m_data.NextState = State.Hit;
     }
 
     private void OnValidate()
     {
-        m_agent = GetComponent<NavMeshAgent>();
-        m_animator = GetComponentInChildren<AnimationDriver>();
-        m_targetting = GetComponent<Targetable>();
+        m_data.agent = GetComponent<NavMeshAgent>();
+        m_data.animator = GetComponentInChildren<AnimationDriver>();
+        m_data.targetting = GetComponent<Targetable>();
     }
+
     private void Reset()
     {
         OnValidate();
@@ -78,53 +142,65 @@ public class MobAI : MonoBehaviour
     private void Start()
     {
         m_lastPosition = transform.position;
-        m_queryTurn = UnityEngine.Random.Range(0, m_targetQueryRate);
-        m_attackCollider.enabled = false;
+        m_queryTurn = UnityEngine.Random.Range(0, m_data.targetQueryRate);
+        m_data.attackCollider.enabled = false;
+
+        if (m_data.projectile) m_data.projectile.gameObject.SetActive(false);
     }
 
     private void Update()
     {
+        // Discard invalid targets
+        if (m_data.Target && !m_data.Target.isActiveAndEnabled)
+            m_data.Target = null;
+
+        // Update target info
+        if (m_data.TargetTransform)
+        {
+            var toTarget = m_data.TargetTransform.position - transform.position;
+            var dist = toTarget.magnitude;
+            m_data.ToTargetCos = Vector3.Dot(toTarget / Mathf.Max(0.001f, dist), transform.forward);
+            m_data.TargetDistance = dist - m_data.Target.radius;
+        }
+        else
+        {
+            m_data.TargetDistance = 0f;
+            m_data.ToTargetCos = 0f;
+        }
+
+        if (m_data.leader)
+        {
+            m_data.RegroupPosition = m_data.leader.position + m_data.leader.forward * m_data.regroupOffset;
+            m_data.LeaderDistance = Vector3.Distance(transform.position, m_data.RegroupPosition);
+        }
+        else m_data.LeaderDistance = 0f;
+
+        if (m_data.hasRangedAttack)
+        {
+            m_data.UseRanged = m_data.TargetDistance >= m_data.rangedRage.x;
+        }
+        else
+            m_data.UseRanged = false;
+
         // Update cooldowns
-        m_currentAttackCooldown -= Time.deltaTime;
+        m_data.CurrentAttackCooldown -= Time.deltaTime;
 
         // Update before just in case
         UpdateTransition();
 
         // Update targetting info so it's ready for the update
-        QueryTargets();
+        RunQueries();
 
-        switch (m_state)
-        {
-            case State.Idle:
-                Idle_Update();
-                break;
-            case State.GoToTarget:
-                GoToTarget_Update();
-                break;
-            case State.Queueing:
-                Queueing_Update();
-                break;
-            case State.CombatIdle:
-                CombatIdle_Update();
-                break;
-            case State.Retreat:
-                Retreat_Update();
-                break;
-            case State.Attack:
-                Attack_Update();
-                break;
-            case State.Hit:
-                Hit_Update();
-                break;
-            case State.Death:
-                Death_Update();
-                break;
-        }
+        // Run the update
+        m_states[(int)m_state]?.Tick(m_data);
 
         // Update after to pick changes during the update
         UpdateTransition();
 
         UpdateMovement();
+
+        if (m_data.Destroy)
+            Destroy(gameObject);
     }
 
     private void UpdateMovement()
@@ -132,60 +208,97 @@ public class MobAI : MonoBehaviour
         // Update the animations
         var movement = transform.position - m_lastPosition;
         m_lastPosition = transform.position;
-        m_animator.SetSpeed(movement.magnitude / Time.deltaTime);
+        m_data.animator.SetSpeed(movement.magnitude / Time.deltaTime);
 
         // Update the rotation
-        if (m_lookAtTarget)
+        if (m_data.LookAtTarget && m_data.Target)
         {
-            var toTarget = (target.position - transform.position).normalized;
-            if (Vector3.Dot(toTarget, transform.forward) < 0.99f)
+            if (m_data.ToTargetCos < 0.99f)
             {
                 transform.rotation = Quaternion.RotateTowards(
                     transform.rotation,
-                    Quaternion.LookRotation(toTarget),
-                    m_agent.angularSpeed * Time.deltaTime);
+                    Quaternion.LookRotation(m_data.TargetTransform.position - transform.position),
+                    m_data.agent.angularSpeed * Time.deltaTime);
             }
         }
-        if (m_alignWithMovement)
+        if (m_data.AlignWithMovement)
         {
             transform.rotation = Quaternion.RotateTowards(
                 transform.rotation,
                 Quaternion.LookRotation(movement),
-                m_agent.angularSpeed * Time.deltaTime);
+                m_data.agent.angularSpeed * Time.deltaTime);
         }
     }
 
-    private void QueryTargets()
+    private void RunQueries()
     {
         // Only update when forced or when it's our turn to do so
-        if (!m_queryNow)
+        if (!m_data.QueryNow && (Time.frameCount % m_data.targetQueryRate) != m_queryTurn)
             return;
-        if ((Time.frameCount % m_targetQueryRate) != m_queryTurn)
-            return;
+
+        m_data.QueryNow = false;
+
         Profiler.BeginSample("Query");
 
-        // Check if there are enemies in front
-        if (m_shouldQueryAdvanceBlocked)
+        if (m_data.ShouldQueryTargets)
         {
-            m_advanceBlocked = false;
-            if (target)
+            m_data.Target = null;
+            Targetable farTarget = null;
+            float farDistance = m_data.bigTargetDistance;
+
+            // Get a main enemy
+            if (m_data.huntMainTargets)
             {
-                var toTarget = (target.position - transform.position).normalized;
-                var nearbyAllies = Targetable.QueryTargets(transform.position, 1.5f, m_targetting.isMain, m_targetting.team);
+                farTarget = Targetable.QueryClosestTarget(transform.position, farDistance, out farDistance, ~m_data.targetting.team,
+                minPriority: Targetable.Priority.High);
+            }
+
+            // If it's close enough that's the one we attack
+            if (farDistance < m_data.meleeRange)
+                m_data.Target = farTarget;
+
+            // If not try to get any enemy that's in range
+            if (!m_data.Target)
+            {
+                var newTarget = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out var closeDistance, ~m_data.targetting.team,
+                    maxPriority: m_data.huntMainTargets ? Targetable.Priority.Medium : Targetable.Priority.High, 
+                    minPriority: Targetable.Priority.Medium);
+
+                if (!farTarget || closeDistance < m_data.meleeRange)
+                    m_data.Target = newTarget;
+                else
+                    m_data.Target = farTarget;
+            }
+
+            // As a backup, find vegetation to burn :devil:
+            if (m_data.targetVegetation && !m_data.Target)
+            {
+                m_data.Target = Targetable.QueryClosestTarget(transform.position, m_data.smallTargetDistance, out _, ~m_data.targetting.team,
+                    maxPriority: Targetable.Priority.Low);
+            }
+
+            // Nothing was close, use the target that was far away
+            if (!m_data.Target)
+                m_data.Target = farTarget;
+        }
+
+        // Check if there are enemies in front
+        if (m_data.ShouldQueryAdvanceBlocked)
+        {
+            m_data.AdvanceBlocked = false;
+            if (m_data.Target)
+            {
+                var toTarget = (m_data.TargetTransform.position - transform.position).normalized;
+                var nearbyAllies = Targetable.QueryTargets(transform.position, 1.5f, m_data.targetting.team, minPriority: m_data.targetting.priority);
                 for (int i = 0; i < nearbyAllies.Count; ++i)
                 {
-                    if (nearbyAllies[i] == m_targetting) continue;
+                    if (nearbyAllies[i] == m_data.targetting) continue;
                     if (Vector3.Dot((nearbyAllies[i].transform.position - transform.position).normalized, toTarget) > COS_BLOCKED)
                     {
-                        m_advanceBlocked = true;
+                        m_data.AdvanceBlocked = true;
                         break;
                     }
                 }
-            }
-
-            if (m_advanceBlocked)
-            {
-                Debug.Log("Advance blocked");
             }
         }
 
@@ -194,262 +307,37 @@ public class MobAI : MonoBehaviour
 
     private void UpdateTransition()
     {
-        if (m_state == m_nextState)
+        if (m_state == m_data.NextState)
             return;
 
-        switch (m_state)
-        {
-            case State.GoToTarget:
-                GoToTarget_Exit();
-                break;
-            case State.Queueing:
-                Queueing_Exit();
-                break;
-            case State.CombatIdle:
-                CombatIdle_Exit();
-                break;
-            case State.Retreat:
-                Retreat_Exit();
-                break;
-            case State.Attack:
-                Attack_Exit();
-                break;
-        }
-
-        switch (m_nextState)
-        {
-            case State.GoToTarget:
-                GoToTarget_Enter();
-                break;
-            case State.Queueing:
-                Queueing_Enter();
-                break;
-            case State.CombatIdle:
-                CombatIdle_Enter();
-                break;
-            case State.Retreat:
-                Retreat_Enter();
-                break;
-            case State.Attack:
-                Attack_Enter();
-                break;
-            case State.Hit:
-                Hit_Enter();
-                break;
-            case State.Death:
-                Death_Enter();
-                break;
-        }
-
-        m_state = m_nextState;
+        m_states[(int)m_state]?.Exit(m_data);
+        m_state = m_data.NextState;
+        m_states[(int)m_state]?.Enter(m_data);
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, m_attackRange.x);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, m_attackRange.y);
-    }
-
-    #region States
-    #region Idle
-    private void Idle_Update()
-    {
-        if (target)
-            m_nextState = State.GoToTarget;
-    }
-    #endregion
-
-    #region GoToTarget
-    private void GoToTarget_Enter()
-    {
-        // Set the destination to start moving
-        m_agent.SetDestination(target.position);
-        m_agent.updateRotation = true;
-        m_shouldQueryAdvanceBlocked = true;
-        // Query immediately so we don't even start moving
-        m_queryNow = true;
-    }
-
-    private void GoToTarget_Update()
-    {
-        if (!target)
+        Gizmos.DrawWireSphere(transform.position, m_data.meleeRange);
+        if (m_data.hasRangedAttack)
         {
-            m_nextState = State.Idle;
-            return;
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, m_data.rangedRage.x);
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, m_data.rangedRage.y);
+        }
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, m_data.smallTargetDistance);
+        if (m_data.huntMainTargets)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(transform.position, m_data.bigTargetDistance);
         }
 
-        if (m_advanceBlocked)
+        if (Application.isPlaying && m_data.leader)
         {
-            m_nextState = State.Queueing;
-            return;
-        }
-
-        // Go to combat if we are close enough
-        if ((target.position - transform.position).sqrMagnitude < (m_attackRange.y * m_attackRange.y))
-        {
-            m_nextState = State.CombatIdle;
-            return;
-        }
-
-        // Update the navigation path if the current one is too outdated
-        if ((m_agent.destination - target.position).sqrMagnitude > (m_agent.radius * m_agent.radius))
-        {
-            m_agent.SetDestination(target.position);
+            Gizmos.color = Color.black;
+            Gizmos.DrawWireSphere(m_data.RegroupPosition, m_data.regroupDistance);
         }
     }
-
-    private void GoToTarget_Exit()
-    {
-        m_agent.ResetPath();
-        m_agent.updateRotation = false;
-        m_shouldQueryAdvanceBlocked = true;
-    }
-    #endregion
-
-    #region Queueing
-    private void Queueing_Enter()
-    {
-        m_shouldQueryAdvanceBlocked = true;
-        m_lookAtTarget = true;
-    }
-
-    private void Queueing_Update()
-    {
-        if (!m_advanceBlocked)
-            m_nextState = State.GoToTarget;
-    }
-
-    private void Queueing_Exit()
-    {
-        m_shouldQueryAdvanceBlocked = false;
-        m_lookAtTarget = false;
-    }
-    #endregion
-
-    #region CombatIdle
-    private void CombatIdle_Enter()
-    {
-        m_lookAtTarget = true;
-    }
-
-    private void CombatIdle_Update()
-    {
-        if (!target)
-        {
-            m_nextState = State.Idle;
-            return;
-        }
-
-        var toTarget = target.position - transform.position;
-        var targetDistSq = toTarget.sqrMagnitude;
-        if (targetDistSq > (m_attackRange.y * m_attackRange.y))
-        {
-            m_nextState = State.GoToTarget;
-            return;
-        }
-
-        if (targetDistSq < (m_attackRange.x * m_attackRange.x))
-        {
-            m_nextState = State.Retreat;
-            return;
-        }
-
-        if (m_currentAttackCooldown < 0f)
-        {
-            var dot = Vector3.Dot(toTarget.normalized, transform.forward);
-            if (dot > COS_ATTACK)
-            {
-                m_currentAttackCooldown = m_attackCooldown;
-                m_nextState = State.Attack;
-            }
-        }
-    }
-
-    private void CombatIdle_Exit()
-    {
-        m_lookAtTarget = false;
-    }
-    #endregion
-
-    #region Retreat
-    private void Retreat_Enter()
-    {
-        m_alignWithMovement = true;
-    }
-
-    private void Retreat_Update()
-    {
-        if (!target)
-        {
-            m_nextState = State.Idle;
-            return;
-        }
-
-        var fromTarget = (transform.position - target.position);
-        var distance = fromTarget.magnitude;
-        m_agent.velocity = (transform.position - target.position) / distance * m_agent.speed;
-
-        if (distance > m_attackRange.x)
-            m_nextState = State.CombatIdle;
-    }
-
-    private void Retreat_Exit()
-    {
-        m_alignWithMovement = false;
-    }
-    #endregion
-
-    #region Attack
-    private void Attack_Enter()
-    {
-        m_animator.TriggerAttack();
-        if (m_sounds) m_sounds.PlayAttackSound();
-    }
-
-    private void Attack_Update()
-    {
-        if (m_attackCollider)
-            m_attackCollider.enabled = m_animator.IsDamagingFrame();
-
-        if (m_animator.HasAnimationFinished())
-            m_nextState = State.CombatIdle;
-    }
-
-    private void Attack_Exit()
-    {
-        if (m_attackCollider)
-            m_attackCollider.enabled = false;
-    }
-    #endregion
-
-    #region Hit
-    private void Hit_Enter()
-    {
-        m_animator.TriggerHit();
-        if (m_sounds) m_sounds.PlayDamageSound();
-    }
-
-    private void Hit_Update()
-    {
-        if (m_animator.HasAnimationFinished())
-            m_nextState = State.CombatIdle;
-    }
-    #endregion
-
-    #region Death
-    private void Death_Enter()
-    {
-        m_animator.TriggerDeath();
-        if (m_sounds) m_sounds.PlayDeathSound();
-    }
-
-    private void Death_Update()
-    {
-        if (m_animator.HasAnimationFinished())
-            Destroy(gameObject);
-    }
-    #endregion
-    #endregion
 }

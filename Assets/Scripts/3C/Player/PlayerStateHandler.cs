@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using DefaultNamespace.Audio;
+using Runtime.Utilities;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace _3C.Player
         IdleMovement,
         Dashing,
         Attacking,
+        Aiming,
     }
     
     public class PlayerStateHandler : MonoBehaviour, IStateHandler
@@ -26,21 +28,26 @@ namespace _3C.Player
         [SerializeField] private PlayerMovement m_PlayerMovement;
         [SerializeField] private DashBehavior m_DashBehavior;
         [SerializeField] private PlayerMeleeAttack m_PlayerMeleeAttack;
+        [SerializeField] private PlayerRangeAttack m_PlayerRangeAttack;
 
         [Header("Components")]
         [SerializeField] private PlayerSounds m_Sounds;
 
+        [SerializeField] private PlayerAiming m_Aiming;
+        
         public PlayerSounds PlayerSoundsInstance => m_Sounds;
+        
+        public PlayerAiming PlayerAimingInstance => m_Aiming;
+
         public void OnMovementStateChanged(bool _state)
         {
-            if (_state)
-            {
-                m_PlayerMovement.StartState();
-            }
-            else
-            {
-                m_PlayerMovement.StopState();
-            }
+            m_PlayerMovement.Enabled = _state;
+        }
+
+        public void OnAimingStateChanged(bool _state)
+        {
+            m_Aiming.enabled = _state;
+            m_PlayerMovement.IsLookingAtMovement = !_state;
         }
 
         private PlayerInputs m_PlayerInputs = new();
@@ -52,6 +59,7 @@ namespace _3C.Player
                 yield return m_PlayerMovement;
                 yield return m_DashBehavior;
                 yield return m_PlayerMeleeAttack;
+                yield return m_PlayerRangeAttack;
             }
         }
 
@@ -82,6 +90,8 @@ namespace _3C.Player
             }
 
             CurrentState = PlayerState.IdleMovement;
+            m_PlayerMovement.Enabled = true;
+            OnAimingStateChanged(false);
         }
 
         private void OnStateChange(PlayerState _currentState, PlayerState _nextState)
@@ -96,6 +106,7 @@ namespace _3C.Player
             PlayerState.IdleMovement => m_PlayerMovement,
             PlayerState.Dashing => m_DashBehavior,
             PlayerState.Attacking => m_PlayerMeleeAttack,
+            PlayerState.Aiming => m_PlayerRangeAttack,
             _ => null,
         };
 
@@ -142,9 +153,11 @@ namespace _3C.Player
             
             CurrentState = (m_CurrentState, _input) switch
             {
-                (PlayerState.IdleMovement, InputType.AttackPerformed) => PlayerState.Attacking,
+                (PlayerState.IdleMovement, InputType.MeleeAttackPerformed) => PlayerState.Attacking,
                 (PlayerState.IdleMovement, InputType.DashPerformed) => PlayerState.Dashing,
                 (PlayerState.Attacking, InputType.DashPerformed) => PlayerState.Dashing,
+                (PlayerState.IdleMovement, InputType.AimPerformed) => PlayerState.Aiming,
+                (PlayerState.IdleMovement, InputType.AimCanceled) => PlayerState.IdleMovement,
                 _ => throw new Exception($" {m_CurrentState} - {_input} is not handled"),
             };
         }
@@ -156,9 +169,19 @@ namespace _3C.Player
                 (PlayerState.Attacking, InputType.MovementCanceled) or (PlayerState.Attacking, InputType.MovementPerformed) => false,
                 (PlayerState.Dashing, _) => false,
                 (PlayerState.IdleMovement, InputType.MovementPerformed) or (PlayerState.IdleMovement, InputType.MovementCanceled) => false,
-                (PlayerState.Attacking, InputType.AttackPerformed) => false,
+                (PlayerState.Attacking, InputType.MeleeAttackPerformed) => false,
+                (PlayerState.Aiming, InputType.DashPerformed) => true,
+                (PlayerState.Aiming, _) => false,
+                (PlayerState.Attacking, InputType.DashPerformed) => true,
+                (PlayerState.Attacking, _) => false,
                 _ => true,
             };
+        }
+
+        public void SetOrientationToUseMovement()
+        {
+            transform.LookAt(transform.position + GameplayData.s_PlayerInputs.Movement.X0Y());
+            m_PlayerMovement.InstantOrientationTo(GameplayData.s_PlayerInputs.Movement);
         }
     }
 }

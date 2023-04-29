@@ -73,6 +73,12 @@ public class VatAnimationDriver : AnimationDriver
         SwitchAnimation(AnimationID.Attack);
     }
 
+    public override void TriggerRangedAttack()
+    {
+        m_specialAnimationEnds = Time.timeSinceLevelLoad + animationData.animations[(int)AnimationID.Attack].x - transitionDuration;
+        SwitchAnimation(AnimationID.Attack);
+    }
+
     public override bool HasAnimationFinished()
     {
         return m_specialAnimationEnds < Time.timeSinceLevelLoad;

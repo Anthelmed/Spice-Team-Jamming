@@ -3,9 +3,12 @@ using DefaultNamespace.HealthSystem.Damager;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mail;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 
+[SelectionBase]
 public class Targetable : MonoBehaviour
 {
     [Flags]
@@ -18,52 +21,67 @@ public class Targetable : MonoBehaviour
     }
 
     public Team team = Team.Nature;
-    public bool isMain;
-
-    private static readonly Team[] m_teams = new Team[] { Team.Nature, Team.Fire, Team.Ice, Team.Wizard };
-
-    private static List<Targetable>[] m_targets = new List<Targetable>[]
+    
+    public enum Priority
     {
-        new List<Targetable>(),
-        new List<Targetable>(),
-        new List<Targetable>(),
-        new List<Targetable>(),
-    };
+        Low = 0,
+        Medium,
+        High
+    }
 
-    private static List<Targetable>[] m_mainTargets = new List<Targetable>[]
-    {
-        new List<Targetable>(),
-        new List<Targetable>(),
-        new List<Targetable>(),
-        new List<Targetable>(),
-    };
+    public Priority priority = Priority.Medium;
+    public float radius = 0.5f;
+
+    private static List<Targetable> m_allTargets = new List<Targetable>();
 
     // Reuse this one to avoid allocations
     private static List<Targetable> m_reusableListForQueries = new List<Targetable>();
 
-    public static List<Targetable> QueryTargets(Vector3 center, float maxDistance, bool mainTargets, Team teams)
+    public static List<Targetable> QueryTargets(Vector3 center, float maxDistance, Team teams, 
+        Priority minPriority = Priority.Low, Priority maxPriority = Priority.High)
     {
         m_reusableListForQueries.Clear();
         var maxDistanceSq = maxDistance * maxDistance;
 
-        for (int i = 0; i < m_teams.Length; ++i)
+        for (int i = 0; i < m_allTargets.Count; ++i)
         {
-            if (!teams.HasFlag(m_teams[i])) continue;
-            if (mainTargets)
-                FindTargetsInRange(center, maxDistanceSq, m_mainTargets[i]);
-            else
-                FindTargetsInRange(center, maxDistanceSq, m_targets[i]);
+            var target = m_allTargets[i];
+            if ((target.team & teams) != 0 &&
+                target.priority >= minPriority && target.priority <= maxPriority &&
+                (target.transform.position - center).sqrMagnitude <= maxDistanceSq)
+            {
+                m_reusableListForQueries.Add(target);
+            }
         }
 
         return m_reusableListForQueries;
     }
-    private static void FindTargetsInRange(Vector3 center, float maxDistanceSq, List<Targetable> targets)
+
+    public static Targetable QueryClosestTarget(Vector3 center, float maxDistance, out float distance, Team teams,
+        Priority minPriority = Priority.Low, Priority maxPriority = Priority.High)
     {
-        for (int i = 0; i < targets.Count; ++i)
+        Targetable result = null;
+
+        var maxDistanceSq = maxDistance * maxDistance;
+        float newDistSq;
+
+        for (int i = 0; i < m_allTargets.Count; ++i)
         {
-            if ((targets[i].transform.position - center).sqrMagnitude < maxDistanceSq)
-                m_reusableListForQueries.Add(targets[i]);
+            var target = m_allTargets[i];
+            if ((target.team & teams) != 0 &&
+                target.priority >= minPriority && target.priority <= maxPriority)
+            {
+                newDistSq = (target.transform.position - center).sqrMagnitude;
+                if (newDistSq < maxDistanceSq)
+                {
+                    result = target;
+                    maxDistanceSq = newDistSq; ;
+                }
+            }
         }
+
+        distance = Mathf.Sqrt(maxDistanceSq);
+        return result;
     }
 
     private void Reset()
@@ -86,27 +104,11 @@ public class Targetable : MonoBehaviour
 
     private void OnEnable()
     {
-        for (int i = 0; i < m_teams.Length; ++i)
-        {
-            if (team.HasFlag(m_teams[i]))
-            {
-                m_targets[i].Add(this);
-                if (isMain)
-                    m_mainTargets[i].Add(this);
-            }
-        }
+        m_allTargets.Add(this);
     }
 
     private void OnDisable()
     {
-        for (int i = 0; i < m_teams.Length; ++i)
-        {
-            if (team.HasFlag(m_teams[i]))
-            {
-                m_targets[i].Remove(this);
-                if (isMain)
-                    m_mainTargets[i].Remove(this);
-            }
-        }
+        m_allTargets.Remove(this);
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using DefaultNamespace;
 using NaughtyAttributes;
+using Runtime.Utilities;
 using UnityEngine;
 
 namespace _3C.Player
@@ -27,6 +29,8 @@ namespace _3C.Player
         [SerializeField] private float m_Duration;
         [SerializeField] private float m_Distance;
         [SerializeField] private AnimationCurve m_DistanceCurve;
+        [SerializeField] private float m_PostDashDelay;
+        
         
         private float m_InverseDuration;
         private Transform m_Transform;
@@ -56,6 +60,7 @@ namespace _3C.Player
         private IEnumerator c_Dashing()
         {
             m_StateHandler.OnMovementStateChanged(false);
+            m_StateHandler.SetOrientationToUseMovement();
             Vector3 start = m_Transform.position;
             Vector3 end = m_Transform.position + m_Transform.forward * m_Distance;
 
@@ -87,8 +92,26 @@ namespace _3C.Player
             }
             
             m_Transform.position = end;
+            if (m_PostDashDelay == 0)
+            {
+                PostDashCleaning();
+            }
+            else
+            {
+                m_StateHandler.StartCoroutine(c_PostDashDelay());
+            }
+        }
+
+        private void PostDashCleaning()
+        {
             m_StateHandler.OnMovementStateChanged(true);
             m_StateHandler.OnStateEnded();
+        }
+
+        private IEnumerator c_PostDashDelay()
+        {
+            yield return new WaitForSeconds(m_PostDashDelay);
+            PostDashCleaning();
         }
 
         public override void OnValidate()

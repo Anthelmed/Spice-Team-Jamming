@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2625575826228285707}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.496, z: 0.554}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.496, z: 0.867}
+  m_LocalScale: {x: 1.3373, y: 1.3373, z: 1.3373}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3713566029389570041}
@@ -67,7 +67,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 1
-  team: 0
+  team: 1
+  ignore: 0
 --- !u!1001 &7082814781366103968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -86,6 +87,41 @@ PrefabInstance:
       propertyPath: m_attackCollider
       value: 
       objectReference: {fileID: 6045148717642154075}
+    - target: {fileID: 3138952457350015010, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
+        type: 3}
+      propertyPath: m_data.attackRange.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3138952457350015010, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
+        type: 3}
+      propertyPath: m_data.regroupOffset
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3138952457350015010, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
+        type: 3}
+      propertyPath: m_data.attackCollider
+      value: 
+      objectReference: {fileID: 6045148717642154075}
+    - target: {fileID: 3138952457350015010, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
+        type: 3}
+      propertyPath: m_data.regroupDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286957307657902224, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
+        type: 3}
+      propertyPath: m_MaxHealth
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286957307657902224, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
+        type: 3}
+      propertyPath: m_OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286957307657902224, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
+        type: 3}
+      propertyPath: m_OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Behaviour, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5891282415284875353, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
         type: 3}
       propertyPath: m_RootOrder
@@ -154,7 +190,7 @@ PrefabInstance:
     - target: {fileID: 7304046562964798858, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
         type: 3}
       propertyPath: m_Acceleration
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7304046562964798858, guid: 3fbffbfa3a27d7144921326b76bc0cfe,
         type: 3}

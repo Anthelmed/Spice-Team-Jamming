@@ -4,15 +4,16 @@ using UnityEngine.SceneManagement;
 using System;
 using UnityEngine.InputSystem;
 
+public enum GameState
+{
+    title,
+    map,
+    level,
+    pause
+}
 public class GameManager : MonoBehaviour
 {
-    public enum GameState
-    {
-        title,
-        map,
-        level,
-        pause
-    }
+ 
 
     [SerializeField] string battleSceneName;
     [SerializeField] Camera mapCamera;
@@ -31,6 +32,8 @@ public class GameManager : MonoBehaviour
 
     GameObject loadedPlayer;
     bool battleMapLoaded;
+
+    public event Action<GameState> OnGameStateChanged = delegate { };
 
     private void Awake()
     {
@@ -113,6 +116,7 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+        OnGameStateChanged(state);
     }
 
 

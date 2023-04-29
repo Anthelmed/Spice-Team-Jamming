@@ -180,6 +180,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4795046953819220789}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5437439428684099659 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 720232440066317182, guid: d670746b9b8729f4cb34fa9871ec532a,
+    type: 3}
+  m_PrefabInstance: {fileID: 4795046953819220789}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ce2d1a7c610a343806c66d8fcd18d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7086265233812172699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -260,9 +272,19 @@ PrefabInstance:
       objectReference: {fileID: 4763624763943536649}
     - target: {fileID: 5315648498737710978, guid: ce306a084314e7c45bfb270fab518cb0,
         type: 3}
+      propertyPath: m_data.sounds
+      value: 
+      objectReference: {fileID: 5437439428684099659}
+    - target: {fileID: 5315648498737710978, guid: ce306a084314e7c45bfb270fab518cb0,
+        type: 3}
       propertyPath: m_attackRange.y
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5315648498737710978, guid: ce306a084314e7c45bfb270fab518cb0,
+        type: 3}
+      propertyPath: m_data.animator
+      value: 
+      objectReference: {fileID: 4763624763943536649}
     - target: {fileID: 5991835223425298841, guid: ce306a084314e7c45bfb270fab518cb0,
         type: 3}
       propertyPath: team

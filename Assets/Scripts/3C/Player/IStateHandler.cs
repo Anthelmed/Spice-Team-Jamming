@@ -12,7 +12,11 @@ namespace _3C.Player
         void StopAllCoroutines();
         GameObject gameObject { get; }
         PlayerSounds PlayerSoundsInstance { get; }
+        PlayerAiming PlayerAimingInstance { get; }
 
         void OnMovementStateChanged(bool _state);
+
+        void OnAimingStateChanged(bool _state);
+        void SetOrientationToUseMovement();
     }
 }
