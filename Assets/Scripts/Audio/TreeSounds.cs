@@ -14,10 +14,40 @@ namespace DefaultNamespace.Audio
 
         AudioManager m_AudioManager;
 
+        [SerializeField] Vegetation vegetation;
+
+        
+
         private void Start()
         {
             if (AudioManager.instance != null) m_AudioManager = AudioManager.instance;
+            vegetation.OnTreeStateChanged += HandleTreeStateChange;
+        }
 
+        void HandleTreeStateChange(Targetable.Team team)
+        {
+            switch (team)
+            {
+                case Targetable.Team.Nature:
+                    {
+                   //    PlayNatureSound();
+                    }
+                    break;
+                case Targetable.Team.Fire:
+                    {
+                    //    PlayFireDamageSound();
+                    }
+                    break;
+                case Targetable.Team.Ice:
+                    {
+                    //    PlayIceDamageSound(); 
+                    }
+                    break;
+                case Targetable.Team.Wizard:
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void PlayBurnSound()
