@@ -222,7 +222,7 @@ MonoBehaviour:
     Movement: {x: 0, y: 0}
   m_DashBehavior:
     m_HasOvershootFrame: 1
-    m_OvershootDistance: 0
+    m_OvershootDistance: 0.35
     m_HasOvershootPauseFrame: 1
     m_HasBounceFrame: 1
     m_BounceDistance: 0.1
@@ -262,8 +262,8 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   m_PlayerMeleeAttack:
-    m_InputWaitDelay: 1
-    m_DashSpeed: 20
+    m_InputWaitDelay: 0.3
+    m_DashSpeed: 5
     m_DashDuration: 0.1
     m_DashCurve:
       serializedVersion: 2
@@ -323,8 +323,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_BaseDamage: 1
-    m_SuccessfullComboDamage: 3
+    m_BaseDamage: 3
+    m_SuccessfullComboDamage: 2
     m_VFX_Start: 0
     m_VFX:
     - {fileID: 332763085616677012}
