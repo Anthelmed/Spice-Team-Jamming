@@ -15,6 +15,8 @@ namespace Units
         private List<Unit> m_knights = new List<Unit>();
         private List<Unit> m_players = new List<Unit>();
 
+        private bool m_wasVisible;
+
         private List<Unit> GetListForType(Unit.Type type)
         {
             switch (type)
@@ -44,6 +46,19 @@ namespace Units
         private void Awake()
         {
             Instance = this;
+            m_wasVisible = visible;
+        }
+
+        private void Update()
+        {
+            if (visible != m_wasVisible)
+            {
+                m_wasVisible = visible;
+                foreach (var unit in m_vegetation) unit.ChangeVisibility(visible);
+                foreach (var unit in m_pawns) unit.ChangeVisibility(visible);
+                foreach (var unit in m_knights) unit.ChangeVisibility(visible);
+                foreach (var unit in m_players) unit.ChangeVisibility(visible);
+            }
         }
 
 #if UNITY_EDITOR

@@ -2091,35 +2091,14 @@ MonoBehaviour:
       m_Calls: []
   onHit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DebugUnitHits, Assembly-CSharp
-        m_MethodName: LogHit
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onHeal:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DebugUnitHits, Assembly-CSharp
-        m_MethodName: LogHeal
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onDie:
+    m_PersistentCalls:
+      m_Calls: []
+  onVisibilityChanged:
     m_PersistentCalls:
       m_Calls: []
   m_debugColor: {r: 0.78300154, g: 1, b: 0.526, a: 1}
@@ -2808,6 +2787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1825692b0065a4e8237b42aa3de27b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visible: 1
 --- !u!4 &1572894319
 Transform:
   m_ObjectHideFlags: 0
@@ -3291,12 +3271,12 @@ PrefabInstance:
     - target: {fileID: 1765777192518057553, guid: aa6f300edfddd8249873ed9412fd482f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -3e-45
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 1765777192518057553, guid: aa6f300edfddd8249873ed9412fd482f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1e-45
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2209499713400549653, guid: aa6f300edfddd8249873ed9412fd482f,
         type: 3}
@@ -3411,12 +3391,12 @@ PrefabInstance:
     - target: {fileID: 5854567030279583236, guid: aa6f300edfddd8249873ed9412fd482f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -3e-45
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 5854567030279583236, guid: aa6f300edfddd8249873ed9412fd482f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1e-45
+      value: -0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4969432041460435222, guid: aa6f300edfddd8249873ed9412fd482f, type: 3}

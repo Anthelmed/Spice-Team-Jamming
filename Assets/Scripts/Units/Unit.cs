@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 namespace Units
 {
@@ -36,6 +37,7 @@ namespace Units
         public UnityEvent<float, Unit, Vector3> onHit;
         public UnityEvent<float> onHeal;
         public UnityEvent onDie;
+        public UnityEvent<bool> onVisibilityChanged;
 
         public bool Visible => DummyWorld.Instance.visible;
 
@@ -77,6 +79,11 @@ namespace Units
 
             if (wasDead)
                 DummyWorld.Instance.Register(this);
+        }
+
+        public void ChangeVisibility(bool visible)
+        {
+            onVisibilityChanged?.Invoke(visible);
         }
 
         private void Awake()
