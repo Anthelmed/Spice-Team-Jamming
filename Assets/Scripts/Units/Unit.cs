@@ -11,6 +11,7 @@ namespace Units
         Ice
     }
 
+    [SelectionBase]
     public sealed class Unit : MonoBehaviour
     {
         public enum Type
