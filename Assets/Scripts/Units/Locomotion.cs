@@ -18,6 +18,7 @@ namespace Units
         public Transform LookAtTarget { get; set; }
 
         private Vector3 m_lastPosition;
+        private Vector3 m_lastVelocity;
 
         private Transform Transform => m_unit ? m_unit.transform : transform;
 
@@ -40,6 +41,8 @@ namespace Units
 
             var lastVelocity = lastMovement / Time.deltaTime;
             lastVelocity = Vector3.ClampMagnitude(lastVelocity, m_speed);
+            lastVelocity = Vector3.MoveTowards(m_lastVelocity, lastVelocity, m_acceleration * Time.deltaTime);
+            m_lastVelocity = lastVelocity;
             var velocity = Vector3.MoveTowards(lastVelocity, targetVelocity, m_acceleration * Time.deltaTime);
 
             var newPosition = trans.position + velocity * Time.deltaTime;
