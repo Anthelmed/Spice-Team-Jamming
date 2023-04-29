@@ -58,9 +58,9 @@ namespace Units
             GetListForType(unit.UnitType).Remove(unit);
         }
 
-        public Unit FindClosestEnemyOfType(Vector3 position, float maxDistance, Unit.Type type, Faction myTeam, out float distanceSq)
+        public Unit FindClosestEnemyOfType(Vector3 position, float maxDistance, Unit.Type type, Faction myTeam, out float distance)
         {
-            distanceSq = maxDistance * maxDistance;
+            distance = maxDistance;
             Unit result = null;
 
             var list = GetListForType(type);
@@ -68,10 +68,11 @@ namespace Units
             for (int i = 0; i < list.Count; ++i)
             {
                 if (list[i].Team == myTeam) continue;
-                newDist = (list[i].transform.position - position).sqrMagnitude;
-                if (newDist < distanceSq)
+                newDist = (list[i].transform.position - position).magnitude;
+                newDist -= list[i].Radius;
+                if (newDist < distance)
                 {
-                    distanceSq = newDist;
+                    distance = newDist;
                     result = list[i];
                 }
             }

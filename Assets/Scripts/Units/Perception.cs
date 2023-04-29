@@ -42,29 +42,29 @@ namespace Units
             var world = DummyWorld.Instance;
             if (!world) return;
 
-            Target = world.FindClosestEnemyOfType(position, m_importantTargetRange, Unit.Type.Player, m_unit.Team, out float distSq);
-            var candidate = world.FindClosestEnemyOfType(position, m_importantTargetRange, Unit.Type.Knight, m_unit.Team, out float newDistSq);
+            Target = world.FindClosestEnemyOfType(position, m_importantTargetRange + m_unit.Radius, Unit.Type.Player, m_unit.Team, out float dist);
+            var candidate = world.FindClosestEnemyOfType(position, m_importantTargetRange + m_unit.Radius, Unit.Type.Knight, m_unit.Team, out float newDist);
 
-            if (candidate && (!Target || newDistSq < distSq && candidate))
+            if (candidate && (!Target || newDist < dist && candidate))
             {
                 Target = candidate;
-                distSq = newDistSq;
+                dist = newDist;
             }
 
-            if (m_prioritizeImportant && distSq < (m_normalTargetRange * m_normalTargetRange) && Target)
+            if (m_prioritizeImportant && dist < (m_normalTargetRange + m_unit.Radius) && Target)
             {
                 return;
             }
 
-            candidate = world.FindClosestEnemyOfType(position, m_normalTargetRange, Unit.Type.Pawn, m_unit.Team, out newDistSq);
-            if (candidate && (!Target || newDistSq < distSq))
+            candidate = world.FindClosestEnemyOfType(position, m_normalTargetRange + m_unit.Radius, Unit.Type.Pawn, m_unit.Team, out newDist);
+            if (candidate && (!Target || newDist < dist))
             {
                 Target = candidate;
             }
 
             if (Target) return;
 
-            Target = world.FindClosestEnemyOfType(position, m_targetFarVegetation ? 10000f : m_normalTargetRange, Unit.Type.Vegetation, m_unit.Team, out _);
+            Target = world.FindClosestEnemyOfType(position, m_targetFarVegetation ? 10000f : m_normalTargetRange + m_unit.Radius, Unit.Type.Vegetation, m_unit.Team, out _);
         }
 
 #if UNITY_EDITOR
