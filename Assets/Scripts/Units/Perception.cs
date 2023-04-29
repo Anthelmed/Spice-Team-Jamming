@@ -74,6 +74,12 @@ namespace Units
             UnityEditor.Handles.color = Color.white;
             UnityEditor.Handles.DrawWireDisc(position, Vector3.up, m_importantTargetRange);
             UnityEditor.Handles.DrawWireDisc(position, Vector3.up, m_normalTargetRange);
+
+            if (Target)
+            {
+                UnityEditor.Handles.color = Color.red;
+                UnityEditor.Handles.DrawWireDisc(Target.transform.position, Vector3.up, Target.Radius);
+            }
         }
 #endif
     }
