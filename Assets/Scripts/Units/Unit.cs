@@ -25,6 +25,7 @@ namespace Units
 
         [SerializeField] private Faction m_team;
         [SerializeField] private Faction m_immuneTo;
+        public Type UnitType => m_type;
         [SerializeField] private Type m_type;
         [SerializeField] [Min(1)] private int m_maxHealth = 10;
         [SerializeField] [Min(0f)] private float m_invencivilityAfterHit = 0.5f;
@@ -37,9 +38,14 @@ namespace Units
         public UnityEvent onDie;
 
         private float m_currentHealth;
+        private float m_lastHit;
 
         public void TakeHit(float damage, Unit other, Vector3 hitPosition)
         {
+            if (m_currentHealth < 0f) return;
+
+            if (Time.timeSinceLevelLoad - m_lastHit < m_invencivilityAfterHit) return;
+
             if (other.m_team == m_immuneTo)
             {
                 onImmuneHit?.Invoke();
@@ -48,23 +54,42 @@ namespace Units
 
             if (other.m_team == m_team) return;
 
+            m_lastHit = Time.timeSinceLevelLoad;
             m_currentHealth = Mathf.Max(0, m_currentHealth - damage);
 
             if (m_currentHealth == 0)
+            {
                 onDie?.Invoke();
+                DummyWorld.Instance.Unregister(this);
+            }
             else
                 onHit?.Invoke(damage, other, hitPosition);
         }
 
         public void Heal(float amount)
         {
+            var wasDead = m_currentHealth == 0;
+
             m_currentHealth = Mathf.Min(m_maxHealth, m_currentHealth + amount);
             onHeal?.Invoke(amount);
+
+            if (wasDead)
+                DummyWorld.Instance.Register(this);
         }
 
         private void Awake()
         {
             m_currentHealth = m_maxHealth;
+        }
+
+        private void OnEnable()
+        {
+            DummyWorld.Instance.Register(this);
+        }
+
+        private void OnDisable()
+        {
+            DummyWorld.Instance.Unregister(this);
         }
 
 #if UNITY_EDITOR
