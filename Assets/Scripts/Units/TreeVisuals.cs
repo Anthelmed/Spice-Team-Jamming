@@ -15,6 +15,8 @@ namespace Units
         public Transform[] iceTransforms;
         public ParticleSystem fireParticles;
 
+        private bool m_needsFire = false;
+
         private void Start()
         {
             foreach (var iceCube in iceTransforms)
@@ -23,6 +25,12 @@ namespace Units
 
             }
             trunkRenderer.material.SetFloat("_TrunkState", 0);
+        }
+
+        private void OnEnable()
+        {
+            if (m_needsFire)
+                fireParticles.Play();
         }
 
         protected override void Awake()
@@ -52,21 +60,50 @@ namespace Units
         [Button]
         public void SetNatureState()
         {
-            StopAllCoroutines();
-            StartCoroutine(NatureCoroutine());
+            m_needsFire = false;
+            if (!m_unit || m_unit.Visible)
+            {
+                StopAllCoroutines();
+                StartCoroutine(NatureCoroutine());
+            }
+            else
+                NatureImmediate();
         }
 
         [Button]
         public void SetFrozenState()
         {
-            StopAllCoroutines();
-            StartCoroutine(FrozenCoroutine());
+            m_needsFire = false;
+            if (!m_unit || m_unit.Visible)
+            {
+                StopAllCoroutines();
+                StartCoroutine(FrozenCoroutine());
+            }
+            else
+                FrozenImmediate();
         }
         [Button]
         public void SetBurntState()
         {
-            StopAllCoroutines();
-            StartCoroutine(BurntCoroutine());
+            m_needsFire = true;
+            if (!m_unit || m_unit.Visible)
+            {
+                StopAllCoroutines();
+                StartCoroutine(BurntCoroutine());
+            }
+            else 
+                BurnImmediate();
+        }
+
+        private void BurnImmediate()
+        {
+            leavesRenderer.material.SetFloat("_IceFireSwitch", 1);
+            leavesTransform.localScale = new Vector3(0, 1, 0);
+            foreach (var iceCube in iceTransforms)
+            {
+                iceCube.localScale = Vector3.zero;
+            }
+            trunkRenderer.material.SetFloat("_TrunkState", 1);
         }
 
         IEnumerator BurntCoroutine()
@@ -94,6 +131,18 @@ namespace Units
                 yield return null;
             }
         }
+
+        private void FrozenImmediate()
+        {
+            leavesRenderer.material.SetFloat("_IceFireSwitch", 0);
+            leavesTransform.localScale = new Vector3(0, 1, 0);
+            foreach (var iceCube in iceTransforms)
+            {
+                iceCube.localScale = Vector3.one;
+            }
+            trunkRenderer.material.SetFloat("_TrunkState", -1);
+        }
+
         IEnumerator FrozenCoroutine()
         {
             fireParticles.Stop();
@@ -118,6 +167,17 @@ namespace Units
                 time += Time.deltaTime / 2;
                 yield return null;
             }
+        }
+
+        private void NatureImmediate()
+        {
+            leavesRenderer.material.SetFloat("_Dissolve", 0);
+            leavesTransform.localScale = Vector3.one;
+            foreach (var iceCube in iceTransforms)
+            {
+                iceCube.localScale = Vector3.zero;
+            }
+            trunkRenderer.material.SetFloat("_TrunkState", 0);
         }
         IEnumerator NatureCoroutine()
         {
