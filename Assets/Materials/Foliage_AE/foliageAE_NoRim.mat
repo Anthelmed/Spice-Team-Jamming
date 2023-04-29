@@ -7,32 +7,28 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ice
-  m_Shader: {fileID: -6465566751694194690, guid: b795a953972d13c4da82cae1d7b2031d,
+  m_Name: foliageAE_NoRim
+  m_Shader: {fileID: -6465566751694194690, guid: 1362a286c7b6efc4d87f0e5a0b43010e,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _ALPHATEST_ON
+  - _OVERLAY_NOISE_MASK
+  - _USE_WORLD_SPACE
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2450
+  stringTagMap:
+    RenderType: TransparentCutout
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Albedo:
-        m_Texture: {fileID: 2800000, guid: 386d2358aa594075905d136e9aad5a54, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0.75, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BlurCustomFunction_6227f8df73704ef2b49bf9cf6059b54f_SceneColor_1:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -65,7 +61,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Noise_Mask:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 32df2a2750d82f54389bc4d2c2533bd5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalVat:
@@ -84,20 +80,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Parallax_Noise:
-        m_Texture: {fileID: 2800000, guid: 80869f8c62674f99b40beb10656a82dc, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SceneColor:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VertexVat:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _grungeTex:
+        m_Texture: {fileID: 2800000, guid: 4f940653a8c8185499379d9d1715aab2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -114,40 +106,39 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Albedo_Color_Influence: 0.206
-    - _AlphaClip: 0
-    - _AlphaToMask: 0
+    - _AlphaClip: 1
+    - _AlphaToMask: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
+    - _CastShadows: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _Dissolve: 0.03
     - _DstBlend: 0
     - _DstBlendAlpha: 0
+    - _Edge_Width: -0.06
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _IceFireSwitch: 1
     - _Metallic: 0
-    - _Noise_Intensity: 1
-    - _Noise_Tile: 1
+    - _Noise_Intensity: 0.121
+    - _Noise_Tile: 0.15
     - _Normal_Strength: 0
-    - _OVERLAY_NOISE_MASK: 0
+    - _OVERLAY_NOISE_MASK: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _Parallax_Amplitude: 10.61
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Refraction: -0.03
-    - _SSS_Smooth: 1
-    - _Shadow_Edge_Smoothness: 0.5
-    - _Shadow_Offset: 0.5
-    - _Smoothness: 0.5
+    - _Rim_Width: 0.053
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -155,24 +146,26 @@ Material:
     - _Surface: 0
     - _Transition: 0
     - _USEVAT: 0
-    - _Vertex_Color: 0
+    - _USE_WORLD_SPACE: 1
+    - _Vertex_Color: 1
     - _WorkflowMode: 1
+    - _ZTest: 4
     - _ZWrite: 1
+    - _ZWriteControl: 0
     m_Colors:
     - _AnimData: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Inside_Light: {r: 0, g: 0, b: 0, a: 0}
+    - _Fire_Emission: {r: 9.285779, g: 3.0342054, b: 1.8834364, a: 0}
+    - _Ice_Emission: {r: 0.20392156, g: 1.4539964, b: 1.6235294, a: 0}
     - _Lit_Color: {r: 1, g: 1, b: 1, a: 0}
     - _PrevAnimData: {r: 0, g: 0, b: 0, a: 0}
-    - _Remap_Smoothness: {r: 0.9, g: 1, b: 0, a: 0}
-    - _Remap_Transparency: {r: 0.86, g: -1.06, b: 0, a: 0}
-    - _SSS_Color: {r: 0, g: 0, b: 0, a: 0}
-    - _Shadow_Color: {r: 0.6462264, g: 0.9255214, b: 1, a: 0}
+    - _Rim_Color: {r: 0.277, g: 0.277, b: 0.277, a: 0.22352941}
+    - _Shadow_Color: {r: 1, g: 1, b: 1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &7792745334283896845
+--- !u!114 &5041493177143135333
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
