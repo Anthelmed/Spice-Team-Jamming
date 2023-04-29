@@ -21,7 +21,8 @@ namespace Units
         public void Tick(Mob.Data data)
         {
             // TODO too far from leader, go there
-            // TODO has target, to there
+            if (data.perception && data.perception.Target)
+                data.NextState = Mob.State.GoToTarget;
         }
     }
 }
