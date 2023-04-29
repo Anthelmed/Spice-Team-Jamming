@@ -21,7 +21,7 @@ public class MobAI : MonoBehaviour
         public AnimationDriver animator;
         public Targetable targetting;
         public Collider attackCollider;
-        public PlayerSounds sounds;
+        public MobSounds sounds;
         public Projectile projectile;
 
         [Header("Parameters")]

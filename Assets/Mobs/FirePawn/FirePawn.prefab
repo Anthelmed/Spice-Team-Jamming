@@ -5016,7 +5016,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_data.sounds
       value: 
-      objectReference: {fileID: 3996543583614995841}
+      objectReference: {fileID: 1322705990468441027}
     - target: {fileID: 5315648498737710978, guid: ce306a084314e7c45bfb270fab518cb0,
         type: 3}
       propertyPath: m_data.animator
@@ -5146,15 +5146,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8700451759165334881}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3996543583614995841 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5749027382548097248, guid: f04075f8bbf0dc340af2d2251e48c2cf,
-    type: 3}
-  m_PrefabInstance: {fileID: 8700451759165334881}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afcd702a4d9d4394927ff3a89234dc78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
