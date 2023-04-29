@@ -29,6 +29,8 @@ namespace _3C.Player
         [SerializeField] private float m_Duration;
         [SerializeField] private float m_Distance;
         [SerializeField] private AnimationCurve m_DistanceCurve;
+        [SerializeField] private float m_PostDashDelay;
+        
         
         private float m_InverseDuration;
         private Transform m_Transform;
@@ -90,8 +92,26 @@ namespace _3C.Player
             }
             
             m_Transform.position = end;
+            if (m_PostDashDelay == 0)
+            {
+                PostDashCleaning();
+            }
+            else
+            {
+                m_StateHandler.StartCoroutine(c_PostDashDelay());
+            }
+        }
+
+        private void PostDashCleaning()
+        {
             m_StateHandler.OnMovementStateChanged(true);
             m_StateHandler.OnStateEnded();
+        }
+
+        private IEnumerator c_PostDashDelay()
+        {
+            yield return new WaitForSeconds(m_PostDashDelay);
+            PostDashCleaning();
         }
 
         public override void OnValidate()
