@@ -219,13 +219,8 @@ MonoBehaviour:
     m_Speed: 8
     m_MovementDamping: 8
     m_RotationDamping: 10
-    m_SpeedAnimatorParam: -823668238
-    m_MovementTriggerParam: 229373857
-    m_Animator: {fileID: 0}
     Movement: {x: 0, y: 0}
   m_DashBehavior:
-    m_DashTriggerParam: -1043442331
-    m_Animator: {fileID: 0}
     m_HasOvershootFrame: 1
     m_OvershootDistance: 0
     m_HasOvershootPauseFrame: 1
@@ -338,7 +333,6 @@ MonoBehaviour:
     m_AreVFXWorldBased: 1
     m_WeaponMovement: {fileID: 1158905776164586155}
     m_Damager: {fileID: 7518698054020727578}
-  m_Animator: {fileID: 0}
   m_Sounds: {fileID: 8188397984285573184}
   m_CurrentState: 0
 --- !u!114 &1782962883110624016
@@ -353,8 +347,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0337c8dfaf378a74a9d489a2c118a8aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 3
-  isMain: 1
+  team: 8
+  priority: 2
+  radius: 0.5
 --- !u!114 &412046645469499385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,8 +362,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845df4a83a1c4e8fa9f3a104d125febf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 3
+  team: 8
   m_MaxHealth: 999
+  m_invincibleTime: 0.5
   m_CurrentHealth: 0
   m_OnTakeDamage:
     m_PersistentCalls:
@@ -449,7 +445,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 0
-  team: 3
+  team: 8
+  ignore: 1
 --- !u!1001 &402762768143152386
 PrefabInstance:
   m_ObjectHideFlags: 0
