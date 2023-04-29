@@ -27,14 +27,6 @@ public class LevelTile : MonoBehaviour
         if (LevelTilesManager.instance != null) worldTilesManager = LevelTilesManager.instance;
 
     }
-    public void ActivateGroundFX()
-    {
-        RTCam.SetActive(true);
-    }
-    public void DeactivateGroundFX()
-    {
-        RTCam.SetActive(false);
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -51,14 +43,12 @@ public class LevelTile : MonoBehaviour
         if (!tileActivated)
         {
             tileActivated = true;
-            if (RTCam != null)  RTCam.SetActive(true);
             environmentArt.SetActive(true);
         }
     }
     internal void Sleep()
     {
             tileActivated = false;
-            if (RTCam != null) RTCam.SetActive(false);
             environmentArt.SetActive(false);
             hasPlayer = false;
            //tell mobs to go home or whatever
