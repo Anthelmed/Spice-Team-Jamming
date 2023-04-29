@@ -194,7 +194,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      AttackDuration: 0.3
+      AttackDuration: 0.4
       WeaponMovementCurve:
         serializedVersion: 2
         m_Curve:
@@ -265,7 +265,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      AttackDuration: 0.3
+      AttackDuration: 0.4
       WeaponMovementCurve:
         serializedVersion: 2
         m_Curve:
@@ -336,7 +336,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      AttackDuration: 0.3
+      AttackDuration: 0.4
       WeaponMovementCurve:
         serializedVersion: 2
         m_Curve:
