@@ -17,5 +17,6 @@ namespace _3C.Player
         void OnMovementStateChanged(bool _state);
 
         void OnAimingStateChanged(bool _state);
+        void SetOrientationToUseMovement();
     }
 }

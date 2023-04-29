@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using DefaultNamespace;
 using NaughtyAttributes;
+using Runtime.Utilities;
 using UnityEngine;
 
 namespace _3C.Player
@@ -56,6 +58,7 @@ namespace _3C.Player
         private IEnumerator c_Dashing()
         {
             m_StateHandler.OnMovementStateChanged(false);
+            m_StateHandler.SetOrientationToUseMovement();
             Vector3 start = m_Transform.position;
             Vector3 end = m_Transform.position + m_Transform.forward * m_Distance;
 

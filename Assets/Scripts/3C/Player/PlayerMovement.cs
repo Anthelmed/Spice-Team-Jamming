@@ -107,5 +107,10 @@ namespace _3C.Player
             Gizmos.DrawRay(m_Transform.position, m_LookAtDirection.normalized);
 
         }
+
+        public void InstantOrientationTo(Vector2 _direction)
+        {
+            m_LookAtDirection = Movement;
+        }
     }
 }

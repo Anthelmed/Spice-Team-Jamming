@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using DefaultNamespace.Audio;
+using Runtime.Utilities;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -155,7 +156,8 @@ namespace _3C.Player
                 (PlayerState.IdleMovement, InputType.MeleeAttackPerformed) => PlayerState.Attacking,
                 (PlayerState.IdleMovement, InputType.DashPerformed) => PlayerState.Dashing,
                 (PlayerState.Attacking, InputType.DashPerformed) => PlayerState.Dashing,
-                (PlayerState.IdleMovement, InputType.FirePerformed) => PlayerState.Aiming,
+                (PlayerState.IdleMovement, InputType.AimPerformed) => PlayerState.Aiming,
+                (PlayerState.IdleMovement, InputType.AimCanceled) => PlayerState.IdleMovement,
                 _ => throw new Exception($" {m_CurrentState} - {_input} is not handled"),
             };
         }
@@ -174,6 +176,12 @@ namespace _3C.Player
                 (PlayerState.Attacking, _) => false,
                 _ => true,
             };
+        }
+
+        public void SetOrientationToUseMovement()
+        {
+            transform.LookAt(transform.position + GameplayData.s_PlayerInputs.Movement.X0Y());
+            m_PlayerMovement.InstantOrientationTo(GameplayData.s_PlayerInputs.Movement);
         }
     }
 }

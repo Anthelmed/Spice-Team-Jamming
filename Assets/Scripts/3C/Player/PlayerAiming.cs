@@ -25,7 +25,6 @@ namespace _3C.Player
             {
                 direction = ray.GetPoint(value) - GameplayData.s_PlayerStateHandler.transform.position;
                 GameplayData.s_PlayerInputs.AimDirection = direction.normalized;
-                Debug.Log("Raycast hit: " + Mouse.current.position.value + " " + direction.normalized);
             }
             
             // if (GameplayData.s_PlayerInputs.AimDirection == Vector2.zero)

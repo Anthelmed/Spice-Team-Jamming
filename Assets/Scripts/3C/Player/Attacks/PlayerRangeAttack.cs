@@ -25,7 +25,7 @@ namespace _3C.Player
 
         public override void OnInput(InputType inputType)
         {
-            if (inputType == InputType.FireEnded)
+            if (inputType == InputType.AimCanceled)
             {
                 m_StateHandler.OnStateEnded();
                 //TODO: TriggerAttackAfterDelay

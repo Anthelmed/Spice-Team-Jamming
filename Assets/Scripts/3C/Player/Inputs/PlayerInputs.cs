@@ -17,6 +17,7 @@ namespace _3C.Player
     public class PlayerInputs
     {
         public Vector2 Movement  = Vector2.zero;
+        public Vector2 AimDirection  = Vector2.zero;
 
         public DumbFixedSizeStack<InputType> InputStack;
     }

@@ -42,10 +42,10 @@ namespace _3C.Player
         public void OnLook(InputAction.CallbackContext _context)
         {
             // WIP: likely Vector2 readValue 
-            if (_context.phase == InputActionPhase.Started)
-            {
-                StackInput(InputType.AimPerformed);
-            }
+            // if (_context.phase == InputActionPhase.Started)
+            // {
+            //     StackInput(InputType.AimPerformed);
+            // }
         }
 
         // TO-DO: Held Melee Attack using InputAction HoldInteraction,
@@ -54,7 +54,7 @@ namespace _3C.Player
         {
             if (_context.phase == InputActionPhase.Performed)
             {
-                StackInput(InputType.AttackPerformed);
+                StackInput(InputType.MeleeAttackPerformed);
             }
         }
 
@@ -73,23 +73,23 @@ namespace _3C.Player
             // if held, wait for shoot input,
             // if shoot is held, begin charging,
             // perform attack when shoot input is released
-            
-            if (_context.interaction is HoldInteraction)
-            {
-                // Order uncertain, phase can only be started if an interaction was passed successfully.
-                // if (_context.phase == InputActionPhase.Started)
-                {
-                    
-                }
-            }
+            //
+            // if (_context.interaction is HoldInteraction)
+            // {
+            //     // Order uncertain, phase can only be started if an interaction was passed successfully.
+            //     // if (_context.phase == InputActionPhase.Started)
+            //     {
+            //         
+            //     }
+            // }
             
             switch (_context.phase)
             {
                 case InputActionPhase.Performed:
-                    StackInputIfNotTop(InputType.FirePerformed);
+                    StackInputIfNotTop(InputType.AimPerformed);
                     break;
                 case InputActionPhase.Canceled:
-                    StackInputIfNotTop(InputType.FireEnded);
+                    StackInputIfNotTop(InputType.AimCanceled);
                     break;
             }
 
