@@ -71,6 +71,15 @@ namespace Units
 #if UNITY_EDITOR
         public float CurrentHealth => m_currentHealth;
         public float Radius => m_radius;
+
+        [Header("Debug")]
+        [SerializeField] private Color m_debugColor = Color.green;
+
+        private void OnDrawGizmosSelected()
+        {
+            UnityEditor.Handles.color = m_debugColor;
+            UnityEditor.Handles.DrawSolidDisc(transform.position, Vector3.up, m_radius);
+        }
 #endif
     }
 }

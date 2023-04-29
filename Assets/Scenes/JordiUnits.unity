@@ -2085,7 +2085,11 @@ MonoBehaviour:
   m_immuneTo: 0
   m_type: 0
   m_maxHealth: 5
+  m_invencivilityAfterHit: 0.5
   m_radius: 0.5
+  onImmuneHit:
+    m_PersistentCalls:
+      m_Calls: []
   onHit:
     m_PersistentCalls:
       m_Calls:
@@ -2116,6 +2120,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onDie:
+    m_PersistentCalls:
+      m_Calls: []
+  m_debugColor: {r: 0.78300154, g: 1, b: 0.526, a: 1}
 --- !u!4 &1356085679
 Transform:
   m_ObjectHideFlags: 0
@@ -3252,12 +3260,12 @@ PrefabInstance:
     - target: {fileID: 1765777192518057553, guid: aa6f300edfddd8249873ed9412fd482f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1e-45
+      value: -3e-45
       objectReference: {fileID: 0}
     - target: {fileID: 1765777192518057553, guid: aa6f300edfddd8249873ed9412fd482f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 2209499713400549653, guid: aa6f300edfddd8249873ed9412fd482f,
         type: 3}
@@ -3372,12 +3380,12 @@ PrefabInstance:
     - target: {fileID: 5854567030279583236, guid: aa6f300edfddd8249873ed9412fd482f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1e-45
+      value: -3e-45
       objectReference: {fileID: 0}
     - target: {fileID: 5854567030279583236, guid: aa6f300edfddd8249873ed9412fd482f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 1e-45
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4969432041460435222, guid: aa6f300edfddd8249873ed9412fd482f, type: 3}
@@ -3710,13 +3718,21 @@ MonoBehaviour:
   m_immuneTo: 1
   m_type: 1
   m_maxHealth: 1
+  m_invencivilityAfterHit: 0.5
   m_radius: 0.5
+  onImmuneHit:
+    m_PersistentCalls:
+      m_Calls: []
   onHit:
     m_PersistentCalls:
       m_Calls: []
   onHeal:
     m_PersistentCalls:
       m_Calls: []
+  onDie:
+    m_PersistentCalls:
+      m_Calls: []
+  m_debugColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!4 &1933307074
 Transform:
   m_ObjectHideFlags: 0
