@@ -61,22 +61,22 @@ namespace _3C.Player
         [SerializeField] private AWeaponMovement m_WeaponMovement;
         [SerializeField] private ColliderDamager m_Damager;
 
-        // [Header("Animation")]
-        // [AnimatorParam("m_Animator")]
-        // [SerializeField] private int m_StartAttackTriggerParam;
-        // [AnimatorParam("m_Animator")]
-        // [SerializeField] private int m_EndAttackTriggerParam;
-        //
-        // [AnimatorParam("m_Animator")]
-        // [SerializeField] private int m_FirstAttackTrigger;
-        //
-        // [AnimatorParam("m_Animator")]
-        // [SerializeField] private int m_SecondAttackTrigger;
-        //
-        // [AnimatorParam("m_Animator")]
-        // [SerializeField] private int m_ThirdAttackTrigger;
-        //
-        // [SerializeField] private Animator m_Animator;
+        [Header("Animation")]
+        [AnimatorParam("m_Animator")]
+        [SerializeField] private int m_StartAttackTriggerParam;
+        [AnimatorParam("m_Animator")]
+        [SerializeField] private int m_EndAttackTriggerParam;
+        
+        [AnimatorParam("m_Animator")]
+        [SerializeField] private int m_FirstAttackTrigger;
+        
+        [AnimatorParam("m_Animator")]
+        [SerializeField] private int m_SecondAttackTrigger;
+        
+        [AnimatorParam("m_Animator")]
+        [SerializeField] private int m_ThirdAttackTrigger;
+        
+        [SerializeField] private Animator m_Animator;
         
         private bool m_IsAttackAsked;
 
@@ -86,7 +86,6 @@ namespace _3C.Player
         private Coroutine m_AttackCoroutine;
         private Tween m_DashTween;
         private Transform m_Transform;
-
         private bool IsWaitingForInput => m_WaitForInputCoroutine != null;
 
         protected override void Init(IStateHandler _stateHandler)
@@ -113,6 +112,7 @@ namespace _3C.Player
             m_Damager.Damage = CurrentAttackSettings.BaseDamage;
             m_WeaponMovement.TriggerWeaponMovement(CurrentAttackSettings.AttackDuration, CurrentAttackSettings.WeaponMovementCurve);
             m_StateHandler.PlayerSoundsInstance.PlayAttackSound();
+            m_Animator?.SetTrigger(TriggerParameterFromAttackIndex);
             //if (m_Animator == null)
             {
                 m_AttackCoroutine = m_StateHandler.StartCoroutine(c_AttackDuration());
@@ -126,7 +126,7 @@ namespace _3C.Player
             }
             //else
             {
-                //m_Animator?.SetTrigger(TriggerParameterFromAttackIndex);
+                // m_Animator?.SetTrigger(TriggerParameterFromAttackIndex);
             }
         }
 
@@ -255,12 +255,12 @@ namespace _3C.Player
             }
         }
 
-        // private int TriggerParameterFromAttackIndex => m_AttackIndex switch
-        // {
-        //     0 => m_FirstAttackTrigger,
-        //     1 => m_SecondAttackTrigger,
-        //     2 => m_ThirdAttackTrigger,
-        //     _ => throw new Exception($"Attack Index {m_AttackIndex} not handled")
-        // };
+        private int TriggerParameterFromAttackIndex => m_AttackIndex switch
+        {
+            0 => m_FirstAttackTrigger,
+            1 => m_SecondAttackTrigger,
+            2 => m_ThirdAttackTrigger,
+            _ => throw new Exception($"Attack Index {m_AttackIndex} not handled")
+        };
     }
 }

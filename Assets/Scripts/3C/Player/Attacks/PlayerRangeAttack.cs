@@ -21,6 +21,7 @@ namespace _3C.Player
         
         [SerializeField] private AWeaponMovement m_RangeWeaponMovement;
         [SerializeField] private ParticleSystem[] m_VFXToPlay;
+        [SerializeField] private Animator m_Animator;
         
         [Tooltip("Planed for world UI, use to enable the thing you need during aiming, will be disabled at the end of aiming")]
         [SerializeField] private GameObject m_AimingWorldUI;
@@ -82,6 +83,7 @@ namespace _3C.Player
             m_AttackHolder.transform.localRotation = Quaternion.identity;
             m_AttackHolder.SetParent(null, true);
             m_RangeWeaponMovement.TriggerWeaponMovement(m_AttackDuration, m_AttackAnimationCurve);
+            m_Animator.SetTrigger("Ranged Attack");
             foreach (var particleSystem in m_VFXToPlay)
             {
                 particleSystem.Play();
