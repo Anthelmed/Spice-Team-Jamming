@@ -210,7 +210,7 @@ namespace _3C.Player
         {
             if (IsWaitingForInput)
             {
-                if (inputType != InputType.AttackPerformed)
+                if (inputType != InputType.MeleeAttackPerformed)
                 {
                     return;
                 }
@@ -226,7 +226,7 @@ namespace _3C.Player
                 {
                     m_IsAttackAsked = false;
                 }
-                if (inputType == InputType.AttackPerformed)
+                if (inputType == InputType.MeleeAttackPerformed)
                 {
                     m_IsAttackAsked = true;
                 }

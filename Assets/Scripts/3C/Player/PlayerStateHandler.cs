@@ -142,7 +142,7 @@ namespace _3C.Player
             
             CurrentState = (m_CurrentState, _input) switch
             {
-                (PlayerState.IdleMovement, InputType.AttackPerformed) => PlayerState.Attacking,
+                (PlayerState.IdleMovement, InputType.MeleeAttackPerformed) => PlayerState.Attacking,
                 (PlayerState.IdleMovement, InputType.DashPerformed) => PlayerState.Dashing,
                 (PlayerState.Attacking, InputType.DashPerformed) => PlayerState.Dashing,
                 _ => throw new Exception($" {m_CurrentState} - {_input} is not handled"),
@@ -156,7 +156,7 @@ namespace _3C.Player
                 (PlayerState.Attacking, InputType.MovementCanceled) or (PlayerState.Attacking, InputType.MovementPerformed) => false,
                 (PlayerState.Dashing, _) => false,
                 (PlayerState.IdleMovement, InputType.MovementPerformed) or (PlayerState.IdleMovement, InputType.MovementCanceled) => false,
-                (PlayerState.Attacking, InputType.AttackPerformed) => false,
+                (PlayerState.Attacking, InputType.MeleeAttackPerformed) => false,
                 _ => true,
             };
         }

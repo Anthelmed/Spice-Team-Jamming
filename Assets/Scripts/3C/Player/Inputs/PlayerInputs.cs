@@ -7,8 +7,11 @@ namespace _3C.Player
     {
         MovementPerformed,
         MovementCanceled,
-        AttackPerformed,
+        MeleeAttackPerformed,
         DashPerformed,
+        HeldMeleeAttackPerformed,
+        AimPerformed,
+        AimCanceled
     }
     
     public class PlayerInputs
