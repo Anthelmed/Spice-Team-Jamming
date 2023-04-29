@@ -1,3 +1,4 @@
+using AmplifyShaderEditor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,26 +28,39 @@ namespace Units
         [SerializeField] private Faction m_immuneTo;
         [SerializeField] private Type m_type;
         [SerializeField] [Min(1)] private int m_maxHealth = 10;
+        [SerializeField] [Min(0f)] private float m_invencivilityAfterHit = 0.5f;
         [SerializeField] [Min(0f)] private float m_radius = 0.5f;
 
         [Header("Events")]
+        public UnityEvent onImmuneHit;
         public UnityEvent<float, Unit, Vector3> onHit;
         public UnityEvent<float> onHeal;
+        public UnityEvent onDie;
 
         private float m_currentHealth;
 
         public void TakeHit(float damage, Unit other, Vector3 hitPosition)
         {
-            if (other.m_team == m_team || other.m_team == m_immuneTo) return;
+            if (other.m_team == m_immuneTo)
+            {
+                onImmuneHit?.Invoke();
+                return;
+            }
 
-            m_currentHealth -= damage;
-            onHit?.Invoke(damage, other, hitPosition);
+            if (other.m_team == m_team) return;
+
+            m_currentHealth = Mathf.Max(0, m_currentHealth - damage);
+
+            if (m_currentHealth == 0)
+                onDie?.Invoke();
+            else
+                onHit?.Invoke(damage, other, hitPosition);
         }
 
         public void Heal(float amount)
         {
             m_currentHealth = Mathf.Min(m_maxHealth, m_currentHealth + amount);
-            onHeal.Invoke(amount);
+            onHeal?.Invoke(amount);
         }
 
         private void Awake()

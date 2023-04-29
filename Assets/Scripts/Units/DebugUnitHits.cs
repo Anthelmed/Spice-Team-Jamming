@@ -14,4 +14,14 @@ public class DebugUnitHits : MonoBehaviour
     {
         Debug.Log($"{name}: {damage}");
     }
+
+    public void LogDie()
+    {
+        Debug.Log($"{name}: It's dead!");
+    }
+
+    public void LogImmune()
+    {
+        Debug.Log($"{name}: Not affected by this");
+    }
 }
