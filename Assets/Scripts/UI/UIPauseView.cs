@@ -7,17 +7,16 @@ namespace SpiceTeamJamming.UI
 	public class UIPauseView : UIBackableView
 	{
 		[Space]
-		[SerializeField] private GameManager gameManager;
 		[SerializeField] private PauseMenuDocumentAutoReferences elementsReferences;
 
 		protected override VisualElement MainElement => elementsReferences.PauseMenu;
 		protected override UIRouter.RouteType Route => UIRouter.RouteType.Pause;
+		protected override VisualElement BackButton => elementsReferences.ActionHelperBack;
 		
 		protected override void OnEnable()
 		{
 			base.OnEnable();
-			//Bind OnVisibilityChanged;
-			
+
 			elementsReferences.PauseMenuButtonResume.clicked += OnResumeButtonPressed;
 			elementsReferences.PauseMenuButtonSettings.clicked += OnSettingsButtonPressed;
 			elementsReferences.PauseMenuButtonMainMenu.clicked += OnMainMenuButtonPressed;
@@ -28,15 +27,15 @@ namespace SpiceTeamJamming.UI
 				elementsReferences.PauseMenuButtonResume,
 				elementsReferences.PauseMenuButtonSettings,
 				elementsReferences.PauseMenuButtonMainMenu,
-				elementsReferences.PauseMenuButtonQuit
+				elementsReferences.PauseMenuButtonQuit,
+				elementsReferences.ActionHelperBack
 			});
 		}
 		
 		protected override void OnDisable()
 		{
 			base.OnDisable();
-			//Unbind OnVisibilityChanged;
-			
+
 			elementsReferences.PauseMenuButtonResume.clicked -= OnResumeButtonPressed;
 			elementsReferences.PauseMenuButtonSettings.clicked -= OnSettingsButtonPressed;
 			elementsReferences.PauseMenuButtonMainMenu.clicked -= OnMainMenuButtonPressed;

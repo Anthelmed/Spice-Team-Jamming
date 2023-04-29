@@ -8,17 +8,15 @@ namespace SpiceTeamJamming.UI
 	public class UISettingsView : UIBackableView
 	{
 		[Space]
-		[SerializeField] private GameManager gameManager;
 		[SerializeField] private SettingsMenuDocumentAutoReferences elementsReferences;
 
 		protected override VisualElement MainElement => elementsReferences.SettingsMenu;
 		protected override UIRouter.RouteType Route => UIRouter.RouteType.Settings;
+		protected override VisualElement BackButton => elementsReferences.ActionHelperBack;
 		
 		protected override void OnEnable()
 		{
 			base.OnEnable();
-			
-			//Bind OnVisibilityChanged;
 			
 			elementsReferences.SettingsMenuButtonControls.clicked += OnControlsButtonPressed;
 			elementsReferences.SettingsMenuButtonAudio.clicked += OnAudioButtonPressed;
@@ -30,15 +28,15 @@ namespace SpiceTeamJamming.UI
 				elementsReferences.SettingsMenuButtonControls,
 				elementsReferences.SettingsMenuButtonAudio,
 				elementsReferences.SettingsMenuButtonGraphics,
-				elementsReferences.SettingsMenuButtonAccessibility
+				elementsReferences.SettingsMenuButtonAccessibility,
+				elementsReferences.ActionHelperBack
 			});
 		}
 		
 		protected override void OnDisable()
 		{
 			base.OnDisable();
-			//Unbind OnVisibilityChanged;
-			
+
 			elementsReferences.SettingsMenuButtonControls.clicked -= OnControlsButtonPressed;
 			elementsReferences.SettingsMenuButtonAudio.clicked -= OnAudioButtonPressed;
 			elementsReferences.SettingsMenuButtonGraphics.clicked -= OnGraphicsButtonPressed;

@@ -20,7 +20,7 @@ namespace UIToolkitAutoReferences
 		private VisualElement _levelSelection;
 		private VisualElement _levelSelectionTitle;
 		private VisualElement _actionHelperSelect;
-		private VisualElement _actionHelperBack;
+		private Button _actionHelperBack;
 		private VisualElement _levelSelectionInfo;
 		private Label _levelSelectionInfoText;
 
@@ -30,8 +30,8 @@ namespace UIToolkitAutoReferences
 			RootVisualElement.Q<VisualElement>("LevelSelectionTitle");
 		public VisualElement ActionHelperSelect => _actionHelperSelect ??=
 			RootVisualElement.Q<VisualElement>("ActionHelperSelect");
-		public VisualElement ActionHelperBack => _actionHelperBack ??=
-			RootVisualElement.Q<VisualElement>("ActionHelperBack");
+		public Button ActionHelperBack => _actionHelperBack ??=
+			RootVisualElement.Q<Button>("ActionHelperBack");
 		public VisualElement LevelSelectionInfo => _levelSelectionInfo ??=
 			RootVisualElement.Q<VisualElement>("LevelSelectionInfo");
 		public Label LevelSelectionInfoText => _levelSelectionInfoText ??=

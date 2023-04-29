@@ -17,10 +17,10 @@ namespace UIToolkitAutoReferences
 		private VisualElement RootVisualElement => _rootVisualElement ??=
 			uiDocument.rootVisualElement;
 
-		private VisualElement _actionHelperPause;
+		private Button _actionHelperPause;
 
-		public VisualElement ActionHelperPause => _actionHelperPause ??=
-			RootVisualElement.Q<VisualElement>("ActionHelperPause");
+		public Button ActionHelperPause => _actionHelperPause ??=
+			RootVisualElement.Q<Button>("ActionHelperPause");
 
 		private void Start()
 		{

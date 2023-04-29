@@ -1,8 +1,10 @@
-﻿.action-helpers {
+.action-helpers {
     position: absolute;
     bottom: 50px;
     flex-direction: column;
     left: 100px;
+    align-items: flex-start;
+    align-self: flex-start;
 }
 
 .action-helper {
@@ -10,6 +12,22 @@
     justify-content: flex-start;
     flex-direction: row;
     margin-top: 25px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .action-helper-icon {

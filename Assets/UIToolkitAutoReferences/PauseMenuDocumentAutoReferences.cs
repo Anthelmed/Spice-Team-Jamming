@@ -24,7 +24,7 @@ namespace UIToolkitAutoReferences
 		private Button _pauseMenuButtonMainMenu;
 		private Button _pauseMenuButtonQuit;
 		private VisualElement _actionHelperSelect;
-		private VisualElement _actionHelperBack;
+		private Button _actionHelperBack;
 
 		public VisualElement PauseMenu => _pauseMenu ??=
 			RootVisualElement.Q<VisualElement>("PauseMenu");
@@ -40,8 +40,8 @@ namespace UIToolkitAutoReferences
 			RootVisualElement.Q<Button>("PauseMenuButtonQuit");
 		public VisualElement ActionHelperSelect => _actionHelperSelect ??=
 			RootVisualElement.Q<VisualElement>("ActionHelperSelect");
-		public VisualElement ActionHelperBack => _actionHelperBack ??=
-			RootVisualElement.Q<VisualElement>("ActionHelperBack");
+		public Button ActionHelperBack => _actionHelperBack ??=
+			RootVisualElement.Q<Button>("ActionHelperBack");
 
 		private void Start()
 		{

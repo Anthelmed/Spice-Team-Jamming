@@ -1,10 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Styles/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=852c0b1f00071754886a563d72ecb599&amp;type=3#GlobalStyle" />
     <Style src="project://database/Assets/UI/Styles/ActionHelperStyle.uss?fileID=7433441132597879392&amp;guid=1ee840c4db8243eaa2a9f33057bc878a&amp;type=3#ActionHelperStyle" />
-    <ui:VisualElement name="ActionHelperBack" class="action-helper auto-reference">
+    <ui:Button name="ActionHelperBack" class="action-helper auto-reference">
         <ui:VisualElement name="ActionHelperSelectIcon" class="action-helper-icon">
             <ui:Label tabindex="-1" text="B" display-tooltip-when-elided="true" name="LevelSelectionActionHelperSelectIconLabel" class="action-helper-icon-label" />
         </ui:VisualElement>
         <ui:Label tabindex="-1" text="Back" display-tooltip-when-elided="true" name="ActionHelperSelectLabel" class="action-helper-label" />
-    </ui:VisualElement>
+    </ui:Button>
 </ui:UXML>

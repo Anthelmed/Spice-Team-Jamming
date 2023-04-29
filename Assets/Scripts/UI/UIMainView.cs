@@ -1,4 +1,5 @@
-﻿using UIToolkitAutoReferences;
+﻿using System;
+using UIToolkitAutoReferences;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -8,16 +9,18 @@ namespace SpiceTeamJamming.UI
 	public class UIMainView : UIView
 	{
 		[Space]
-		[SerializeField] private GameManager gameManager;
 		[SerializeField] private MainMenuDocumentAutoReferences elementsReferences;
 
 		protected override VisualElement MainElement => elementsReferences.MainMenu;
 		protected override UIRouter.RouteType Route => UIRouter.RouteType.Main;
-		
+
+		private void Start()
+		{
+			UIRouter.GoToRoute(UIRouter.RouteType.Main);
+		}
+
 		protected void OnEnable()
 		{
-			//Bind OnVisibilityChanged;
-			
 			elementsReferences.MainMenuButtonNewGame.clicked += OnNewGameButtonPressed;
 			elementsReferences.MainMenuButtonSettings.clicked += OnSettingsButtonPressed;
 			elementsReferences.MainMenuButtonQuit.clicked += OnQuitButtonPressed;
@@ -32,8 +35,6 @@ namespace SpiceTeamJamming.UI
 		
 		protected void OnDisable()
 		{
-			//Unbind OnVisibilityChanged;
-			
 			elementsReferences.MainMenuButtonNewGame.clicked -= OnNewGameButtonPressed;
 			elementsReferences.MainMenuButtonSettings.clicked -= OnSettingsButtonPressed;
 			elementsReferences.MainMenuButtonQuit.clicked -= OnQuitButtonPressed;

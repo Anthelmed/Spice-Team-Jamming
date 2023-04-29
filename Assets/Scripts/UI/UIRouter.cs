@@ -24,6 +24,8 @@ namespace SpiceTeamJamming.UI
         private static Stack<RouteType> _routesHistory = new ();
         private static RouteType _currentRoute = RouteType.Main;
 
+        public static RouteType CurrentRoute => _currentRoute;
+
         public static void ConfigureRoute(RouteType route, UIView view)
         {
             if (_routeToViewBridge.ContainsKey(route)) return;
@@ -40,6 +42,8 @@ namespace SpiceTeamJamming.UI
 
         public static void GoToRoute(RouteType route)
         {
+            if (!_routeToViewBridge.ContainsKey(route)) return;
+            
             var leavingView = _routeToViewBridge[_currentRoute];
             var enteringView = _routeToViewBridge[route];
         
