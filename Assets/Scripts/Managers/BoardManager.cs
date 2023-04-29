@@ -28,6 +28,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private BiomePrefabHolder forestPrefabHolder;
     [SerializeField] private BiomePrefabHolder waterPrefabHolder;
     [SerializeField] private float sameBiomeChance = 0.5f;
+    [SerializeField] private bool randomBiomeRotation = false;
     [SerializeField] private List<Biome> spawnableBiomes = new List<Biome>();
 
     private Dictionary<Biome, BiomePrefabHolder> _biomePrefabHolders = new Dictionary<Biome, BiomePrefabHolder>();
@@ -42,7 +43,6 @@ public class BoardManager : MonoBehaviour
     public static GameTile[,] MapTiles;
     private static float[,] _mapHeights;
     private Transform _transform;
-
     
     [SerializeField] private bool debugMode = false;
 
@@ -221,7 +221,13 @@ public class BoardManager : MonoBehaviour
                 Vector3 pos = new Vector3(x * xSize, 0, y * zSize);
 
                 // We can rotate the tile [0, 90, 180, 270] degrees to get more variation
-                GameObject go = Instantiate(currentPrefab, pos, Quaternion.identity, _transform);
+                Quaternion rotation = Quaternion.identity;
+                
+                if (randomBiomeRotation)
+                {
+                    rotation = Quaternion.Euler(0, 90 * Random.Range(0, 4), 0);
+                }
+                GameObject go = Instantiate(currentPrefab, pos, rotation, _transform);
                 var tile = go.GetComponentInChildren<GameTile>();
 
                 MapTiles[x, y] = tile;
