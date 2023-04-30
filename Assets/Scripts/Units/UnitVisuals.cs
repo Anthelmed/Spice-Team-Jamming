@@ -30,7 +30,6 @@ namespace Units
 
         protected virtual void OnVisibilityChanged(bool visible) 
         {
-            Debug.Log($"{name}: {visible}");
             gameObject.SetActive(visible);
         }
     }
