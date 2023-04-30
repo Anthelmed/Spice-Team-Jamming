@@ -14,6 +14,7 @@ namespace Units
         public Transform leavesTransform;
         public Transform[] iceTransforms;
         public ParticleSystem fireParticles;
+        public Renderer[] additionalTrunks;
 
         private bool m_needsFire = false;
 
@@ -23,6 +24,10 @@ namespace Units
             {
                 iceCube.localScale = Vector3.zero;
 
+            }
+            foreach (var renderer in additionalTrunks)
+            {
+                renderer.material.SetFloat("_TrunkState", 0);
             }
             trunkRenderer.material.SetFloat("_TrunkState", 0);
         }
@@ -103,6 +108,10 @@ namespace Units
             {
                 iceCube.localScale = Vector3.zero;
             }
+            foreach (var renderer in additionalTrunks)
+            {
+                renderer.material.SetFloat("_TrunkState", 1);
+            }
             trunkRenderer.material.SetFloat("_TrunkState", 1);
         }
 
@@ -126,6 +135,10 @@ namespace Units
             while (time < 1)
             {
                 trunkRenderer.material.SetFloat("_TrunkState", Mathf.Lerp(startState, 1, time));
+                foreach (var renderer in additionalTrunks)
+                {
+                    renderer.material.SetFloat("_TrunkState", Mathf.Lerp(startState, 1, time));
+                }
                 //    leavesMaterial.SetFloat("_Dissolve", Mathf.Lerp(0, 1, time));
                 time += Time.deltaTime / 2;
                 yield return null;
@@ -141,6 +154,10 @@ namespace Units
                 iceCube.localScale = Vector3.one;
             }
             trunkRenderer.material.SetFloat("_TrunkState", -1);
+             foreach (var renderer in additionalTrunks)
+                {
+                    renderer.material.SetFloat("_TrunkState", -1);
+                }
         }
 
         IEnumerator FrozenCoroutine()
@@ -163,6 +180,10 @@ namespace Units
             while (time < 1)
             {
                 trunkRenderer.material.SetFloat("_TrunkState", Mathf.Lerp(startState, -1, time));
+                 foreach (var renderer in additionalTrunks)
+                {
+                    renderer.material.SetFloat("_TrunkState", Mathf.Lerp(startState, -1, time));
+                }
                 //  leavesMaterial.SetFloat("_Dissolve", Mathf.Lerp(0, 1, time));
                 time += Time.deltaTime / 2;
                 yield return null;
@@ -178,6 +199,10 @@ namespace Units
                 iceCube.localScale = Vector3.zero;
             }
             trunkRenderer.material.SetFloat("_TrunkState", 0);
+             foreach (var renderer in additionalTrunks)
+                {
+                    renderer.material.SetFloat("_TrunkState", 0);
+                }
         }
         IEnumerator NatureCoroutine()
         {
@@ -197,6 +222,10 @@ namespace Units
             while (time < 1f)
             {
                 trunkRenderer.material.SetFloat("_TrunkState", Mathf.Lerp(startState, 0, time));
+                 foreach (var renderer in additionalTrunks)
+                {
+                    renderer.material.SetFloat("_TrunkState", Mathf.Lerp(startState, 0, time));
+                }
                 time += Time.deltaTime / 2;
                 yield return null;
             }

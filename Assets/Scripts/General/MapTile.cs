@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using Units;
 
 public class GameTile : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class GameTile : MonoBehaviour
 
     Vector3 startPos;
     Vector3 startScale;
+    public TreeVisuals[] treeVisuals;
 
     public MapTileData mapTileData = new MapTileData();
 
@@ -54,8 +56,35 @@ public class GameTile : MonoBehaviour
 
     public void SetTileState(WorldTileStatus status)
     {
-        //DO IT
-        
+        foreach (var tree in treeVisuals)
+        {
+            switch (status)
+            {
+                case WorldTileStatus.neutral:
+                {
+                    tree.SetNatureState();
+                    break;
+                }
+                case WorldTileStatus.contested:
+                {
+                    tree.SetNatureState();
+                    break;
+                }
+                case WorldTileStatus.frozen:
+                {
+                    tree.SetFrozenState();
+                    break;
+                }
+                case WorldTileStatus.burnt:
+                {
+                    tree.SetBurntState();
+                    break;
+                }
+                default:
+                break;
+            }
+        }
+
     }
     public void Highlight()
     {
