@@ -35,6 +35,8 @@ namespace Units
         [SerializeField] [Min(0f)] private float m_radius = 0.5f;
         [SerializeField] private bool doesntMove = false;
 
+        public int MAXHealth => m_maxHealth;
+
         [Header("Events")]
         public UnityEvent onImmuneHit;
         public UnityEvent<float, Unit> onHit;

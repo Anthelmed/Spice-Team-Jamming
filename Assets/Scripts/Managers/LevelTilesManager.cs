@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 
 public class LevelTilesManager : MonoBehaviour
 {
+    public event Action<Vector2Int> PlayerTileIndexChanged = delegate { };
     [Header("generation")]
     [SerializeField] GameObject defaultTilePrefab;
     [SerializeField] float spacing = 40f; //dependant on prefab
@@ -128,29 +129,7 @@ public class LevelTilesManager : MonoBehaviour
                 }
             }
         }
-        //for (int columnIndex = 0; columnIndex < columns; columnIndex++)
-        //{
-        //    for (int rowIndex = 0; rowIndex < rows; rowIndex++)
-        //    {
-        //        float xPos = columnIndex * spacing;
-        //        float zPos = rowIndex * spacing;
-        //        Vector3 position = new Vector3(xPos, 0.0f, zPos);
-
-        //        var mapTile = BoardManager.MapTiles[rowIndex, columnIndex];
-        //        GameObject prefabToSpawn = GetPrefab(mapTile);
-
-        //        GameObject spawnedObject = Instantiate(prefabToSpawn, position, Quaternion.identity);
-        //        spawnedObject.gameObject.name = "Tile " + rowIndex + " / " + columnIndex;
-        //        spawnedObject.transform.SetParent(transform);
-        //        var tile = spawnedObject.GetComponent<LevelTile>();
-
-        //        Vector2Int gridCoordinates = new Vector2Int(columnIndex, rowIndex);
-
-        //        gridTiles.Add(gridCoordinates, tile);
-        //        tile.Init(mapTile.mapTileData, gridCoordinates);
-        //        tile.Sleep();
-        //    }
-        //}
+      
 
         foreach (LevelTile tile in gridTiles.Values)
         {
@@ -231,6 +210,7 @@ public class LevelTilesManager : MonoBehaviour
                 tile.Sleep();
             }
         }
+        QueryPlayerLocation();
     }
 
     public Vector2Int GetTileIndexFromPosition(Vector3 pos)
@@ -313,6 +293,22 @@ public class LevelTilesManager : MonoBehaviour
         }
 
         return neighboringTiles;
+    }
+    [ContextMenu("query player")]
+    public void QueryPlayerLocation()
+    {
+        foreach (LevelTile tile in gridTiles.Values)
+        {
+             if (tile != null)
+            {
+                if (tile.hasPlayer)
+                {
+                    PlayerTileIndexChanged(tile.gridLocation);
+                    print(tile.gameObject.name + "has player");
+                    return;
+                }
+            }
+        }
     }
 
     #region Jordi's stuff

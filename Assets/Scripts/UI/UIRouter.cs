@@ -21,6 +21,7 @@ namespace SpiceTeamJamming.UI
         }
 
         private static readonly Dictionary<RouteType, UIView> _routeToViewBridge = new();
+        internal static UILoadingScreen LoadingScreen;
 
         private static readonly Stack<RouteType> _routesHistoric = new ();
         private static RouteType _currentRoute = RouteType.Main;
@@ -70,6 +71,16 @@ namespace SpiceTeamJamming.UI
         
             var previousRoute = _routesHistoric.Pop();
             GoToRoute(previousRoute, false);
+        }
+
+        public static void ShowLoadingScreen()
+        {
+            LoadingScreen.Show();
+        }
+
+        public static void HideLoadingScreen()
+        {
+            LoadingScreen.Hide();
         }
     }
 }

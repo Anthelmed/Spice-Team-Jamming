@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     public event Action<bool> startScreenVisibilityEvent = delegate { };
     public event Action<bool> pauseScreenVisibilityEvent = delegate { };
 
+    public event Action OnInitialLevelLoad = delegate { };
+
     GameObject loadedPlayer;
     Animator playerAnimator;// DO this much better
     bool battleMapLoaded;
@@ -219,6 +221,7 @@ public class GameManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1);
+        OnInitialLevelLoad?.Invoke();
 
         if (LevelTilesManager.instance == null)
         {
