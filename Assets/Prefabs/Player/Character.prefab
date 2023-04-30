@@ -124,9 +124,9 @@ MonoBehaviour:
     SpeedModifier: 1
     Enabled: 0
   m_DashBehavior:
-    m_ManaCost: 10
-    m_HasOvershootFrame: 0
-    m_OvershootDistance: 0
+    m_ManaCost: 0
+    m_HasOvershootFrame: 1
+    m_OvershootDistance: 0.5
     m_HasOvershootPauseFrame: 0
     m_HasBounceFrame: 0
     m_BounceDistance: 0.1
