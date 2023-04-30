@@ -2,6 +2,8 @@
     --primary-color-1: rgb(134, 219, 165);
     --primary-color-1-dark: rgb(118, 194, 146);
     --primary-color-2: rgb(142, 101, 136);
+    --primary-color-3: rgb(255, 112, 105);
+    --primary-color-4: rgb(79, 173, 255);
     --title-font-size: 36px;
     --button-font-size: 30px;
     --rowdies-font-regular: url('project://database/Assets/Fonts/Rowdies/Rowdies-Regular.ttf?fileID=12800000&guid=2cea9ff495f9b4a4daed12e48f24ef32&type=3#Rowdies-Regular');
@@ -119,7 +121,7 @@
     margin-bottom: 0;
     padding-left: 0;
     padding-right: 0;
-    padding-top: 0;
+    padding-top: 50px;
     padding-bottom: 0;
     font-size: 28px;
 }

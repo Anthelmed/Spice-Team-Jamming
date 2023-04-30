@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 
 public class LevelTilesManager : MonoBehaviour
 {
+    public event Action<Vector2Int> PlayerTileIndexChanged = delegate { };
     [Header("generation")]
     [SerializeField] GameObject defaultTilePrefab;
     [SerializeField] float spacing = 40f; //dependant on prefab
@@ -102,6 +103,7 @@ public class LevelTilesManager : MonoBehaviour
                 GameObject spawnedObject = Instantiate(prefabToSpawn, position, Quaternion.identity);
                 spawnedObject.gameObject.name = "Tile " + xIndex + " _ " + yIndex;
                 spawnedObject.transform.SetParent(transform);
+                spawnedObject.transform.eulerAngles = new Vector3(spawnedObject.transform.localEulerAngles.x, UnityEngine.Random.Range(0, 4) * 90f, spawnedObject.transform.localEulerAngles.z);
                 var tile = spawnedObject.GetComponent<LevelTile>();
                 tile.MapTile = mapTile;
 
@@ -111,42 +113,23 @@ public class LevelTilesManager : MonoBehaviour
                 tile.Init(mapTile.mapTileData, gridCoordinates);
                 tile.Sleep();
 
-                var enemyChoice = UnityEngine.Random.Range(0, maxWeight);
-                for (int i = 0; i < enemies.Length; ++i)
+                if (mapTile.Biome != Biome.Water)
                 {
-                    if (enemyChoice < enemies[i].weight)
+                    var enemyChoice = UnityEngine.Random.Range(0, maxWeight);
+                    for (int i = 0; i < enemies.Length; ++i)
                     {
-                        if (enemies[i].m_squadPrefab)
-                            Instantiate(enemies[i].m_squadPrefab, spawnedObject.transform.position, spawnedObject.transform.rotation);
-                        break;
+                        if (enemyChoice < enemies[i].weight)
+                        {
+                            if (enemies[i].m_squadPrefab)
+                                Instantiate(enemies[i].m_squadPrefab, spawnedObject.transform.position, spawnedObject.transform.rotation);
+                            break;
+                        }
+                        enemyChoice -= enemies[i].weight;
                     }
-                    enemyChoice -= enemies[i].weight;
                 }
             }
         }
-        //for (int columnIndex = 0; columnIndex < columns; columnIndex++)
-        //{
-        //    for (int rowIndex = 0; rowIndex < rows; rowIndex++)
-        //    {
-        //        float xPos = columnIndex * spacing;
-        //        float zPos = rowIndex * spacing;
-        //        Vector3 position = new Vector3(xPos, 0.0f, zPos);
-
-        //        var mapTile = BoardManager.MapTiles[rowIndex, columnIndex];
-        //        GameObject prefabToSpawn = GetPrefab(mapTile);
-
-        //        GameObject spawnedObject = Instantiate(prefabToSpawn, position, Quaternion.identity);
-        //        spawnedObject.gameObject.name = "Tile " + rowIndex + " / " + columnIndex;
-        //        spawnedObject.transform.SetParent(transform);
-        //        var tile = spawnedObject.GetComponent<LevelTile>();
-
-        //        Vector2Int gridCoordinates = new Vector2Int(columnIndex, rowIndex);
-
-        //        gridTiles.Add(gridCoordinates, tile);
-        //        tile.Init(mapTile.mapTileData, gridCoordinates);
-        //        tile.Sleep();
-        //    }
-        //}
+      
 
         foreach (LevelTile tile in gridTiles.Values)
         {
@@ -227,13 +210,19 @@ public class LevelTilesManager : MonoBehaviour
                 tile.Sleep();
             }
         }
+        QueryPlayerLocation();
+    }
+
+    public Vector2Int GetTileIndexFromPosition(Vector3 pos)
+    {
+        return new Vector2Int(
+            Mathf.FloorToInt((pos.x + spacing * 0.5f) / spacing),
+            Mathf.FloorToInt((pos.z + spacing * 0.5f) / spacing));
     }
 
     public LevelTile GetTileAtPosition(Vector3 pos)
     {
-        var gridPos = new Vector2Int(
-            Mathf.RoundToInt(pos.x / spacing),
-            Mathf.RoundToInt(pos.z / spacing));
+        var gridPos = GetTileIndexFromPosition(pos);
 
         return GetTileAtGridPosition(gridPos);
     }
@@ -305,6 +294,22 @@ public class LevelTilesManager : MonoBehaviour
 
         return neighboringTiles;
     }
+    [ContextMenu("query player")]
+    public void QueryPlayerLocation()
+    {
+        foreach (LevelTile tile in gridTiles.Values)
+        {
+             if (tile != null)
+            {
+                if (tile.hasPlayer)
+                {
+                    PlayerTileIndexChanged(tile.gridLocation);
+                    print(tile.gameObject.name + "has player");
+                    return;
+                }
+            }
+        }
+    }
 
     #region Jordi's stuff
     private List<LevelTile> m_levelTilesReusable = new List<LevelTile>(5);
@@ -312,9 +317,7 @@ public class LevelTilesManager : MonoBehaviour
     {
         m_levelTilesReusable.Clear();
 
-        var gridPos = new Vector2Int(
-            Mathf.RoundToInt(position.x / spacing),
-            Mathf.RoundToInt(position.z / spacing));
+        var gridPos = GetTileIndexFromPosition(position);
 
         var wrappedX = Mathf.Repeat(position.x + spacing * 0.5f, spacing);
         var wrappedY = Mathf.Repeat(position.z + spacing * 0.5f, spacing);

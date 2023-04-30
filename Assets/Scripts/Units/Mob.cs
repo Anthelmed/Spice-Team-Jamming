@@ -70,11 +70,15 @@ namespace Units
         private void OnDeath(float damage, Unit other)
         {
             m_data.NextState = State.Death;
+            // Change immediately
+            UpdateTransition();
         }
 
         private void OnHit(float damage, Unit other)
         {
             m_data.NextState = State.Hit;
+            // Change immediately
+            UpdateTransition();
         }
 
         private void OnValidate()
@@ -113,9 +117,16 @@ namespace Units
             onHit.AddListener(OnHit);
         }
 
-        protected override void Update()
+        public override void FixedTick()
         {
-            base.Update();
+            base.FixedTick();
+            if (m_data.locomotion)
+                m_data.locomotion.FixedTick();
+        }
+        public override void Tick()
+        {
+            if (!this) return;
+            base.Tick();
 
             if (m_data.NextState == State.Destroy)
             {

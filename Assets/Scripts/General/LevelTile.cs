@@ -19,6 +19,9 @@ public class LevelTile : MonoBehaviour
     [SerializeField] RenderTexture groundFXPersistantRT;
     [SerializeField] GameObject RTCam;
     [SerializeField] GameObject environmentArt;
+    private const int UPDATE_RATE = 6;
+
+    private int m_updateTurn;
 
     private void Awake()
     {
@@ -32,11 +35,26 @@ public class LevelTile : MonoBehaviour
     private void Start()
     {
         if (LevelTilesManager.instance != null) worldTilesManager = LevelTilesManager.instance;
+        m_updateTurn = UnityEngine.Random.Range(0, UPDATE_RATE);
+    }
 
+    private void FixedUpdate()
+    {
+        for (int i = 0; i < Vegetation.Count; ++i) Vegetation[i].FixedTick();
+        for (int i = 0; i < Pawns.Count; ++i) Pawns[i].FixedTick();
+        for (int i = 0; i < Knights.Count; ++i) Knights[i].FixedTick();
+        for (int i = 0; i < Players.Count; ++i) Players[i].FixedTick();
     }
 
     private void Update()
     {
+        if ((Time.frameCount % UPDATE_RATE) != m_updateTurn) return;
+
+        for (int i = 0; i < Vegetation.Count; ++i) Vegetation[i].Tick();
+        for (int i = 0; i < Pawns.Count; ++i) Pawns[i].Tick();
+        for (int i = 0; i < Knights.Count; ++i) Knights[i].Tick();
+        for (int i = 0; i < Players.Count; ++i) Players[i].Tick();
+
         int fire = 0;
         int ice = 0;
         int total = 0;
@@ -74,6 +92,16 @@ public class LevelTile : MonoBehaviour
         hasPlayer = true;
         tileActivated = true;
         worldTilesManager.UpdateActiveTiles(this);
+       
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        other.TryGetComponent(out PlayerStateHandler player);
+        if (player == null) return;
+
+        hasPlayer = false;
+   
     }
 
     internal void WakeUp()
@@ -151,6 +179,7 @@ public class LevelTile : MonoBehaviour
         float newDist;
         for (int i = 0; i < list.Count; ++i)
         {
+            if (!list[i]) continue;
             if (list[i].Team == myTeam) continue;
             newDist = (list[i].transform.position - position).magnitude;
             newDist -= list[i].Radius;
@@ -185,6 +214,7 @@ public class LevelTile : MonoBehaviour
         var list = GetListForType(type);
         for (int i = 0; i < list.Count; ++i)
         {
+            if (!list[i]) continue;
             if (list[i].Team == team) continue;
             if (CircleCircleIntersect(center, radius, list[i].transform.position, list[i].Radius))
                 m_queryResultNoAlloc.Add(list[i]);
@@ -210,14 +240,15 @@ public class LevelTile : MonoBehaviour
         if (!mergePrevious)
             m_queryResultNoAlloc.Clear();
 
-        var cos = Mathf.Cos(angle);
+        var halfAngle = angle * 0.5f;
         dir.Normalize();
 
         var list = GetListForType(type);
         for (int i = 0; i < list.Count; ++i)
         {
+            if (!list[i]) continue;
             if (list[i].Team == team) continue;
-            if (CircleFanIntersect(list[i].transform.position, list[i].Radius, center, radius, dir, cos))
+            if (CircleFanIntersect(list[i].transform.position, list[i].Radius, center, radius, dir, halfAngle))
                 m_queryResultNoAlloc.Add(list[i]);
         }
         return m_queryResultNoAlloc;
@@ -244,6 +275,7 @@ public class LevelTile : MonoBehaviour
         var list = GetListForType(type);
         for (int i = 0; i < list.Count; ++i)
         {
+            if (!list[i]) continue;
             if (CircleCircleIntersect(center, radius, list[i].transform.position, list[i].Radius))
                 m_queryResultNoAlloc.Add(list[i]);
         }
@@ -257,16 +289,13 @@ public class LevelTile : MonoBehaviour
         return ((center1 - center2).sqrMagnitude < maxDistSq);
     }
 
-    private bool CircleFanIntersect(Vector3 center1, float radius1, Vector3 center2, float radius2, Vector3 dir2, float cos2)
+    private bool CircleFanIntersect(Vector3 center1, float radius1, Vector3 center2, float radius2, Vector3 dir2, float halfAngle)
     {
         // If a fan intersects, a circle will always intersect as well
         if (!CircleCircleIntersect(center1, radius1, center2, radius2))
             return false;
 
-        var movedCenter = center2 - dir2 * radius1;
-        var toCenter = center1 - movedCenter;
-        toCenter.Normalize();
-        if (Vector3.Dot(toCenter, dir2) > cos2)
+        if (Vector3.Angle(center1 - center2, dir2) < (halfAngle))
             return true;
 
         return false;

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 681261570677698082}
   - component: {fileID: 7684613700305265623}
+  - component: {fileID: 5136160913063148432}
   m_Layer: 0
   m_Name: MobBase
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7684613700305265623
 MonoBehaviour:
@@ -50,6 +51,8 @@ MonoBehaviour:
   m_maxHealth: 10
   m_invencivilityAfterHit: 0.5
   m_radius: 0.5
+  doesntMove: 0
+  m_updateRate: 30
   onImmuneHit:
     m_PersistentCalls:
       m_Calls: []
@@ -65,4 +68,26 @@ MonoBehaviour:
   onVisibilityChanged:
     m_PersistentCalls:
       m_Calls: []
+  m_currentTile: {fileID: 0}
   m_debugColor: {r: 0, g: 1, b: 0, a: 1}
+  m_data:
+    transform: {fileID: 681261570677698082}
+    mob: {fileID: 7684613700305265623}
+    perception: {fileID: 0}
+    locomotion: {fileID: 0}
+    visuals: {fileID: 0}
+    attacks: {fileID: 0}
+    squad: {fileID: 0}
+    framesLeft: 0
+--- !u!114 &5136160913063148432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5983850131748112274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19eeb3edb14444144803ab5a049fbf5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

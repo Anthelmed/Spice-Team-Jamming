@@ -108,6 +108,7 @@ namespace _3C.Player
             if (newPossibleStateBehavior.DoConsumeManaPoints() &&
                 !m_ManaPoints.CheckIfPossible(newPossibleStateBehavior.BaseManaPoints))
             {
+                m_ManaPoints.TriggerOnCantConsumeMana();
                 return false;
             }
             
@@ -177,6 +178,7 @@ namespace _3C.Player
                 (PlayerState.IdleMovement, InputType.AimCanceled) => PlayerState.IdleMovement,
                 (PlayerState.IdleMovement, InputType.RangeAttackCanceled) => PlayerState.IdleMovement,
                 (PlayerState.Aiming, InputType.AimCanceled) => PlayerState.IdleMovement,
+                (PlayerState.Aiming, InputType.DashPerformed) => PlayerState.Dashing,
                 _ => throw new Exception($" {m_CurrentState} - {_input} is not handled"),
             };
         }

@@ -23,7 +23,7 @@ public class GameTile : MonoBehaviour
     Vector3 startPos;
     Vector3 startScale;
     public TreeVisuals[] treeVisuals;
-
+    public Transform playerIndicator;
     public MapTileData mapTileData = new MapTileData();
 
     public static event Action<MapTileData> MapTileClicked = delegate { };
@@ -42,6 +42,7 @@ public class GameTile : MonoBehaviour
     private void Awake()
     {
         _renderer = GetComponent<Renderer>();
+        playerIndicator.gameObject.SetActive(false);
     }
 
     public bool IsSpawnArea
@@ -52,8 +53,7 @@ public class GameTile : MonoBehaviour
     public Transform contestedIndicator;
     // public Transform SpawnPoint => spawnPoint;
 
-    private bool isHighlighted = false;
-
+    bool hasPlayer = false;
     public void SetTileState(WorldTileStatus status)
     {
        
@@ -106,10 +106,22 @@ public class GameTile : MonoBehaviour
          mapTileData.tileStatus = status;
 
     }
+    public void OnPlayerMove(Vector2Int newTile)
+    {
+        if(hasPlayer && newTile != mapTileData.tileCoords)
+        {
+            playerIndicator.gameObject.SetActive(false);
+        }
+        else if (newTile == mapTileData.tileCoords)
+        {
+            playerIndicator.gameObject.SetActive(true);
+        }
+    }
     public void Highlight()
     {
         transform.DOKill();
-        transform.DOMove(startPos + Vector3.up * 7.5f, 0.4f).SetEase(Ease.OutBack);
+        transform.DOMoveY(startPos.y + 7.5f, 0.4f).SetEase(Ease.OutBack);
+        // transform.DOMove(startPos + Vector3.up * 7.5f, 0.4f).SetEase(Ease.OutBack);
         transform.DOScale(startScale * 1.25f, 0.4f).SetEase(Ease.OutBack);
         highlight.SetActive(true);
         // if (!_isObstacle)

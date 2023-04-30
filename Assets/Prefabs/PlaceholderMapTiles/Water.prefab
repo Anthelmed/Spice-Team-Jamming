@@ -229,6 +229,9 @@ MonoBehaviour:
   centerPoint: {fileID: 972718030235555217}
   highlight: {fileID: 2928082402681330408}
   biome: 4
+  treeVisuals: []
+  playerIndicator: {fileID: 972718030235555217}
+  contestedIndicator: {fileID: 0}
 --- !u!1 &6470430731500575965
 GameObject:
   m_ObjectHideFlags: 0

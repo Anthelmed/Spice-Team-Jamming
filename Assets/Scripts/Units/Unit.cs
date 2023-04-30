@@ -14,6 +14,7 @@ namespace Units
     }
 
     [SelectionBase]
+    [RequireComponent(typeof(AutoUpdateUnit))]
     public class Unit : MonoBehaviour
     {
         public enum Type
@@ -34,13 +35,17 @@ namespace Units
         [SerializeField] [Min(0f)] private float m_radius = 0.5f;
         [SerializeField] private bool doesntMove = false;
 
+        public int MAXHealth => m_maxHealth;
+
         [Header("Events")]
         public UnityEvent onImmuneHit;
         public UnityEvent<float, Unit> onHit;
         public UnityEvent<float> onHeal;
+        public UnityEvent<float> onHealthChanged;
         public UnityEvent<float, Unit> onDie;
         public UnityEvent<bool> onVisibilityChanged;
 
+        public bool HasTile => m_currentTile;
         public bool Visible => !m_currentTile || m_currentTile.tileActivated;
 
         private float m_currentHealth;
@@ -50,7 +55,7 @@ namespace Units
 
         public void TakeHit(float damage, Unit other)
         {
-            if (m_currentHealth < 0f) return;
+            if (m_currentHealth <= 0f) return;
 
             if (Time.timeSinceLevelLoad - m_lastHit < m_invencivilityAfterHit) return;
 
@@ -64,11 +69,15 @@ namespace Units
 
             m_lastHit = Time.timeSinceLevelLoad;
             m_currentHealth = Mathf.Max(0, m_currentHealth - damage);
+            onHealthChanged?.Invoke(m_currentHealth);
+
 
             if (m_currentHealth == 0)
             {
                 onDie?.Invoke(damage, other);
                 m_currentTile.Unregister(this);
+                m_currentTile = null;
+                GetComponent<AutoUpdateUnit>().enabled = true;
             }
             else
                 onHit?.Invoke(damage, other);
@@ -79,6 +88,7 @@ namespace Units
             var wasDead = m_currentHealth == 0;
 
             m_currentHealth = Mathf.Min(m_maxHealth, m_currentHealth + amount);
+            onHealthChanged?.Invoke(m_currentHealth);
             onHeal?.Invoke(amount);
 
             if (wasDead)
@@ -90,8 +100,11 @@ namespace Units
             onVisibilityChanged?.Invoke(visible);
         }
 
-        protected virtual void Update()
+        public virtual void FixedTick() { }
+
+        public virtual void Tick()
         {
+            if (!this) return;
             if (doesntMove && m_currentTile) return;
 
             var world = LevelTilesManager.instance;
@@ -114,6 +127,7 @@ namespace Units
         protected virtual void Awake()
         {
             m_currentHealth = m_maxHealth;
+            onHealthChanged?.Invoke(m_currentHealth);
             m_currentTile = null;
         }
 
@@ -124,19 +138,19 @@ namespace Units
         [Header("Debug")]
         [SerializeField] protected Color m_debugColor = Color.green;
 
-        private void OnDrawGizmos()
-        {
-            if (Application.isPlaying && !Visible)
-            {
-                UnityEditor.Handles.color = m_debugColor;
-                UnityEditor.Handles.DrawSolidDisc(transform.position, Vector3.up, m_radius);
-            }
-        }
-        private void OnDrawGizmosSelected()
-        {
-            UnityEditor.Handles.color = m_debugColor;
-            UnityEditor.Handles.DrawSolidDisc(transform.position, Vector3.up, m_radius);
-        }
+        // private void OnDrawGizmos()
+        // {
+        //     if (Application.isPlaying && !Visible)
+        //     {
+        //         UnityEditor.Handles.color = m_debugColor;
+        //         UnityEditor.Handles.DrawSolidDisc(transform.position, Vector3.up, m_radius);
+        //     }
+        // }
+        // private void OnDrawGizmosSelected()
+        // {
+        //     UnityEditor.Handles.color = m_debugColor;
+        //     UnityEditor.Handles.DrawSolidDisc(transform.position, Vector3.up, m_radius);
+        // }
 #endif
     }
 }

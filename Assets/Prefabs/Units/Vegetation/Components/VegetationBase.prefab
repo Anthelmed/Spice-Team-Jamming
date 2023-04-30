@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 169872055167040422}
   - component: {fileID: 8668855018888612260}
+  - component: {fileID: 2833662481261461459}
   m_Layer: 0
   m_Name: VegetationBase
   m_TagString: Untagged
@@ -50,7 +51,8 @@ MonoBehaviour:
   m_maxHealth: 2
   m_invencivilityAfterHit: 0.5
   m_radius: 0.5
-  doesntMove: 0
+  doesntMove: 1
+  m_updateRate: 30
   onImmuneHit:
     m_PersistentCalls:
       m_Calls: []
@@ -68,3 +70,15 @@ MonoBehaviour:
       m_Calls: []
   m_currentTile: {fileID: 0}
   m_debugColor: {r: 0, g: 0.25, b: 0, a: 1}
+--- !u!114 &2833662481261461459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8040388396541389246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19eeb3edb14444144803ab5a049fbf5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

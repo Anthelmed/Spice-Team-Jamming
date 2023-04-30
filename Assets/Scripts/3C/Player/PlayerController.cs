@@ -65,7 +65,6 @@ namespace _3C.Player
 
         public void OnRangeAttack(InputAction.CallbackContext _context)
         {
-            Debug.Log("On Range : " + _context.phase);
             if (_context.phase == InputActionPhase.Performed)
             {
                 StackInputIfNotTop(InputType.RangeAttackPerformed);
