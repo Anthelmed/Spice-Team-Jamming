@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System;
+using _3C.Player;
 using UnityEngine.InputSystem;
 using DG.Tweening;
 
@@ -263,6 +264,7 @@ public class GameManager : MonoBehaviour
         else
         {
             loadedPlayer.transform.position = spawnPos;
+            loadedPlayer.GetComponentInChildren<PlayerStateHandler>().transform.position = Vector3.zero;
             Debug.Log("teleporting");
             if (!loadedPlayer.activeInHierarchy) loadedPlayer.SetActive(true);
 
