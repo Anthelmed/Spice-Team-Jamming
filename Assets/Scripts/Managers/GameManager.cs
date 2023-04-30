@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using _3C.Player;
 using DG.Tweening;
+using SpiceTeamJamming.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour
     public event Action<bool> loadingScreenVisibilityEvent = delegate { };
     public event Action<bool> startScreenVisibilityEvent = delegate { };
     public event Action<bool> pauseScreenVisibilityEvent = delegate { };
-
+    public event Action<GameTile> onHoverTileChanged;
     public event Action OnInitialLevelLoad = delegate { };
 
     Animator playerAnimator;// DO this much better
@@ -93,6 +94,7 @@ public class GameManager : MonoBehaviour
             case GameState.pause:
                 {
                     pauseScreenVisibilityEvent(false);
+                    UIRouter.GoToRoute(UIRouter.RouteType.Battlefield);
                 }
                 break;
             default:
@@ -119,7 +121,7 @@ public class GameManager : MonoBehaviour
             case GameState.pause:
                 {
                     pauseScreenVisibilityEvent(true);
-                    //switch input map
+                    UIRouter.GoToRoute(UIRouter.RouteType.Pause);
                 }
                 break;
             default:
@@ -340,6 +342,7 @@ public class GameManager : MonoBehaviour
                     cachedHoverTile.Unhighlight();
                 }
                 cachedHoverTile = hoverTile;
+                onHoverTileChanged?.Invoke(cachedHoverTile);
                 if (hoverTile.mapTileData.biome == Biome.Water)return; // dont juice a place you cant go
 
                 
