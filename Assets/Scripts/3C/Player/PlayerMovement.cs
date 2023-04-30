@@ -36,7 +36,7 @@ namespace _3C.Player
         [ReadOnly]
         public bool Enabled;
 
-        private Vector3 CurrentWorldSpeed => (m_CurrentMovement * m_Speed).X0Y();  
+        private Vector3 CurrentWorldSpeed => (m_CurrentMovement * m_Speed).X0Y().SetY(m_Rigidbody.velocity.y);  
 
         protected override void Init(IStateHandler _stateHandler)
         {
