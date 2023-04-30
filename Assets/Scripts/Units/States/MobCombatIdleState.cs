@@ -22,7 +22,8 @@ namespace Units
 
         public void Tick(Mob.Data data)
         {
-            // TODO: Regroup if leader too far
+            if (data.squad && data.squad.IsTooFar())
+                data.NextState = Mob.State.Regroup;
 
             if (!data.perception.Target)
             {
@@ -30,37 +31,21 @@ namespace Units
                 return;
             }
 
-            float distance;
             var toTarget = data.perception.Target.transform.position - data.transform.position;
             var cos = Vector3.Dot(toTarget.normalized, data.transform.forward);
             bool canAttack = cos > Mob.COS_ATTACK;
-
-            float toTargetSq = (data.perception.Target.transform.position - data.transform.position).sqrMagnitude;
-            if (data.attacks.HasRangedAttack)
+            
+            if (data.attacks.HasRangedAttack && data.attacks.IsInRangedRange(data.perception.Target))
             {
-                // Chase the target if it got out of range
-                distance = data.attacks.MaxRange + data.perception.Target.Radius;
-                if (toTargetSq > distance * distance)
-                {
-                    data.NextState = Mob.State.GoToTarget;
-                    return;
-                }
-                
-                // Attack if in range
-                distance = data.attacks.MinRange - data.perception.Target.Radius;
-                if (toTargetSq > distance * distance)
-                {
-                    if (/*canAttack &&*/ data.attacks.IsAttackReady)
-                        data.NextState = Mob.State.RangedAttack;
-                    return;
-                }
-
+                if (canAttack && data.attacks.IsAttackReady)
+                    data.NextState = Mob.State.RangedAttack;
+                return;
             }
 
-            // Go to melee range
-            distance = data.attacks.MeleeRange + data.perception.Target.Radius;
-            if (toTargetSq > distance * distance)
+            if (!data.attacks.IsInMeleeRange(data.perception.Target))
+            {
                 data.NextState = Mob.State.GoToTarget;
+            }
 
             if (canAttack && data.attacks.IsAttackReady)
                 data.NextState = Mob.State.Attack;

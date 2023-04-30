@@ -9,7 +9,7 @@ namespace Units
         public void Enter(Mob.Data data)
         {
             if (data.mob.Visible && data.visuals) data.visuals.TriggerRangedAttack();
-            else data.attacks.DoRanged(data.perception.Target.transform.position);
+            else data.attacks.DoRanged();
         }
 
         public void Exit(Mob.Data data)
@@ -25,7 +25,7 @@ namespace Units
             }
 
             if (data.visuals.IsDamagingFrame() && data.perception.Target)
-                data.attacks.DoRanged(data.perception.Target.transform.position);
+                data.attacks.DoRanged();
         }
     }
 }

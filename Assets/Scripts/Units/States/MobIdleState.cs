@@ -20,7 +20,9 @@ namespace Units
 
         public void Tick(Mob.Data data)
         {
-            // TODO too far from leader, go there
+            if (data.squad && data.squad.IsTooFar())
+                data.NextState = Mob.State.Regroup;
+
             if (data.perception && data.perception.Target)
                 data.NextState = Mob.State.GoToTarget;
         }

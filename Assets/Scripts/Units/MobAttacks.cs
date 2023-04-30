@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Units;
 using UnityEngine;
 
-namespace Unit
+namespace Units
 {
     public class MobAttacks : MonoBehaviour
     {
@@ -49,7 +49,7 @@ namespace Unit
                 m_meleeHitBox.gameObject.SetActive(false);
         }
 
-        public void DoRanged(Vector3 target)
+        public void DoRanged()
         {
             if (!m_rangedObject || m_rangedObject.activeSelf) return;
             if (!IsAttackReady) return;
@@ -57,10 +57,25 @@ namespace Unit
             SetAttackDelay(m_rangedCooldown);
             var proj = m_rangedObject.GetComponent<Projectile>();
             if (proj)
-                proj.target = target;
+                proj.target = transform.position + transform.forward * Mathf.Lerp(m_rangedRange.x, m_rangedRange.y, 0.5f);
 
             m_rangedObject.transform.position = transform.position;
             m_rangedObject.SetActive(true);
+        }
+
+        public bool IsInMeleeRange(Unit unit)
+        {
+            var toTarget = (unit.transform.position - transform.position).sqrMagnitude;
+            var range = MeleeRange + unit.Radius;
+            return (toTarget < range * range);
+        }
+
+        public bool IsInRangedRange(Unit unit)
+        {
+            var toTarget = (unit.transform.position - transform.position).sqrMagnitude;
+            var minRange = m_rangedRange.x - unit.Radius;
+            var maxRange = m_rangedRange.y + unit.Radius;
+            return (toTarget > minRange * minRange && toTarget < maxRange * maxRange);
         }
 
 #if UNITY_EDITOR

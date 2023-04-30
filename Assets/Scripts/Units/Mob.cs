@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unit;
 using UnityEngine;
 using UnityEngine.AI;
 using static MobAI;
@@ -18,6 +17,7 @@ namespace Units
             public Locomotion locomotion;
             public MobVisuals visuals;
             public MobAttacks attacks;
+            public Squad squad;
 
             public int framesLeft;
 
@@ -85,6 +85,7 @@ namespace Units
             m_data.locomotion = GetComponentInChildren<Locomotion>();
             m_data.visuals = GetComponentInChildren<MobVisuals>();
             m_data.attacks = GetComponentInChildren<MobAttacks>();
+            m_data.squad = GetComponentInChildren<Squad>();
         }
 
         private void Reset()

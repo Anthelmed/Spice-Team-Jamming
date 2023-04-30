@@ -20,6 +20,19 @@ namespace Units
 
         private Vector3 m_lastPosition;
         private Vector3 m_lastVelocity;
+        private Vector3 m_targetPosition;
+        private bool m_goToPosition;
+
+        public void GoToPosition(Vector3 position)
+        {
+            m_goToPosition = true;
+            m_targetPosition = position;
+        }
+
+        public void ClearPosition()
+        {
+            m_goToPosition = false;
+        }
 
         public void StopImmediate()
         {
@@ -37,8 +50,12 @@ namespace Units
 
             if (Destination)
             {
+                m_targetPosition = Destination.transform.position;
+            }
 
-                var toTarget = (Destination.position - trans.position).normalized;
+            if (Destination || m_goToPosition)
+            {
+                var toTarget = (m_targetPosition - trans.position).normalized;
                 targetVelocity = toTarget * m_speed;
                 HandleIntersections(trans, toTarget);
             }
