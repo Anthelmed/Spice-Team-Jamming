@@ -19,7 +19,15 @@ namespace _3C.Player
 
         void OnAimingStateChanged(bool _state);
         void SetOrientationToUseMovement();
+
+        void ChangeMovementSpeedModifier(float _modifier);
+        
         T Instantiate<T>(T prefab)
             where T : Object;
+
+        void ResetMovementSpeedModifier()
+        {
+            ChangeMovementSpeedModifier(1);
+        }
     }
 }
