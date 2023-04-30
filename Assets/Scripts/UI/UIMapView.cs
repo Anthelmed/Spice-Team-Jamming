@@ -19,21 +19,21 @@ public class UIMapView : UIView
 		pauseInputAction.action.performed += OnPauseActionPerformed;
 		elementsReferences.ActionHelperPause.clicked += OnPauseButtonPressed;
 
-		//GameManager.instance.onHoverTileChanged += OnHoverTileChanged;		
+		GameManager.instance.onHoverTileChanged += OnHoverTileChanged;		
 		
 		InitializeButtonsManipulators(new[]
 		{
 			elementsReferences.ActionHelperPause
 		});
 	}
-		
+	
 	protected void OnDisable()
 	{
 		pauseInputAction.action.Disable();
 		pauseInputAction.action.performed -= OnPauseActionPerformed;
 		elementsReferences.ActionHelperPause.clicked -= OnPauseButtonPressed;
 		
-		//GameManager.instance.onHoverTileChanged -= OnHoverTileChanged;	
+		GameManager.instance.onHoverTileChanged -= OnHoverTileChanged;	
 
 		ClearButtonsManipulators();
 	}
@@ -48,6 +48,15 @@ public class UIMapView : UIView
 	private void OnPauseButtonPressed()
 	{
 		UIRouter.GoToRoute(UIRouter.RouteType.Pause);
+	}
+	
+	private void OnHoverTileChanged(GameTile tile)
+	{
+		var tileData = tile.mapTileData;
+
+		elementsReferences.MapTileInfoText.text = @"Biome: " + tileData.biome +
+		                                          "Status: " + tileData.tileStatus +
+		                                          "Coordinates: " + tileData.tileCoords;
 	}
 	
 	protected override void DisplaceElementsRandomly()
