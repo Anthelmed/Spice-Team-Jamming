@@ -92,6 +92,16 @@ public class LevelTile : MonoBehaviour
         hasPlayer = true;
         tileActivated = true;
         worldTilesManager.UpdateActiveTiles(this);
+       
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        other.TryGetComponent(out PlayerStateHandler player);
+        if (player == null) return;
+
+        hasPlayer = false;
+   
     }
 
     internal void WakeUp()
