@@ -133,19 +133,19 @@ namespace Units
         [Header("Debug")]
         [SerializeField] protected Color m_debugColor = Color.green;
 
-        private void OnDrawGizmos()
-        {
-            if (Application.isPlaying && !Visible)
-            {
-                UnityEditor.Handles.color = m_debugColor;
-                UnityEditor.Handles.DrawSolidDisc(transform.position, Vector3.up, m_radius);
-            }
-        }
-        private void OnDrawGizmosSelected()
-        {
-            UnityEditor.Handles.color = m_debugColor;
-            UnityEditor.Handles.DrawSolidDisc(transform.position, Vector3.up, m_radius);
-        }
+        // private void OnDrawGizmos()
+        // {
+        //     if (Application.isPlaying && !Visible)
+        //     {
+        //         UnityEditor.Handles.color = m_debugColor;
+        //         UnityEditor.Handles.DrawSolidDisc(transform.position, Vector3.up, m_radius);
+        //     }
+        // }
+        // private void OnDrawGizmosSelected()
+        // {
+        //     UnityEditor.Handles.color = m_debugColor;
+        //     UnityEditor.Handles.DrawSolidDisc(transform.position, Vector3.up, m_radius);
+        // }
 #endif
     }
 }
