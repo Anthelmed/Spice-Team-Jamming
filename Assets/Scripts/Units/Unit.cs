@@ -32,6 +32,7 @@ namespace Units
         [SerializeField] [Min(1)] private int m_maxHealth = 10;
         [SerializeField] [Min(0f)] private float m_invencivilityAfterHit = 0.5f;
         [SerializeField] [Min(0f)] private float m_radius = 0.5f;
+        [SerializeField] private bool doesntMove = false;
 
         [Header("Events")]
         public UnityEvent onImmuneHit;
@@ -91,6 +92,8 @@ namespace Units
 
         protected virtual void Update()
         {
+            if (doesntMove && m_currentTile) return;
+
             var world = LevelTilesManager.instance;
             if (!world) return;
             var newTile = world.GetTileAtPosition(transform.position);

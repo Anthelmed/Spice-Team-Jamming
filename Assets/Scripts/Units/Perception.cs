@@ -17,8 +17,13 @@ namespace Units
         public bool QueryTargetEnabled { get; set; } = false;
         public Unit Target { get; private set; } = null;
 
+        // Optimization: don't tick every frame
+        private int m_tickTurn;
+        private const int TICK_RATE = 10;
+
         public void Tick()
         {
+            if ((Time.frameCount % TICK_RATE) != m_tickTurn) return;
             if (!m_unit) return;
 
             if (Target && (Target.Team == m_unit.Team || Target.CurrentHealth == 0)) Target = null;
@@ -29,6 +34,7 @@ namespace Units
         private void Start()
         {
             OnValidate();
+            m_tickTurn = Random.Range(0, TICK_RATE);
         }
 
         private void OnValidate()
