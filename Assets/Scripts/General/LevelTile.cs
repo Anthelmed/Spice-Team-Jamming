@@ -62,7 +62,7 @@ public class LevelTile : MonoBehaviour
         if (newStatus != status)
         {
             status = newStatus;
-            Debug.Log($"{name} changed to {status}");
+            MapTile.SetTileState(status);
         }
     }
 
