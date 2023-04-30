@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 890051847975540007, guid: 6e721f86e60571e4288e648c166baca3,
         type: 3}
       propertyPath: m_Name
-      value: IceKnight Variant
+      value: IceKnight
       objectReference: {fileID: 0}
     - target: {fileID: 1319468382984332948, guid: 6e721f86e60571e4288e648c166baca3,
         type: 3}
@@ -43,6 +43,16 @@ PrefabInstance:
       propertyPath: m_data.visuals
       value: 
       objectReference: {fileID: 3081392959180078645}
+    - target: {fileID: 3888231552320926050, guid: 6e721f86e60571e4288e648c166baca3,
+        type: 3}
+      propertyPath: m_debugColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888231552320926050, guid: 6e721f86e60571e4288e648c166baca3,
+        type: 3}
+      propertyPath: m_debugColor.g
+      value: 0.031849384
+      objectReference: {fileID: 0}
     - target: {fileID: 6207276697970556055, guid: 6e721f86e60571e4288e648c166baca3,
         type: 3}
       propertyPath: m_RootOrder
@@ -114,7 +124,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6207276697970556055, guid: 6e721f86e60571e4288e648c166baca3,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3338493313966026367}
+      addedObject: {fileID: 2034816929595916366}
     - targetCorrespondingSourceObject: {fileID: 6207276697970556055, guid: 6e721f86e60571e4288e648c166baca3,
         type: 3}
       insertIndex: -1
@@ -251,7 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_unit: {fileID: 0}
-  m_sounds: {fileID: 7974133020358540685}
+  m_sounds: {fileID: 6683453412121301948}
   m_animator: {fileID: 5349043035723036682}
 --- !u!1001 &4676208687269897224
 PrefabInstance:
@@ -326,13 +336,13 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2940c3a6601b3949bd9e28ee8d6a63e, type: 3}
---- !u!4 &3338493313966026367 stripped
+--- !u!4 &2034816929595916366 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6690137043287499846, guid: f2940c3a6601b3949bd9e28ee8d6a63e,
     type: 3}
   m_PrefabInstance: {fileID: 4676208687269897224}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7974133020358540685 stripped
+--- !u!114 &6683453412121301948 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2028131047732787124, guid: f2940c3a6601b3949bd9e28ee8d6a63e,
     type: 3}

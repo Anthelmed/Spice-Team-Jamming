@@ -99,11 +99,12 @@ namespace Units
                 var visible = Visible;
                 if (m_currentTile)
                     m_currentTile.Unregister(this);
+
                 newTile.Register(this);
                 m_currentTile = newTile;
 
                 if (visible != Visible)
-                    ChangeVisibility(visible);
+                    ChangeVisibility(Visible);
             }
         }
 
