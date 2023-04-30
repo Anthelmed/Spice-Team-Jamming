@@ -18,6 +18,8 @@ public class UIMapView : UIView
 		pauseInputAction.action.Enable();
 		pauseInputAction.action.performed += OnPauseActionPerformed;
 		elementsReferences.ActionHelperPause.clicked += OnPauseButtonPressed;
+
+		//GameManager.instance.onHoverTileChanged += OnHoverTileChanged;		
 		
 		InitializeButtonsManipulators(new[]
 		{
@@ -30,6 +32,8 @@ public class UIMapView : UIView
 		pauseInputAction.action.Disable();
 		pauseInputAction.action.performed -= OnPauseActionPerformed;
 		elementsReferences.ActionHelperPause.clicked -= OnPauseButtonPressed;
+		
+		//GameManager.instance.onHoverTileChanged -= OnHoverTileChanged;	
 
 		ClearButtonsManipulators();
 	}
