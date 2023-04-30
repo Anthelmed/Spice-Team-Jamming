@@ -364,7 +364,8 @@ public class LevelTilesManager : MonoBehaviour
 
         for (int i = 0; i < tile.Count; ++i)
         {
-            result = tile[i].QueryCircleEnemies(center, radius, team, i != 0);
+            if (tile[i])
+                result = tile[i].QueryCircleEnemies(center, radius, team, i != 0);
         }
 
         return result;
@@ -377,7 +378,8 @@ public class LevelTilesManager : MonoBehaviour
 
         for (int i = 0; i < tile.Count; ++i)
         {
-            result = tile[i].QueryCircleEnemiesOfType(center, radius, type, team, i != 0);
+            if (tile[i])
+                result = tile[i].QueryCircleEnemiesOfType(center, radius, type, team, i != 0);
         }
 
         return result;
@@ -390,7 +392,8 @@ public class LevelTilesManager : MonoBehaviour
 
         for (int i = 0; i < tile.Count; ++i)
         {
-            result = tile[i].QueryFanEnemies(center, radius, dir, angle, team, i != 0);
+            if (tile[i])
+                result = tile[i].QueryFanEnemies(center, radius, dir, angle, team, i != 0);
         }
 
         return result;
@@ -404,7 +407,8 @@ public class LevelTilesManager : MonoBehaviour
 
         for (int i = 0; i < tile.Count; ++i)
         {
-            result = tile[i].QueryFanEnemiesOfType(center, radius, dir, angle, type, team, i != 0);
+            if (tile[i])
+                result = tile[i].QueryFanEnemiesOfType(center, radius, dir, angle, type, team, i != 0);
         }
 
         return result;
@@ -431,7 +435,8 @@ public class LevelTilesManager : MonoBehaviour
 
         for (int i = 0; i < tile.Count; ++i)
         {
-            result = tile[i].QueryCircleAllOfType(center, radius, type, i != 0);
+            if (tile[i])
+                result = tile[i].QueryCircleAllOfType(center, radius, type, i != 0);
         }
 
         return result;
