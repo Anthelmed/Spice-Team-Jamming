@@ -102,6 +102,7 @@ public class LevelTilesManager : MonoBehaviour
                 GameObject spawnedObject = Instantiate(prefabToSpawn, position, Quaternion.identity);
                 spawnedObject.gameObject.name = "Tile " + xIndex + " _ " + yIndex;
                 spawnedObject.transform.SetParent(transform);
+                spawnedObject.transform.eulerAngles = new Vector3(spawnedObject.transform.localEulerAngles.x, UnityEngine.Random.Range(0, 4) * 90f, spawnedObject.transform.localEulerAngles.z);
                 var tile = spawnedObject.GetComponent<LevelTile>();
                 tile.MapTile = mapTile;
 

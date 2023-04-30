@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public event Action<bool> pauseScreenVisibilityEvent = delegate { };
 
     GameObject loadedPlayer;
+    Animator playerAnimator;// DO this much better
     bool battleMapLoaded;
     bool loadingBattleMap;
 
@@ -164,13 +165,15 @@ public class GameManager : MonoBehaviour
                                 var cachedPos = tile.gameObject.transform.position;
                                 
                                 if (AudioManager.instance != null)  AudioManager.instance.PlaySingleClip(mapClickSound, SFXCategory.ui, 0, 0);
+                                Debug.Log("here");
                                 tile.gameObject.transform.DOPunchScale(tile.gameObject.transform.localScale * 1.1f, 0.4f, 5, 0);
                                 tile.gameObject.transform.DOPunchPosition((Vector3.up * 15), 0.4f, 1, 1, false).OnComplete(() =>
                                 {
                                     mapDestination = clickedTile.mapTileData.tileCoords;
+                                    TryTransitionToLevel();
                                     tile.Unhighlight();
                                     //tile.gameObject.transform.position = cachedPos;
-                                    TryTransitionToLevel();
+                                    
                                 });
 
 
@@ -194,6 +197,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(string sceneName)
     {
+        Debug.Log("transition 3");
         if (currentGameState == GameState.level) return;
 
         Scene scene = SceneManager.GetSceneByName(sceneName);
@@ -239,13 +243,14 @@ public class GameManager : MonoBehaviour
 
     void TryTransitionToLevel()
     {
+        Debug.Log("transition 1");
         if(loadingBattleMap) return;
         if (battleMapLoaded) TransitionToLevel();
         else LoadLevel(battleSceneName); // this ends up being async that's why it's like this
     }
     void TransitionToLevel()
     {
-
+        Debug.Log("transition 2");
         var spawnTile = LevelTilesManager.instance.GetTileAtGridPosition(mapDestination);
         spawnTile.WakeUp();
         var spawnPos = spawnTile.teleportPoint.position;
@@ -253,14 +258,16 @@ public class GameManager : MonoBehaviour
         if (loadedPlayer == null)
         {
          loadedPlayer = Instantiate(playerPrefab, spawnPos, Quaternion.identity);
+         playerAnimator = loadedPlayer.GetComponentInChildren<Animator>();
         }
         else
         {
             loadedPlayer.transform.position = spawnPos;
+            Debug.Log("teleporting");
             if (!loadedPlayer.activeInHierarchy) loadedPlayer.SetActive(true);
 
         }
-      
+        playerAnimator.SetTrigger("Teleport In");
         mapGraphics.SetActive(false); /// do this better
 
         TransitionToState(GameState.level);
@@ -300,7 +307,7 @@ public class GameManager : MonoBehaviour
     public void TeleportPlayerToMapPoint(Vector2Int gridCoords)
     {
         if (LevelTilesManager.instance == null) return;
-
+        Debug.Log("teleporting");
         var desinationTile = LevelTilesManager.instance.GetTileAtGridPosition(gridCoords);
 
         playerPrefab.transform.position = desinationTile.teleportPoint.position;
