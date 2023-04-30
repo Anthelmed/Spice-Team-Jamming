@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using System;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 public enum GameState
 {
@@ -14,14 +15,16 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
  
-
+    [Header("references")]
     [SerializeField] string battleSceneName;
     [SerializeField] Camera mapCamera;
     [SerializeField] GameObject playerPrefab;
     [SerializeField] Vector2Int mapDestination;
     [SerializeField] GameObject mapGraphics;
+    
+    [Header("misc")]
+    [SerializeField] string mapClickSound = "uiClickStone";
 
-  
     GameState currentGameState;
 
     public static GameManager instance;
@@ -49,14 +52,14 @@ public class GameManager : MonoBehaviour
         startScreenVisibilityEvent(true);
     }
 
- 
+    private void Start()
+    {
+        StartGame();
+    }
     public void StartGame()
     {
-        if (currentGameState == GameState.title)
-        {
             HideAllPanels();
             TransitionToState(GameState.map);
-        }
     }
     
      void TransitionToState(GameState newState)
@@ -120,11 +123,10 @@ public class GameManager : MonoBehaviour
     }
 
 
-     GameTile clickedTile;
-     bool isHoldingDown = false;
-     float holdTimer;
-     float holdDownDuration = 1.0f;
-
+    GameTile clickedTile;
+    GameTile cachedHoverTile;
+    bool wigglin;
+     
 
     void Update()
     {
@@ -135,6 +137,11 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.map:
                 {
+                    ////hovering over tiles. for juice only
+                    HighlightingJuice();
+
+
+                    //actually selecting tiles and telporting there
                     if (Mouse.current.leftButton.wasPressedThisFrame)
                     {
                         Vector2 mousePosition = Mouse.current.position.ReadValue();
@@ -144,20 +151,34 @@ public class GameManager : MonoBehaviour
                         if (Physics.Raycast(ray, out hit))
                         {
                             GameObject hitObject = hit.collider.gameObject;
-                            Debug.Log("Clicked on " + hitObject.name);
                             hitObject.TryGetComponent(out GameTile tile);
 
-                        if (tile != null)
-                        {
-                                print("found game tile on object");
-                                // Player clicked on a tile, start the timer
+                            if (tile != null)
+                            {
                                 clickedTile = tile;
-                                mapDestination = clickedTile.mapTileData.tileCoords;
-                                TryTransitionToLevel();
+                                if (tile.mapTileData.biome == Biome.Water)
+                                {
+                                    print("you cant swim!");
+                                    return;
+                                }
+                                var cachedPos = tile.gameObject.transform.position;
+
+                                if (AudioManager.instance != null)  AudioManager.instance.PlaySingleClip(mapClickSound, SFXCategory.ui, 0, 0);
+
+                                tile.gameObject.transform.DOPunchPosition((Vector3.up * 15), 0.8f, 1, 1, false).OnComplete(() =>
+                                {
+                                    mapDestination = clickedTile.mapTileData.tileCoords;
+                                    tile.gameObject.transform.position = cachedPos;
+                                    TryTransitionToLevel();
+
+                                });
+
+
+
                             }
+                        }
+
                     }
-              
-                }
                 }
                 break;
             case GameState.level:
@@ -169,6 +190,7 @@ public class GameManager : MonoBehaviour
         }  
     }
 
+   
 
     public void LoadLevel(string sceneName)
     {
@@ -285,6 +307,29 @@ public class GameManager : MonoBehaviour
         //var spawnPos = WorldTilesManager.instance.GetTileAtGridPosition(mapDestination).teleportPoint.position;
         //Instantiate(playerPrefab, spawnPos, Quaternion.identity);
 
+    }
+    private void HighlightingJuice()
+    {
+        RaycastHit hoverHit;
+
+        Ray hoverRay = mapCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(hoverRay, out hoverHit))
+        {
+            hoverHit.collider.gameObject.TryGetComponent(out GameTile hoverTile);
+            if (hoverTile != null && !wigglin && cachedHoverTile != hoverTile)
+            {
+                if (hoverTile.mapTileData.biome == Biome.Water) return; // dont juice a place you cant go
+
+                wigglin = true;
+                cachedHoverTile = hoverTile;
+                var cachedTilePos = hoverTile.gameObject.transform.position;
+                hoverTile.gameObject.transform.DOPunchPosition(Vector3.up * 5, 0.15f, 1, 1, false).OnComplete(() =>
+                {
+                    wigglin = false;
+                    hoverTile.gameObject.transform.position = cachedTilePos;
+                });
+            }
+        }
     }
 
     [ContextMenu(" load test scene")]
