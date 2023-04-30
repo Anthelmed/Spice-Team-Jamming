@@ -129,7 +129,7 @@ Material:
     - _IceFireSwitch: 1
     - _Metallic: 0
     - _Noise_Intensity: 0.167
-    - _Noise_Tile: 0.004
+    - _Noise_Tile: 0.007
     - _Normal_Strength: 0
     - _OVERLAY_NOISE_MASK: 1
     - _OcclusionStrength: 1
