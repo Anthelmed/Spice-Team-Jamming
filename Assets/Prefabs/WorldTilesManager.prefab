@@ -54,4 +54,25 @@ MonoBehaviour:
   forestBiomePrefabs:
   - {fileID: 3542509089036126314, guid: 9d2e1249b230ca941956c4b3da7c238b, type: 3}
   - {fileID: 3542509089036126314, guid: 9d2e1249b230ca941956c4b3da7c238b, type: 3}
+  enemies:
+  - m_squadPrefab: {fileID: 0}
+    weight: 24
+  - m_squadPrefab: {fileID: 3216817778645677260, guid: 3ebb28f4ca8c12541ad863e1311793b1,
+      type: 3}
+    weight: 1
+  - m_squadPrefab: {fileID: 1811915866761771354, guid: fbced670d1e8d2042b3d35659fcc8c91,
+      type: 3}
+    weight: 2
+  - m_squadPrefab: {fileID: 1572596635743955553, guid: ded6bd29881639047bfd7a717e8eb56f,
+      type: 3}
+    weight: 1
+  - m_squadPrefab: {fileID: 2595401695013452893, guid: f19ed965bdb6cd147b66f1edc541bfe8,
+      type: 3}
+    weight: 1
+  - m_squadPrefab: {fileID: 1927212137544287556, guid: 379628db2a103a04a9063c32e42b01e7,
+      type: 3}
+    weight: 2
+  - m_squadPrefab: {fileID: 7132305001879793573, guid: 3a476cda2b28a7d49bc50b61001d6e55,
+      type: 3}
+    weight: 1
   playerSpawnCoords: {x: 0, y: 0}

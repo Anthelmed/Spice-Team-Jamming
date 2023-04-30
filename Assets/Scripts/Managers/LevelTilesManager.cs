@@ -84,6 +84,11 @@ public class LevelTilesManager : MonoBehaviour
             GameObject.DestroyImmediate(child.gameObject);
         }
 
+        // Prepare for spawning enemies
+        var maxWeight = 0;
+        foreach (var enemyVariation in enemies)
+            maxWeight += enemyVariation.weight;
+
         for (int xIndex = 0; xIndex < rows; xIndex++)
         {
             for (int yIndex = 0; yIndex < columns; yIndex++)
@@ -105,6 +110,18 @@ public class LevelTilesManager : MonoBehaviour
                 gridTiles.Add(gridCoordinates, tile);
                 tile.Init(mapTile.mapTileData, gridCoordinates);
                 tile.Sleep();
+
+                var enemyChoice = UnityEngine.Random.Range(0, maxWeight);
+                for (int i = 0; i < enemies.Length; ++i)
+                {
+                    if (enemyChoice < enemies[i].weight)
+                    {
+                        if (enemies[i].m_squadPrefab)
+                            Instantiate(enemies[i].m_squadPrefab, spawnedObject.transform.position, spawnedObject.transform.rotation);
+                        break;
+                    }
+                    enemyChoice -= enemies[i].weight;
+                }
             }
         }
         //for (int columnIndex = 0; columnIndex < columns; columnIndex++)

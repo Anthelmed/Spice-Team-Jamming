@@ -101,7 +101,7 @@ namespace Units
 
             for (int i = 0; i < intersections.Count; ++i)
             {
-                if (intersections[i] == m_unit) continue;
+                if (!intersections[i] || intersections[i] == m_unit) continue;
                 var vector = intersections[i].transform.position - trans.position;
                 var amount = vector.magnitude;
 
@@ -127,6 +127,8 @@ namespace Units
         private void Awake()
         {
             m_lastPosition = Transform.position;
+            if (!m_unit)
+                m_unit = GetComponentInParent<Unit>();
         }
     }
 }
