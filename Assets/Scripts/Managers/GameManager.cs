@@ -167,7 +167,7 @@ public class GameManager : MonoBehaviour
                                 
                                 if (AudioManager.instance != null)  AudioManager.instance.PlaySingleClip(mapClickSound, SFXCategory.ui, 0, 0);
                                 Debug.Log("here");
-                                tile.gameObject.transform.DOPunchScale(tile.gameObject.transform.localScale * 1.1f, 0.4f, 5, 0);
+                                //tile.gameObject.transform.DOPunchScale(tile.gameObject.transform.localScale * 1.1f, 0.4f, 5, 0);
                                 tile.gameObject.transform.DOPunchPosition((Vector3.up * 15), 0.4f, 1, 1, false).OnComplete(() =>
                                 {
                                     mapDestination = clickedTile.mapTileData.tileCoords;
