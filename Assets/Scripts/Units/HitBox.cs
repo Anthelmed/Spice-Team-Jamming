@@ -50,7 +50,6 @@ namespace Units
         {
             var world = LevelTilesManager.instance;
 
-            Debug.Log(world);
             if (!world) return;
 
             List<Unit> newHits = null;
