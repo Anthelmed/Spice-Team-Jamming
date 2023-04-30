@@ -21,6 +21,7 @@ namespace _3C.Player
         {
             m_StateHandler = _stateHandler;
             m_CurrentManaPoint = m_MaxManaPoint;
+            PlayerStaticEvents.s_PlayerManaChanged?.Invoke(m_CurrentManaPoint);
         }
         
         public void Update()
