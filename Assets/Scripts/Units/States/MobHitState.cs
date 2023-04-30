@@ -17,7 +17,7 @@ namespace Units
 
         public void Tick(Mob.Data data)
         {
-            if (!data.visuals || data.visuals.HasAnimationFinished())
+            if (!data.visuals || !data.mob.Visible || data.visuals.HasAnimationFinished())
                 data.NextState = Mob.State.CombatIdle;
         }
     }

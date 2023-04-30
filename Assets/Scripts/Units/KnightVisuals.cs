@@ -20,6 +20,7 @@ namespace Units
 
         protected override void OnValidate()
         {
+            base.OnValidate();
             if (!m_animator) m_animator = GetComponent<Animator>();
         }
 
