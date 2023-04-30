@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.ComponentModel;
 using _3C.Player.Weapons;
 using DefaultNamespace;
 using DefaultNamespace.HealthSystem.Damager;
@@ -15,13 +16,18 @@ namespace _3C.Player
     {
         public float InputWaitDelay;
 
+        [HideInInspector] // Set speed using duration and distance
         public float DashSpeed;
+        
+        [Tooltip("In meters.")]
+        public float DashDistance;
         public float DashDuration;
         public AnimationCurve DashCurve;
         
         
         public float AttackDuration;
         
+        [HideInInspector] // Not exactly sure what this curve's purpose is? If it was for moving the attack collider then it can be removed as that behavior is no longer used.
         public AnimationCurve WeaponMovementCurve;
         
         public int BaseDamage;
@@ -61,7 +67,7 @@ namespace _3C.Player
         [SerializeField] private AWeaponMovement m_WeaponMovement;
         [SerializeField] private ColliderDamager m_Damager;
 
-        [Header("Animation")]
+        [BoxGroup("Animation")] 
         [AnimatorParam("m_Animator")]
         [SerializeField] private int m_StartAttackTriggerParam;
         [AnimatorParam("m_Animator")]
@@ -116,9 +122,14 @@ namespace _3C.Player
             //if (m_Animator == null)
             {
                 m_AttackCoroutine = m_StateHandler.StartCoroutine(c_AttackDuration());
-                m_DashTween = m_Transform.DOMove(
+                /*m_DashTween = m_Transform.DOMove(
                     m_Transform.position + m_Transform.forward * CurrentAttackSettings.DashSpeed * CurrentAttackSettings.DashDuration, CurrentAttackSettings.DashDuration
-                    ).SetEase(CurrentAttackSettings.DashCurve);
+                    ).SetEase(CurrentAttackSettings.DashCurve);*/
+                
+                m_DashTween = m_Transform.DOMove(
+                    m_Transform.position + m_Transform.forward * CurrentAttackSettings.DashDistance, CurrentAttackSettings.DashDuration
+                ).SetEase(CurrentAttackSettings.DashCurve);
+                
                 m_DashTween.onComplete += () =>
                 {
                     m_StateHandler.OnMovementStateChanged(true);

@@ -111,16 +111,19 @@ MonoBehaviour:
     m_Speed: 8
     m_MovementDamping: 8
     m_RotationDamping: 10
+    m_SpeedAnimatorParam: 0
+    m_AnimatorSpeedMultiplier: 0
+    m_Animator: {fileID: 0}
     Movement: {x: 0, y: 0}
     IsLookingAtMovement: 1
     Enabled: 0
   m_DashBehavior:
-    m_HasOvershootFrame: 1
-    m_OvershootDistance: 0.35
-    m_HasOvershootPauseFrame: 1
-    m_HasBounceFrame: 1
+    m_HasOvershootFrame: 0
+    m_OvershootDistance: 0
+    m_HasOvershootPauseFrame: 0
+    m_HasBounceFrame: 0
     m_BounceDistance: 0.1
-    m_Duration: 0.2
+    m_Duration: 0.25
     m_Distance: 5
     m_DistanceCurve:
       serializedVersion: 2
@@ -129,17 +132,80 @@ MonoBehaviour:
         time: 0
         value: 0
         inSlope: 1.1154763
-        outSlope: 1.1237301
+        outSlope: 3
         tangentMode: 69
         weightedMode: 0
         inWeight: 0
         outWeight: 0.14949884
       - serializedVersion: 3
-        time: 0.72480124
-        value: 0.81448096
-        inSlope: 1.1237301
-        outSlope: 1.1967862
+        time: 0.2
+        value: 0.6
+        inSlope: 3
+        outSlope: 0.74999917
+        tangentMode: 69
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.26666668
+        value: 0.65
+        inSlope: 0.74999917
+        outSlope: 0.9749999
         tangentMode: 5
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.33333334
+        value: 0.73
+        inSlope: Infinity
+        outSlope: 0
+        tangentMode: 71
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.4
+        value: 0.73
+        inSlope: -0
+        outSlope: 1.05
+        tangentMode: 69
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.46666667
+        value: 0.8
+        inSlope: Infinity
+        outSlope: 0.7124997
+        tangentMode: 7
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.53333336
+        value: 0.825
+        inSlope: 0.3749995
+        outSlope: 0.074999936
+        tangentMode: 69
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.6
+        value: 0.83
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.6666667
+        value: 0.83
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
@@ -155,14 +221,85 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_PostDashDelay: 0
+    m_PostDashDelay: 0.0016666667
     m_VFX: {fileID: 2717888372220823215}
   m_PlayerMeleeAttack:
     m_AttacksSettings:
-    - InputWaitDelay: 0.3
+    - InputWaitDelay: 0.5
       DashSpeed: 5
+      DashDistance: 0.5
       DashDuration: 0.1
       DashCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0.4
+          inSlope: 1.1154763
+          outSlope: 0
+          tangentMode: 69
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.14949884
+        - serializedVersion: 3
+          time: 0.165
+          value: 0.4
+          inSlope: -0
+          outSlope: 1.1904763
+          tangentMode: 69
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.333
+          value: 0.6
+          inSlope: Infinity
+          outSlope: 1.2345679
+          tangentMode: 71
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.495
+          value: 0.8
+          inSlope: 0.9036143
+          outSlope: 0.9036143
+          tangentMode: 136
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.665
+          value: 0.9
+          inSlope: 0.5970149
+          outSlope: 0.5970149
+          tangentMode: 136
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.83
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 136
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackDuration: 0.26666668
+      WeaponMovementCurve:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
@@ -195,7 +332,90 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      AttackDuration: 0.4
+      BaseDamage: 1
+    - InputWaitDelay: 0.5
+      DashSpeed: 5
+      DashDistance: 1
+      DashDuration: 0.1
+      DashCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0.12
+          inSlope: 1.1154763
+          outSlope: 2.2857141
+          tangentMode: 69
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.14949884
+        - serializedVersion: 3
+          time: 0.14
+          value: 0.44
+          inSlope: 1.5714285
+          outSlope: 1.5714285
+          tangentMode: 1
+          weightedMode: 1
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.28
+          value: 0.56
+          inSlope: 0.5862069
+          outSlope: 0.5862069
+          tangentMode: 136
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.43
+          value: 0.61
+          inSlope: 0.3333334
+          outSlope: 1.2142855
+          tangentMode: 65
+          weightedMode: 1
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.57
+          value: 0.78
+          inSlope: 0.97380936
+          outSlope: 0.97380936
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.72
+          value: 0.89
+          inSlope: 0.73333323
+          outSlope: 0
+          tangentMode: 5
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.86
+          value: 0.89
+          inSlope: 0
+          outSlope: 0.78571445
+          tangentMode: 65
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0.78571445
+          outSlope: 0
+          tangentMode: 5
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackDuration: 0.2666667
       WeaponMovementCurve:
         serializedVersion: 2
         m_Curve:
@@ -232,25 +452,71 @@ MonoBehaviour:
       BaseDamage: 1
     - InputWaitDelay: 0.3
       DashSpeed: 5
+      DashDistance: 1.4
       DashDuration: 0.1
       DashCurve:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
-          inSlope: 1.1154763
-          outSlope: 1.1237301
+          value: 0.2941
+          inSlope: -0
+          outSlope: 1.2254167
           tangentMode: 69
           weightedMode: 0
-          inWeight: 0
-          outWeight: 0.14949884
+          inWeight: 0.33333334
+          outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.72480124
-          value: 0.81448096
-          inSlope: 1.1237301
-          outSlope: 1.1967862
+          time: 0.24
+          value: 0.5882
+          inSlope: 1.2254167
+          outSlope: 0.90538484
+          tangentMode: 69
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.37
+          value: 0.7059
+          inSlope: 0.90538484
+          outSlope: 0.90461516
+          tangentMode: 69
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.5
+          value: 0.8235
+          inSlope: 0.90461516
+          outSlope: 0
           tangentMode: 5
+          weightedMode: 0
+          inWeight: 0.5704041
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.62
+          value: 0.8235
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.75
+          value: 0.8824
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 97
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.87
+          value: 0.8824
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 136
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
@@ -259,85 +525,14 @@ MonoBehaviour:
           value: 1
           inSlope: 0
           outSlope: 0
-          tangentMode: 0
+          tangentMode: 1
           weightedMode: 0
           inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      AttackDuration: 0.4
-      WeaponMovementCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 1.1154763
-          outSlope: 1.1237301
-          tangentMode: 69
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.14949884
-        - serializedVersion: 3
-          time: 0.72480124
-          value: 0.81448096
-          inSlope: 1.1237301
-          outSlope: 1.1967862
-          tangentMode: 5
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      BaseDamage: 1
-    - InputWaitDelay: 0.3
-      DashSpeed: 5
-      DashDuration: 0.1
-      DashCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 1.1154763
-          outSlope: 1.1237301
-          tangentMode: 69
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.14949884
-        - serializedVersion: 3
-          time: 0.72480124
-          value: 0.81448096
-          inSlope: 1.1237301
-          outSlope: 1.1967862
-          tangentMode: 5
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      AttackDuration: 0.4
+      AttackDuration: 0.432
       WeaponMovementCurve:
         serializedVersion: 2
         m_Curve:
@@ -380,6 +575,12 @@ MonoBehaviour:
     m_AreVFXWorldBased: 1
     m_WeaponMovement: {fileID: 1158905776164586155}
     m_Damager: {fileID: 7518698054020727578}
+    m_StartAttackTriggerParam: 0
+    m_EndAttackTriggerParam: 0
+    m_FirstAttackTrigger: 0
+    m_SecondAttackTrigger: 0
+    m_ThirdAttackTrigger: 0
+    m_Animator: {fileID: 0}
   m_PlayerRangeAttack:
     m_AttackDuration: 5
     m_AttackAnimationCurve:
@@ -413,6 +614,7 @@ MonoBehaviour:
     m_VFXToPlay:
     - {fileID: 7009484212727554566}
     - {fileID: 687728087159626288}
+    m_Animator: {fileID: 0}
     m_AimingWorldUI: {fileID: 3804535594222755562}
   m_Sounds: {fileID: 8188397984285573184}
   m_Aiming: {fileID: 1077894710202307896}
