@@ -35,9 +35,9 @@ namespace Units
 
         [Header("Events")]
         public UnityEvent onImmuneHit;
-        public UnityEvent<float, Unit, Vector3> onHit;
+        public UnityEvent<float, Unit> onHit;
         public UnityEvent<float> onHeal;
-        public UnityEvent<float, Unit, Vector3> onDie;
+        public UnityEvent<float, Unit> onDie;
         public UnityEvent<bool> onVisibilityChanged;
 
         public bool Visible => DummyWorld.Instance.visible;
@@ -45,7 +45,7 @@ namespace Units
         private float m_currentHealth;
         private float m_lastHit;
 
-        public void TakeHit(float damage, Unit other, Vector3 hitPosition)
+        public void TakeHit(float damage, Unit other)
         {
             if (m_currentHealth < 0f) return;
 
@@ -64,11 +64,11 @@ namespace Units
 
             if (m_currentHealth == 0)
             {
-                onDie?.Invoke(damage, other, hitPosition);
+                onDie?.Invoke(damage, other);
                 DummyWorld.Instance.Unregister(this);
             }
             else
-                onHit?.Invoke(damage, other, hitPosition);
+                onHit?.Invoke(damage, other);
         }
 
         public void Heal(float amount)

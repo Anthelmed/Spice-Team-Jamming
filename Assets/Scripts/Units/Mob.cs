@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unit;
 using UnityEngine;
 using UnityEngine.AI;
 using static MobAI;
@@ -11,9 +12,12 @@ namespace Units
         [System.Serializable]
         public class Data
         {
+            public Transform transform;
+            public Mob mob;
             public Perception perception;
             public Locomotion locomotion;
             public MobVisuals visuals;
+            public MobAttacks attacks;
 
             public State NextState { get; set; }
         }
@@ -59,21 +63,24 @@ namespace Units
 
         private State m_state = State.Uninitialized;
 
-        private void OnDeath(float damage, Unit other, Vector3 hitPos)
+        private void OnDeath(float damage, Unit other)
         {
             m_data.NextState = State.Death;
         }
 
-        private void OnHit(float damage, Unit other, Vector3 hitPos)
+        private void OnHit(float damage, Unit other)
         {
             m_data.NextState = State.Hit;
         }
 
         private void OnValidate()
         {
+            m_data.transform = transform;
+            m_data.mob = this;
             m_data.perception = GetComponentInChildren<Perception>();
             m_data.locomotion = GetComponentInChildren<Locomotion>();
             m_data.visuals = GetComponentInChildren<MobVisuals>();
+            m_data.attacks = GetComponentInChildren<MobAttacks>();
         }
 
         private void Reset()

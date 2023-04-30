@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using UnityEngine;
 
 namespace Units
@@ -12,9 +13,10 @@ namespace Units
             Fan
         }
 
-        [SerializeField][HideInInspector] private Unit m_unit;
+        [SerializeField][HideInInspector] private Unit m_owner;
 
         public float Radius => m_radius;
+        public float damage = 1f;
         [SerializeField] private Shape m_shape = Shape.Circle;
         [SerializeField][Min(0f)] private float m_radius = 1f;
         [SerializeField][Min(0f)] private float m_fanAngle = 30f;
@@ -26,7 +28,7 @@ namespace Units
 
         private void OnValidate()
         {
-            m_unit = GetComponentInParent<Unit>();
+            m_owner = GetComponentInParent<Unit>();
         }
 
         private void Start()
@@ -45,9 +47,9 @@ namespace Units
             else
             {
                 var center = transform.position;
-                var start = Quaternion.AngleAxis(-0.5f * m_fanAngle, Vector3.up) * transform.rotation * transform.forward;
+                var start = transform.rotation * Quaternion.AngleAxis(-0.5f * m_fanAngle, Vector3.up) * Vector3.forward;
                 var startp = center + start * m_radius;
-                var end = Quaternion.AngleAxis(0.5f * m_fanAngle, Vector3.up) * transform.rotation * transform.forward;
+                var end = transform.rotation * Quaternion.AngleAxis(0.5f * m_fanAngle, Vector3.up) * Vector3.forward;
                 var endp = center + end * m_radius;
                 UnityEditor.Handles.DrawWireArc(transform.position, Vector3.up, start, m_fanAngle, m_radius);
                 UnityEditor.Handles.DrawLine(center, startp);

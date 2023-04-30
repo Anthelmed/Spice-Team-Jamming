@@ -25,7 +25,7 @@ namespace Units
             onDie.AddListener(OnDie);
         }
 
-        private void OnDie (float damage, Unit other, Vector3 hitPosition)
+        private void OnDie (float damage, Unit other)
         {
             // Turn to the type of the aggressor
             m_team = other.Team;

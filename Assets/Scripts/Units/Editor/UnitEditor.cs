@@ -35,7 +35,7 @@ namespace Units
                 amount = EditorGUILayout.FloatField("Damage", amount);
                 other = EditorGUILayout.ObjectField("Other", other, typeof(Unit), true) as Unit;
                 if (GUILayout.Button("Hit!"))
-                    unit.TakeHit(amount, other, other.transform.position);
+                    unit.TakeHit(amount, other);
 
                 EditorGUI.indentLevel--;
             }

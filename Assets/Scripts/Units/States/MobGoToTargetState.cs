@@ -8,12 +8,6 @@ namespace Units
     {
         public void Enter(Mob.Data data)
         {
-            if (data.locomotion && data.perception && data.perception.Target)
-            {
-                
-            // TODO: Locomotion look in direction of movement
-            }
-
             if (data.perception) data.perception.QueryTargetEnabled = true;
         }
 
@@ -22,7 +16,6 @@ namespace Units
             if (data.locomotion)
             {
                 data.locomotion.Destination = null;
-                // TODO: Locomotion stop rotation
             }
 
             if (data.perception) data.perception.QueryTargetEnabled = false;
@@ -37,7 +30,12 @@ namespace Units
             else 
                 data.locomotion.Destination = data.perception.Target.transform;
 
-            // TODO: If close enough, fight
+            if (data.attacks)
+            {
+                var distance = data.attacks.MeleeRange + data.perception.Target.Radius;
+                if ((data.perception.Target.transform.position - data.transform.position).sqrMagnitude < distance * distance)
+                    data.NextState = Mob.State.CombatIdle;
+            }
         }
     }
 }
