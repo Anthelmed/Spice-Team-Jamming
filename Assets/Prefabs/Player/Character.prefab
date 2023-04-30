@@ -106,6 +106,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputStackSize: 32
+  m_ManaPoints:
+    m_MaxManaPoint: 100
+    m_ReloadAmountPerSecond: 10
+    m_CurrentManaPoint: 100
   m_PlayerMovement:
     m_Speed: 8
     m_MovementDamping: 8
@@ -117,6 +121,7 @@ MonoBehaviour:
     IsLookingAtMovement: 1
     Enabled: 0
   m_DashBehavior:
+    m_ManaCost: 10
     m_HasOvershootFrame: 0
     m_OvershootDistance: 0
     m_HasOvershootPauseFrame: 0
@@ -220,7 +225,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_PostDashDelay: 0.1
+    m_PostDashDelay: 2
     m_VFX: {fileID: 2717888372220823215}
   m_PlayerMeleeAttack:
     m_AttacksSettings:
@@ -607,13 +612,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     m_BaseDamage: 5
-    m_Damager: {fileID: 0}
+    m_ManaCost: 20
     m_RangeAttackPrefab: {fileID: 2482928752937964366, guid: 0642d15ad83228342a7d363af01d6b1b,
       type: 3}
-    m_AttackHolder: {fileID: 2049246498937072034}
-    m_RangeWeaponMovement: {fileID: 0}
-    m_VFXToPlay:
-    - {fileID: 7009484212727554566}
     m_VFXShootVFX: {fileID: 7009484212727554566}
     m_Animator: {fileID: 0}
     m_AimingWorldUI: {fileID: 3804535594222755562}

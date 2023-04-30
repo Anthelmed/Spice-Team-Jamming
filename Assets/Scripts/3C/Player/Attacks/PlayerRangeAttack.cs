@@ -15,12 +15,13 @@ namespace _3C.Player
         [SerializeField] private float m_AttackDuration;
         [SerializeField] private AnimationCurve m_AttackAnimationCurve;
         [SerializeField] private int m_BaseDamage;
+        
+        [SerializeField] private float m_ManaCost;
+
+        public override float BaseManaPoints => m_ManaCost;
 
         [Header("Scene components")]
         [SerializeField] private RangeAttackHolder m_RangeAttackPrefab;
-        
-        [Tooltip("This one is used to hold the weapon and the vfx to unparent them")]
-        [SerializeField] private Transform m_AttackHolder;
         
         [SerializeField] private ParticleSystem m_VFXShootVFX;
         [SerializeField] private Animator m_Animator;
