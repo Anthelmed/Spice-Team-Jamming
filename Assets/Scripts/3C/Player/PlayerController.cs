@@ -38,15 +38,8 @@ namespace _3C.Player
             }
         }
         
-        // TO-DO: Orient character toward input direction 
         public void OnLook(InputAction.CallbackContext _context)
         {
-            // WIP: likely Vector2 readValue 
-            // if (_context.phase == InputActionPhase.Started)
-            // {
-            //     StackInput(InputType.AimPerformed);
-            // }
-
             if (_context.phase == InputActionPhase.Performed)
             {
                 GameplayData.s_PlayerInputs.IsUsingCursorPositionForAim = false;
@@ -70,29 +63,6 @@ namespace _3C.Player
 
         public void OnRangeAttack(InputAction.CallbackContext _context)
         {
-            // NOTE: Aim should be it's own function? Should it encompass OnLook?
-            // Plan for implementing a charged ranged attack.
-            
-            // Ranged attack:
-            // check if aim button is held down,
-            // if held, wait for shoot input,
-            // when pressed shoot input will perform attack
-            
-            // Charged ranged attack:
-            // check if aim button is held down,
-            // if held, wait for shoot input,
-            // if shoot is held, begin charging,
-            // perform attack when shoot input is released
-            //
-            // if (_context.interaction is HoldInteraction)
-            // {
-            //     // Order uncertain, phase can only be started if an interaction was passed successfully.
-            //     // if (_context.phase == InputActionPhase.Started)
-            //     {
-            //         
-            //     }
-            // }
-            
             switch (_context.phase)
             {
                 case InputActionPhase.Performed:
