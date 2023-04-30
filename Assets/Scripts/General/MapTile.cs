@@ -26,6 +26,7 @@ public class GameTile : MonoBehaviour
     public MapTileData mapTileData = new MapTileData();
 
     public static event Action<MapTileData> MapTileClicked = delegate { };
+    public static event Action<MapTileData> MapTileStatusChanged = delegate { };
     public bool IsOccupied
     {
         get => _isOccupied;
@@ -109,6 +110,7 @@ public class GameTile : MonoBehaviour
         }
          mapTileData.tileStatus = status;
 
+         MapTileStatusChanged?.Invoke(mapTileData);
     }
     public void OnPlayerMove(Vector2Int newTile)
     {

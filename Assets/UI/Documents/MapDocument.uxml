@@ -6,7 +6,8 @@
     <Style src="project://database/Assets/UI/Styles/ActionHelperStyle.uss?fileID=7433441132597879392&amp;guid=1ee840c4db8243eaa2a9f33057bc878a&amp;type=3#ActionHelperStyle" />
     <ui:VisualElement name="Map" class="main-element auto-reference">
         <ui:VisualElement name="MapTileInfo" class="auto-reference">
-            <ui:Label tabindex="-1" text="Tile Info" display-tooltip-when-elided="true" name="MapTileInfoSubTitle" class="sub-title" />
+            <ui:Label tabindex="-1" text="Tile Info" display-tooltip-when-elided="true" name="MapTileInfoSubTitle" class="sub-title auto-reference" />
+            <ui:Label tabindex="-1" text="[Text]" display-tooltip-when-elided="true" name="MapTileInfoText" class="text auto-reference" />
         </ui:VisualElement>
         <ui:VisualElement name="MapBalanceIndicator" class="auto-reference" />
         <ui:VisualElement name="MapActionHelpers" class="action-helpers">
