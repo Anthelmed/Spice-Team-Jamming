@@ -23,6 +23,7 @@ namespace UIToolkitAutoReferences
 		private VisualElement _tutorialInfo;
 		private Label _tutorialInfoSubTitle;
 		private Label _tutorialInfoText;
+		private VisualElement _tutorialInfoImage;
 		private Button _actionHelperBack;
 
 		public VisualElement Tutorial => _tutorial ??=
@@ -37,6 +38,8 @@ namespace UIToolkitAutoReferences
 			RootVisualElement.Q<Label>("TutorialInfoSubTitle");
 		public Label TutorialInfoText => _tutorialInfoText ??=
 			RootVisualElement.Q<Label>("TutorialInfoText");
+		public VisualElement TutorialInfoImage => _tutorialInfoImage ??=
+			RootVisualElement.Q<VisualElement>("TutorialInfoImage");
 		public Button ActionHelperBack => _actionHelperBack ??=
 			RootVisualElement.Q<Button>("ActionHelperBack");
 
