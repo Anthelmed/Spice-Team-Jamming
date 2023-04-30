@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: foliageAE_NoRim
+  m_Name: Map Tiles
   m_Shader: {fileID: -6465566751694194690, guid: 1362a286c7b6efc4d87f0e5a0b43010e,
     type: 3}
   m_Parent: {fileID: 0}
@@ -128,8 +128,8 @@ Material:
     - _GlossyReflections: 0
     - _IceFireSwitch: 1
     - _Metallic: 0
-    - _Noise_Intensity: 0.121
-    - _Noise_Tile: 0.15
+    - _Noise_Intensity: 0.069
+    - _Noise_Tile: 0.008
     - _Normal_Strength: 0
     - _OVERLAY_NOISE_MASK: 1
     - _OcclusionStrength: 1
@@ -137,7 +137,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Rim_Width: 0
+    - _Rim_Width: 0.212
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class GameTile : MonoBehaviour
@@ -18,6 +19,8 @@ public class GameTile : MonoBehaviour
     private bool _isSpawnArea = false;
     private bool _isOccupied = false;
 
+    Vector3 startPos;
+    Vector3 startScale;
 
     public MapTileData mapTileData = new MapTileData();
 
@@ -49,8 +52,16 @@ public class GameTile : MonoBehaviour
 
     private bool isHighlighted = false;
 
+    public void SetTileState(WorldTileStatus status)
+    {
+        //DO IT
+        
+    }
     public void Highlight()
     {
+        transform.DOKill();
+        transform.DOMove(startPos + Vector3.up * 7.5f, 0.4f).SetEase(Ease.OutBack);
+        transform.DOScale(startScale * 1.25f, 0.4f).SetEase(Ease.OutBack);
         highlight.SetActive(true);
         // if (!_isObstacle)
         //     isHighlighted = true;
@@ -59,6 +70,10 @@ public class GameTile : MonoBehaviour
     public void Unhighlight()
     {
         highlight.SetActive(false);
+
+        transform.DOKill();
+         transform.DOScale(startScale, 0.2f).SetEase(Ease.InBack);
+        transform.DOMove(startPos, 0.2f).SetEase(Ease.InBack);
         // isHighlighted = false;
     }
 
@@ -67,6 +82,8 @@ public class GameTile : MonoBehaviour
         mapTileData.tileCoords = coords;
         mapTileData.biome = tileBiome;
         mapTileData.tileStatus = WorldTileStatus.neutral;
+        startPos = transform.position;
+        startScale = transform.localScale;
     }
 
     internal void SetTileStatus(WorldTileStatus status)
