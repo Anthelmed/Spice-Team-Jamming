@@ -47,9 +47,10 @@ MonoBehaviour:
   m_team: 0
   m_immuneTo: 0
   m_type: 0
-  m_maxHealth: 6
+  m_maxHealth: 2
   m_invencivilityAfterHit: 0.5
   m_radius: 0.5
+  doesntMove: 0
   onImmuneHit:
     m_PersistentCalls:
       m_Calls: []
@@ -65,4 +66,5 @@ MonoBehaviour:
   onVisibilityChanged:
     m_PersistentCalls:
       m_Calls: []
+  m_currentTile: {fileID: 0}
   m_debugColor: {r: 0, g: 0.25, b: 0, a: 1}

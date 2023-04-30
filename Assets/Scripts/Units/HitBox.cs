@@ -50,7 +50,7 @@ namespace Units
         {
             var world = LevelTilesManager.instance;
 
-            if (!world) return;
+            if (!world || !m_owner) return;
 
             List<Unit> newHits = null;
 
