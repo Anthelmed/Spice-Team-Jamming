@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=852c0b1f00071754886a563d72ecb599&amp;type=3#GlobalStyle" />
+    <Style src="project://database/Assets/UI/Styles/LoadingScreenStyle.uss?fileID=7433441132597879392&amp;guid=e6123f3982a16ad45ad4665d8054ceca&amp;type=3#LoadingScreenStyle" />
+    <ui:VisualElement name="LoadingScreen" class="auto-reference" style="background-image: url(&apos;project://database/Assets/UI/Textures/Loading%20Screen%20Background%20Custom%20Render%20Texture.asset?fileID=8600000&amp;guid=437d2847a3b38b440ad1e6448bb679ea&amp;type=2#Loading Screen Background Custom Render Texture&apos;);" />
+</ui:UXML>
