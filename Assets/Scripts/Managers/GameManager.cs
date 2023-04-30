@@ -264,7 +264,7 @@ public class GameManager : MonoBehaviour
         else
         {
             loadedPlayer.transform.position = spawnPos;
-            loadedPlayer.GetComponentInChildren<PlayerStateHandler>().transform.position = Vector3.zero;
+            loadedPlayer.GetComponentInChildren<PlayerStateHandler>().transform.localPosition = Vector3.zero;
             Debug.Log("teleporting");
             if (!loadedPlayer.activeInHierarchy) loadedPlayer.SetActive(true);
 
