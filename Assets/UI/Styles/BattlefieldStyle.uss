@@ -23,3 +23,37 @@
     background-image: url('project://database/Assets/UI/Textures/Background.png?fileID=2800000&guid=db5a558d34c59dd4b94b330d5b0e2b98&type=3#Background');
     -unity-background-image-tint-color: var(--primary-color-1);
 }
+
+#BattlefieldPlayerStats {
+    position: absolute;
+    left: 100px;
+    top: 50px;
+}
+
+.battlefield-player-stat-background {
+    background-image: url('project://database/Assets/UI/Textures/StatIndicatorBackground.png?fileID=2800000&guid=6562a9248c849b341bce8bc4bef689f1&type=3#StatIndicatorBackground');
+    height: 60px;
+    -unity-background-scale-mode: scale-to-fit;
+    width: 242px;
+    margin-bottom: 25px;
+    -unity-background-image-tint-color: var(--primary-color-1);
+}
+
+.battlefield-player-stat-gauge {
+    background-image: url('project://database/Assets/UI/Textures/StatIndicatorGauge.png?fileID=2800000&guid=5be761d7986e007468c09866960cfb43&type=3#StatIndicatorGauge');
+    position: absolute;
+    left: 12px;
+    top: 10px;
+    right: 12px;
+    bottom: 10px;
+}
+
+#BattlefieldPlayerStatHealthGauge {
+    -unity-background-image-tint-color: var(--primary-color-3);
+    background-image: url('project://database/Assets/UI/Textures/Player%20Stat%20Health%20Custom%20Render%20Texture.asset?fileID=8600000&guid=e53a2c8f1d1e20b4bb3f16b2a1ed8bb7&type=2#Player Stat Health Custom Render Texture');
+}
+
+#BattlefieldPlayerStatManaGauge {
+    -unity-background-image-tint-color: var(--primary-color-4);
+    background-image: url('project://database/Assets/UI/Textures/Player%20Stat%20Mana%20Custom%20Render%20Texture.asset?fileID=8600000&guid=8755535c16a8487438c6e39771ba72e4&type=2#Player Stat Mana Custom Render Texture');
+}
