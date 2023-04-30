@@ -79,16 +79,16 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 441828563566108288}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5405044405895379889 stripped
+--- !u!114 &6560965742343488453 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5558325933940778289, guid: 415d71ee343afb640829c598cac3c309,
+  m_CorrespondingSourceObject: {fileID: 6713894148704738629, guid: 415d71ee343afb640829c598cac3c309,
     type: 3}
   m_PrefabInstance: {fileID: 441828563566108288}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afcd702a4d9d4394927ff3a89234dc78, type: 3}
+  m_Script: {fileID: 11500000, guid: 96ce2d1a7c610a343806c66d8fcd18d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1398129031333868014
@@ -195,6 +195,11 @@ PrefabInstance:
       propertyPath: team
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 433581429227692497, guid: 84c85c506ceacb948b7c416dae605f32,
+        type: 3}
+      propertyPath: m_team
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3602961013157845434, guid: 84c85c506ceacb948b7c416dae605f32,
         type: 3}
       propertyPath: m_RootOrder
@@ -264,7 +269,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_data.sounds
       value: 
-      objectReference: {fileID: 5405044405895379889}
+      objectReference: {fileID: 6560965742343488453}
     - target: {fileID: 5209978082944500161, guid: 84c85c506ceacb948b7c416dae605f32,
         type: 3}
       propertyPath: m_data.animator

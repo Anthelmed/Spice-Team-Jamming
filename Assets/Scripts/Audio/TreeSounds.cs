@@ -31,17 +31,17 @@ namespace DefaultNamespace.Audio
             {
                 case Targetable.Team.Nature:
                     {
-                   //    PlayNatureSound();
+                    PlayNatureStatusSound();
                     }
                     break;
                 case Targetable.Team.Fire:
                     {
-                    //    PlayFireDamageSound();
+                     PlayBurnStatusSound();
                     }
                     break;
                 case Targetable.Team.Ice:
                     {
-                    //    PlayIceDamageSound(); 
+                     PlayFreezeStatusSound(); 
                     }
                     break;
                 case Targetable.Team.Wizard:
@@ -51,17 +51,17 @@ namespace DefaultNamespace.Audio
             }
         }
 
-        public void PlayBurnSound()
+        public void PlayBurnStatusSound()
         {
             if (m_AudioManager == null) return;
             m_AudioManager.PlaySingleClip(burnsound, SFXCategory.player, 0.1f, 0.1f);
         }
-        public void PlayFreezeSound()
+        public void PlayFreezeStatusSound()
         {
             if (m_AudioManager == null) return;
             m_AudioManager.PlaySingleClip(freezeSound, SFXCategory.player, 0.1f, 0.1f);
         }
-        public void PlayNatureSound()
+        public void PlayNatureStatusSound()
         {
             if (m_AudioManager == null) return;
             m_AudioManager.PlaySingleClip(natureSound, SFXCategory.player, 0.1f, 0.1f);

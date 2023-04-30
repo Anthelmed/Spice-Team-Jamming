@@ -1072,8 +1072,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4443165f8c7310c44917d920c4354460, type: 3}
   - {fileID: 8300000, guid: 599c73a09b1a08a4282c8b13b09d506d, type: 3}
   - {fileID: 8300000, guid: 24637fabc7d564247b3c936f778c8580, type: 3}
-  - {fileID: 8300000, guid: 921535bfc563c7a4291bb802fc5c31aa, type: 3}
-  - {fileID: 8300000, guid: 9cad70e2fadf2ee469c4f95c2c4cae1f, type: 3}
+  - {fileID: 8300000, guid: ca5ac061c5bf7dc4ab01a9ccf79a9672, type: 3}
+  - {fileID: 8300000, guid: e4e4afeaccc3bcd45873abbea4951658, type: 3}
+  - {fileID: 8300000, guid: e6e30794f4514fd468a738bb05fef792, type: 3}
+  - {fileID: 8300000, guid: 9db31297a24b8784fbb6407feafb45a5, type: 3}
   multiSounds:
   - {fileID: 11400000, guid: 2930a663a6d82704c8cbee617d0f4229, type: 2}
   - {fileID: 11400000, guid: f9d9e66f694d61e4bb7f655314c4785e, type: 2}
@@ -1089,7 +1091,8 @@ MonoBehaviour:
   battleSnapshot: {fileID: 24500006, guid: af0374d79e3c12a4f949c406a1962272, type: 2}
   pauseSnapShot: {fileID: -5840381992680404044, guid: a8eb57fe499bc7240b9ead1175178864,
     type: 2}
-  blendedSnapshot: {fileID: 0}
+  blendedSnapshot: {fileID: 2904938716665533818, guid: af0374d79e3c12a4f949c406a1962272,
+    type: 2}
   shouldPlayBGM: 1
   transitionTime: 3
   enemyWeight: 0.7

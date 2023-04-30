@@ -38,8 +38,8 @@ namespace DefaultNamespace.Audio
         }
         public void PlayDamageSound()
         {
-            if (m_AudioManager == null) return;
-            m_AudioManager.PlayShuffledSound(damageSound, SFXCategory.mob, 0.1f, 0.1f);
+         //   if (m_AudioManager == null) return;
+         //   m_AudioManager.PlayShuffledSound(damageSound, SFXCategory.mob, 0.1f, 0.1f);
         }
         public void PlayDeathSound()
         {
