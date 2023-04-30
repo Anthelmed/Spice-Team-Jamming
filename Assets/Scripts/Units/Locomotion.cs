@@ -75,7 +75,6 @@ namespace Units
 
             var intersections = world.QueryCircleAll(trans.position, m_unit.Radius);
 
-            var hasCollided = false;
             for (int i = 0; i < intersections.Count; ++i)
             {
                 if (intersections[i] == m_unit) continue;
@@ -85,11 +84,8 @@ namespace Units
                 if (amount <= 0f) continue;
                 vector /= amount;
                 if (Vector3.Dot(vector, direction) < 0f) continue;
-                hasCollided = true;
                 trans.position += vector * (amount - m_unit.Radius - intersections[i].Radius);
             }
-            //if (hasCollided) 
-            //    m_lastPosition = trans.position;
         }
 
         private void Reset()

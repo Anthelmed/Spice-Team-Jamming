@@ -174,6 +174,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c2356e8972c2cc44872c004d5f3478a, type: 3}
+--- !u!114 &2111662858114914494 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 276273822973512223, guid: 0c2356e8972c2cc44872c004d5f3478a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2205540861582774945}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3e77934c8aae4e44ba69a6b9fbd9a59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6124631788143941612 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5360611298602288461, guid: 0c2356e8972c2cc44872c004d5f3478a,
@@ -191,7 +203,7 @@ PrefabInstance:
     - target: {fileID: 3218894895242519952, guid: 96355d43fe4bc5b4ab0e32e518173755,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3218894895242519952, guid: 96355d43fe4bc5b4ab0e32e518173755,
         type: 3}
@@ -243,10 +255,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5727073914390734949, guid: 96355d43fe4bc5b4ab0e32e518173755,
+        type: 3}
+      propertyPath: m_data.visuals
+      value: 
+      objectReference: {fileID: 2111662858114914494}
     - target: {fileID: 8562886529106873376, guid: 96355d43fe4bc5b4ab0e32e518173755,
         type: 3}
       propertyPath: m_Name
-      value: FirePawn Variant
+      value: FirePawn
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
