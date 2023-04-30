@@ -34,7 +34,7 @@ namespace DefaultNamespace.Audio
         public void PlayRangeSound()
         {
             if (m_AudioManager == null) return;
-            m_AudioManager.PlaySingleClip(rangedSound, SFXCategory.mob, 0.05f, 0.05f);
+            m_AudioManager.PlaySingleClip(rangedSound, SFXCategory.mob, 0.1f, 0.08f);
         }
         public void PlayDamageSound()
         {

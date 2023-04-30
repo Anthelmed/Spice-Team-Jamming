@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ce2d1a7c610a343806c66d8fcd18d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackOneSound: FireEnemyAttacks
+  attackOneSound: IceEnemyAttacks
   attackTwoSound: 
   rangedSound: fireBall
   deathSound: enemyDeath

@@ -66,7 +66,7 @@ namespace Units
 
         public override void TriggerRangedAttack()
         {
-            if (m_sounds && m_unit.Visible) m_sounds.PlayAttackSound();
+            if (m_sounds && m_unit.Visible) m_sounds.PlayRangeSound();
 
             m_animator.SetTrigger(RANGED_ATTACK);
             m_animationFinished = false;
