@@ -109,6 +109,16 @@ PrefabInstance:
       propertyPath: m_owner
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4625335335068320526, guid: 6c1b06d1c566f804ebb73c2e3ab5706e,
+        type: 3}
+      propertyPath: m_rangedRange.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625335335068320526, guid: 6c1b06d1c566f804ebb73c2e3ab5706e,
+        type: 3}
+      propertyPath: m_rangedRange.y
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7749552625463672410, guid: 6c1b06d1c566f804ebb73c2e3ab5706e,
         type: 3}
       propertyPath: m_Name
