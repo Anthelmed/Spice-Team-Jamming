@@ -7,6 +7,7 @@ using Runtime.Utilities;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace _3C.Player
 {
@@ -182,6 +183,11 @@ namespace _3C.Player
         {
             transform.LookAt(transform.position + GameplayData.s_PlayerInputs.Movement.X0Y());
             m_PlayerMovement.InstantOrientationTo(GameplayData.s_PlayerInputs.Movement);
+        }
+
+        public T Instantiate<T>(T prefab) where T : Object
+        {
+            return Object.Instantiate(prefab);
         }
     }
 }

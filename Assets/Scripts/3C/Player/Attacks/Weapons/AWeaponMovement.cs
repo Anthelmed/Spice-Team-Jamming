@@ -12,6 +12,8 @@ namespace _3C.Player.Weapons
         private HitBox m_Collider;
         private Tween m_CurrentTweener;
 
+        public Tween CurrentTweener => m_CurrentTweener;
+
         private void Awake()
         {
             m_Collider = GetComponentInChildren<HitBox>();

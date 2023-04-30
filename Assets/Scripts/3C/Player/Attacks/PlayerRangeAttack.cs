@@ -4,6 +4,7 @@ using _3C.Player.Weapons;
 using DefaultNamespace.HealthSystem.Damager;
 using Units;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace _3C.Player
 {
@@ -17,11 +18,15 @@ namespace _3C.Player
 
         [Header("Scene components")]
         [SerializeField] private HitBox m_Damager;
+
+        [SerializeField] private RangeAttackHolder m_RangeAttackPrefab;
+        
         [Tooltip("This one is used to hold the weapon and the vfx to unparent them")]
         [SerializeField] private Transform m_AttackHolder;
         
         [SerializeField] private AWeaponMovement m_RangeWeaponMovement;
         [SerializeField] private ParticleSystem[] m_VFXToPlay;
+        [SerializeField] private ParticleSystem m_VFXShootVFX;
         [SerializeField] private Animator m_Animator;
         
         [Tooltip("Planed for world UI, use to enable the thing you need during aiming, will be disabled at the end of aiming")]
@@ -30,6 +35,7 @@ namespace _3C.Player
         
         
         private Transform m_Transform;
+        private IObjectPool<RangeAttackHolder> m_RangeAttackPool;
 
         protected override void Init(IStateHandler _stateHandler)
         {
@@ -38,6 +44,12 @@ namespace _3C.Player
             {
                 m_AimingWorldUI.SetActive(false);
             }
+            m_RangeAttackPool = new ObjectPool<RangeAttackHolder>(CreateRangeItem, maxSize: 10);
+        }
+
+        private RangeAttackHolder CreateRangeItem()
+        {
+            return m_StateHandler.Instantiate(m_RangeAttackPrefab);
         }
 
         public override void StartState()
@@ -73,31 +85,33 @@ namespace _3C.Player
             }
         }
         
-        
-
         private void TriggerAttack()
         {
             StateCleaning();
-            PostAttackCleaning();
-            m_Damager.damage = m_BaseDamage;
-            m_AttackHolder.transform.localPosition = Vector3.zero;
-            m_AttackHolder.transform.localRotation = Quaternion.identity;
-            m_AttackHolder.SetParent(null, true);
-            
-            m_RangeWeaponMovement.TriggerWeaponMovement(m_AttackDuration, m_AttackAnimationCurve);
+            //PostAttackCleaning();
+            SpawnAttack();
+        }
+
+        private void SpawnAttack()
+        {
+            var spawned = m_RangeAttackPool.Get();
+            spawned.HitBox.damage = m_BaseDamage;
+            spawned.transform.position = m_Transform.position;
+            spawned.transform.rotation = m_Transform.rotation;
+            spawned.WeaponMovement.TriggerWeaponMovement(m_AttackDuration, m_AttackAnimationCurve);
+            spawned.WeaponMovement.CurrentTweener.onComplete += () =>
+            {
+                m_RangeAttackPool.Release(spawned);
+                // TODO: On end explosion VFX
+                // TODO: Clean
+            } ;
             m_Animator.SetTrigger("Ranged Attack");
-            foreach (var particleSystem in m_VFXToPlay)
+            foreach (var particleSystem in spawned.VFXToPlay)
             {
                 particleSystem.Play();
             }
+            m_VFXShootVFX.Play();
             m_StateHandler.PlayerSoundsInstance.PlayRangeSound();
-            m_StateHandler.StartCoroutine(c_OnAttackAnimationEnded());
-        }
-
-        private IEnumerator c_OnAttackAnimationEnded()
-        {
-            yield return new WaitForSeconds(m_AttackDuration);
-            PostAttackCleaning();
         }
 
         private void PostAttackCleaning()

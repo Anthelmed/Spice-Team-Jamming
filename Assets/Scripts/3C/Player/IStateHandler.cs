@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using _3C.Player.Weapons;
 using DefaultNamespace.Audio;
 using UnityEngine;
 
@@ -18,5 +19,7 @@ namespace _3C.Player
 
         void OnAimingStateChanged(bool _state);
         void SetOrientationToUseMovement();
+        T Instantiate<T>(T prefab)
+            where T : Object;
     }
 }
