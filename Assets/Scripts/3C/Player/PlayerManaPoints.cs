@@ -33,13 +33,18 @@ namespace _3C.Player
 
         public bool CheckIfPossiblePlusConsume(float _manaAmount)
         {
-            if (m_CurrentManaPoint >= _manaAmount)
+            if (CheckIfPossible(_manaAmount))
             {
                 m_CurrentManaPoint -= _manaAmount;
                 return true;
             }
 
             return false;
+        }
+
+        public bool CheckIfPossible(float _manaAmount)
+        {
+            return m_CurrentManaPoint >= _manaAmount;
         }
     }
 }

@@ -42,9 +42,11 @@ namespace _3C.Player
         {
             if (_context.phase == InputActionPhase.Performed)
             {
+                StackInputIfNotTop(InputType.AimPerformed);
                 GameplayData.s_PlayerInputs.IsUsingCursorPositionForAim = false;
             } else if (_context.phase == InputActionPhase.Canceled)
             {
+                StackInputIfNotTop(InputType.AimCanceled);
                 GameplayData.s_PlayerInputs.IsUsingCursorPositionForAim = true;
             }
 
@@ -63,6 +65,18 @@ namespace _3C.Player
 
         public void OnRangeAttack(InputAction.CallbackContext _context)
         {
+            Debug.Log("On Range : " + _context.phase);
+            if (_context.phase == InputActionPhase.Performed)
+            {
+                StackInputIfNotTop(InputType.RangeAttackPerformed);
+            } else if (_context.phase == InputActionPhase.Canceled)
+            {
+                StackInput(InputType.RangeAttackCanceled);
+            }
+        }
+
+        public void OnKeyboardAim(InputAction.CallbackContext _context)
+        {
             switch (_context.phase)
             {
                 case InputActionPhase.Performed:
@@ -72,10 +86,6 @@ namespace _3C.Player
                     StackInputIfNotTop(InputType.AimCanceled);
                     break;
             }
-
-            //ChangeAiming(_context);
-
-            // TODO: Handle aiming depending on mouse or gamepad right joystick
         }
         
         private void ChangeAiming(InputAction.CallbackContext _context)

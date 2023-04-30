@@ -149,6 +149,41 @@ PrefabInstance:
       propertyPath: m_debugColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3888231552320926050, guid: 6e721f86e60571e4288e648c166baca3,
+        type: 3}
+      propertyPath: onHit.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888231552320926050, guid: 6e721f86e60571e4288e648c166baca3,
+        type: 3}
+      propertyPath: onHit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888231552320926050, guid: 6e721f86e60571e4288e648c166baca3,
+        type: 3}
+      propertyPath: onHit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7567264794646628910}
+    - target: {fileID: 3888231552320926050, guid: 6e721f86e60571e4288e648c166baca3,
+        type: 3}
+      propertyPath: onHit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888231552320926050, guid: 6e721f86e60571e4288e648c166baca3,
+        type: 3}
+      propertyPath: onHit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888231552320926050, guid: 6e721f86e60571e4288e648c166baca3,
+        type: 3}
+      propertyPath: onHit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.ParticleSystem, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888231552320926050, guid: 6e721f86e60571e4288e648c166baca3,
+        type: 3}
+      propertyPath: onHit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6207276697970556055, guid: 6e721f86e60571e4288e648c166baca3,
         type: 3}
       propertyPath: m_RootOrder
@@ -431,6 +466,12 @@ MonoBehaviour:
 --- !u!4 &4426173380218071107 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6387620237862119451, guid: 3aabfe7c9c230534689a30e064df942e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7334551791111897176}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7567264794646628910 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 922636227580349046, guid: 3aabfe7c9c230534689a30e064df942e,
     type: 3}
   m_PrefabInstance: {fileID: 7334551791111897176}
   m_PrefabAsset: {fileID: 0}
