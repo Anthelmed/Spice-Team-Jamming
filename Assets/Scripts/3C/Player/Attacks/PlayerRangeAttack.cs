@@ -17,15 +17,11 @@ namespace _3C.Player
         [SerializeField] private int m_BaseDamage;
 
         [Header("Scene components")]
-        [SerializeField] private HitBox m_Damager;
-
         [SerializeField] private RangeAttackHolder m_RangeAttackPrefab;
         
         [Tooltip("This one is used to hold the weapon and the vfx to unparent them")]
         [SerializeField] private Transform m_AttackHolder;
         
-        [SerializeField] private AWeaponMovement m_RangeWeaponMovement;
-        [SerializeField] private ParticleSystem[] m_VFXToPlay;
         [SerializeField] private ParticleSystem m_VFXShootVFX;
         [SerializeField] private Animator m_Animator;
         
@@ -88,7 +84,6 @@ namespace _3C.Player
         private void TriggerAttack()
         {
             StateCleaning();
-            //PostAttackCleaning();
             SpawnAttack();
         }
 
@@ -112,18 +107,6 @@ namespace _3C.Player
             }
             m_VFXShootVFX.Play();
             m_StateHandler.PlayerSoundsInstance.PlayRangeSound();
-        }
-
-        private void PostAttackCleaning()
-        {
-            m_RangeWeaponMovement.StopWeaponMovement();
-            m_AttackHolder.SetParent(m_Transform, false);
-            m_AttackHolder.transform.localPosition = Vector3.zero;
-            m_AttackHolder.transform.localRotation = Quaternion.identity;
-            foreach (var particleSystem in m_VFXToPlay)
-            {
-                particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            }
         }
     }
 }
