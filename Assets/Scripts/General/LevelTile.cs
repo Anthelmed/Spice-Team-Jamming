@@ -19,6 +19,9 @@ public class LevelTile : MonoBehaviour
     [SerializeField] RenderTexture groundFXPersistantRT;
     [SerializeField] GameObject RTCam;
     [SerializeField] GameObject environmentArt;
+    private const int UPDATE_RATE = 6;
+
+    private int m_updateTurn;
 
     private void Awake()
     {
@@ -32,11 +35,13 @@ public class LevelTile : MonoBehaviour
     private void Start()
     {
         if (LevelTilesManager.instance != null) worldTilesManager = LevelTilesManager.instance;
-
+        m_updateTurn = UnityEngine.Random.Range(0, UPDATE_RATE);
     }
 
     private void Update()
     {
+        if ((Time.frameCount % UPDATE_RATE) != m_updateTurn) return;
+
         for (int i = 0; i < Vegetation.Count; ++i) Vegetation[i].Tick();
         for (int i = 0; i < Pawns.Count; ++i) Pawns[i].Tick();
         for (int i = 0; i < Knights.Count; ++i) Knights[i].Tick();
