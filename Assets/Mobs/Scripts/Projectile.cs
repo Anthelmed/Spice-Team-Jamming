@@ -18,11 +18,6 @@ public class Projectile : MonoBehaviour
 
     [SerializeField] private HitBox m_hitBox;
 
-    private void Start()
-    {
-        gameObject.SetActive(true);
-    }
-
     private void OnEnable()
     {
         if (m_hitBox)

@@ -22,6 +22,12 @@ namespace Unit
         public bool IsAttackReady => Time.timeSinceLevelLoad > m_cooldownEnds;
         public bool HasRangedAttack => m_rangedObject;
 
+        private void Awake()
+        {
+            if (m_rangedObject)
+                m_rangedObject.SetActive(false);
+        }
+
         public void SetAttackDelay(float delay)
         {
             m_cooldownEnds = Time.timeSinceLevelLoad + delay;
