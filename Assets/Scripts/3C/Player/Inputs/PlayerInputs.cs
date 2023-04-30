@@ -12,6 +12,7 @@ namespace _3C.Player
         HeldMeleeAttackPerformed,
         AimPerformed,
         AimCanceled,
+        RangeAttackPerformed,
         RangeAttackCanceled,
     }
     

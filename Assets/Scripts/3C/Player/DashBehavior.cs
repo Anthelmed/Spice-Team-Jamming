@@ -66,6 +66,7 @@ namespace _3C.Player
 
         private IEnumerator c_Dashing()
         {
+            m_StateHandler.PlayerManaPoints.CheckIfPossiblePlusConsume(m_ManaCost);
             m_StateHandler.OnMovementStateChanged(false);
             m_StateHandler.SetOrientationToUseMovement();
             Vector3 start = m_Transform.position;

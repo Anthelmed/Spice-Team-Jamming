@@ -65,13 +65,14 @@ namespace _3C.Player
 
         public void OnRangeAttack(InputAction.CallbackContext _context)
         {
-            if (_context.phase == InputActionPhase.Canceled)
+            Debug.Log("On Range : " + _context.phase);
+            if (_context.phase == InputActionPhase.Performed)
+            {
+                StackInputIfNotTop(InputType.RangeAttackPerformed);
+            } else if (_context.phase == InputActionPhase.Canceled)
             {
                 StackInput(InputType.RangeAttackCanceled);
             }
-            //ChangeAiming(_context);
-
-            // TODO: Handle aiming depending on mouse or gamepad right joystick
         }
 
         public void OnKeyboardAim(InputAction.CallbackContext _context)

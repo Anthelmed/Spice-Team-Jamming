@@ -14,6 +14,7 @@ namespace _3C.Player
         GameObject gameObject { get; }
         PlayerSounds PlayerSoundsInstance { get; }
         PlayerAiming PlayerAimingInstance { get; }
+        PlayerManaPoints PlayerManaPoints { get; }
 
         void OnMovementStateChanged(bool _state);
 

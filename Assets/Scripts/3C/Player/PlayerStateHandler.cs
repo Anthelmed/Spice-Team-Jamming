@@ -42,6 +42,7 @@ namespace _3C.Player
         public PlayerSounds PlayerSoundsInstance => m_Sounds;
         
         public PlayerAiming PlayerAimingInstance => m_Aiming;
+        public PlayerManaPoints PlayerManaPoints => m_ManaPoints;
 
         public void OnMovementStateChanged(bool _state)
         {
@@ -105,7 +106,7 @@ namespace _3C.Player
         {
             var newPossibleStateBehavior = GetBehaviorFromState(_nextState);
             if (newPossibleStateBehavior.DoConsumeManaPoints() &&
-                !m_ManaPoints.CheckIfPossiblePlusConsume(newPossibleStateBehavior.BaseManaPoints))
+                !m_ManaPoints.CheckIfPossible(newPossibleStateBehavior.BaseManaPoints))
             {
                 return false;
             }
@@ -193,6 +194,8 @@ namespace _3C.Player
                 (PlayerState.Aiming, _) => false,
                 (PlayerState.Attacking, InputType.DashPerformed) => true,
                 (PlayerState.Attacking, _) => false,
+                (PlayerState.IdleMovement, InputType.RangeAttackPerformed) => false,
+                (PlayerState.IdleMovement, InputType.RangeAttackCanceled) => false,
                 _ => true,
             };
         }

@@ -613,11 +613,22 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_BaseDamage: 5
+    m_BaseDamage: 3
+    m_ChargedOptimalDamage: 15
+    m_ChargedDamage: 10
     m_ManaCost: 20
+    m_ChargedManaCost: 50
+    m_DelayBeforeBuild: 0.1
+    m_BuildUpDelay: 0.9
+    m_PostOptimalTriggerPhaseDelay: 0.1
+    m_NormalAttackIfMissedChargedOne: 1
     m_RangeAttackPrefab: {fileID: 2482928752937964366, guid: 0642d15ad83228342a7d363af01d6b1b,
       type: 3}
+    m_ChargedRangeAttackPrefab: {fileID: 2482928752937964366, guid: 0642d15ad83228342a7d363af01d6b1b,
+      type: 3}
+    m_DoubleChargedWeaponScale: 1
     m_VFXShootVFX: {fileID: 7009484212727554566}
+    m_ChargedBuildUpVFX: {fileID: 7009484212727554566}
     m_Animator: {fileID: 0}
     m_AimingWorldUI: {fileID: 3804535594222755562}
   m_Sounds: {fileID: 8188397984285573184}
