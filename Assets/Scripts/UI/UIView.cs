@@ -32,8 +32,8 @@ namespace SpiceTeamJamming.UI
 		private float RandomAngle => _random.NextFloat(_minMaxAngle.x, _minMaxAngle.y); 
 		private float RandomScale => _random.NextFloat(_minMaxScale.x, _minMaxScale.y);
 		
-		private Button[] _buttons;
-		private UIButtonManipulator[] _buttonManipulators;
+		private Button[] _buttons = Array.Empty<Button>();
+		private UIButtonManipulator[] _buttonManipulators = Array.Empty<UIButtonManipulator>();
 		private readonly Dictionary<VisualElement, UIButtonManipulator> _elementToButtonManipulatorBridge = new ();
 
 		protected virtual void Awake()
