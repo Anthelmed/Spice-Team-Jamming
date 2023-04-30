@@ -1,4 +1,5 @@
-﻿using UIToolkitAutoReferences;
+﻿using System;
+using UIToolkitAutoReferences;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -13,7 +14,15 @@ namespace SpiceTeamJamming.UI
 		protected override VisualElement MainElement => elementsReferences.SettingsMenu;
 		protected override UIRouter.RouteType Route => UIRouter.RouteType.Settings;
 		protected override Button BackButton => elementsReferences.ActionHelperBack;
-		
+
+		private void Start()
+		{
+			elementsReferences.SettingsMenuButtonControls.SetEnabled(false);
+			elementsReferences.SettingsMenuButtonAudio.SetEnabled(false);
+			elementsReferences.SettingsMenuButtonGraphics.SetEnabled(false);
+			elementsReferences.SettingsMenuButtonAccessibility.SetEnabled(false);
+		}
+
 		protected override void OnEnable()
 		{
 			base.OnEnable();

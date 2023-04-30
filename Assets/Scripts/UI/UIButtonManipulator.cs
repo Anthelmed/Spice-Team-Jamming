@@ -60,16 +60,22 @@ namespace SpiceTeamJamming.UI
 
 		private void OnPointerReleased(PointerUpEvent _)
 		{
+			if (!target.enabledSelf) return;
+			
 			FadeColor(_baseColor, _fadeOutDurationMS);
 		}
 		
 		private void OnPointerPressed(PointerDownEvent _)
 		{
+			if (!target.enabledSelf) return;
+			
 			FadeColor(_actionColor, _fadeInDurationMS);
 		}
 		
 		private void OnPointerEntered(PointerEnterEvent _)
 		{
+			if (!target.enabledSelf) return;
+			
 			FadeTranslate(Translate.None(), _fadeInDurationMS);
 			FadeRotate(Rotate.None(), _fadeInDurationMS);
 			FadeScale(Scale.None(), _fadeInDurationMS);
@@ -77,6 +83,8 @@ namespace SpiceTeamJamming.UI
 		
 		private void OnPointerLeaved(PointerLeaveEvent _)
 		{
+			if (!target.enabledSelf) return;
+			
 			FadeTranslate(_baseTranslate, _fadeOutDurationMS);
 			FadeRotate(_baseRotate, _fadeOutDurationMS);
 			FadeScale(_baseScale, _fadeOutDurationMS);
