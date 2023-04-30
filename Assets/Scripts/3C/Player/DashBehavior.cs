@@ -13,7 +13,11 @@ namespace _3C.Player
         // [AnimatorParam("m_Animator")]
         // [SerializeField] private int m_DashTriggerParam;
         // [SerializeField] private Animator m_Animator;
-        
+        [SerializeField] private float m_ManaCost;
+
+        public override float BaseManaPoints => m_ManaCost;
+
+
         [SerializeField] private bool m_HasOvershootFrame;
         [ShowIf("m_HasOvershootFrame")]
         [SerializeField] private float m_OvershootDistance;

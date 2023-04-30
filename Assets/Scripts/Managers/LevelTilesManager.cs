@@ -17,7 +17,6 @@ public class LevelTilesManager : MonoBehaviour
     [SerializeField] GameObject[] grassBiomePrefabs;
     [SerializeField] GameObject[] forestBiomePrefabs;
 
-    [Header("enemies")]
     [SerializeField] EnemyPrefab[] enemies;
 
     [Serializable]
@@ -104,6 +103,7 @@ public class LevelTilesManager : MonoBehaviour
                 spawnedObject.gameObject.name = "Tile " + xIndex + " _ " + yIndex;
                 spawnedObject.transform.SetParent(transform);
                 var tile = spawnedObject.GetComponent<LevelTile>();
+                tile.MapTile = mapTile;
 
                 Vector2Int gridCoordinates = new Vector2Int(xIndex, yIndex);
 

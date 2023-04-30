@@ -7,6 +7,7 @@ namespace _3C.Player
     public class PlayerStateBehavior
     {
         protected IStateHandler m_StateHandler;
+        public virtual float BaseManaPoints => 0;
 
         public void Awake(IStateHandler _stateHandler)
         {
@@ -27,5 +28,10 @@ namespace _3C.Player
         public virtual void OnInput(InputType inputType) { }
         
         public virtual void OnDrawGizmos() {}
+
+        public bool DoConsumeManaPoints()
+        {
+            return BaseManaPoints != 0;
+        }
     }
 }

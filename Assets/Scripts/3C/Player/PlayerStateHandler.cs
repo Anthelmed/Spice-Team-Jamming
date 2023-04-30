@@ -24,6 +24,9 @@ namespace _3C.Player
     {
         [Header("Handler Settings")]
         [SerializeField] private int m_InputStackSize;
+
+        [SerializeField] private PlayerManaPoints m_ManaPoints;
+        
         
         [Header("State Settings")]
         [SerializeField] private PlayerMovement m_PlayerMovement;
@@ -75,8 +78,10 @@ namespace _3C.Player
             get => m_CurrentState;
             set
             {
-                OnStateChange(m_CurrentState, value);
-                m_CurrentState = value;
+                if (OnStateChange(m_CurrentState, value))
+                {
+                    m_CurrentState = value;
+                }
             }
         }
 
@@ -93,13 +98,22 @@ namespace _3C.Player
             CurrentState = PlayerState.IdleMovement;
             m_PlayerMovement.Enabled = true;
             OnAimingStateChanged(false);
+            m_ManaPoints.Init(this);
         }
 
-        private void OnStateChange(PlayerState _currentState, PlayerState _nextState)
+        private bool OnStateChange(PlayerState _currentState, PlayerState _nextState)
         {
+            var newPossibleStateBehavior = GetBehaviorFromState(_nextState);
+            if (newPossibleStateBehavior.DoConsumeManaPoints() &&
+                !m_ManaPoints.CheckIfPossiblePlusConsume(newPossibleStateBehavior.BaseManaPoints))
+            {
+                return false;
+            }
+            
             m_CurrentStateBehavior?.StopState();
             m_CurrentStateBehavior = GetBehaviorFromState(_nextState); 
             m_CurrentStateBehavior.StartState();
+            return true;
         }
 
         private PlayerStateBehavior GetBehaviorFromState(PlayerState _state) => _state switch
@@ -123,6 +137,7 @@ namespace _3C.Player
 
         private void Update()
         {
+            m_ManaPoints.Update();
             if (m_CurrentStateBehavior != m_PlayerMovement)
             {
                 m_PlayerMovement?.Update();
