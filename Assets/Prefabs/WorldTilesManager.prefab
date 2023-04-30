@@ -56,7 +56,7 @@ MonoBehaviour:
   - {fileID: 3542509089036126314, guid: 9d2e1249b230ca941956c4b3da7c238b, type: 3}
   enemies:
   - m_squadPrefab: {fileID: 0}
-    weight: 24
+    weight: 16
   - m_squadPrefab: {fileID: 3216817778645677260, guid: 3ebb28f4ca8c12541ad863e1311793b1,
       type: 3}
     weight: 1
