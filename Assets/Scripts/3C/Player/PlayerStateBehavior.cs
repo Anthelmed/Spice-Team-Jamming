@@ -1,8 +1,4 @@
-﻿using System;
-using Unity.VisualScripting;
-using UnityEngine;
-
-namespace _3C.Player
+﻿namespace _3C.Player
 {
     public class PlayerStateBehavior
     {

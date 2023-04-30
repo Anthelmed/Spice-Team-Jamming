@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections;
-using System.ComponentModel;
 using _3C.Player.Weapons;
-using DefaultNamespace;
-using DefaultNamespace.HealthSystem.Damager;
 using DG.Tweening;
 using NaughtyAttributes;
 using Units;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace _3C.Player
 {

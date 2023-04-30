@@ -1,7 +1,5 @@
-﻿using DefaultNamespace.HealthSystem.Damager;
-using Units;
+﻿using Units;
 using UnityEngine;
-using UnityEngine.Pool;
 
 namespace _3C.Player.Weapons
 {

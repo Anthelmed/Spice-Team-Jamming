@@ -1,20 +1,16 @@
-using AmplifyShaderEditor;
-using DefaultNamespace.Audio;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using DefaultNamespace.Audio;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Profiling;
-using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Targetable))]
 [SelectionBase]
 public class MobAI : MonoBehaviour
 {
-    [System.Serializable]
+    [Serializable]
     public class Data
     {
         [Header("Referencies")]
@@ -143,7 +139,7 @@ public class MobAI : MonoBehaviour
     private void Start()
     {
         m_lastPosition = transform.position;
-        m_queryTurn = UnityEngine.Random.Range(0, m_data.targetQueryRate);
+        m_queryTurn = Random.Range(0, m_data.targetQueryRate);
         m_data.attackCollider.enabled = false;
 
         if (m_data.projectile) m_data.projectile.gameObject.SetActive(false);

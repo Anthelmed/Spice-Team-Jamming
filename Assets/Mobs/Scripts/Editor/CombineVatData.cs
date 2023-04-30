@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 using UnityEditor;
 using UnityEditor.AssetImporters;
+using UnityEngine;
 
 [ScriptedImporter(1, "vat")]
 public class CombineVatData : ScriptedImporter
 {
-    [System.Serializable]
+    [Serializable]
     public struct Animation
     {
         public Texture2D vertexVat;

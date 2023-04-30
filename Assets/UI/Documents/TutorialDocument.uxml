@@ -6,11 +6,12 @@
     <ui:VisualElement name="Tutorial" class="main-element auto-reference">
         <ui:VisualElement name="Overlay" />
         <ui:VisualElement name="TutorialTitle" class="title auto-reference">
-            <ui:Label tabindex="-1" text="[Hint Name]" display-tooltip-when-elided="true" name="TutorialTitleLabel" class="title-label auto-reference" />
+            <ui:Label tabindex="-1" text="Tutorial" display-tooltip-when-elided="true" name="TutorialTitleLabel" class="title-label auto-reference" />
         </ui:VisualElement>
-        <ui:VisualElement name="TutorialInfo" class="auto-reference" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement name="TutorialInfo" class="auto-reference" style="background-color: rgba(0, 0, 0, 0);">
             <ui:Label tabindex="-1" text="[Hint SubTitle]" display-tooltip-when-elided="true" name="TutorialInfoSubTitle" class="sub-title auto-reference" />
             <ui:Label tabindex="-1" text="[Hint Text]" display-tooltip-when-elided="true" name="TutorialInfoText" class="auto-reference text" />
+            <ui:VisualElement name="TutorialInfoImage" class="auto-reference" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
         </ui:VisualElement>
         <ui:VisualElement name="TutorialActionHelpers" class="action-helpers">
             <ui:Instance template="ActionHelperBack" name="ActionHelperBack" />

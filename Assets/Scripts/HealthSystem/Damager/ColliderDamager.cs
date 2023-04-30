@@ -1,5 +1,4 @@
-﻿using System;
-using DefaultNamespace.HealthSystem.Damageable;
+﻿using DefaultNamespace.HealthSystem.Damageable;
 using UnityEngine;
 
 namespace DefaultNamespace.HealthSystem.Damager
