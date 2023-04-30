@@ -14,6 +14,7 @@ namespace Units
     }
 
     [SelectionBase]
+    [RequireComponent(typeof(AutoUpdateUnit))]
     public class Unit : MonoBehaviour
     {
         public enum Type
@@ -41,6 +42,7 @@ namespace Units
         public UnityEvent<float, Unit> onDie;
         public UnityEvent<bool> onVisibilityChanged;
 
+        public bool HasTile => m_currentTile;
         public bool Visible => !m_currentTile || m_currentTile.tileActivated;
 
         private float m_currentHealth;
@@ -90,7 +92,7 @@ namespace Units
             onVisibilityChanged?.Invoke(visible);
         }
 
-        protected virtual void Update()
+        public virtual void Tick()
         {
             if (doesntMove && m_currentTile) return;
 

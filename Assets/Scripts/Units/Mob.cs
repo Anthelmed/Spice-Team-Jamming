@@ -113,9 +113,9 @@ namespace Units
             onHit.AddListener(OnHit);
         }
 
-        protected override void Update()
+        public override void Tick()
         {
-            base.Update();
+            base.Tick();
 
             if (m_data.NextState == State.Destroy)
             {

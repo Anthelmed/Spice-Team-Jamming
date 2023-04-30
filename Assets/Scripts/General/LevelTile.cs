@@ -37,6 +37,11 @@ public class LevelTile : MonoBehaviour
 
     private void Update()
     {
+        for (int i = 0; i < Vegetation.Count; ++i) Vegetation[i].Tick();
+        for (int i = 0; i < Pawns.Count; ++i) Pawns[i].Tick();
+        for (int i = 0; i < Knights.Count; ++i) Knights[i].Tick();
+        for (int i = 0; i < Players.Count; ++i) Players[i].Tick();
+
         int fire = 0;
         int ice = 0;
         int total = 0;
