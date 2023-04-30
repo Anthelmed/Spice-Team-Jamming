@@ -229,11 +229,16 @@ public class LevelTilesManager : MonoBehaviour
         }
     }
 
+    public Vector2Int GetTileIndexFromPosition(Vector3 pos)
+    {
+        return new Vector2Int(
+            Mathf.FloorToInt((pos.x + spacing * 0.5f) / spacing),
+            Mathf.FloorToInt((pos.z + spacing * 0.5f) / spacing));
+    }
+
     public LevelTile GetTileAtPosition(Vector3 pos)
     {
-        var gridPos = new Vector2Int(
-            Mathf.RoundToInt(pos.x / spacing),
-            Mathf.RoundToInt(pos.z / spacing));
+        var gridPos = GetTileIndexFromPosition(pos);
 
         return GetTileAtGridPosition(gridPos);
     }
@@ -312,9 +317,7 @@ public class LevelTilesManager : MonoBehaviour
     {
         m_levelTilesReusable.Clear();
 
-        var gridPos = new Vector2Int(
-            Mathf.RoundToInt(position.x / spacing),
-            Mathf.RoundToInt(position.z / spacing));
+        var gridPos = GetTileIndexFromPosition(position);
 
         var wrappedX = Mathf.Repeat(position.x + spacing * 0.5f, spacing);
         var wrappedY = Mathf.Repeat(position.z + spacing * 0.5f, spacing);
