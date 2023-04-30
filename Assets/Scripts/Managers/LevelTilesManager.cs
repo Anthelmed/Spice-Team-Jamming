@@ -112,16 +112,19 @@ public class LevelTilesManager : MonoBehaviour
                 tile.Init(mapTile.mapTileData, gridCoordinates);
                 tile.Sleep();
 
-                var enemyChoice = UnityEngine.Random.Range(0, maxWeight);
-                for (int i = 0; i < enemies.Length; ++i)
+                if (mapTile.Biome != Biome.Water)
                 {
-                    if (enemyChoice < enemies[i].weight)
+                    var enemyChoice = UnityEngine.Random.Range(0, maxWeight);
+                    for (int i = 0; i < enemies.Length; ++i)
                     {
-                        if (enemies[i].m_squadPrefab)
-                            Instantiate(enemies[i].m_squadPrefab, spawnedObject.transform.position, spawnedObject.transform.rotation);
-                        break;
+                        if (enemyChoice < enemies[i].weight)
+                        {
+                            if (enemies[i].m_squadPrefab)
+                                Instantiate(enemies[i].m_squadPrefab, spawnedObject.transform.position, spawnedObject.transform.rotation);
+                            break;
+                        }
+                        enemyChoice -= enemies[i].weight;
                     }
-                    enemyChoice -= enemies[i].weight;
                 }
             }
         }
