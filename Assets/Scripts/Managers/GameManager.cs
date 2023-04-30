@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     public event Action<bool> loadingScreenVisibilityEvent = delegate { };
     public event Action<bool> startScreenVisibilityEvent = delegate { };
     public event Action<bool> pauseScreenVisibilityEvent = delegate { };
-
+    public event Action<GameTile> onHoverTileChanged;
     public event Action OnInitialLevelLoad = delegate { };
 
     Animator playerAnimator;// DO this much better
@@ -340,6 +340,7 @@ public class GameManager : MonoBehaviour
                     cachedHoverTile.Unhighlight();
                 }
                 cachedHoverTile = hoverTile;
+                onHoverTileChanged?.Invoke(cachedHoverTile);
                 if (hoverTile.mapTileData.biome == Biome.Water)return; // dont juice a place you cant go
 
                 
