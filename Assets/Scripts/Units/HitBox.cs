@@ -41,12 +41,16 @@ namespace Units
 
         private void OnEnable()
         {
+            if (!m_owner)
+                m_owner = GetComponentInParent<Unit>();
             m_targetsHit.Clear();
         }
 
         private void Update()
         {
-            var world = DummyWorld.Instance;
+            var world = LevelTilesManager.instance;
+
+            Debug.Log(world);
             if (!world) return;
 
             List<Unit> newHits = null;

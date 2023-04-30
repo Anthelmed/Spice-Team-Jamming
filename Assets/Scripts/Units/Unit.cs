@@ -40,10 +40,12 @@ namespace Units
         public UnityEvent<float, Unit> onDie;
         public UnityEvent<bool> onVisibilityChanged;
 
-        public bool Visible => DummyWorld.Instance.visible;
+        public bool Visible => !m_currentTile || m_currentTile.tileActivated;
 
         private float m_currentHealth;
         private float m_lastHit;
+
+        [SerializeField] private LevelTile m_currentTile;
 
         public void TakeHit(float damage, Unit other)
         {
@@ -65,7 +67,7 @@ namespace Units
             if (m_currentHealth == 0)
             {
                 onDie?.Invoke(damage, other);
-                DummyWorld.Instance.Unregister(this);
+                m_currentTile.Unregister(this);
             }
             else
                 onHit?.Invoke(damage, other);
@@ -79,7 +81,7 @@ namespace Units
             onHeal?.Invoke(amount);
 
             if (wasDead)
-                DummyWorld.Instance.Register(this);
+                m_currentTile.Register(this);
         }
 
         public void ChangeVisibility(bool visible)
@@ -87,20 +89,27 @@ namespace Units
             onVisibilityChanged?.Invoke(visible);
         }
 
+        protected virtual void Update()
+        {
+            var world = LevelTilesManager.instance;
+            if (!world) return;
+            var newTile = world.GetTileAtPosition(transform.position);
+            if (newTile != m_currentTile)
+            {
+                var visible = Visible;
+                if (m_currentTile)
+                    m_currentTile.Unregister(this);
+                newTile.Register(this);
+                m_currentTile = newTile;
+
+                if (visible != Visible)
+                    ChangeVisibility(visible);
+            }
+        }
+
         protected virtual void Awake()
         {
             m_currentHealth = m_maxHealth;
-        }
-
-        private void OnEnable()
-        {
-            DummyWorld.Instance.Register(this);
-        }
-
-        private void OnDisable()
-        {
-            if (DummyWorld.Instance)
-                DummyWorld.Instance.Unregister(this);
         }
 
 #if UNITY_EDITOR

@@ -94,7 +94,7 @@ namespace Units
 
         private void HandleIntersections(Transform trans, Vector3 direction)
         {
-            var world = DummyWorld.Instance;
+            var world = LevelTilesManager.instance;
             if (!world) return;
 
             var intersections = world.QueryCircleAll(trans.position, m_unit.Radius);

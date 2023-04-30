@@ -113,8 +113,10 @@ namespace Units
             onHit.AddListener(OnHit);
         }
 
-        private void Update()
+        protected override void Update()
         {
+            base.Update();
+
             if (m_data.NextState == State.Destroy)
             {
                 Destroy(gameObject);

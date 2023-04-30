@@ -41,7 +41,7 @@ namespace Units
             Target = null;
             var position = m_unit ? m_unit.transform.position : transform.position;
 
-            var world = DummyWorld.Instance;
+            var world = LevelTilesManager.instance;
             if (!world) return;
 
             Target = world.FindClosestEnemyOfType(position, m_importantTargetRange + m_unit.Radius, Unit.Type.Player, m_unit.Team, out float dist);
