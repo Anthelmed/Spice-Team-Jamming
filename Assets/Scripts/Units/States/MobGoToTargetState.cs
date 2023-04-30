@@ -33,8 +33,12 @@ namespace Units
             if (data.attacks)
             {
                 var distance = data.attacks.MeleeRange + data.perception.Target.Radius;
+                distance *= 0.9f;
                 if ((data.perception.Target.transform.position - data.transform.position).sqrMagnitude < distance * distance)
+                {
+                    // Todo apply cooldown
                     data.NextState = Mob.State.CombatIdle;
+                }
             }
         }
     }
