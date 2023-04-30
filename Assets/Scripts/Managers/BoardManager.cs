@@ -255,7 +255,8 @@ public class BoardManager : MonoBehaviour
                     Vector3 pos = new Vector3(x * xSize, mapHeightOffset, y * zSize);
 
                     // We can rotate the tile [0, 90, 180, 270] degrees to get more variation
-                    GameObject go = Instantiate(currentPrefab, pos, Quaternion.identity, _transform);
+                    
+                    GameObject go = Instantiate(currentPrefab, pos, Quaternion.Euler(0, 90 * Random.Range(0, 4), 0), _transform);
                     var tile = go.GetComponentInChildren<GameTile>();
                     go.transform.SetParent(mapGraphicsParent);
                     tile.InitTileData(currentBiome, new Vector2Int(x,y));
