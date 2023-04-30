@@ -32,14 +32,24 @@ namespace Units
 
             if (data.attacks)
             {
+                var toTarget = (data.perception.Target.transform.position - data.transform.position).sqrMagnitude;
+
                 var distance = data.attacks.MeleeRange + data.perception.Target.Radius;
                 distance *= 0.9f;
-                if ((data.perception.Target.transform.position - data.transform.position).sqrMagnitude < distance * distance)
+                if (toTarget < distance * distance)
                 {
-                    if (data.attacks.IsMeleeReady)
-                        data.attacks.SetMeleeDelay(Random.Range(0f, data.attacks.MeleeColdown * 0.5f));
+                    if (data.attacks.IsAttackReady)
+                        data.attacks.SetAttackDelay(Random.Range(0f, data.attacks.MeleeColdown * 0.5f));
                     data.NextState = Mob.State.CombatIdle;
                 }
+                else
+                {
+                    distance = data.attacks.MinRange - data.perception.Target.Radius;
+                    var maxDistance = data.attacks.MaxRange  + data.perception.Target.Radius;
+                    if (toTarget > distance * distance && toTarget < maxDistance * maxDistance)
+                        data.NextState = Mob.State.CombatIdle;
+                }
+
             }
         }
     }

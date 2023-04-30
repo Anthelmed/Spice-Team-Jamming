@@ -30,13 +30,39 @@ namespace Units
                 return;
             }
 
-            // Chase the target if it got out of range
-            var distance = data.attacks.MeleeRange + data.perception.Target.Radius;
-            if ((data.perception.Target.transform.position - data.transform.position).sqrMagnitude > distance * distance)
+            float distance;
+            var toTarget = data.perception.Target.transform.position - data.transform.position;
+            var cos = Vector3.Dot(toTarget.normalized, data.transform.forward);
+            bool canAttack = cos > Mob.COS_ATTACK;
+
+            float toTargetSq = (data.perception.Target.transform.position - data.transform.position).sqrMagnitude;
+            if (data.attacks.HasRangedAttack)
+            {
+                // Chase the target if it got out of range
+                distance = data.attacks.MaxRange + data.perception.Target.Radius;
+                if (toTargetSq > distance * distance)
+                {
+                    data.NextState = Mob.State.GoToTarget;
+                    return;
+                }
+                
+                // Attack if in range
+                distance = data.attacks.MinRange - data.perception.Target.Radius;
+                if (toTargetSq > distance * distance)
+                {
+                    if (/*canAttack &&*/ data.attacks.IsAttackReady)
+                        data.NextState = Mob.State.RangedAttack;
+                    return;
+                }
+
+            }
+
+            // Go to melee range
+            distance = data.attacks.MeleeRange + data.perception.Target.Radius;
+            if (toTargetSq > distance * distance)
                 data.NextState = Mob.State.GoToTarget;
 
-            // TODO ranged attacks
-            if (data.attacks.IsMeleeReady)
+            if (canAttack && data.attacks.IsAttackReady)
                 data.NextState = Mob.State.Attack;
         }
     }

@@ -9,23 +9,30 @@ namespace Unit
     {
         [SerializeField] private HitBox m_meleeHitBox;
         [SerializeField] [Min(0f)] private float m_meleeCooldown = 2f;
+        [SerializeField] private GameObject m_rangedObject;
+        [SerializeField] private Vector2 m_rangedRange = Vector2.up;
+        [SerializeField] [Min(0f)] private float m_rangedCooldown = 2f;
 
-        private float m_meleeColdownEnd;
+        private float m_cooldownEnds;
 
         public float MeleeColdown => m_meleeCooldown;
         public float MeleeRange => m_meleeHitBox ? m_meleeHitBox.Radius : 0f;
-        public bool IsMeleeReady => Time.timeSinceLevelLoad > m_meleeColdownEnd;
+        public float MaxRange => m_rangedRange.y;
+        public float MinRange => m_rangedRange.x;
+        public bool IsAttackReady => Time.timeSinceLevelLoad > m_cooldownEnds;
+        public bool HasRangedAttack => m_rangedObject;
 
-        public void SetMeleeDelay(float delay)
+        public void SetAttackDelay(float delay)
         {
-            m_meleeColdownEnd = Time.timeSinceLevelLoad + delay;
+            m_cooldownEnds = Time.timeSinceLevelLoad + delay;
         }
 
         public void StartMelee()
         {
             if (m_meleeHitBox.isActiveAndEnabled) return;
+            if (!IsAttackReady) return;
 
-            SetMeleeDelay(m_meleeCooldown);
+            SetAttackDelay(m_meleeCooldown);
             if (m_meleeHitBox)
                 m_meleeHitBox.gameObject.SetActive(true);
         }
@@ -35,5 +42,30 @@ namespace Unit
             if (m_meleeHitBox)
                 m_meleeHitBox.gameObject.SetActive(false);
         }
+
+        public void DoRanged(Vector3 target)
+        {
+            if (!m_rangedObject || m_rangedObject.activeSelf) return;
+            if (!IsAttackReady) return;
+
+            SetAttackDelay(m_rangedCooldown);
+            var proj = m_rangedObject.GetComponent<Projectile>();
+            if (proj)
+                proj.target = target;
+
+            m_rangedObject.transform.position = transform.position;
+            m_rangedObject.SetActive(true);
+        }
+
+#if UNITY_EDITOR
+        private void OnDrawGizmosSelected()
+        {
+            if (!HasRangedAttack) return;
+
+            UnityEditor.Handles.color = Color.red;
+            UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, m_rangedRange.x);
+            UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, m_rangedRange.y);
+        }
+#endif
     }
 }

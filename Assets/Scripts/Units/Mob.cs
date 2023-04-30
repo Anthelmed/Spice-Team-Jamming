@@ -65,6 +65,8 @@ namespace Units
 
         private State m_state = State.Uninitialized;
 
+        public static readonly float COS_ATTACK = Mathf.Cos(15 * Mathf.Deg2Rad);
+
         private void OnDeath(float damage, Unit other)
         {
             m_data.NextState = State.Death;

@@ -8,6 +8,8 @@ namespace Units
     {
         public void Enter(Mob.Data data)
         {
+            if (data.mob.Visible && data.visuals) data.visuals.TriggerRangedAttack();
+            else data.attacks.DoRanged(data.perception.Target.transform.position);
         }
 
         public void Exit(Mob.Data data)
@@ -16,6 +18,14 @@ namespace Units
 
         public void Tick(Mob.Data data)
         {
+            if (!data.mob.Visible || !data.visuals || data.visuals.HasAnimationFinished())
+            {
+                data.NextState = Mob.State.CombatIdle;
+                return;
+            }
+
+            if (data.visuals.IsDamagingFrame() && data.perception.Target)
+                data.attacks.DoRanged(data.perception.Target.transform.position);
         }
     }
 }

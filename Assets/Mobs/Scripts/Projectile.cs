@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Units;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -15,8 +16,18 @@ public class Projectile : MonoBehaviour
     private float m_distance;
     private float m_startTime;
 
+    [SerializeField] private HitBox m_hitBox;
+
+    private void Start()
+    {
+        gameObject.SetActive(true);
+    }
+
     private void OnEnable()
     {
+        if (m_hitBox)
+            m_hitBox.enabled = false;
+
         m_startTime = Time.timeSinceLevelLoad;
         m_startPosition = transform.position;
 
@@ -36,11 +47,17 @@ public class Projectile : MonoBehaviour
         var time = Time.timeSinceLevelLoad - m_startTime;
         if (time > duration)
         {
-            gameObject.SetActive(false);
+            if (!m_hitBox || m_hitBox.enabled)
+                gameObject.SetActive(false);
+            else
+                m_hitBox.enabled = true;
+
             return;
         }
 
-        var x = m_distance * time / duration;
+        var ratio = time / duration;
+        var x = m_distance * ratio;
         transform.position = m_startPosition + m_direction * x + (-m_a * x * x + m_b * x) * Vector3.up;
+
     }
 }
