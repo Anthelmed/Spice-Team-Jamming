@@ -8,7 +8,11 @@ namespace Units
     {
         public void Enter(Mob.Data data)
         {
-            if (data.locomotion) data.locomotion.LookAtTarget = data.perception.Target.transform;
+            if (data.locomotion)
+            {
+                data.locomotion.StopImmediate();
+                data.locomotion.LookAtTarget = data.perception.Target.transform;
+            }
         }
 
         public void Exit(Mob.Data data)

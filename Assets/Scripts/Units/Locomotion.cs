@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -19,6 +20,12 @@ namespace Units
 
         private Vector3 m_lastPosition;
         private Vector3 m_lastVelocity;
+
+        public void StopImmediate()
+        {
+            m_lastVelocity = Vector3.zero;
+            m_lastPosition = transform.position;
+        }
 
         private Transform Transform => m_unit ? m_unit.transform : transform;
 
