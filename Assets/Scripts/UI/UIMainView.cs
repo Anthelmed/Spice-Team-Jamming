@@ -16,7 +16,7 @@ namespace SpiceTeamJamming.UI
 
 		private void Start()
 		{
-			UIRouter.GoToRoute(UIRouter.RouteType.Main);
+			//UIRouter.GoToRoute(UIRouter.RouteType.Main);
 		}
 
 		protected void OnEnable()
