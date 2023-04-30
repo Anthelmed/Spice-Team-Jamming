@@ -113,6 +113,12 @@ namespace Units
             onHit.AddListener(OnHit);
         }
 
+        public override void FixedTick()
+        {
+            base.FixedTick();
+            if (m_data.locomotion)
+                m_data.locomotion.FixedTick();
+        }
         public override void Tick()
         {
             base.Tick();

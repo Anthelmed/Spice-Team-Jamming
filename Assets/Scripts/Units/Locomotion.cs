@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Profiling;
 using UnityEngine.UIElements;
 
 namespace Units
@@ -42,7 +43,7 @@ namespace Units
 
         private Transform Transform => m_unit ? m_unit.transform : transform;
 
-        public void FixedUpdate()
+        public void FixedTick()
         {
             var trans = Transform;
 
@@ -57,7 +58,9 @@ namespace Units
             {
                 var toTarget = (m_targetPosition - trans.position).normalized;
                 targetVelocity = toTarget * m_speed;
+                Profiler.BeginSample("Intersections");
                 HandleIntersections(trans, toTarget);
+                Profiler.EndSample();
             }
 
             var lastMovement = trans.position - m_lastPosition;

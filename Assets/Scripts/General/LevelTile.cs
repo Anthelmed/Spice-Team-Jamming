@@ -38,6 +38,14 @@ public class LevelTile : MonoBehaviour
         m_updateTurn = UnityEngine.Random.Range(0, UPDATE_RATE);
     }
 
+    private void FixedUpdate()
+    {
+        for (int i = 0; i < Vegetation.Count; ++i) Vegetation[i].FixedTick();
+        for (int i = 0; i < Pawns.Count; ++i) Pawns[i].FixedTick();
+        for (int i = 0; i < Knights.Count; ++i) Knights[i].FixedTick();
+        for (int i = 0; i < Players.Count; ++i) Players[i].FixedTick();
+    }
+
     private void Update()
     {
         if ((Time.frameCount % UPDATE_RATE) != m_updateTurn) return;

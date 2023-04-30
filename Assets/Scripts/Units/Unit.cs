@@ -92,6 +92,8 @@ namespace Units
             onVisibilityChanged?.Invoke(visible);
         }
 
+        public virtual void FixedTick() { }
+
         public virtual void Tick()
         {
             if (doesntMove && m_currentTile) return;
