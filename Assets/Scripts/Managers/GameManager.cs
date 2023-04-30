@@ -237,14 +237,19 @@ public class GameManager : MonoBehaviour
     public void TransitionToMap()
     {
         if (currentGameState != GameState.level) return;
-        playerInstance.SetActive(false);
-
+        
+        CancelInvoke(nameof(DeactivatePlayer));
+        Invoke(nameof(DeactivatePlayer), 1f);
+        playerAnimator.SetTrigger("Teleport Out");
         LevelTilesManager.instance.SleepAllTiles();
 
         mapGraphics.SetActive(true); /// do this better
         TransitionToState(GameState.map);
     }
-
+    void DeactivatePlayer()
+    {
+        playerInstance.SetActive(false);
+    }
     void TryTransitionToLevel()
     {
         Debug.Log("transition 1");
