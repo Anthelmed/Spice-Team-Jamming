@@ -32,17 +32,17 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VatNormalTex:
-        m_Texture: {fileID: 2800000, guid: c87745e51a585114d9eaa2cc9bd767f5, type: 2}
+        m_Texture: {fileID: 2800000, guid: e6fbe3e21bda3c14f800d17c5d73f664, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VatPositionTex:
-        m_Texture: {fileID: 2800000, guid: 831e72ea2206d2d4c9e613072d42027d, type: 2}
+        m_Texture: {fileID: 2800000, guid: d9834521558057648b67f2a126bd695a, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _AnimationTimeOffset: 0
     - _VatAnimFps: 30
-    - _VatAnimLength: 1.3333334
+    - _VatAnimLength: 1.333333
     m_Colors: []
   m_BuildTextureStacks: []
