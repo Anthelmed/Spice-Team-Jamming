@@ -17,6 +17,15 @@ public class LevelTilesManager : MonoBehaviour
     [SerializeField] GameObject[] grassBiomePrefabs;
     [SerializeField] GameObject[] forestBiomePrefabs;
 
+    [Header("enemies")]
+    [SerializeField] EnemyPrefab[] enemies;
+
+    [Serializable]
+    public struct EnemyPrefab
+    {
+        public GameObject m_squadPrefab;
+        public int weight;
+    }
 
     public Vector2Int playerSpawnCoords;
 
