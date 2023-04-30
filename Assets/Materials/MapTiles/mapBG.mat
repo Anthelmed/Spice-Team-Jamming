@@ -20,12 +20,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
-  m_Shader: {fileID: -6465566751694194690, guid: 2753d56cee62e1e4c815b7d92a3a0328,
+  m_Name: mapBG
+  m_Shader: {fileID: -6465566751694194690, guid: 718355b4c48c47c4ca1e4981631cf7e5,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _OVERLAY_NOISE_MASK
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -39,7 +40,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 74e1bc1cbbbcf5142bca12e0ca7855d0, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7a26ec6b083cac643931ad5abce1fbc6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -62,11 +63,27 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _FireDamageTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _IceDamageTex:
+        m_Texture: {fileID: 2800000, guid: 2822b2c46b774d64cac6c68f7296bce6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise_Mask:
+        m_Texture: {fileID: 2800000, guid: 386d2358aa594075905d136e9aad5a54, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_Map:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -84,6 +101,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _renderTexture:
+        m_Texture: {fileID: 8400000, guid: adfbd4a2dbf631545820fe0cd88ab4e0, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -120,6 +141,10 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
+    - _Noise_Intensity: 0.284
+    - _Noise_Tile: 10
+    - _Normal_Strength: 0
+    - _OVERLAY_NOISE_MASK: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
@@ -132,15 +157,21 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
+    - _Vertex_Color: 0
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 0
+    - _damageTexTiling: 1
     m_Colors:
     - _BaseColor: {r: 0.028391568, g: 0.3584906, b: 0, a: 1}
     - _Color: {r: 0.028391568, g: 0.35849056, b: 0, a: 1}
     - _DiffuseColor: {r: 0.2261303, g: 0.24382722, b: 0.3018868, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FireDamageColor: {r: 2.781495, g: 0.1827135, b: 0, a: 1}
+    - _IceDamageColor: {r: 0.4471698, g: 0.9553679, b: 1, a: 0}
+    - _Lit_Color: {r: 0.3773585, g: 0.3510146, b: 0.2719829, a: 0}
+    - _Shadow_Color: {r: 0.16981131, g: 0.095158406, b: 0.095158406, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularColour: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
