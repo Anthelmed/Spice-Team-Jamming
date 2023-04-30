@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System;
+using _3C.Player;
 using UnityEngine.InputSystem;
 using DG.Tweening;
 
@@ -166,7 +167,7 @@ public class GameManager : MonoBehaviour
                                 
                                 if (AudioManager.instance != null)  AudioManager.instance.PlaySingleClip(mapClickSound, SFXCategory.ui, 0, 0);
                                 Debug.Log("here");
-                                tile.gameObject.transform.DOPunchScale(tile.gameObject.transform.localScale * 1.1f, 0.4f, 5, 0);
+                                //tile.gameObject.transform.DOPunchScale(tile.gameObject.transform.localScale * 1.1f, 0.4f, 5, 0);
                                 tile.gameObject.transform.DOPunchPosition((Vector3.up * 15), 0.4f, 1, 1, false).OnComplete(() =>
                                 {
                                     mapDestination = clickedTile.mapTileData.tileCoords;
@@ -263,6 +264,7 @@ public class GameManager : MonoBehaviour
         else
         {
             loadedPlayer.transform.position = spawnPos;
+            loadedPlayer.GetComponentInChildren<PlayerStateHandler>().transform.localPosition = Vector3.zero;
             Debug.Log("teleporting");
             if (!loadedPlayer.activeInHierarchy) loadedPlayer.SetActive(true);
 

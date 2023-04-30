@@ -109,7 +109,8 @@ public class GameTile : MonoBehaviour
     public void Highlight()
     {
         transform.DOKill();
-        transform.DOMove(startPos + Vector3.up * 7.5f, 0.4f).SetEase(Ease.OutBack);
+        transform.DOMoveY(startPos.y + 7.5f, 0.4f).SetEase(Ease.OutBack);
+        // transform.DOMove(startPos + Vector3.up * 7.5f, 0.4f).SetEase(Ease.OutBack);
         transform.DOScale(startScale * 1.25f, 0.4f).SetEase(Ease.OutBack);
         highlight.SetActive(true);
         // if (!_isObstacle)

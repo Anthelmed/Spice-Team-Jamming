@@ -21,13 +21,13 @@ namespace _3C.Player
         {
             m_StateHandler = _stateHandler;
             m_CurrentManaPoint = m_MaxManaPoint;
-            PlayerStaticEvents.s_PlayerManaChanged?.Invoke(m_CurrentManaPoint);
+            TriggerManaChange();
         }
         
         public void Update()
         {
             m_CurrentManaPoint += m_ReloadAmountPerSecond * Time.deltaTime;
-            PlayerStaticEvents.s_PlayerManaChanged?.Invoke(m_CurrentManaPoint);
+            TriggerManaChange();
             if (m_CurrentManaPoint > m_MaxManaPoint)
             {
                 m_CurrentManaPoint = m_MaxManaPoint;
@@ -39,7 +39,7 @@ namespace _3C.Player
             if (CheckIfPossible(_manaAmount))
             {
                 m_CurrentManaPoint -= _manaAmount;
-                PlayerStaticEvents.s_PlayerManaChanged?.Invoke(m_CurrentManaPoint);
+                TriggerManaChange();
                 return true;
             }
 
@@ -49,6 +49,11 @@ namespace _3C.Player
         public bool CheckIfPossible(float _manaAmount)
         {
             return m_CurrentManaPoint >= _manaAmount;
+        }
+
+        private void TriggerManaChange()
+        {
+            PlayerStaticEvents.s_PlayerManaChanged?.Invoke(m_CurrentManaPoint/m_MaxManaPoint);
         }
 
         public void TriggerOnCantConsumeMana()

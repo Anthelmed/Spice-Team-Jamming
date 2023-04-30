@@ -471,6 +471,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4162673794576891586, guid: eac1ae59bef618847b73c10b4d795403,
+        type: 3}
+      propertyPath: m_DashBehavior.m_PostDashDelay
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4636448721759052204, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
       propertyPath: m_owner
