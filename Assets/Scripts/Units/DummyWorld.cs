@@ -83,6 +83,33 @@ namespace Units
             return result;
         }
 
+        public List<Unit> QueryCircleEnemies(Vector3 center, float radius, Faction team)
+        {
+            m_queryResultNoAlloc.Clear();
+
+            QueryCircleEnemiesOfType(center, radius, Unit.Type.Vegetation, team, true);
+            QueryCircleEnemiesOfType(center, radius, Unit.Type.Pawn, team, true);
+            QueryCircleEnemiesOfType(center, radius, Unit.Type.Knight, team, true);
+            QueryCircleEnemiesOfType(center, radius, Unit.Type.Player, team, true);
+
+            return m_queryResultNoAlloc;
+        }
+
+        public List<Unit> QueryCircleEnemiesOfType(Vector3 center, float radius, Unit.Type type, Faction team, bool mergePrevious = false)
+        {
+            if (!mergePrevious)
+                m_queryResultNoAlloc.Clear();
+
+            var list = GetListForType(type);
+            for (int i = 0; i < list.Count; ++i)
+            {
+                if (list[i].Team == team) continue;
+                if (CircleCircleIntersect(center, radius, list[i].transform.position, list[i].Radius))
+                    m_queryResultNoAlloc.Add(list[i]);
+            }
+            return m_queryResultNoAlloc;
+        }
+
         public List<Unit> QueryCircleAll(Vector3 center, float radius)
         {
             m_queryResultNoAlloc.Clear();

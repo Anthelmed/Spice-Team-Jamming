@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Units
@@ -21,6 +22,8 @@ namespace Units
         [SerializeField][Min(0f)] private float m_radius = 1f;
         [SerializeField][Min(0f)] private float m_fanAngle = 30f;
 
+        private List<Unit> m_targetsHit = new List<Unit>(5);
+
         private void Reset()
         {
             OnValidate();
@@ -34,6 +37,33 @@ namespace Units
         private void Start()
         {
             gameObject.SetActive(false);
+        }
+
+        private void OnEnable()
+        {
+            m_targetsHit.Clear();
+        }
+
+        private void Update()
+        {
+            var world = DummyWorld.Instance;
+            if (!world) return;
+
+            List<Unit> newHits = null;
+
+            if (m_shape == Shape.Circle)
+                newHits = world.QueryCircleEnemies(transform.position, m_radius, m_owner.Team);
+
+            if (newHits == null) return;
+
+            for (int i = 0; i < newHits.Count; ++i)
+            {
+                if (!m_targetsHit.Contains(newHits[i]))
+                {
+                    m_targetsHit.Add(newHits[i]);
+                    newHits[i].TakeHit(damage, m_owner);
+                }
+            }
         }
 
 #if UNITY_EDITOR
