@@ -54,9 +54,9 @@ public class UIMapView : UIView
 	{
 		var tileData = tile.mapTileData;
 
-		elementsReferences.MapTileInfoText.text = @"Biome: " + tileData.biome +
-		                                          "Status: " + tileData.tileStatus +
-		                                          "Coordinates: " + tileData.tileCoords;
+		elementsReferences.MapTileInfoText.text = @"Biome: " + tileData.biome + "\n"
+		                                          + "Status: " + tileData.tileStatus + "\n"
+		                                           + "Coordinates: " + tileData.tileCoords;
 	}
 	
 	protected override void DisplaceElementsRandomly()

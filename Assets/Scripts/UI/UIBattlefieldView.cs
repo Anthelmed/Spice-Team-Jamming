@@ -61,13 +61,13 @@ namespace SpiceTeamJamming.UI
 		private void OnMapActionPerformed(InputAction.CallbackContext _)
 		{
 			if (UIRouter.CurrentRoute != Route) return;
-			
-			UIRouter.GoToRoute(UIRouter.RouteType.Map);
+
+			GoToMap();
 		}
 		
 		private void OnMapButtonPressed()
 		{
-			UIRouter.GoToRoute(UIRouter.RouteType.Map);
+			GoToMap();
 		}
 
 		private void OnPauseActionPerformed(InputAction.CallbackContext _)
@@ -90,6 +90,12 @@ namespace SpiceTeamJamming.UI
 		private void OnPlayerManaChanged(float value)
 		{
 			playerStatManaCustomRenderTexture.material.SetFloat(_percent, value);
+		}
+
+		private void GoToMap()
+		{
+			UIRouter.GoToRoute(UIRouter.RouteType.Map);
+			GameManager.instance.TransitionToMap();
 		}
 
 		protected override void DisplaceElementsRandomly()
