@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: IcePawn_Baking_Armature_Walk
+  m_Name: IcePawn_Baking_Armature_Hit.V2
   m_Shader: {fileID: 4800000, guid: 481a6342e075c7241bbaa4a3ed355f13, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -32,17 +32,17 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VatNormalTex:
-        m_Texture: {fileID: 2800000, guid: 4684dbcbedc259d4cbfb76176b05df56, type: 2}
+        m_Texture: {fileID: 2800000, guid: 3ce8e553a136b654caeade51f89a8bbb, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VatPositionTex:
-        m_Texture: {fileID: 2800000, guid: 3eb3d225bf015ba4fba1281bb44298a7, type: 2}
+        m_Texture: {fileID: 2800000, guid: 43dbd49eb16d94e4281dc21ae21f5f4f, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _AnimationTimeOffset: 0
     - _VatAnimFps: 30
-    - _VatAnimLength: 0.9583334
+    - _VatAnimLength: 2.9166667
     m_Colors: []
   m_BuildTextureStacks: []
