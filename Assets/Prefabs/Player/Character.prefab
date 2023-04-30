@@ -225,7 +225,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_PostDashDelay: 2
+    m_PostDashDelay: 0
     m_VFX: {fileID: 2717888372220823215}
   m_PlayerMeleeAttack:
     m_AttacksSettings:
