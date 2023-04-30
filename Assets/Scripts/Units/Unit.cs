@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -124,9 +125,14 @@ namespace Units
         protected virtual void Awake()
         {
             m_currentHealth = m_maxHealth;
-            onHealthChanged?.Invoke(m_currentHealth);
             m_currentTile = null;
         }
+
+        private void Start()
+        {
+            onHealthChanged?.Invoke(m_currentHealth);
+        }
+
         public float CurrentHealth => m_currentHealth;
         public float Radius => m_radius;
         
