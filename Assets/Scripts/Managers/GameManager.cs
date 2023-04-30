@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Camera mapCamera;
     [SerializeField] GameObject playerInstance;
     [SerializeField] GameObject playerCharacter;
+    [SerializeField] GameObject playerCam;
     [SerializeField] PlayerInput playerInput;
     [SerializeField] Vector2Int mapDestination;
     [SerializeField] GameObject mapGraphics;
@@ -55,8 +56,9 @@ public class GameManager : MonoBehaviour
 
         }
 
-        HideAllPanels();
-        startScreenVisibilityEvent(true);
+      //  if (playerCam != null) playerCam.SetActive(false);
+    //    HideAllPanels();
+       // startScreenVisibilityEvent(true);
         playerAnimator = playerInstance.GetComponentInChildren<Animator>(true);
     }
 
@@ -94,7 +96,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.pause:
                 {
-                    pauseScreenVisibilityEvent(false);
+                 //   pauseScreenVisibilityEvent(false);
                     UIRouter.GoToRoute(UIRouter.RouteType.Battlefield);
                 }
                 break;
@@ -109,19 +111,22 @@ public class GameManager : MonoBehaviour
             case GameState.title:
                 break;
             case GameState.map:
+
                 {
                     mapCamera.gameObject.SetActive(true);
-                   
+                 //   if (playerCam != null) playerCam.SetActive(false);
+
                 }
                 break;
             case GameState.level:
                 {
                     mapCamera.gameObject.SetActive(false);
+                 //   if (playerCam != null) playerCam.SetActive(false);
                 }
                 break;
             case GameState.pause:
                 {
-                    pauseScreenVisibilityEvent(true);
+                  //  pauseScreenVisibilityEvent(true);
                     UIRouter.GoToRoute(UIRouter.RouteType.Pause);
                 }
                 break;
@@ -221,7 +226,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator LoadLevelScene(String sceneToLoad)
     {
-        loadingScreenVisibilityEvent(true);
+      //  loadingScreenVisibilityEvent(true);
          AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
 
         while (!asyncLoad.isDone)
@@ -261,7 +266,8 @@ public class GameManager : MonoBehaviour
     }
     void DeactivatePlayer()
     {
-        playerInstance.SetActive(false);
+      //  playerInstance.SetActive(false);
+        playerCharacter.SetActive(false);
     }
     void TryTransitionToLevel()
     {
@@ -286,7 +292,7 @@ public class GameManager : MonoBehaviour
         mapGraphics.SetActive(false); /// do this better
 
         TransitionToState(GameState.level);
-        loadingScreenVisibilityEvent(false);
+      //  loadingScreenVisibilityEvent(false);
         UIRouter.GoToRoute(UIRouter.RouteType.Battlefield);
 
     }
@@ -295,9 +301,9 @@ public class GameManager : MonoBehaviour
     [ContextMenu(" hide all panels")]
     public void HideAllPanels()
     {
-        startScreenVisibilityEvent(false);
-        pauseScreenVisibilityEvent(false);
-        loadingScreenVisibilityEvent(false);
+      //  startScreenVisibilityEvent(false);
+      //  pauseScreenVisibilityEvent(false);
+      //  loadingScreenVisibilityEvent(false);
     }
 
     public void OnTogglePause(InputAction.CallbackContext _context)
