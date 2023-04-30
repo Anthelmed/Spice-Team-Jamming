@@ -70,11 +70,15 @@ namespace Units
         private void OnDeath(float damage, Unit other)
         {
             m_data.NextState = State.Death;
+            // Change immediately
+            UpdateTransition();
         }
 
         private void OnHit(float damage, Unit other)
         {
             m_data.NextState = State.Hit;
+            // Change immediately
+            UpdateTransition();
         }
 
         private void OnValidate()

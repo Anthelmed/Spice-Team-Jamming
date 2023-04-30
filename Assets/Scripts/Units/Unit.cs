@@ -53,7 +53,7 @@ namespace Units
 
         public void TakeHit(float damage, Unit other)
         {
-            if (m_currentHealth < 0f) return;
+            if (m_currentHealth <= 0f) return;
 
             if (Time.timeSinceLevelLoad - m_lastHit < m_invencivilityAfterHit) return;
 

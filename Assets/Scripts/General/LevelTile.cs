@@ -228,14 +228,14 @@ public class LevelTile : MonoBehaviour
         if (!mergePrevious)
             m_queryResultNoAlloc.Clear();
 
-        var cos = Mathf.Cos(angle);
+        var halfAngle = angle * 0.5f;
         dir.Normalize();
 
         var list = GetListForType(type);
         for (int i = 0; i < list.Count; ++i)
         {
             if (list[i].Team == team) continue;
-            if (CircleFanIntersect(list[i].transform.position, list[i].Radius, center, radius, dir, cos))
+            if (CircleFanIntersect(list[i].transform.position, list[i].Radius, center, radius, dir, halfAngle))
                 m_queryResultNoAlloc.Add(list[i]);
         }
         return m_queryResultNoAlloc;
@@ -275,16 +275,13 @@ public class LevelTile : MonoBehaviour
         return ((center1 - center2).sqrMagnitude < maxDistSq);
     }
 
-    private bool CircleFanIntersect(Vector3 center1, float radius1, Vector3 center2, float radius2, Vector3 dir2, float cos2)
+    private bool CircleFanIntersect(Vector3 center1, float radius1, Vector3 center2, float radius2, Vector3 dir2, float halfAngle)
     {
         // If a fan intersects, a circle will always intersect as well
         if (!CircleCircleIntersect(center1, radius1, center2, radius2))
             return false;
 
-        var movedCenter = center2 - dir2 * radius1;
-        var toCenter = center1 - movedCenter;
-        toCenter.Normalize();
-        if (Vector3.Dot(toCenter, dir2) > cos2)
+        if (Vector3.Angle(center1 - center2, dir2) < (halfAngle))
             return true;
 
         return false;
