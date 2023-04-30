@@ -52,6 +52,11 @@ public class GameTile : MonoBehaviour
 
     private bool isHighlighted = false;
 
+    public void SetTileState(WorldTileStatus status)
+    {
+        //DO IT
+        
+    }
     public void Highlight()
     {
         transform.DOKill();
