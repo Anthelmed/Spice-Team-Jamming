@@ -14,8 +14,10 @@ namespace SpiceTeamJamming.UI
 		protected override UIRouter.RouteType Route => UIRouter.RouteType.Settings;
 		protected override Button BackButton => elementsReferences.ActionHelperBack;
 
-		private void Start()
+		protected override void Start()
 		{
+			base.Start();
+			
 			elementsReferences.SettingsMenuButtonControls.SetEnabled(false);
 			elementsReferences.SettingsMenuButtonAudio.SetEnabled(false);
 			elementsReferences.SettingsMenuButtonGraphics.SetEnabled(false);

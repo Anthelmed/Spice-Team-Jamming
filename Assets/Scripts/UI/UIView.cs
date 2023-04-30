@@ -10,6 +10,8 @@ namespace SpiceTeamJamming.UI
 {
 	public abstract class UIView : MonoBehaviour
 	{
+		[SerializeField] private bool loadViewAtStart = false;
+		
 		private readonly Color _baseColorButton = new (0.5254902f, 0.8588235f, 0.6470588f);
 		private readonly Color _actionColorButton = new (0.5254902f, 0.7607843f, 0.572549f);
 		
@@ -41,6 +43,12 @@ namespace SpiceTeamJamming.UI
 			_random = new Random((uint)GetInstanceID());
 			
 			UIRouter.ConfigureRoute(Route, this);
+		}
+		
+		protected virtual void Start()
+		{
+			if (loadViewAtStart)
+				UIRouter.GoToRoute(Route);
 		}
 
 		private void OnDestroy()

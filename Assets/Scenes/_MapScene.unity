@@ -2180,17 +2180,17 @@ PrefabInstance:
     - target: {fileID: 2358580041383519547, guid: b01c10b5eef61e0469f8222510eaaf13,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.95036966
+      value: 0.9503697
       objectReference: {fileID: 0}
     - target: {fileID: 2358580041383519547, guid: b01c10b5eef61e0469f8222510eaaf13,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000040055077
+      value: 3.3448713e-15
       objectReference: {fileID: 0}
     - target: {fileID: 2358580041383519547, guid: b01c10b5eef61e0469f8222510eaaf13,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000131128495
+      value: -1.2032717e-15
       objectReference: {fileID: 0}
     - target: {fileID: 2434436965589393334, guid: b01c10b5eef61e0469f8222510eaaf13,
         type: 3}
@@ -2270,17 +2270,17 @@ PrefabInstance:
     - target: {fileID: 7567605092417596782, guid: b01c10b5eef61e0469f8222510eaaf13,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.95036966
+      value: 0.9503697
       objectReference: {fileID: 0}
     - target: {fileID: 7567605092417596782, guid: b01c10b5eef61e0469f8222510eaaf13,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000040055077
+      value: 3.3448713e-15
       objectReference: {fileID: 0}
     - target: {fileID: 7567605092417596782, guid: b01c10b5eef61e0469f8222510eaaf13,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000131128495
+      value: -1.2032717e-15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2305,6 +2305,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426034289017792417, guid: a168bf3bfc28f5b4fab98ab8bbdb8155,
+        type: 3}
+      propertyPath: loadViewAtStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5437604614254549841, guid: a168bf3bfc28f5b4fab98ab8bbdb8155,
         type: 3}
