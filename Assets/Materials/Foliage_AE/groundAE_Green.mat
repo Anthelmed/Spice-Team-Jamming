@@ -158,9 +158,9 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FireDamageColor: {r: 31.626797, g: 6.138359, b: 0, a: 0}
     - _IceDamageColor: {r: 3.9958944, g: 8.574187, b: 8.077461, a: 0}
-    - _Lit_Color: {r: 0.4056604, g: 0.37312666, b: 0.33103418, a: 1}
+    - _Lit_Color: {r: 0.32577822, g: 0.397, b: 0.304102, a: 1}
     - _Rim_Color: {r: 1, g: 1, b: 1, a: 0.41960785}
-    - _Shadow_Color: {r: 0.43137255, g: 0.35481492, b: 0.30588236, a: 1}
+    - _Shadow_Color: {r: 0.3254902, g: 0.39607847, b: 0.30588236, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &5041493177143135333
