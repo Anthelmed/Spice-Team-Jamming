@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using _3C.Player;
 using DG.Tweening;
+using SpiceTeamJamming.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -93,6 +94,7 @@ public class GameManager : MonoBehaviour
             case GameState.pause:
                 {
                     pauseScreenVisibilityEvent(false);
+                    UIRouter.GoToRoute(UIRouter.RouteType.Battlefield);
                 }
                 break;
             default:
@@ -119,7 +121,7 @@ public class GameManager : MonoBehaviour
             case GameState.pause:
                 {
                     pauseScreenVisibilityEvent(true);
-                    //switch input map
+                    UIRouter.GoToRoute(UIRouter.RouteType.Pause);
                 }
                 break;
             default:
