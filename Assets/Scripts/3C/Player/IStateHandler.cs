@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using _3C.Player.Weapons;
 using DefaultNamespace.Audio;
 using UnityEngine;
 

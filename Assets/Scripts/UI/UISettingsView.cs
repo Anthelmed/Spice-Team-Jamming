@@ -1,6 +1,5 @@
 ﻿using UIToolkitAutoReferences;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 namespace SpiceTeamJamming.UI

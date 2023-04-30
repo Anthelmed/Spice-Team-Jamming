@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UIElements;
 
 namespace Units
 {
@@ -130,10 +127,11 @@ namespace Units
             onHealthChanged?.Invoke(m_currentHealth);
             m_currentTile = null;
         }
-
-#if UNITY_EDITOR
         public float CurrentHealth => m_currentHealth;
         public float Radius => m_radius;
+        
+#if UNITY_EDITOR
+
 
         [Header("Debug")]
         [SerializeField] protected Color m_debugColor = Color.green;

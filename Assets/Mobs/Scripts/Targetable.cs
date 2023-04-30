@@ -1,12 +1,8 @@
+using System;
+using System.Collections.Generic;
 using DefaultNamespace.HealthSystem.Damageable;
 using DefaultNamespace.HealthSystem.Damager;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Mail;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering.UI;
 using UnityEngine.Serialization;
 
 [SelectionBase]

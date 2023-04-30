@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class GroundChunkFX : MonoBehaviour
 {
     [SerializeField] GameObject RTCam;

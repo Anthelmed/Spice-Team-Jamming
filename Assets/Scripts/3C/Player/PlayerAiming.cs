@@ -1,9 +1,7 @@
-﻿using System;
-using DefaultNamespace;
+﻿using DefaultNamespace;
 using Runtime.Utilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
 
 namespace _3C.Player
 {

@@ -1,10 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections.Generic;
-using System;
 using Units;
-using static UnityEditor.PlayerSettings;
-using static Targetable;
-using UnityEngine.UIElements;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class LevelTilesManager : MonoBehaviour
 {
@@ -81,7 +79,7 @@ public class LevelTilesManager : MonoBehaviour
         gridTiles.Clear();
         foreach (Transform child in transform)
         {
-            GameObject.DestroyImmediate(child.gameObject);
+            DestroyImmediate(child.gameObject);
         }
 
         // Prepare for spawning enemies
@@ -103,7 +101,7 @@ public class LevelTilesManager : MonoBehaviour
                 GameObject spawnedObject = Instantiate(prefabToSpawn, position, Quaternion.identity);
                 spawnedObject.gameObject.name = "Tile " + xIndex + " _ " + yIndex;
                 spawnedObject.transform.SetParent(transform);
-                spawnedObject.transform.eulerAngles = new Vector3(spawnedObject.transform.localEulerAngles.x, UnityEngine.Random.Range(0, 4) * 90f, spawnedObject.transform.localEulerAngles.z);
+                spawnedObject.transform.eulerAngles = new Vector3(spawnedObject.transform.localEulerAngles.x, Random.Range(0, 4) * 90f, spawnedObject.transform.localEulerAngles.z);
                 var tile = spawnedObject.GetComponent<LevelTile>();
                 tile.MapTile = mapTile;
 
@@ -115,7 +113,7 @@ public class LevelTilesManager : MonoBehaviour
 
                 if (mapTile.Biome != Biome.Water)
                 {
-                    var enemyChoice = UnityEngine.Random.Range(0, maxWeight);
+                    var enemyChoice = Random.Range(0, maxWeight);
                     for (int i = 0; i < enemies.Length; ++i)
                     {
                         if (enemyChoice < enemies[i].weight)
@@ -146,7 +144,7 @@ public class LevelTilesManager : MonoBehaviour
                 {
                     if (grassBiomePrefabs.Length > 0)
                     {
-                        var randomIndex = UnityEngine.Random.Range(0, grassBiomePrefabs.Length);
+                        var randomIndex = Random.Range(0, grassBiomePrefabs.Length);
                         prefab = grassBiomePrefabs[randomIndex];
                     }
                     else prefab = defaultTilePrefab;
@@ -166,7 +164,7 @@ public class LevelTilesManager : MonoBehaviour
                 {
                         if (forestBiomePrefabs.Length > 0)
                         {
-                            var randomIndex = UnityEngine.Random.Range(0, forestBiomePrefabs.Length);
+                            var randomIndex = Random.Range(0, forestBiomePrefabs.Length);
                             prefab = forestBiomePrefabs[randomIndex];
                         }
                       else prefab = defaultTilePrefab;

@@ -1,8 +1,6 @@
+using System.Collections;
 using DG.Tweening;
 using NaughtyAttributes;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
 using UnityEngine;
 
 namespace Units

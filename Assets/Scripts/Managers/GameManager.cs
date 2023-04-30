@@ -1,10 +1,10 @@
-using UnityEngine;
-using System.Collections;
-using UnityEngine.SceneManagement;
 using System;
+using System.Collections;
 using _3C.Player;
-using UnityEngine.InputSystem;
 using DG.Tweening;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {

@@ -1,5 +1,4 @@
-﻿using System;
-using UIToolkitAutoReferences;
+﻿using UIToolkitAutoReferences;
 using UnityEngine;
 using UnityEngine.UIElements;
 

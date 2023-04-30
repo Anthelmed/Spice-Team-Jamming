@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
-using DG.Tweening;
 
 public class TreeStateExample : MonoBehaviour
 {
