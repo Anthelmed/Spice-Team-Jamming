@@ -21,6 +21,8 @@ namespace Units
         {
             if (!m_unit) return;
 
+            if (Target.Team == m_unit.Team || Target.CurrentHealth == 0) return;
+
             if (QueryTargetEnabled) QueryTarget();
         }
 

@@ -8,7 +8,7 @@ namespace Units
     {
         public void Enter(Mob.Data data)
         {
-            if (data.locomotion)
+            if (data.locomotion && data.perception.Target)
             {
                 data.locomotion.StopImmediate();
                 data.locomotion.LookAtTarget = data.perception.Target.transform;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Targetable;
+using static UnityEditor.PlayerSettings;
 
 namespace Units
 {
@@ -110,6 +111,37 @@ namespace Units
             return m_queryResultNoAlloc;
         }
 
+        public List<Unit> QueryFanEnemies(Vector3 center, float radius, Vector3 dir, float angle, Faction team)
+        {
+            m_queryResultNoAlloc.Clear();
+
+            QueryFanEnemiesOfType(center, radius, dir, angle, Unit.Type.Vegetation, team, true);
+            QueryFanEnemiesOfType(center, radius, dir, angle, Unit.Type.Pawn, team, true);
+            QueryFanEnemiesOfType(center, radius, dir, angle, Unit.Type.Knight, team, true);
+            QueryFanEnemiesOfType(center, radius, dir, angle, Unit.Type.Player, team, true);
+
+            return m_queryResultNoAlloc;
+        }
+
+        public List<Unit> QueryFanEnemiesOfType(Vector3 center, float radius, Vector3 dir, float angle, 
+            Unit.Type type, Faction team, bool mergePrevious = false)
+        {
+            if (!mergePrevious)
+                m_queryResultNoAlloc.Clear();
+
+            var cos = Mathf.Cos(angle);
+            dir.Normalize();
+
+            var list = GetListForType(type);
+            for (int i = 0; i < list.Count; ++i)
+            {
+                if (list[i].Team == team) continue;
+                if (CircleFanIntersect(list[i].transform.position, list[i].Radius, center, radius, dir, cos))
+                    m_queryResultNoAlloc.Add(list[i]);
+            }
+            return m_queryResultNoAlloc;
+        }
+
         public List<Unit> QueryCircleAll(Vector3 center, float radius)
         {
             m_queryResultNoAlloc.Clear();
@@ -141,6 +173,21 @@ namespace Units
             var maxDistSq = radius1 + radius2;
             maxDistSq *= maxDistSq;
             return ((center1 - center2).sqrMagnitude < maxDistSq);
+        }
+
+        private bool CircleFanIntersect(Vector3 center1, float radius1, Vector3 center2, float radius2, Vector3 dir2, float cos2)
+        {
+            // If a fan intersects, a circle will always intersect as well
+            if (!CircleCircleIntersect(center1, radius1, center2, radius2))
+                return false;
+
+            var movedCenter = center2 - dir2 * radius1;
+            var toCenter = center1 - movedCenter;
+            toCenter.Normalize();
+            if (Vector3.Dot(toCenter, dir2) > cos2)
+                return true;
+
+            return false;
         }
 
         private void Awake()

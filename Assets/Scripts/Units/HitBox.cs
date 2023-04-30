@@ -53,6 +53,8 @@ namespace Units
 
             if (m_shape == Shape.Circle)
                 newHits = world.QueryCircleEnemies(transform.position, m_radius, m_owner.Team);
+            else if (m_shape == Shape.Fan)
+                newHits = world.QueryFanEnemies(transform.position, m_radius, transform.forward, m_fanAngle, m_owner.Team);
 
             if (newHits == null) return;
 

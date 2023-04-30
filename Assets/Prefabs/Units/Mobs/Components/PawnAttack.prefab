@@ -46,9 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_owner: {fileID: 0}
   damage: 1
-  m_shape: 0
+  m_shape: 1
   m_radius: 0.75
-  m_fanAngle: 59
+  m_fanAngle: 96.6
 --- !u!1 &7934410689574554664
 GameObject:
   m_ObjectHideFlags: 0
