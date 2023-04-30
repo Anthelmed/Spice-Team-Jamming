@@ -13,8 +13,9 @@ public class LevelTile : MonoBehaviour
     public Transform teleportPoint;
     public bool hasPlayer;
     public bool tileActivated;
-    WorldTileStatus status;
+    WorldTileStatus status = WorldTileStatus.neutral;
     public Vector2Int gridLocation;
+    public GameTile MapTile { get; set; }
     [SerializeField] RenderTexture groundFXPersistantRT;
     [SerializeField] GameObject RTCam;
     [SerializeField] GameObject environmentArt;
@@ -32,6 +33,37 @@ public class LevelTile : MonoBehaviour
     {
         if (LevelTilesManager.instance != null) worldTilesManager = LevelTilesManager.instance;
 
+    }
+
+    private void Update()
+    {
+        int fire = 0;
+        int ice = 0;
+        int total = 0;
+
+        for (int i = 0; i < Vegetation.Count; ++i)
+        {
+            if (Vegetation[i].Team == Faction.Fire)
+                ++fire;
+            if (Vegetation[i].Team == Faction.Ice)
+                ++ice;
+            ++total;
+        }
+
+        var newStatus = WorldTileStatus.neutral;
+        var threshold = total / 2;
+        if (fire > threshold)
+            newStatus = WorldTileStatus.burnt;
+        else if (ice > threshold)
+            newStatus = WorldTileStatus.frozen;
+        else if (fire + ice > threshold)
+            newStatus = WorldTileStatus.contested;
+
+        if (newStatus != status)
+        {
+            status = newStatus;
+            Debug.Log($"{name} changed to {status}");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
