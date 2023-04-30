@@ -39,6 +39,7 @@ namespace Units
         public UnityEvent onImmuneHit;
         public UnityEvent<float, Unit> onHit;
         public UnityEvent<float> onHeal;
+        public UnityEvent<float> onHealthChanged;
         public UnityEvent<float, Unit> onDie;
         public UnityEvent<bool> onVisibilityChanged;
 
@@ -66,6 +67,8 @@ namespace Units
 
             m_lastHit = Time.timeSinceLevelLoad;
             m_currentHealth = Mathf.Max(0, m_currentHealth - damage);
+            onHealthChanged?.Invoke(m_currentHealth);
+
 
             if (m_currentHealth == 0)
             {
@@ -81,6 +84,7 @@ namespace Units
             var wasDead = m_currentHealth == 0;
 
             m_currentHealth = Mathf.Min(m_maxHealth, m_currentHealth + amount);
+            onHealthChanged?.Invoke(m_currentHealth);
             onHeal?.Invoke(amount);
 
             if (wasDead)
@@ -118,6 +122,7 @@ namespace Units
         protected virtual void Awake()
         {
             m_currentHealth = m_maxHealth;
+            onHealthChanged?.Invoke(m_currentHealth);
             m_currentTile = null;
         }
 

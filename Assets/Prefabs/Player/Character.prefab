@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7279425899133959930}
   - component: {fileID: 1077894710202307896}
   - component: {fileID: 6087022061473861407}
+  - component: {fileID: 7356071481000661705}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -613,11 +614,22 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_BaseDamage: 5
+    m_BaseDamage: 3
+    m_ChargedOptimalDamage: 15
+    m_ChargedDamage: 10
     m_ManaCost: 20
+    m_ChargedManaCost: 50
+    m_DelayBeforeBuild: 0.1
+    m_BuildUpDelay: 0.9
+    m_PostOptimalTriggerPhaseDelay: 0.1
+    m_NormalAttackIfMissedChargedOne: 1
     m_RangeAttackPrefab: {fileID: 2482928752937964366, guid: 0642d15ad83228342a7d363af01d6b1b,
       type: 3}
+    m_ChargedRangeAttackPrefab: {fileID: 2482928752937964366, guid: 0642d15ad83228342a7d363af01d6b1b,
+      type: 3}
+    m_DoubleChargedWeaponScale: 1
     m_VFXShootVFX: {fileID: 7009484212727554566}
+    m_ChargedBuildUpVFX: {fileID: 7009484212727554566}
     m_Animator: {fileID: 0}
     m_AimingWorldUI: {fileID: 3804535594222755562}
   m_Sounds: {fileID: 8188397984285573184}
@@ -663,6 +675,21 @@ MonoBehaviour:
   onHeal:
     m_PersistentCalls:
       m_Calls: []
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7356071481000661705}
+        m_TargetAssemblyTypeName: _3C.Player.PlayerHealthReactor, Assembly-CSharp
+        m_MethodName: OnHealthChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDie:
     m_PersistentCalls:
       m_Calls: []
@@ -671,6 +698,18 @@ MonoBehaviour:
       m_Calls: []
   m_currentTile: {fileID: 0}
   m_debugColor: {r: 0, g: 1, b: 0, a: 1}
+--- !u!114 &7356071481000661705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5761272857374477472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00d433cbbfe468b82f4c0c5f2e2764e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &358791740936460752
 PrefabInstance:
   m_ObjectHideFlags: 0

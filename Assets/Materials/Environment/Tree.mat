@@ -144,7 +144,7 @@ Material:
     - _SrcBlendAlpha: 1
     - _Surface: 0
     - _Tree_State: 1
-    - _TrunkState: -0.99000335
+    - _TrunkState: 0
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 1

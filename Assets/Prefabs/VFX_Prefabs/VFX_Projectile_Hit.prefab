@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.5529412}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.44705883}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9739,7 +9739,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b0b048d813ec7ae4489adbd5b120a209, type: 2}
+  - {fileID: 2100000, guid: e6373fa730e2fd741ac5448e86daff73, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19620,7 +19620,7 @@ Transform:
   - {fileID: 910263797290590509}
   - {fileID: 5363434093855370891}
   m_Father: {fileID: 0}
-  m_RootOrder: 36
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &4201617088981712584
 ParticleSystem:
@@ -29310,7 +29310,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b0b048d813ec7ae4489adbd5b120a209, type: 2}
+  - {fileID: 2100000, guid: e6373fa730e2fd741ac5448e86daff73, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -29378,7 +29378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3191218934556749304
 Transform:
   m_ObjectHideFlags: 0
@@ -29702,7 +29702,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.21960784}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -29766,7 +29766,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 1.7
       minScalar: 0.03
       maxCurve:
         serializedVersion: 2
@@ -33356,7 +33356,7 @@ ParticleSystem:
       properties: 0
       emitProbability: 1
   LightsModule:
-    enabled: 1
+    enabled: 0
     ratio: 1
     light: {fileID: 4416957943998488944}
     randomDistribution: 0

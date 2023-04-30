@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using Units;
 
 public class GameTile : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class GameTile : MonoBehaviour
 
     Vector3 startPos;
     Vector3 startScale;
+    public TreeVisuals[] treeVisuals;
 
     public MapTileData mapTileData = new MapTileData();
 
@@ -47,15 +49,62 @@ public class GameTile : MonoBehaviour
         get => _isSpawnArea;
         set => _isSpawnArea = value;
     }
-
+    public Transform contestedIndicator;
     // public Transform SpawnPoint => spawnPoint;
 
     private bool isHighlighted = false;
 
     public void SetTileState(WorldTileStatus status)
     {
-        //DO IT
-        
+       
+        foreach (var tree in treeVisuals)
+        {
+            switch (status)
+            {
+                case WorldTileStatus.neutral:
+                {
+                    if(mapTileData.tileStatus == WorldTileStatus.contested)
+                    {
+                        contestedIndicator.DOKill();
+                        contestedIndicator.DOScale(Vector3.zero, 0.4f).SetEase(Ease.InBack).OnComplete(() => contestedIndicator.gameObject.SetActive(false));
+                    }
+                    tree.SetNatureState();
+                    break;
+                }
+                case WorldTileStatus.contested:
+                {
+                    contestedIndicator.gameObject.SetActive(true);
+                    contestedIndicator.DOKill();
+                    contestedIndicator.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack);
+                    tree.SetNatureState();
+                    break;
+                }
+                case WorldTileStatus.frozen:
+                {
+                    if(mapTileData.tileStatus == WorldTileStatus.contested)
+                    {
+                        contestedIndicator.DOKill();
+                        contestedIndicator.DOScale(Vector3.zero, 0.4f).SetEase(Ease.InBack).OnComplete(() => contestedIndicator.gameObject.SetActive(false));
+                    }
+                    tree.SetFrozenState();
+                    break;
+                }
+                case WorldTileStatus.burnt:
+                {
+                    if(mapTileData.tileStatus == WorldTileStatus.contested)
+                    {
+                        contestedIndicator.DOKill();
+                        contestedIndicator.DOScale(Vector3.zero, 0.4f).SetEase(Ease.InBack).OnComplete(() => contestedIndicator.gameObject.SetActive(false));
+                    }
+                    tree.SetBurntState();
+                    break;
+                }
+                default:
+                break;
+            }
+        }
+         mapTileData.tileStatus = status;
+
     }
     public void Highlight()
     {
@@ -84,12 +133,20 @@ public class GameTile : MonoBehaviour
         mapTileData.tileStatus = WorldTileStatus.neutral;
         startPos = transform.position;
         startScale = transform.localScale;
+        if (contestedIndicator != null)
+        {
+            contestedIndicator.DOKill();
+            contestedIndicator.localScale = Vector3.zero;
+            contestedIndicator.gameObject.SetActive(false);
+
+            foreach (var tree in treeVisuals)
+            {
+                tree.SetNatureState(true);
+            }
+        }
+
     }
 
-    internal void SetTileStatus(WorldTileStatus status)
-    {
-       mapTileData.tileStatus = status;
-    }
 
     // private void OnDrawGizmos()
     // {

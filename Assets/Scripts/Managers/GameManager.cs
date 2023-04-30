@@ -125,7 +125,6 @@ public class GameManager : MonoBehaviour
 
     GameTile clickedTile;
     GameTile cachedHoverTile;
-    Vector3 cachedHoverTilePos;
     bool wigglin;
      
 
