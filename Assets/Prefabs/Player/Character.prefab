@@ -808,6 +808,18 @@ ParticleSystem:
     type: 3}
   m_PrefabInstance: {fileID: 358791740936460752}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &5872517704401715528 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6162596179391682712, guid: 8abde405a98efe34181cf83be9595d1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 358791740936460752}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6449227205628453911 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6735958798287535559, guid: 8abde405a98efe34181cf83be9595d1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 358791740936460752}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1723666192402713506
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -889,7 +901,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4981292854976103821, guid: 0db9a9cfbb106f341b3dd43db3501af9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4587368844943527721}
   m_SourcePrefab: {fileID: 100100000, guid: 0db9a9cfbb106f341b3dd43db3501af9, type: 3}
 --- !u!4 &991543056936350094 stripped
 Transform:
@@ -897,6 +913,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1723666192402713506}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5965767782267702831 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4981292854976103821, guid: 0db9a9cfbb106f341b3dd43db3501af9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1723666192402713506}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4587368844943527721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5965767782267702831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77a3bd5ce106651458effdebf9245d25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TeleportInVFX: {fileID: 6449227205628453911}
+  m_TeleportOutVFX: {fileID: 5872517704401715528}
 --- !u!1001 &6050829432578553685
 PrefabInstance:
   m_ObjectHideFlags: 0
