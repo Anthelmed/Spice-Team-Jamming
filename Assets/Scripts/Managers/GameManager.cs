@@ -68,7 +68,9 @@ public class GameManager : MonoBehaviour
     }
     public void StartGame()
     {
-            HideAllPanels();
+        playerInput.SwitchCurrentActionMap("Map");
+        print("current action map" + playerInput.currentActionMap);
+        HideAllPanels();
             TransitionToState(GameState.map);
     }
     
