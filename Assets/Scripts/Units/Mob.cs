@@ -19,6 +19,8 @@ namespace Units
             public MobVisuals visuals;
             public MobAttacks attacks;
 
+            public int framesLeft;
+
             public State NextState { get; set; }
         }
 

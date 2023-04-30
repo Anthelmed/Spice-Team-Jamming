@@ -9,6 +9,7 @@ namespace Units
     {
         public void Enter(Mob.Data data)
         {
+            data.framesLeft = 5;
             if (data.mob.Visible && data.visuals) data.visuals.TriggerAttack();
             else data.attacks.StartMelee();
         }
@@ -20,9 +21,12 @@ namespace Units
 
         public void Tick(Mob.Data data)
         {
+            data.framesLeft--;
             if (!data.mob.Visible || !data.visuals || data.visuals.HasAnimationFinished())
             {
-                data.NextState = Mob.State.CombatIdle;
+                if (data.framesLeft <= 0)
+                    data.NextState = Mob.State.CombatIdle;
+
                 return;
             }
 
