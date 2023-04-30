@@ -288,6 +288,100 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2293917989382269931}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3244373337131070058
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7202600502526788155}
+    m_Modifications:
+    - target: {fileID: 2469413545756743270, guid: 17e59f79b2a4f6e46a46492a1c69d6a6,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469413545756743270, guid: 17e59f79b2a4f6e46a46492a1c69d6a6,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469413545756743270, guid: 17e59f79b2a4f6e46a46492a1c69d6a6,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469413545756743270, guid: 17e59f79b2a4f6e46a46492a1c69d6a6,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469413545756743270, guid: 17e59f79b2a4f6e46a46492a1c69d6a6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469413545756743270, guid: 17e59f79b2a4f6e46a46492a1c69d6a6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469413545756743270, guid: 17e59f79b2a4f6e46a46492a1c69d6a6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469413545756743270, guid: 17e59f79b2a4f6e46a46492a1c69d6a6,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9494816
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469413545756743270, guid: 17e59f79b2a4f6e46a46492a1c69d6a6,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469413545756743270, guid: 17e59f79b2a4f6e46a46492a1c69d6a6,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.31382284
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469413545756743270, guid: 17e59f79b2a4f6e46a46492a1c69d6a6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469413545756743270, guid: 17e59f79b2a4f6e46a46492a1c69d6a6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469413545756743270, guid: 17e59f79b2a4f6e46a46492a1c69d6a6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 36.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469413545756743270, guid: 17e59f79b2a4f6e46a46492a1c69d6a6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4402107606406794835, guid: 17e59f79b2a4f6e46a46492a1c69d6a6,
+        type: 3}
+      propertyPath: m_Name
+      value: Contested Indicator
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 17e59f79b2a4f6e46a46492a1c69d6a6, type: 3}
+--- !u!4 &1099805013102584844 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2469413545756743270, guid: 17e59f79b2a4f6e46a46492a1c69d6a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 3244373337131070058}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6631345570523429493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -500,6 +594,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1756152326554340352}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2d90f325a344ad349ba9e60a9e4b6f4d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1099805013102584844}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2d90f325a344ad349ba9e60a9e4b6f4d,
         type: 3}
@@ -539,6 +637,7 @@ MonoBehaviour:
   biome: 3
   treeVisuals:
   - {fileID: 2972224988104769593}
+  contestedIndicator: {fileID: 1099805013102584844}
 --- !u!65 &8499617543261277887
 BoxCollider:
   m_ObjectHideFlags: 0

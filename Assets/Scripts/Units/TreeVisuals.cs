@@ -63,10 +63,10 @@ namespace Units
         }
 
         [Button]
-        public void SetNatureState()
+        public void SetNatureState(bool immediate = false)
         {
             m_needsFire = false;
-            if (!m_unit || m_unit.Visible)
+            if ((!m_unit || m_unit.Visible) && gameObject.activeInHierarchy && !immediate)
             {
                 StopAllCoroutines();
                 StartCoroutine(NatureCoroutine());
@@ -75,11 +75,12 @@ namespace Units
                 NatureImmediate();
         }
 
+
         [Button]
         public void SetFrozenState()
         {
             m_needsFire = false;
-            if (!m_unit || m_unit.Visible)
+            if ((!m_unit || m_unit.Visible) && gameObject.activeInHierarchy)
             {
                 StopAllCoroutines();
                 StartCoroutine(FrozenCoroutine());
@@ -91,7 +92,7 @@ namespace Units
         public void SetBurntState()
         {
             m_needsFire = true;
-            if (!m_unit || m_unit.Visible)
+            if ((!m_unit || m_unit.Visible) && gameObject.activeInHierarchy)
             {
                 StopAllCoroutines();
                 StartCoroutine(BurntCoroutine());
