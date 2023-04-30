@@ -20,6 +20,8 @@ namespace Units
 
         protected virtual void Awake()
         {
+            if (!m_unit)
+                m_unit = GetComponentInParent<Unit>();
             if (m_unit)
             {
                 m_unit.onVisibilityChanged.AddListener(OnVisibilityChanged);
@@ -28,6 +30,7 @@ namespace Units
 
         protected virtual void OnVisibilityChanged(bool visible) 
         {
+            Debug.Log($"{name}: {visible}");
             gameObject.SetActive(visible);
         }
     }

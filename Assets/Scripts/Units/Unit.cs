@@ -114,6 +114,7 @@ namespace Units
         protected virtual void Awake()
         {
             m_currentHealth = m_maxHealth;
+            m_currentTile = null;
         }
 
 #if UNITY_EDITOR
