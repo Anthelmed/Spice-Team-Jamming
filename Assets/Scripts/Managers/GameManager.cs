@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
 
         HideAllPanels();
         startScreenVisibilityEvent(true);
-        playerAnimator = playerInstance.GetComponentInChildren<Animator>();
+        playerAnimator = playerInstance.GetComponentInChildren<Animator>(true);
     }
 
     private void Start()
@@ -240,6 +240,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentGameState != GameState.level) return;
         playerCharacter.SetActive(false);
+        playerInput.SwitchCurrentActionMap("UI");
         CancelInvoke(nameof(DeactivatePlayer));
         Invoke(nameof(DeactivatePlayer), 1f);
         playerAnimator.SetTrigger("Teleport Out");
@@ -271,6 +272,7 @@ public class GameManager : MonoBehaviour
         playerInstance.transform.position = spawnPos;
         playerCharacter.transform.localPosition = Vector3.zero;
         playerCharacter.SetActive(true);
+        playerInput.SwitchCurrentActionMap("Gameplay");
         
         playerAnimator.SetTrigger("Teleport In");
         mapGraphics.SetActive(false); /// do this better
