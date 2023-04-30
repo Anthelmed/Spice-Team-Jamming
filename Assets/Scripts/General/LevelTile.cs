@@ -179,6 +179,7 @@ public class LevelTile : MonoBehaviour
         float newDist;
         for (int i = 0; i < list.Count; ++i)
         {
+            if (!list[i]) continue;
             if (list[i].Team == myTeam) continue;
             newDist = (list[i].transform.position - position).magnitude;
             newDist -= list[i].Radius;
@@ -213,6 +214,7 @@ public class LevelTile : MonoBehaviour
         var list = GetListForType(type);
         for (int i = 0; i < list.Count; ++i)
         {
+            if (!list[i]) continue;
             if (list[i].Team == team) continue;
             if (CircleCircleIntersect(center, radius, list[i].transform.position, list[i].Radius))
                 m_queryResultNoAlloc.Add(list[i]);
@@ -244,6 +246,7 @@ public class LevelTile : MonoBehaviour
         var list = GetListForType(type);
         for (int i = 0; i < list.Count; ++i)
         {
+            if (!list[i]) continue;
             if (list[i].Team == team) continue;
             if (CircleFanIntersect(list[i].transform.position, list[i].Radius, center, radius, dir, halfAngle))
                 m_queryResultNoAlloc.Add(list[i]);
@@ -272,6 +275,7 @@ public class LevelTile : MonoBehaviour
         var list = GetListForType(type);
         for (int i = 0; i < list.Count; ++i)
         {
+            if (!list[i]) continue;
             if (CircleCircleIntersect(center, radius, list[i].transform.position, list[i].Radius))
                 m_queryResultNoAlloc.Add(list[i]);
         }

@@ -125,6 +125,7 @@ namespace Units
         }
         public override void Tick()
         {
+            if (!this) return;
             base.Tick();
 
             if (m_data.NextState == State.Destroy)
