@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
-using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 namespace Units
@@ -74,10 +72,10 @@ namespace Units
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
-            UnityEditor.Handles.color = Color.red;
+            Handles.color = Color.red;
             if (m_shape == Shape.Circle)
             {
-                UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, m_radius);
+                Handles.DrawWireDisc(transform.position, Vector3.up, m_radius);
             }
             else
             {
@@ -86,9 +84,9 @@ namespace Units
                 var startp = center + start * m_radius;
                 var end = transform.rotation * Quaternion.AngleAxis(0.5f * m_fanAngle, Vector3.up) * Vector3.forward;
                 var endp = center + end * m_radius;
-                UnityEditor.Handles.DrawWireArc(transform.position, Vector3.up, start, m_fanAngle, m_radius);
-                UnityEditor.Handles.DrawLine(center, startp);
-                UnityEditor.Handles.DrawLine(center, endp);
+                Handles.DrawWireArc(transform.position, Vector3.up, start, m_fanAngle, m_radius);
+                Handles.DrawLine(center, startp);
+                Handles.DrawLine(center, endp);
             }
         }
 #endif

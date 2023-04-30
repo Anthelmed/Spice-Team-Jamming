@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UIElements;
 
 namespace Units
 {
@@ -76,6 +73,8 @@ namespace Units
             {
                 onDie?.Invoke(damage, other);
                 m_currentTile.Unregister(this);
+                m_currentTile = null;
+                GetComponent<AutoUpdateUnit>().enabled = true;
             }
             else
                 onHit?.Invoke(damage, other);
@@ -102,6 +101,7 @@ namespace Units
 
         public virtual void Tick()
         {
+            if (!this) return;
             if (doesntMove && m_currentTile) return;
 
             var world = LevelTilesManager.instance;
@@ -127,10 +127,11 @@ namespace Units
             onHealthChanged?.Invoke(m_currentHealth);
             m_currentTile = null;
         }
-
-#if UNITY_EDITOR
         public float CurrentHealth => m_currentHealth;
         public float Radius => m_radius;
+        
+#if UNITY_EDITOR
+
 
         [Header("Debug")]
         [SerializeField] protected Color m_debugColor = Color.green;

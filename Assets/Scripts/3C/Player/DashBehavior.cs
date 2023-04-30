@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
-using DefaultNamespace;
 using NaughtyAttributes;
-using Runtime.Utilities;
 using UnityEngine;
 
 namespace _3C.Player

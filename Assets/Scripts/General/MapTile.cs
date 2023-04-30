@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
 using DG.Tweening;
-using UnityEngine;
 using Units;
+using UnityEngine;
 
 public class GameTile : MonoBehaviour
 {

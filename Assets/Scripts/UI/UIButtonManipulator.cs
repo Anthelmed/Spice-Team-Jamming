@@ -1,8 +1,6 @@
 ﻿using System;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.UIElements.Experimental;
 
 namespace SpiceTeamJamming.UI
 {

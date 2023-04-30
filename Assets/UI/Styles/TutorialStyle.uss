@@ -10,5 +10,15 @@
     background-image: url('project://database/Assets/UI/Textures/LargeBackground.png?fileID=2800000&guid=6b7c30f4be77e454c8a49b0bca12e04d&type=3#LargeBackground');
     -unity-background-image-tint-color: var(--primary-color-1);
     top: 350px;
-    -unity-background-scale-mode: scale-to-fit;
+    -unity-background-scale-mode: stretch-to-fill;
+}
+
+#TutorialInfoText {
+    padding-bottom: 0;
+    -unity-text-align: middle-center;
+}
+
+#TutorialInfoImage {
+    padding-left: 50px;
+    padding-right: 50px;
 }

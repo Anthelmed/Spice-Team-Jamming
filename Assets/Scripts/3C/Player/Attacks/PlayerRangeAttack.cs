@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
 using _3C.Player.Weapons;
-using DefaultNamespace.HealthSystem.Damager;
-using Units;
 using UnityEngine;
 using UnityEngine.Pool;
 

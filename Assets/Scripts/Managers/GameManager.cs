@@ -1,10 +1,10 @@
-using UnityEngine;
-using System.Collections;
-using UnityEngine.SceneManagement;
 using System;
+using System.Collections;
 using _3C.Player;
-using UnityEngine.InputSystem;
 using DG.Tweening;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     [Header("references")]
     [SerializeField] string battleSceneName;
     [SerializeField] Camera mapCamera;
-    [SerializeField] GameObject playerPrefab;
+    [SerializeField] GameObject playerInstance;
     [SerializeField] Vector2Int mapDestination;
     [SerializeField] GameObject mapGraphics;
     
@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
 
     public event Action OnInitialLevelLoad = delegate { };
 
-    GameObject loadedPlayer;
     Animator playerAnimator;// DO this much better
     bool battleMapLoaded;
     bool loadingBattleMap;
@@ -54,6 +53,7 @@ public class GameManager : MonoBehaviour
 
         HideAllPanels();
         startScreenVisibilityEvent(true);
+        playerAnimator = playerInstance.GetComponentInChildren<Animator>();
     }
 
     private void Start()
@@ -237,7 +237,7 @@ public class GameManager : MonoBehaviour
     public void TransitionToMap()
     {
         if (currentGameState != GameState.level) return;
-        if (loadedPlayer != null) loadedPlayer.SetActive(false);
+        playerInstance.SetActive(false);
 
         LevelTilesManager.instance.SleepAllTiles();
 
@@ -258,26 +258,16 @@ public class GameManager : MonoBehaviour
         var spawnTile = LevelTilesManager.instance.GetTileAtGridPosition(mapDestination);
         spawnTile.WakeUp();
         var spawnPos = spawnTile.teleportPoint.position;
- 
-        if (loadedPlayer == null)
-        {
-         loadedPlayer = Instantiate(playerPrefab, spawnPos, Quaternion.identity);
-         playerAnimator = loadedPlayer.GetComponentInChildren<Animator>();
-        }
-        else
-        {
-            loadedPlayer.transform.position = spawnPos;
-            loadedPlayer.GetComponentInChildren<PlayerStateHandler>().transform.localPosition = Vector3.zero;
-            Debug.Log("teleporting");
-            if (!loadedPlayer.activeInHierarchy) loadedPlayer.SetActive(true);
 
-        }
+        playerInstance.transform.position = spawnPos;
+        playerInstance.GetComponentInChildren<PlayerStateHandler>().transform.localPosition = Vector3.zero;
+        playerInstance.SetActive(true);
+        
         playerAnimator.SetTrigger("Teleport In");
         mapGraphics.SetActive(false); /// do this better
 
         TransitionToState(GameState.level);
         loadingScreenVisibilityEvent(false);
-
     }
 
 
@@ -315,8 +305,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("teleporting");
         var desinationTile = LevelTilesManager.instance.GetTileAtGridPosition(gridCoords);
 
-        playerPrefab.transform.position = desinationTile.teleportPoint.position;
-        playerPrefab.transform.rotation = desinationTile.teleportPoint.rotation;
+        playerInstance.transform.position = desinationTile.teleportPoint.position;
+        playerInstance.transform.rotation = desinationTile.teleportPoint.rotation;
 
         //or this?
         //var spawnPos = WorldTilesManager.instance.GetTileAtGridPosition(mapDestination).teleportPoint.position;

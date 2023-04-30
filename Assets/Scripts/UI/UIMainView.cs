@@ -1,7 +1,5 @@
-﻿using System;
-using UIToolkitAutoReferences;
+﻿using UIToolkitAutoReferences;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 namespace SpiceTeamJamming.UI
@@ -11,12 +9,15 @@ namespace SpiceTeamJamming.UI
 		[Space]
 		[SerializeField] private MainMenuDocumentAutoReferences elementsReferences;
 
+		[SerializeField] private bool loadViewAtStart = false;
+		
 		protected override VisualElement MainElement => elementsReferences.MainMenu;
 		protected override UIRouter.RouteType Route => UIRouter.RouteType.Main;
 
 		private void Start()
 		{
-			UIRouter.GoToRoute(UIRouter.RouteType.Main);
+			if (loadViewAtStart)
+				UIRouter.GoToRoute(UIRouter.RouteType.Main);
 		}
 
 		protected void OnEnable()

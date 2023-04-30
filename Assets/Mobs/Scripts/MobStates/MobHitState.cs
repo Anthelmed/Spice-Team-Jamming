@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class MobHitState : MobAI.IMobState
 {
     public void Enter(MobAI.Data data)
