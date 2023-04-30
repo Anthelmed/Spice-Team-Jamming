@@ -74,6 +74,8 @@ namespace Units
             {
                 onDie?.Invoke(damage, other);
                 m_currentTile.Unregister(this);
+                m_currentTile = null;
+                GetComponent<AutoUpdateUnit>().enabled = true;
             }
             else
                 onHit?.Invoke(damage, other);
@@ -100,6 +102,7 @@ namespace Units
 
         public virtual void Tick()
         {
+            if (!this) return;
             if (doesntMove && m_currentTile) return;
 
             var world = LevelTilesManager.instance;
