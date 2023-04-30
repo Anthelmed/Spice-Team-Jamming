@@ -116,5 +116,5 @@ MonoBehaviour:
   m_owner: {fileID: 0}
   damage: 3
   m_shape: 0
-  m_radius: 1
+  m_radius: 2
   m_fanAngle: 30
