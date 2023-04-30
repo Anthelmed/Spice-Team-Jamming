@@ -254,6 +254,7 @@ public class GameManager : MonoBehaviour
         if (currentGameState != GameState.level) return;
         playerCharacter.SetActive(false);
         playerInput.SwitchCurrentActionMap("Map");
+        print("current action map" + playerInput.currentActionMap);
         CancelInvoke(nameof(DeactivatePlayer));
         Invoke(nameof(DeactivatePlayer), 1f);
         playerAnimator.SetTrigger("Teleport Out");
@@ -287,7 +288,8 @@ public class GameManager : MonoBehaviour
         playerCharacter.transform.localPosition = Vector3.zero;
         playerCharacter.SetActive(true);
         playerInput.SwitchCurrentActionMap("Gameplay");
-        
+        print("current action map" + playerInput.currentActionMap);
+
         playerAnimator.SetTrigger("Teleport In");
         mapGraphics.SetActive(false); /// do this better
 
@@ -306,24 +308,24 @@ public class GameManager : MonoBehaviour
       //  loadingScreenVisibilityEvent(false);
     }
 
-    public void OnTogglePause(InputAction.CallbackContext _context)
-    {
-        if (_context.phase == InputActionPhase.Performed)
-            switch (currentGameState)
-            {
+    //public void OnTogglePause(InputAction.CallbackContext _context)
+    //{
+    //    if (_context.phase == InputActionPhase.Performed)
+    //        switch (currentGameState)
+    //        {
 
-                case GameState.level:
-                    {
-                        TransitionToState(GameState.pause);
-                    }
-                    break;
-                case GameState.pause:
-                    {
-                        TransitionToState(GameState.level);
-                    }
-                    break;
-            }
-    }
+    //            case GameState.level:
+    //                {
+    //                    TransitionToState(GameState.pause);
+    //                }
+    //                break;
+    //            case GameState.pause:
+    //                {
+    //                    TransitionToState(GameState.level);
+    //                }
+    //                break;
+    //        }
+    //}
 
 
     public void TeleportPlayerToMapPoint(Vector2Int gridCoords)
