@@ -43,6 +43,11 @@ namespace Units
             m_renderer.localBounds = new Bounds(Vector3.zero, Vector3.one * 2);
         }
 
+        private void OnEnable()
+        {
+            m_specialAnimationEnds = 0f;
+        }
+
         private void SwitchAnimation(AnimationID desiredAnimationID)
         {
             var desiredAnimation = (int)desiredAnimationID;

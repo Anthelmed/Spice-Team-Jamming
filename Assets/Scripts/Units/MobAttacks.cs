@@ -23,6 +23,8 @@ namespace Unit
 
         public void StartMelee()
         {
+            if (m_meleeHitBox.isActiveAndEnabled) return;
+
             SetMeleeDelay(m_meleeCooldown);
             if (m_meleeHitBox)
                 m_meleeHitBox.gameObject.SetActive(true);

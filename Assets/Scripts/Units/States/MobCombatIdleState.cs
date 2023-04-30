@@ -32,7 +32,6 @@ namespace Units
 
             // Chase the target if it got out of range
             var distance = data.attacks.MeleeRange + data.perception.Target.Radius;
-            distance *= 0.9f;
             if ((data.perception.Target.transform.position - data.transform.position).sqrMagnitude > distance * distance)
                 data.NextState = Mob.State.GoToTarget;
 
