@@ -19620,7 +19620,7 @@ Transform:
   - {fileID: 910263797290590509}
   - {fileID: 5363434093855370891}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &4201617088981712584
 ParticleSystem:
@@ -29702,7 +29702,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.36862746}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.21960784}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
