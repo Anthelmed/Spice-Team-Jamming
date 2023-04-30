@@ -32,11 +32,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VatNormalTex:
-        m_Texture: {fileID: 2800000, guid: a8a43bc18789aaa4ea2b20ef89ab619f, type: 2}
+        m_Texture: {fileID: 2800000, guid: 14d0895e12fa5e3409c4b6c5db745eee, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VatPositionTex:
-        m_Texture: {fileID: 2800000, guid: df46d99826f303c47a178aca2f3cd0ea, type: 2}
+        m_Texture: {fileID: 2800000, guid: 2701a4e4c7679b541a662d5ddd308e8a, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []

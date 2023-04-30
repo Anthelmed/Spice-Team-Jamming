@@ -1,10 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Collections;
-using Unity.Jobs;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Jobs;
 
 namespace Mobs
 {
@@ -33,7 +27,7 @@ namespace Mobs
 
             for (int i = 0; i < amount; ++i)
             {
-                var offset = UnityEngine.Random.insideUnitCircle * radius;
+                var offset = Random.insideUnitCircle * radius;
                 var position = center + new Vector3(offset.x, 0, offset.y);
 
                 var mob = Instantiate(prefab, position, Quaternion.identity);

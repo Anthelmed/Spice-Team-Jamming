@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 
 [CreateAssetMenu(fileName = "New Biome Prefab Holder", menuName = "Biome Prefab Holder")]
 public class BiomePrefabHolder : ScriptableObject

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Units
@@ -26,7 +24,8 @@ namespace Units
             Idle = 0,
             Walk,
             Attack,
-            Hit
+            Hit,
+            Death
         }
 
         protected override void OnValidate()
@@ -101,8 +100,8 @@ namespace Units
         {
             if (m_sounds && m_unit.Visible) m_sounds.PlayDeathSound();
 
-            m_specialAnimationEnds = Time.timeSinceLevelLoad + animationData.animations[(int)AnimationID.Hit].x * 0.5f - transitionDuration;
-            SwitchAnimation(AnimationID.Hit);
+            m_specialAnimationEnds = Time.timeSinceLevelLoad + animationData.animations[(int)AnimationID.Death].x * 0.5f - transitionDuration;
+            SwitchAnimation(AnimationID.Death);
         }
 
         public override void TriggerHit()

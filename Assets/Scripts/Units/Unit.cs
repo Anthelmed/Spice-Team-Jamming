@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UIElements;
 
 namespace Units
 {
@@ -127,13 +125,19 @@ namespace Units
         protected virtual void Awake()
         {
             m_currentHealth = m_maxHealth;
-            onHealthChanged?.Invoke(m_currentHealth);
             m_currentTile = null;
         }
 
-#if UNITY_EDITOR
+        private void Start()
+        {
+            onHealthChanged?.Invoke(m_currentHealth);
+        }
+
         public float CurrentHealth => m_currentHealth;
         public float Radius => m_radius;
+        
+#if UNITY_EDITOR
+
 
         [Header("Debug")]
         [SerializeField] protected Color m_debugColor = Color.green;

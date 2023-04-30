@@ -1,5 +1,7 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
+
 //AudioManager.instance.PlayAudioClip("clipName");
 
 [Serializable]
@@ -13,7 +15,7 @@ public class MultiSound : ScriptableObject
 
     public AudioClip GetShuffledClip()
     { 
-        int randomIndex = UnityEngine.Random.Range(0, clips.Length);  // pick a random index
+        int randomIndex = Random.Range(0, clips.Length);  // pick a random index
         if (randomIndex == lastIndex && clips.Length > 1)  // if the same index was picked last time and there are more than 1 clips
         {
             randomIndex = (randomIndex + 1) % clips.Length;  // select the next clip in the array

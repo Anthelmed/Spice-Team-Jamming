@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Units;
+using UnityEditor;
 using UnityEngine;
 
 namespace Units
@@ -83,9 +81,9 @@ namespace Units
         {
             if (!HasRangedAttack) return;
 
-            UnityEditor.Handles.color = Color.red;
-            UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, m_rangedRange.x);
-            UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, m_rangedRange.y);
+            Handles.color = Color.red;
+            Handles.DrawWireDisc(transform.position, Vector3.up, m_rangedRange.x);
+            Handles.DrawWireDisc(transform.position, Vector3.up, m_rangedRange.y);
         }
 #endif
     }

@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
 using DG.Tweening;
-using UnityEngine;
 using Units;
+using UnityEngine;
 
 public class GameTile : MonoBehaviour
 {
@@ -43,6 +42,11 @@ public class GameTile : MonoBehaviour
     {
         _renderer = GetComponent<Renderer>();
         playerIndicator.gameObject.SetActive(false);
+        GameManager.instance.OnInitialLevelLoad += SetupEvent;
+    }
+    void OnDestroy()
+    {
+            GameManager.instance.OnInitialLevelLoad -= SetupEvent;
     }
 
     public bool IsSpawnArea
@@ -115,6 +119,7 @@ public class GameTile : MonoBehaviour
         else if (newTile == mapTileData.tileCoords)
         {
             playerIndicator.gameObject.SetActive(true);
+            hasPlayer = true;
         }
     }
     public void Highlight()
@@ -157,6 +162,10 @@ public class GameTile : MonoBehaviour
             }
         }
 
+    }
+    void SetupEvent()
+    {
+        LevelTilesManager.instance.PlayerTileIndexChanged += OnPlayerMove;
     }
 
 

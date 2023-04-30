@@ -1,8 +1,6 @@
-using DefaultNamespace.HealthSystem.Damageable;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using DefaultNamespace.HealthSystem.Damageable;
+using UnityEngine;
 
 [RequireComponent(typeof(HealthHolder))]
 [RequireComponent(typeof(Targetable))]

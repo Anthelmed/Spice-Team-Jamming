@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.AI;
-using static MobAI;
 
 namespace Units
 {
     public class Mob : Unit
     {
-        [System.Serializable]
+        [Serializable]
         public class Data
         {
             public Transform transform;

@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using _3C.Player;
-using System;
 using Units;
+using UnityEngine;
 
 public class LevelTile : MonoBehaviour
 {
@@ -35,7 +33,7 @@ public class LevelTile : MonoBehaviour
     private void Start()
     {
         if (LevelTilesManager.instance != null) worldTilesManager = LevelTilesManager.instance;
-        m_updateTurn = UnityEngine.Random.Range(0, UPDATE_RATE);
+        m_updateTurn = Random.Range(0, UPDATE_RATE);
     }
 
     private void FixedUpdate()
