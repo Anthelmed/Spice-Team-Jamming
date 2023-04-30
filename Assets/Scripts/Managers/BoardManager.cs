@@ -47,6 +47,7 @@ public class BoardManager : MonoBehaviour
 
     
     [SerializeField] private bool debugMode = false;
+    [SerializeField] float mapHeightOffset;
 
     private void Awake()
     {
@@ -220,7 +221,7 @@ public class BoardManager : MonoBehaviour
                 float xSize = localScale.x;
                 float zSize = localScale.z;
 
-                Vector3 pos = new Vector3(x * xSize, 0, y * zSize);
+                Vector3 pos = new Vector3(x * xSize, mapHeightOffset, y * zSize);
 
                 // We can rotate the tile [0, 90, 180, 270] degrees to get more variation
                 GameObject go = Instantiate(currentPrefab, pos, Quaternion.identity, _transform);
@@ -252,7 +253,7 @@ public class BoardManager : MonoBehaviour
                     float xSize = localScale.x;
                     float zSize = localScale.z;
 
-                    Vector3 pos = new Vector3(x * xSize, 0, y * zSize);
+                    Vector3 pos = new Vector3(x * xSize, mapHeightOffset, y * zSize);
 
                     // We can rotate the tile [0, 90, 180, 270] degrees to get more variation
                     GameObject go = Instantiate(currentPrefab, pos, Quaternion.identity, _transform);
@@ -279,7 +280,7 @@ public class BoardManager : MonoBehaviour
                     float xSize = localScale.x;
                     float zSize = localScale.z;
                 
-                    Vector3 pos = new Vector3(x * xSize, 0, y * zSize);
+                    Vector3 pos = new Vector3(x * xSize, mapHeightOffset, y * zSize);
                 
                     // We can rotate the tile [0, 90, 180, 270] degrees to get more variation
                     GameObject go = Instantiate(currentPrefab, pos, Quaternion.identity, _transform);

@@ -3,7 +3,22 @@ guid: e4818769e5080db4aa563fdcb677b22f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ice
+    second: {fileID: 2100000, guid: 73cb4f48d3e7d3c47a3c3eef0b61c345, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree
+    second: {fileID: 2100000, guid: a28034875cc48cc4ba7be28bcf634f98, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: foliage
+    second: {fileID: 2100000, guid: 4eea7181748669042b265d0cb276e02b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd1a697fffce5b4eb529d83a1dced26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  burnsound: 
-  freezeSound: 
-  natureSound: 
+  burnsound: treeFireStatus
+  freezeSound: treeIceStatus
+  natureSound: treeHealStatus
   takeFireDamage: 
   takeIceDamage: 
   restore: 
