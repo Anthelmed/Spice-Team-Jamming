@@ -10,19 +10,23 @@ ScriptedImporter:
   script: {fileID: 11500000, guid: 99e4578b4f76c8d4bbfa50b223186c77, type: 3}
   attackHitRange: {x: 0.25, y: 0.75}
   animations:
-  - vertexVat: {fileID: 2800000, guid: df46d99826f303c47a178aca2f3cd0ea, type: 2}
-    normalVat: {fileID: 2800000, guid: a8a43bc18789aaa4ea2b20ef89ab619f, type: 2}
+  - vertexVat: {fileID: 2800000, guid: 2701a4e4c7679b541a662d5ddd308e8a, type: 2}
+    normalVat: {fileID: 2800000, guid: 3cee82782e53b6b438a531d5413e5b94, type: 2}
     fps: 30
     duration: 3.833333
-  - vertexVat: {fileID: 2800000, guid: fbeaedd7972907e4f85f122a844b8fb6, type: 2}
-    normalVat: {fileID: 2800000, guid: 13dc0518421fc624a84f98c18642f321, type: 2}
+  - vertexVat: {fileID: 2800000, guid: 6005a2acc2c81da4e9df13e2af6c6b18, type: 2}
+    normalVat: {fileID: 2800000, guid: 5b49aec544b6d4a439dc3b5482203465, type: 2}
     fps: 30
     duration: 0.9583334
-  - vertexVat: {fileID: 2800000, guid: 7c71933f8a8fa1f4eb14581613777d20, type: 2}
-    normalVat: {fileID: 2800000, guid: 8f6fe2b2d7fa33840a9bfaf53fcccf90, type: 2}
+  - vertexVat: {fileID: 2800000, guid: a100b8c31bcc48e43bceb12a3b6f70c0, type: 2}
+    normalVat: {fileID: 2800000, guid: 4b8ebb30c1e9e324d85150077bc2d1f0, type: 2}
     fps: 30
     duration: 1.5
-  - vertexVat: {fileID: 2800000, guid: 831e72ea2206d2d4c9e613072d42027d, type: 2}
-    normalVat: {fileID: 2800000, guid: c87745e51a585114d9eaa2cc9bd767f5, type: 2}
+  - vertexVat: {fileID: 2800000, guid: 04f05bd3df83d504b915e12d06ab04e7, type: 2}
+    normalVat: {fileID: 2800000, guid: 3cee82782e53b6b438a531d5413e5b94, type: 2}
     fps: 30
     duration: 1.3333334
+  - vertexVat: {fileID: 2800000, guid: fb391d7addeb4c04da8665fa2673919d, type: 2}
+    normalVat: {fileID: 2800000, guid: 42aedc50a5f7dda42b1718831136787a, type: 2}
+    fps: 30
+    duration: 1.683333
