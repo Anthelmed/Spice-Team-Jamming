@@ -1,6 +1,7 @@
 :root {
     --primary-color-1: rgb(134, 219, 165);
-    --primary-color-1-dark: rgb(118, 194, 146);
+    --primary-color-1-dark: rgb(117, 192, 145);
+    --primary-color-1-light: rgb(180, 253, 206);
     --primary-color-2: rgb(142, 101, 136);
     --primary-color-3: rgb(255, 112, 105);
     --primary-color-4: rgb(79, 173, 255);
@@ -83,6 +84,11 @@
     border-bottom-width: 0;
     -unity-background-image-tint-color: var(--primary-color-1);
     -unity-background-scale-mode: scale-to-fit;
+}
+
+.button:disabled {
+    color: rgba(255, 255, 255, 0.5);
+    -unity-background-image-tint-color: var(--primary-color-1-light);
 }
 
 .square-button {
