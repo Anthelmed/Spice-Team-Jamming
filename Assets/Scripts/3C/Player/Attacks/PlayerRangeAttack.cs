@@ -74,11 +74,9 @@ namespace _3C.Player
 
         public override void OnInput(InputType inputType)
         {
-            if (inputType == InputType.AimCanceled)
+            if (inputType == InputType.RangeAttackCanceled)
             {
                 TriggerAttack();
-                m_StateHandler.OnStateEnded();
-                //TODO: TriggerAttackAfterDelay
             }
         }
         

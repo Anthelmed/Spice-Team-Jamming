@@ -11,7 +11,8 @@ namespace _3C.Player
         DashPerformed,
         HeldMeleeAttackPerformed,
         AimPerformed,
-        AimCanceled
+        AimCanceled,
+        RangeAttackCanceled,
     }
     
     public class PlayerInputs

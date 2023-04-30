@@ -174,6 +174,8 @@ namespace _3C.Player
                 (PlayerState.Attacking, InputType.DashPerformed) => PlayerState.Dashing,
                 (PlayerState.IdleMovement, InputType.AimPerformed) => PlayerState.Aiming,
                 (PlayerState.IdleMovement, InputType.AimCanceled) => PlayerState.IdleMovement,
+                (PlayerState.IdleMovement, InputType.RangeAttackCanceled) => PlayerState.IdleMovement,
+                (PlayerState.Aiming, InputType.AimCanceled) => PlayerState.IdleMovement,
                 _ => throw new Exception($" {m_CurrentState} - {_input} is not handled"),
             };
         }
@@ -187,6 +189,7 @@ namespace _3C.Player
                 (PlayerState.IdleMovement, InputType.MovementPerformed) or (PlayerState.IdleMovement, InputType.MovementCanceled) => false,
                 (PlayerState.Attacking, InputType.MeleeAttackPerformed) => false,
                 (PlayerState.Aiming, InputType.DashPerformed) => true,
+                (PlayerState.Aiming, InputType.AimCanceled) => true,
                 (PlayerState.Aiming, _) => false,
                 (PlayerState.Attacking, InputType.DashPerformed) => true,
                 (PlayerState.Attacking, _) => false,

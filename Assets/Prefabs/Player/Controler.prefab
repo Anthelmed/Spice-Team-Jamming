@@ -247,6 +247,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9703b7d1-0cc6-473d-a8a0-5c1ccee68150
     m_ActionName: Gameplay/Open Map[/Keyboard/tab,/XInputControllerWindows/select]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3254206215208585877}
+        m_TargetAssemblyTypeName: _3C.Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnKeyboardAim
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3326126e-81cc-4310-afac-440fd873a3d4
+    m_ActionName: Gameplay/Keyboard-Aim[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

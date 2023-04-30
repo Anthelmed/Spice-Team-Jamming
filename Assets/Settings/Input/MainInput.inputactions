@@ -196,6 +196,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Keyboard-Aim",
+                    "type": "Button",
+                    "id": "3326126e-81cc-4310-afac-440fd873a3d4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -304,7 +313,7 @@
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "RangeAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -316,17 +325,6 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "RangeAttack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b39a8e09-aede-4945-b3b1-98c7d996e812",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
                     "action": "RangeAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -413,9 +411,20 @@
                     "id": "8cadba34-26ca-409f-925b-9b9def47af13",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
-                    "processors": "",
-                    "groups": "",
+                    "processors": "StickDeadzone(min=0.5)",
+                    "groups": "Gamepad",
                     "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c7c6bbfd-59d2-4b5e-bb58-e9d20280fc63",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Keyboard-Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
