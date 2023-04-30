@@ -40,6 +40,7 @@ namespace Units
 
         private void OnDie (float damage, Unit other)
         {
+            m_nextRecovery = Time.timeSinceLevelLoad + m_timeToRecover;
             // Turn to the type of the aggressor
             m_team = other.Team;
             // Go back to life

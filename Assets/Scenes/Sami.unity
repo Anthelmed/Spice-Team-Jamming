@@ -158,7 +158,9 @@ MonoBehaviour:
     type: 2}
   forestPrefabHolder: {fileID: 11400000, guid: 659d969c8c6364a9a87ac75bbbff9eef, type: 2}
   waterPrefabHolder: {fileID: 11400000, guid: 33c1578768d9f453e8c91017ff2b8527, type: 2}
-  sameBiomeChance: 0.99
+  sameBiomeChance: 0.8
+  randomBiomeRotation: 1
+  spawnableBiomes: 000000000100000003000000
   widthHeight: {x: 15, y: 15}
   noiseScale: {x: 0.13, y: 0.1}
   noiseOffset: 53.2

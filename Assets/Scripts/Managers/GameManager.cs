@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] string battleSceneName;
     [SerializeField] Camera mapCamera;
     [SerializeField] GameObject playerInstance;
+    [SerializeField] GameObject playerCharacter;
+    [SerializeField] PlayerInput playerInput;
     [SerializeField] Vector2Int mapDestination;
     [SerializeField] GameObject mapGraphics;
     
@@ -33,7 +35,7 @@ public class GameManager : MonoBehaviour
     public event Action<bool> loadingScreenVisibilityEvent = delegate { };
     public event Action<bool> startScreenVisibilityEvent = delegate { };
     public event Action<bool> pauseScreenVisibilityEvent = delegate { };
-
+    public event Action<GameTile> onHoverTileChanged;
     public event Action OnInitialLevelLoad = delegate { };
 
     Animator playerAnimator;// DO this much better
@@ -53,7 +55,7 @@ public class GameManager : MonoBehaviour
 
         HideAllPanels();
         startScreenVisibilityEvent(true);
-        playerAnimator = playerInstance.GetComponentInChildren<Animator>();
+        playerAnimator = playerInstance.GetComponentInChildren<Animator>(true);
     }
 
     private void Start()
@@ -237,10 +239,13 @@ public class GameManager : MonoBehaviour
     public void TransitionToMap()
     {
         if (currentGameState != GameState.level) return;
-        
+        playerCharacter.SetActive(false);
+        playerInput.SwitchCurrentActionMap("UI");
         CancelInvoke(nameof(DeactivatePlayer));
         Invoke(nameof(DeactivatePlayer), 1f);
         playerAnimator.SetTrigger("Teleport Out");
+
+
         LevelTilesManager.instance.SleepAllTiles();
 
         mapGraphics.SetActive(true); /// do this better
@@ -265,8 +270,9 @@ public class GameManager : MonoBehaviour
         var spawnPos = spawnTile.teleportPoint.position;
 
         playerInstance.transform.position = spawnPos;
-        playerInstance.GetComponentInChildren<PlayerStateHandler>().transform.localPosition = Vector3.zero;
-        playerInstance.SetActive(true);
+        playerCharacter.transform.localPosition = Vector3.zero;
+        playerCharacter.SetActive(true);
+        playerInput.SwitchCurrentActionMap("Gameplay");
         
         playerAnimator.SetTrigger("Teleport In");
         mapGraphics.SetActive(false); /// do this better
@@ -334,6 +340,7 @@ public class GameManager : MonoBehaviour
                     cachedHoverTile.Unhighlight();
                 }
                 cachedHoverTile = hoverTile;
+                onHoverTileChanged?.Invoke(cachedHoverTile);
                 if (hoverTile.mapTileData.biome == Biome.Water)return; // dont juice a place you cant go
 
                 

@@ -71,7 +71,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.8405547
+      - time: 0.9305994
         functionName: AnimationFinishedEvent
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -121,7 +121,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.9393416
+      - time: 0.9305994
         functionName: AnimationFinishedEvent
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -157,7 +157,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.84575397
+      - time: 1
         functionName: AnimationFinishedEvent
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -251,7 +251,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.9289429
+      - time: 1
         functionName: AnimationFinishedEvent
         data: 
         objectReferenceParameter: {instanceID: 0}

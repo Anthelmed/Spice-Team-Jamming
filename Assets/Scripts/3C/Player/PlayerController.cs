@@ -119,6 +119,11 @@ namespace _3C.Player
 
         private void StackInput(InputType _input)
         {
+            if (GameplayData.s_PlayerInputs == null)
+            {
+                return;
+            }
+            
             GameplayData.s_PlayerInputs.InputStack.Add(_input);
             GameplayData.s_PlayerStateHandler.OnInputAdded(_input);
         }
