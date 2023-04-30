@@ -82,13 +82,14 @@ namespace _3C.Player
             m_AttackHolder.transform.localPosition = Vector3.zero;
             m_AttackHolder.transform.localRotation = Quaternion.identity;
             m_AttackHolder.SetParent(null, true);
+            
             m_RangeWeaponMovement.TriggerWeaponMovement(m_AttackDuration, m_AttackAnimationCurve);
             m_Animator.SetTrigger("Ranged Attack");
             foreach (var particleSystem in m_VFXToPlay)
             {
                 particleSystem.Play();
             }
-
+            m_StateHandler.PlayerSoundsInstance.PlayRangeSound();
             m_StateHandler.StartCoroutine(c_OnAttackAnimationEnded());
         }
 
