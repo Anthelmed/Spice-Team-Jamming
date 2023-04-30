@@ -60,10 +60,6 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 19204312-67dd-49bf-8d09-085e90319e90
-    m_ActionName: Menu/New action
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3254206215208585877}
         m_TargetAssemblyTypeName: _3C.Player.PlayerController, Assembly-CSharp
@@ -219,6 +215,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d93b9b1d-7f8e-43f2-88c1-a3c00764750d
     m_ActionName: Gameplay/Dash[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dbb94164-7c5f-4a9a-8e0a-ada0522d8617
+    m_ActionName: Menu/Back[/Keyboard/escape,/Mouse/backButton,/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1cde1ff8-6430-4bf8-a4b4-2025270bce2f
+    m_ActionName: Map/Select
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2e73b6a7-fd0e-4cbb-94d2-c5967ccebe85
+    m_ActionName: Map/Back[/Keyboard/escape,/Mouse/backButton,/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3254206215208585877}
+        m_TargetAssemblyTypeName: _3C.Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnLook
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a5db45ad-70b1-46a4-8747-f8a03eac6698
+    m_ActionName: Gameplay/Look[/XInputControllerWindows/rightStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9703b7d1-0cc6-473d-a8a0-5c1ccee68150
+    m_ActionName: Gameplay/Open Map[/Keyboard/tab,/XInputControllerWindows/select]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

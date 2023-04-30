@@ -322,6 +322,17 @@
                 },
                 {
                     "name": "",
+                    "id": "b39a8e09-aede-4945-b3b1-98c7d996e812",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RangeAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "003f20bc-879b-4020-a5a4-ddcc3d294dc5",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -404,17 +415,6 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e13a125e-620e-478e-bfed-0ad11b2080fb",
-                    "path": "<Pointer>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardMouse",
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
