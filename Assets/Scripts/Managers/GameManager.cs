@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] string battleSceneName;
     [SerializeField] Camera mapCamera;
     [SerializeField] GameObject playerInstance;
+    [SerializeField] GameObject playerCharacter;
+    [SerializeField] PlayerInput playerInput;
     [SerializeField] Vector2Int mapDestination;
     [SerializeField] GameObject mapGraphics;
     
@@ -237,10 +239,12 @@ public class GameManager : MonoBehaviour
     public void TransitionToMap()
     {
         if (currentGameState != GameState.level) return;
-        
+        playerCharacter.SetActive(false);
         CancelInvoke(nameof(DeactivatePlayer));
         Invoke(nameof(DeactivatePlayer), 1f);
         playerAnimator.SetTrigger("Teleport Out");
+
+
         LevelTilesManager.instance.SleepAllTiles();
 
         mapGraphics.SetActive(true); /// do this better
@@ -265,8 +269,8 @@ public class GameManager : MonoBehaviour
         var spawnPos = spawnTile.teleportPoint.position;
 
         playerInstance.transform.position = spawnPos;
-        playerInstance.GetComponentInChildren<PlayerStateHandler>().transform.localPosition = Vector3.zero;
-        playerInstance.SetActive(true);
+        playerCharacter.transform.localPosition = Vector3.zero;
+        playerCharacter.SetActive(true);
         
         playerAnimator.SetTrigger("Teleport In");
         mapGraphics.SetActive(false); /// do this better
