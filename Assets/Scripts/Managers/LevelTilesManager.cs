@@ -417,7 +417,8 @@ public class LevelTilesManager : MonoBehaviour
 
         for (int i = 0; i < tile.Count; ++i)
         {
-            result = tile[i].QueryCircleAll(center, radius, i != 0);
+            if (tile[i])
+                result = tile[i].QueryCircleAll(center, radius, i != 0);
         }
 
         return result;
