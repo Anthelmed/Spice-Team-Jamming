@@ -6,6 +6,9 @@ namespace Units
 {
     public class Vegetation : Unit
     {
+        [SerializeField] private float m_timeToRecover = 60f;
+        private float m_nextRecovery;
+
         private void Reset()
         {
             m_team = Faction.Nature;
@@ -23,6 +26,18 @@ namespace Units
             base.Awake();
 
             onDie.AddListener(OnDie);
+        }
+
+        public override void Tick()
+        {
+            if (!this) return;
+            base.Tick();
+
+            if (Team != Faction.Nature && Time.timeSinceLevelLoad > m_nextRecovery)
+            {
+                m_team = Faction.Nature;
+                OnDie(1000f, this);
+            }
         }
 
         private void OnDie (float damage, Unit other)
