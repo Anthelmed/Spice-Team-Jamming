@@ -32,7 +32,9 @@ namespace Units
             if ((data.perception.Target.transform.position - data.transform.position).sqrMagnitude > distance * distance)
                 data.NextState = Mob.State.GoToTarget;
 
-            // TODO if cooldown done, attack
+            // TODO ranged attacks
+            if (data.attacks.IsMeleeReady)
+                data.NextState = Mob.State.Attack;
         }
     }
 }

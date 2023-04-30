@@ -36,7 +36,8 @@ namespace Units
                 distance *= 0.9f;
                 if ((data.perception.Target.transform.position - data.transform.position).sqrMagnitude < distance * distance)
                 {
-                    // Todo apply cooldown
+                    if (data.attacks.IsMeleeReady)
+                        data.attacks.SetMeleeDelay(Random.Range(0f, data.attacks.MeleeColdown * 0.5f));
                     data.NextState = Mob.State.CombatIdle;
                 }
             }
