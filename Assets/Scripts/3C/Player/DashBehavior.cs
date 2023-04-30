@@ -33,7 +33,8 @@ namespace _3C.Player
         [SerializeField] private float m_Duration;
         [SerializeField] private float m_Distance;
         [SerializeField] private AnimationCurve m_DistanceCurve;
-        [SerializeField] private float m_PostDashDelay;
+        [SerializeField] private float m_PostDashSlowDelay;
+        [SerializeField] private float m_PostDashSpeedModifier;
 
         [SerializeField] private ParticleSystem m_VFX;
 
@@ -99,7 +100,7 @@ namespace _3C.Player
             }
             
             m_Transform.position = end;
-            if (m_PostDashDelay == 0)
+            if (m_PostDashSlowDelay == 0)
             {
                 PostDashCleaning();
             }
@@ -112,12 +113,15 @@ namespace _3C.Player
         private void PostDashCleaning()
         {
             m_StateHandler.OnMovementStateChanged(true);
+            m_StateHandler.ResetMovementSpeedModifier();
             m_StateHandler.OnStateEnded();
         }
 
         private IEnumerator c_PostDashDelay()
         {
-            yield return new WaitForSeconds(m_PostDashDelay);
+            m_StateHandler.OnMovementStateChanged(true);
+            m_StateHandler.ChangeMovementSpeedModifier(m_PostDashSpeedModifier);
+            yield return new WaitForSeconds(m_PostDashSlowDelay);
             PostDashCleaning();
         }
 

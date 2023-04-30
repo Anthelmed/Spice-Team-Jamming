@@ -28,7 +28,8 @@ namespace _3C.Player
 
         [ReadOnly] public bool IsLookingAtMovement = true;
 
-        
+        public float SpeedModifier = 1;
+
         private Rigidbody m_Rigidbody;
         private Vector2 m_CurrentMovement;
         private Vector2 m_LookAtDirection;
@@ -36,7 +37,7 @@ namespace _3C.Player
         [ReadOnly]
         public bool Enabled;
 
-        private Vector3 CurrentWorldSpeed => (m_CurrentMovement * m_Speed).X0Y().SetY(m_Rigidbody.velocity.y);  
+        private Vector3 CurrentWorldSpeed => (m_CurrentMovement * m_Speed * SpeedModifier).X0Y().SetY(m_Rigidbody.velocity.y);  
 
         protected override void Init(IStateHandler _stateHandler)
         {

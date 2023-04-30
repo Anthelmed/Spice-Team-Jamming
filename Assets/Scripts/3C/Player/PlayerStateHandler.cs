@@ -200,9 +200,16 @@ namespace _3C.Player
             m_PlayerMovement.InstantOrientationTo(GameplayData.s_PlayerInputs.Movement);
         }
 
+        public void ChangeMovementSpeedModifier(float _modifier)
+        {
+            m_PlayerMovement.SpeedModifier = _modifier;
+        }
+
         public T Instantiate<T>(T prefab) where T : Object
         {
             return Object.Instantiate(prefab);
         }
+        
+        
     }
 }
