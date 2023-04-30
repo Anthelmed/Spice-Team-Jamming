@@ -5,6 +5,7 @@ using DefaultNamespace;
 using DefaultNamespace.HealthSystem.Damager;
 using DG.Tweening;
 using NaughtyAttributes;
+using Units;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -59,7 +60,7 @@ namespace _3C.Player
 
         [Header("Components")]
         [SerializeField] private AWeaponMovement m_WeaponMovement;
-        [SerializeField] private ColliderDamager m_Damager;
+        [SerializeField] private HitBox m_Damager;
 
         [Header("Animation")]
         [AnimatorParam("m_Animator")]
@@ -109,7 +110,7 @@ namespace _3C.Player
         {
             m_IsAttackAsked = false;
             m_StateHandler.OnMovementStateChanged(false);
-            m_Damager.Damage = CurrentAttackSettings.BaseDamage;
+            m_Damager.damage = CurrentAttackSettings.BaseDamage;
             m_WeaponMovement.TriggerWeaponMovement(CurrentAttackSettings.AttackDuration, CurrentAttackSettings.WeaponMovementCurve);
             m_StateHandler.PlayerSoundsInstance.PlayAttackSound();
             m_Animator?.SetTrigger(TriggerParameterFromAttackIndex);

@@ -40,13 +40,13 @@ namespace Units
 
             SetAttackDelay(m_meleeCooldown);
             if (m_meleeHitBox)
-                m_meleeHitBox.gameObject.SetActive(true);
+                m_meleeHitBox.enabled = true;
         }
 
         public void EndMelee()
         {
             if (m_meleeHitBox)
-                m_meleeHitBox.gameObject.SetActive(false);
+                m_meleeHitBox.enabled = false;
         }
 
         public void DoRanged()

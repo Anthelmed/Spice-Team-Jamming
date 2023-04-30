@@ -36,7 +36,7 @@ namespace Units
 
         private void Start()
         {
-            gameObject.SetActive(false);
+            enabled = false;
         }
 
         private void OnEnable()

@@ -2,6 +2,7 @@
 using System.Collections;
 using _3C.Player.Weapons;
 using DefaultNamespace.HealthSystem.Damager;
+using Units;
 using UnityEngine;
 
 namespace _3C.Player
@@ -15,7 +16,7 @@ namespace _3C.Player
         [SerializeField] private int m_BaseDamage;
 
         [Header("Scene components")]
-        [SerializeField] private ColliderDamager m_Damager;
+        [SerializeField] private HitBox m_Damager;
         [Tooltip("This one is used to hold the weapon and the vfx to unparent them")]
         [SerializeField] private Transform m_AttackHolder;
         
@@ -78,7 +79,7 @@ namespace _3C.Player
         {
             StateCleaning();
             PostAttackCleaning();
-            m_Damager.Damage = m_BaseDamage;
+            m_Damager.damage = m_BaseDamage;
             m_AttackHolder.transform.localPosition = Vector3.zero;
             m_AttackHolder.transform.localRotation = Quaternion.identity;
             m_AttackHolder.SetParent(null, true);
