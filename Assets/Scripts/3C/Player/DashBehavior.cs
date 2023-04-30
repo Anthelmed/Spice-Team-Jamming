@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using DefaultNamespace;
 using NaughtyAttributes;
+using Runtime.Utilities;
 using UnityEngine;
 
 namespace _3C.Player
@@ -8,10 +10,14 @@ namespace _3C.Player
     [Serializable]
     public class DashBehavior : PlayerStateBehavior
     {
-        [AnimatorParam("m_Animator")]
-        [SerializeField] private int m_DashTriggerParam;
-        [SerializeField] private Animator m_Animator;
-        
+        // [AnimatorParam("m_Animator")]
+        // [SerializeField] private int m_DashTriggerParam;
+        // [SerializeField] private Animator m_Animator;
+        [SerializeField] private float m_ManaCost;
+
+        public override float BaseManaPoints => m_ManaCost;
+
+
         [SerializeField] private bool m_HasOvershootFrame;
         [ShowIf("m_HasOvershootFrame")]
         [SerializeField] private float m_OvershootDistance;
@@ -27,7 +33,12 @@ namespace _3C.Player
         [SerializeField] private float m_Duration;
         [SerializeField] private float m_Distance;
         [SerializeField] private AnimationCurve m_DistanceCurve;
-        
+        [SerializeField] private float m_PostDashSlowDelay;
+        [SerializeField] private float m_PostDashSpeedModifier;
+
+        [SerializeField] private ParticleSystem m_VFX;
+
+
         private float m_InverseDuration;
         private Transform m_Transform;
 
@@ -42,7 +53,7 @@ namespace _3C.Player
             m_InverseDuration = 1 / m_Duration;
         }
 
-        public override void StartState(PlayerState _previousState)
+        public override void StartState()
         {
             m_StateHandler.StartCoroutine(c_Dashing());
             //m_Animator?.SetTrigger(m_DashTriggerParam);
@@ -55,8 +66,12 @@ namespace _3C.Player
 
         private IEnumerator c_Dashing()
         {
+            m_StateHandler.PlayerManaPoints.CheckIfPossiblePlusConsume(m_ManaCost);
+            m_StateHandler.OnMovementStateChanged(false);
+            m_StateHandler.SetOrientationToUseMovement();
             Vector3 start = m_Transform.position;
             Vector3 end = m_Transform.position + m_Transform.forward * m_Distance;
+            m_VFX.Play();
 
             if (m_HasOvershootFrame)
             {
@@ -86,7 +101,29 @@ namespace _3C.Player
             }
             
             m_Transform.position = end;
+            if (m_PostDashSlowDelay == 0)
+            {
+                PostDashCleaning();
+            }
+            else
+            {
+                m_StateHandler.StartCoroutine(c_PostDashDelay());
+            }
+        }
+
+        private void PostDashCleaning()
+        {
+            m_StateHandler.OnMovementStateChanged(true);
+            m_StateHandler.ResetMovementSpeedModifier();
             m_StateHandler.OnStateEnded();
+        }
+
+        private IEnumerator c_PostDashDelay()
+        {
+            m_StateHandler.OnMovementStateChanged(true);
+            m_StateHandler.ChangeMovementSpeedModifier(m_PostDashSpeedModifier);
+            yield return new WaitForSeconds(m_PostDashSlowDelay);
+            PostDashCleaning();
         }
 
         public override void OnValidate()

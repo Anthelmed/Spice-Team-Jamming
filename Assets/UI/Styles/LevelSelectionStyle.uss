@@ -1,0 +1,18 @@
+#LevelSelectionInfo {
+    position: absolute;
+    top: 50px;
+    width: 350px;
+    height: 350px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-image: url('project://database/Assets/UI/Textures/Background.png?fileID=2800000&guid=db5a558d34c59dd4b94b330d5b0e2b98&type=3#Background');
+    -unity-background-image-tint-color: var(--primary-color-1);
+    right: 100px;
+    -unity-background-scale-mode: scale-to-fit;
+}

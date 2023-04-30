@@ -8,13 +8,14 @@ namespace DefaultNamespace.HealthSystem.Damager
     {
         public int Damage;
 
-        public Target.Team team;
+        public Targetable.Team team;
+        public Targetable.Team ignore;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent<IDamageable>(out var damageable))
             {
-                damageable.TakeDamage(Damage, team);
+                damageable.TakeDamage(Damage, team | ignore);
             }
         }
     }

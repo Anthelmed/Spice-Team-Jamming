@@ -2,20 +2,22 @@
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
+using Units;
 using UnityEngine;
 
 namespace _3C.Player.Weapons
 {
     public abstract class AWeaponMovement : MonoBehaviour
     {
-        private Collider m_Collider;
+        private HitBox m_Collider;
         private Tween m_CurrentTweener;
+
+        public Tween CurrentTweener => m_CurrentTweener;
 
         private void Awake()
         {
-            m_Collider = GetComponentInChildren<Collider>();
+            m_Collider = GetComponentInChildren<HitBox>();
             m_Collider.enabled = false;
-            m_Collider.isTrigger = true;
         }
 
         public void TriggerWeaponMovement(float _duration, AnimationCurve _MovementCurve)

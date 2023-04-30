@@ -7,8 +7,10 @@ namespace DefaultNamespace.HealthSystem.Damageable
 {
     public class HealthHolder : MonoBehaviour, IDamageable
     {
-        public Target.Team team;
+        public Targetable.Team team;
         [SerializeField] private int m_MaxHealth;
+        [SerializeField] private float m_invincibleTime = 0.5f;
+        public int MaxHealth => m_MaxHealth;
 
         [ReadOnly]
         [SerializeField] private int m_CurrentHealth;
@@ -16,23 +18,29 @@ namespace DefaultNamespace.HealthSystem.Damageable
         [SerializeField] private UnityEvent m_OnTakeDamage;
         [SerializeField] private UnityEvent m_OnHealed;
         [SerializeField] private UnityEvent<int> m_OnHealthChanged;
-        [SerializeField] private UnityEvent m_OnDeath;
+        [SerializeField] private UnityEvent<Targetable.Team> m_OnDeath;
+
+        private float m_lastHit;
         
         private void Awake()
         {
             m_CurrentHealth = m_MaxHealth;
         }
 
-        public void TakeDamage(int _damage, Target.Team _team)
+        public void TakeDamage(int _damage, Targetable.Team _team)
         {
+            // Avoid being hit twice in a frame
+            if (Time.timeSinceLevelLoad - m_lastHit < m_invincibleTime) return;
+            m_lastHit = Time.timeSinceLevelLoad;
+
             // Don't receive damage from allies
-            if (_team == team) return;
+            if (_team.HasFlag(team)) return;
 
             m_CurrentHealth -= _damage;
             if (m_CurrentHealth <= 0)
             {
                 m_CurrentHealth = 0;
-                m_OnDeath?.Invoke();
+                m_OnDeath?.Invoke(_team);
             }
             else
             {

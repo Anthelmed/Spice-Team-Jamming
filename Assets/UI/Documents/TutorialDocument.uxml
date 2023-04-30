@@ -1,0 +1,19 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ActionHelperBack" src="project://database/Assets/UI/Templates/ActionHelperBack.uxml?fileID=9197481963319205126&amp;guid=a3bf47acfd3a7bb46a4e5d03dee8c3ca&amp;type=3#ActionHelperBack" />
+    <Style src="project://database/Assets/UI/Styles/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=852c0b1f00071754886a563d72ecb599&amp;type=3#GlobalStyle" />
+    <Style src="project://database/Assets/UI/Styles/TutorialStyle.uss?fileID=7433441132597879392&amp;guid=932f34492c56a0e4ab93ef26a51fbb30&amp;type=3#TutorialStyle" />
+    <Style src="project://database/Assets/UI/Styles/ActionHelperStyle.uss?fileID=7433441132597879392&amp;guid=1ee840c4db8243eaa2a9f33057bc878a&amp;type=3#ActionHelperStyle" />
+    <ui:VisualElement name="Tutorial" class="main-element auto-reference">
+        <ui:VisualElement name="Overlay" />
+        <ui:VisualElement name="TutorialTitle" class="title auto-reference">
+            <ui:Label tabindex="-1" text="[Hint Name]" display-tooltip-when-elided="true" name="TutorialTitleLabel" class="title-label auto-reference" />
+        </ui:VisualElement>
+        <ui:VisualElement name="TutorialInfo" class="auto-reference" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+            <ui:Label tabindex="-1" text="[Hint SubTitle]" display-tooltip-when-elided="true" name="TutorialInfoSubTitle" class="sub-title auto-reference" />
+            <ui:Label tabindex="-1" text="[Hint Text]" display-tooltip-when-elided="true" name="TutorialInfoText" class="auto-reference text" />
+        </ui:VisualElement>
+        <ui:VisualElement name="TutorialActionHelpers" class="action-helpers">
+            <ui:Instance template="ActionHelperBack" name="ActionHelperBack" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

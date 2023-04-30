@@ -128,7 +128,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _Noise_Intensity: 0.139
+    - _Noise_Intensity: 0.166
     - _Noise_Tile: 0.1
     - _Normal_Strength: 0
     - _OVERLAY_NOISE_MASK: 1

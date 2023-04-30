@@ -28,7 +28,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GradientMap:
-        m_Texture: {fileID: 2800000, guid: 67493f89d4df8c748a7151b97be31346, type: 3}
+        m_Texture: {fileID: 2800000, guid: a683b58327756c349b1019208be96f19, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -90,7 +90,7 @@ Material:
     - _VertexOffsetAmount: 0
     m_Colors:
     - _BurnColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 4.90566, g: 4.349855, b: 3.5404058, a: 1}
+    - _Color: {r: 3.5444038, g: 4.328504, b: 4.90566, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _PanningSpeedXYmaintexZWdisplacementtex: {r: 0, g: 0, b: 0, a: 0}
     - _Secondarypanningspeed: {r: 0, g: 0, b: 0, a: 0}

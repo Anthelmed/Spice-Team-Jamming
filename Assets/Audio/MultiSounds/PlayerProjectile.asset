@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5344828a8dab247a92f2393448a6e2, type: 3}
+  m_Name: PlayerProjectile
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 58ce23460eb11d84883ba8a6763a8483, type: 3}
+  - {fileID: 8300000, guid: 5eb9c1be30aadd14280a8e38f587c501, type: 3}
+  - {fileID: 8300000, guid: 5ac492972e5c20b42b6bea60303a6f59, type: 3}
+  hasCooldown: 1
+  coolDownTime: 0.1

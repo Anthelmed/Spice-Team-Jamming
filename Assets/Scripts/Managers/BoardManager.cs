@@ -20,6 +20,8 @@ public enum Biome
 public class BoardManager : MonoBehaviour
 {
     // TODO move this into level data SO
+
+    [SerializeField] Transform mapGraphicsParent;
     
     [Header ("Biomes")]
     [SerializeField] private BiomePrefabHolder grassPrefabHolder;
@@ -45,6 +47,7 @@ public class BoardManager : MonoBehaviour
     private Transform _transform;
     
     [SerializeField] private bool debugMode = false;
+    [SerializeField] float mapHeightOffset;
 
     private void Awake()
     {
@@ -214,21 +217,20 @@ public class BoardManager : MonoBehaviour
                 var currentPrefab = _biomePrefabHolders[currentBiome].GetRandomBiomePrefab();
                 
                 var tilePrefabTransform = currentPrefab.transform;
-                var localScale = tilePrefabTransform.localScale;
+                var localScale = new Vector3(20, 1, 20);// tilePrefabTransform.localScale;
                 float xSize = localScale.x;
                 float zSize = localScale.z;
 
-                Vector3 pos = new Vector3(x * xSize, 0, y * zSize);
+                Vector3 pos = new Vector3(x * xSize, mapHeightOffset, y * zSize);
 
                 // We can rotate the tile [0, 90, 180, 270] degrees to get more variation
-                Quaternion rotation = Quaternion.identity;
-                
-                if (randomBiomeRotation)
-                {
-                    rotation = Quaternion.Euler(0, 90 * Random.Range(0, 4), 0);
-                }
-                GameObject go = Instantiate(currentPrefab, pos, rotation, _transform);
+
+                GameObject go = Instantiate(currentPrefab, pos, Quaternion.identity, _transform);
+                go.transform.SetParent(mapGraphicsParent);
+                go.transform.localEulerAngles = new Vector3(go.transform.localEulerAngles.x, Random.Range(0, 4) * 90f, go.transform.localEulerAngles.z);
                 var tile = go.GetComponentInChildren<GameTile>();
+                
+                tile.InitTileData(currentBiome, new Vector2Int(x, y));
 
                 MapTiles[x, y] = tile;
                 
@@ -250,15 +252,17 @@ public class BoardManager : MonoBehaviour
                     var currentPrefab = _biomePrefabHolders[currentBiome].GetRandomBiomePrefab();
                     
                     var tilePrefabTransform = currentPrefab.transform;
-                    var localScale = tilePrefabTransform.localScale;
+                    var localScale = new Vector3(20, 1, 20);// tilePrefabTransform.localScale;;
                     float xSize = localScale.x;
                     float zSize = localScale.z;
 
-                    Vector3 pos = new Vector3(x * xSize, 0, y * zSize);
+                    Vector3 pos = new Vector3(x * xSize, mapHeightOffset, y * zSize);
 
                     // We can rotate the tile [0, 90, 180, 270] degrees to get more variation
                     GameObject go = Instantiate(currentPrefab, pos, Quaternion.identity, _transform);
                     var tile = go.GetComponentInChildren<GameTile>();
+                    go.transform.SetParent(mapGraphicsParent);
+                    tile.InitTileData(currentBiome, new Vector2Int(x,y));
                     tile.IsObstacle = true;
                     MapTiles[x, y] = tile;
 
@@ -275,15 +279,17 @@ public class BoardManager : MonoBehaviour
                     var currentPrefab = _biomePrefabHolders[mostCommonBiome].GetRandomBiomePrefab();
                     
                     var tilePrefabTransform = currentPrefab.transform;
-                    var localScale = tilePrefabTransform.localScale;
+                    var localScale = new Vector3(20, 1, 20);// tilePrefabTransform.localScale;;
                     float xSize = localScale.x;
                     float zSize = localScale.z;
                 
-                    Vector3 pos = new Vector3(x * xSize, 0, y * zSize);
+                    Vector3 pos = new Vector3(x * xSize, mapHeightOffset, y * zSize);
                 
                     // We can rotate the tile [0, 90, 180, 270] degrees to get more variation
                     GameObject go = Instantiate(currentPrefab, pos, Quaternion.identity, _transform);
                     var tile = go.GetComponentInChildren<GameTile>();
+                    go.transform.SetParent(mapGraphicsParent);
+                    tile.InitTileData(currentBiome, new Vector2Int(x, y));
                     MapTiles[x, y] = tile;
                 }
 
@@ -292,8 +298,9 @@ public class BoardManager : MonoBehaviour
             }
 
         }
-        
+
     }
+
 
     void OnValidate()
     {

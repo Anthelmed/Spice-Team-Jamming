@@ -1,0 +1,23 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ActionHelperMap" src="project://database/Assets/UI/Templates/ActionHelperMap.uxml?fileID=9197481963319205126&amp;guid=60074577164d5e6418ea1c1576f36916&amp;type=3#ActionHelperMap" />
+    <ui:Template name="ActionHelperPause" src="project://database/Assets/UI/Templates/ActionHelperPause.uxml?fileID=9197481963319205126&amp;guid=9f31e097f9e44704850ae8bd21cdf61e&amp;type=3#ActionHelperPause" />
+    <Style src="project://database/Assets/UI/Styles/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=852c0b1f00071754886a563d72ecb599&amp;type=3#GlobalStyle" />
+    <Style src="project://database/Assets/UI/Styles/ActionHelperStyle.uss?fileID=7433441132597879392&amp;guid=1ee840c4db8243eaa2a9f33057bc878a&amp;type=3#ActionHelperStyle" />
+    <Style src="project://database/Assets/UI/Styles/BattlefieldStyle.uss?fileID=7433441132597879392&amp;guid=d6e8357d1c29a054bb5b0fbbd3557a30&amp;type=3#BattlefieldStyle" />
+    <ui:VisualElement name="Battlefield" class="main-element auto-reference">
+        <ui:VisualElement name="BattlefieldPlayerStats" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+            <ui:VisualElement name="BattlefieldPlayerStatHealth" class="battlefield-player-stat-background auto-reference" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                <ui:VisualElement name="BattlefieldPlayerStatHealthGauge" class="battlefield-player-stat-gauge auto-reference" />
+            </ui:VisualElement>
+            <ui:VisualElement name="BattlefieldPlayerStatMana" class="battlefield-player-stat-background auto-reference" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                <ui:VisualElement name="BattlefieldPlayerStatManaGauge" class="battlefield-player-stat-gauge auto-reference" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="BattlefieldBalanceIndicator" class="auto-reference" />
+        <ui:VisualElement name="BattlefieldMinimap" class="auto-reference" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); display: none;" />
+        <ui:VisualElement name="BattlefieldActionHelpers" class="action-helpers">
+            <ui:Instance template="ActionHelperMap" name="ActionHelperMap" />
+            <ui:Instance template="ActionHelperPause" name="ActionHelperPause" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

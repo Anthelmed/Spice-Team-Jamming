@@ -32,7 +32,5 @@ public class TileSelector : MonoBehaviour
         if (selectedTile.IsObstacle) return;
         selectedTile.Highlight();
 
-
-
     }
 }

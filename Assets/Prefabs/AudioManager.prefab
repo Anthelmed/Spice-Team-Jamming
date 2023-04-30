@@ -690,6 +690,7 @@ GameObject:
   - component: {fileID: 7809336113370977693}
   - component: {fileID: 8323578534122345537}
   - component: {fileID: 8388288626561659930}
+  - component: {fileID: 4386575257741072705}
   m_Layer: 0
   m_Name: BGMSources
   m_TagString: Untagged
@@ -723,11 +724,11 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 4113331242230349473, guid: af0374d79e3c12a4f949c406a1962272,
     type: 2}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 3cdae52839809434a9075e263fa17b98, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -820,11 +821,108 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 5001287953217620789, guid: af0374d79e3c12a4f949c406a1962272,
     type: 2}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 6800c728aa0fcf440b82e5063f2cf582, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &4386575257741072705
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4182732915383820337}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 1534161290905669328, guid: af0374d79e3c12a4f949c406a1962272,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 1ec837459ca7cc844af7a04398971452, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -955,10 +1053,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57ddc541bf259f64c819e2908e4c5348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSfxSources: []
-  mobSfxSources: []
-  uiAudioSource: {fileID: 0}
-  bgmSources: []
+  playerSfxSources:
+  - {fileID: 1953704984254078058}
+  - {fileID: 3301423641661413728}
+  - {fileID: 724232544717954062}
+  - {fileID: 3413303473253250302}
+  mobSfxSources:
+  - {fileID: 967972678609691918}
+  - {fileID: 3745363618722162516}
+  - {fileID: 7674131036221476304}
+  uiAudioSource: {fileID: 269294385859189555}
+  overworldBgmSource: {fileID: 8323578534122345537}
+  levelBgmSource: {fileID: 8388288626561659930}
+  tensionSource: {fileID: 4386575257741072705}
   playerSfxSourceParent: {fileID: 5803001632542200392}
   mobSfxSourceParent: {fileID: 3590212808450251421}
   clips:
@@ -971,18 +1078,33 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bdc4ad70de0fa174d88438be359008e4, type: 3}
   - {fileID: 8300000, guid: 4443165f8c7310c44917d920c4354460, type: 3}
   - {fileID: 8300000, guid: 599c73a09b1a08a4282c8b13b09d506d, type: 3}
+  - {fileID: 8300000, guid: 24637fabc7d564247b3c936f778c8580, type: 3}
+  - {fileID: 8300000, guid: ca5ac061c5bf7dc4ab01a9ccf79a9672, type: 3}
+  - {fileID: 8300000, guid: e4e4afeaccc3bcd45873abbea4951658, type: 3}
+  - {fileID: 8300000, guid: e6e30794f4514fd468a738bb05fef792, type: 3}
+  - {fileID: 8300000, guid: 9db31297a24b8784fbb6407feafb45a5, type: 3}
+  - {fileID: 8300000, guid: da162b489197646688ab8a46f38ec744, type: 3}
   multiSounds:
   - {fileID: 11400000, guid: 2930a663a6d82704c8cbee617d0f4229, type: 2}
   - {fileID: 11400000, guid: f9d9e66f694d61e4bb7f655314c4785e, type: 2}
   - {fileID: 11400000, guid: f13e9408fb0d91d429f63fba0cced004, type: 2}
   - {fileID: 11400000, guid: f2b2d7c75fe0f2247a2ec2dd53e73576, type: 2}
+  - {fileID: 11400000, guid: 15cd0892c3fff134e917f490bbbe3b4b, type: 2}
+  - {fileID: 11400000, guid: 72bc3cb4db3e1834f8e913ee304b2a25, type: 2}
+  - {fileID: 11400000, guid: 77891a0f76567e94ca7a8fcfd3994fae, type: 2}
   mainMixer: {fileID: 24100000, guid: a8eb57fe499bc7240b9ead1175178864, type: 2}
-  mobChatterMixer: {fileID: 24100000, guid: 80657fc46a410a044ac09b5c4a0c97a4, type: 2}
-  overWorldSnapshot: {fileID: 0}
-  battleSnapshot: {fileID: 0}
-  lightMobs: {fileID: 0}
-  medMobs: {fileID: 0}
-  heavyMobs: {fileID: 0}
+  bgmMixer: {fileID: 24100000, guid: af0374d79e3c12a4f949c406a1962272, type: 2}
+  overWorldSnapshot: {fileID: -5883265491258198919, guid: af0374d79e3c12a4f949c406a1962272,
+    type: 2}
+  battleSnapshot: {fileID: 24500006, guid: af0374d79e3c12a4f949c406a1962272, type: 2}
+  pauseSnapShot: {fileID: -5840381992680404044, guid: a8eb57fe499bc7240b9ead1175178864,
+    type: 2}
+  blendedSnapshot: {fileID: 2904938716665533818, guid: af0374d79e3c12a4f949c406a1962272,
+    type: 2}
+  shouldPlayBGM: 1
+  transitionTime: 3
+  enemyWeight: 0.7
+  playerWeight: 0.3
 --- !u!1 &5168727758160633787
 GameObject:
   m_ObjectHideFlags: 0

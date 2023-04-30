@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: PlayerAttackOne
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: aa28540b760f6fa42be92fb318527f48, type: 3}
-  - {fileID: 8300000, guid: 7d47debed84d01b49883e5701a184366, type: 3}
-  - {fileID: 8300000, guid: b80a930a5b373f24480d984baae1ffb3, type: 3}
-  - {fileID: 8300000, guid: d289780c9edb49741b9445cafe6a732a, type: 3}
+  - {fileID: 8300000, guid: a83ac0a3a0a7ecd468cf427d249ad335, type: 3}
+  - {fileID: 8300000, guid: c50fc244825f5bb42999affdf15d9029, type: 3}
+  - {fileID: 8300000, guid: fd1ac0a72447e2f498c87533743d71b1, type: 3}
+  - {fileID: 8300000, guid: 920bb3dca36e83841b8b66af72aeb90a, type: 3}
+  hasCooldown: 0
+  coolDownTime: 0.1

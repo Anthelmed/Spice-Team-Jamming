@@ -28,7 +28,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GradientMap:
-        m_Texture: {fileID: 2800000, guid: 67493f89d4df8c748a7151b97be31346, type: 3}
+        m_Texture: {fileID: 2800000, guid: a683b58327756c349b1019208be96f19, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -88,6 +88,7 @@ Material:
     - _VertexAlphaCutoff: 0
     - _VertexOffset: 0
     - _VertexOffsetAmount: 0
+    - _ZTest: 8
     m_Colors:
     - _BurnColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 2.4528303, g: 2.1749277, b: 1.770203, a: 1}

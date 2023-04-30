@@ -1,33 +1,74 @@
 ﻿using System;
 using System.Collections;
+using System.ComponentModel;
 using _3C.Player.Weapons;
 using DefaultNamespace;
 using DefaultNamespace.HealthSystem.Damager;
+using DG.Tweening;
 using NaughtyAttributes;
+using Units;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace _3C.Player
 {
     [Serializable]
+    struct AttackSetting
+    {
+        public float InputWaitDelay;
+
+        [HideInInspector] // Set speed using duration and distance
+        public float DashSpeed;
+        
+        [Tooltip("In meters.")]
+        public float DashDistance;
+        public float DashDuration;
+        public AnimationCurve DashCurve;
+        
+        
+        public float AttackDuration;
+        
+        [HideInInspector] // Not exactly sure what this curve's purpose is? If it was for moving the attack collider then it can be removed as that behavior is no longer used.
+        public AnimationCurve WeaponMovementCurve;
+        
+        public int BaseDamage;
+    }
+    
+    [Serializable]
     public class PlayerMeleeAttack : PlayerStateBehavior
     {
+        // [SerializeField] private float m_InputWaitDelay;
+        //
+        // [SerializeField] private float m_DashSpeed;
+        // [SerializeField] private float m_DashDuration;
+        // [SerializeField] private AnimationCurve m_DashCurve;
+        //
+        //
+        // [SerializeField] private float m_AttackDuration;
+        //
+        // [SerializeField] private AnimationCurve m_WeaponMovementCurve;
+        //
+        // [SerializeField] private int m_BaseDamage;
+        // [SerializeField] private int m_SuccessfullComboDamage;
+
+        
         [Header("Settings")]
-        [SerializeField] private float m_InputWaitDelay;
-        
-        [SerializeField] private float m_AttackDuration;
+        [SerializeField] private AttackSetting[] m_AttacksSettings;
+
+        [Header("VFX")]
         [SerializeField] private float m_VFX_Start;
-        [SerializeField] private AnimationCurve m_WeaponMovementCurve;
+        [SerializeField] private ParticleSystem[] m_VFX;
+        [SerializeField] private bool m_AreVFXWorldBased;
         
-        [SerializeField] private int m_BaseDamage;
-        [SerializeField] private int m_SuccessfullComboDamage;
+        private Transform m_VFXParent;
+
+
 
         [Header("Components")]
-        [SerializeField] private ParticleSystem[] m_VFX;
         [SerializeField] private AWeaponMovement m_WeaponMovement;
-        [SerializeField] private ColliderDamager m_Damager;
+        [SerializeField] private HitBox m_Damager;
 
-        [Header("Animation")]
+        [BoxGroup("Animation")] 
         [AnimatorParam("m_Animator")]
         [SerializeField] private int m_StartAttackTriggerParam;
         [AnimatorParam("m_Animator")]
@@ -47,51 +88,94 @@ namespace _3C.Player
         private bool m_IsAttackAsked;
 
         private int m_AttackIndex = 0;
-
-        private PlayerState m_PreviousState;
-
+        
         private Coroutine m_WaitForInputCoroutine;
         private Coroutine m_AttackCoroutine;
-
+        private Tween m_DashTween;
+        private Transform m_Transform;
         private bool IsWaitingForInput => m_WaitForInputCoroutine != null;
 
-        public override void StartState(PlayerState _previousState)
+        protected override void Init(IStateHandler _stateHandler)
+        {
+            m_Transform = _stateHandler.gameObject.transform;
+            m_VFXParent = m_VFX[0].transform.parent;
+        }
+
+        public override void StartState()
         {
             //m_Animator?.SetTrigger(m_StartAttackTriggerParam);
             m_WaitForInputCoroutine = null;
             m_AttackCoroutine = null;
             m_AttackIndex = 0;
-            m_PreviousState = _previousState;
             PlayNextAttack();
         }
 
+        private AttackSetting CurrentAttackSettings => m_AttacksSettings[m_AttackIndex];
+        
         private void PlayNextAttack()
         {
             m_IsAttackAsked = false;
-            m_Damager.Damage = m_AttackIndex == 2 ? m_SuccessfullComboDamage : m_BaseDamage;
-            m_WeaponMovement.TriggerWeaponMovement(m_AttackDuration, m_WeaponMovementCurve);
+            m_StateHandler.OnMovementStateChanged(false);
+            m_Damager.damage = CurrentAttackSettings.BaseDamage;
+            m_WeaponMovement.TriggerWeaponMovement(CurrentAttackSettings.AttackDuration, CurrentAttackSettings.WeaponMovementCurve);
             m_StateHandler.PlayerSoundsInstance.PlayAttackSound();
-            if (m_Animator == null)
+            m_Animator?.SetTrigger(TriggerParameterFromAttackIndex);
+            //if (m_Animator == null)
             {
                 m_AttackCoroutine = m_StateHandler.StartCoroutine(c_AttackDuration());
+                /*m_DashTween = m_Transform.DOMove(
+                    m_Transform.position + m_Transform.forward * CurrentAttackSettings.DashSpeed * CurrentAttackSettings.DashDuration, CurrentAttackSettings.DashDuration
+                    ).SetEase(CurrentAttackSettings.DashCurve);*/
+                
+                m_DashTween = m_Transform.DOMove(
+                    m_Transform.position + m_Transform.forward * CurrentAttackSettings.DashDistance, CurrentAttackSettings.DashDuration
+                ).SetEase(CurrentAttackSettings.DashCurve);
+                
+                m_DashTween.onComplete += () =>
+                {
+                    m_StateHandler.OnMovementStateChanged(true);
+                };
             }
-            else
+            //else
             {
-                //m_Animator?.SetTrigger(TriggerParameterFromAttackIndex);
+                // m_Animator?.SetTrigger(TriggerParameterFromAttackIndex);
             }
         }
 
         private IEnumerator c_AttackDuration()
         {
             yield return new WaitForSeconds(m_VFX_Start);
-            m_VFX[m_AttackIndex].Play();
-            yield return new WaitForSeconds(m_AttackDuration - m_VFX_Start);
+            
+            PlayVFX(m_VFX[m_AttackIndex]);
+            yield return new WaitForSeconds(CurrentAttackSettings.AttackDuration - m_VFX_Start);
             OnAttackAnimationEnded();
             m_AttackCoroutine = null;
         }
 
+        private void PlayVFX(ParticleSystem particleSystem)
+        {
+            if (m_AreVFXWorldBased)
+            {
+                particleSystem.transform.parent.SetParent(null, true);
+            }
+            
+            particleSystem.Play();
+        }
+
+        private void StopVFX(ParticleSystem particleSystem)
+        {
+            particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            if (m_AreVFXWorldBased)
+            {
+                particleSystem.transform.parent.parent = m_Transform;
+                m_VFXParent.localPosition = Vector3.zero;
+                m_VFXParent.localRotation = Quaternion.identity;
+            }
+        }
+
         public void OnAttackAnimationEnded()
         {
+            StopVFX(m_VFX[m_AttackIndex]);
             if (m_IsAttackAsked)
             {
                 IncrementAttackIndex();
@@ -99,28 +183,9 @@ namespace _3C.Player
             }
             else
             {
+                m_StateHandler.OnMovementStateChanged(true);
                 m_WeaponMovement.StopWeaponMovement();
-                var lastInput = GameplayData.s_PlayerInputs.InputStack.Top;
-                if (lastInput == InputType.MovementCanceled)
-                {
-                    m_WaitForInputCoroutine = m_StateHandler.StartCoroutine(c_WaitForInput());
-                    return;
-                }
-
-                if (lastInput == InputType.AttackPerformed)
-                {
-                    if (GameplayData.s_PlayerInputs.InputStack.Count >= 2 && 
-                        GameplayData.s_PlayerInputs.InputStack.GetTop(1) == InputType.MovementPerformed)
-                    {
-                        ExitState();
-                        return;
-                        
-                    }
-                    m_WaitForInputCoroutine = m_StateHandler.StartCoroutine(c_WaitForInput());
-                    return;
-                }
-
-                ExitState();
+                m_WaitForInputCoroutine = m_StateHandler.StartCoroutine(c_WaitForInput());
             }
         }
 
@@ -135,15 +200,16 @@ namespace _3C.Player
 
         private IEnumerator c_WaitForInput()
         {
-            yield return new WaitForSeconds(m_InputWaitDelay);
+            yield return new WaitForSeconds(CurrentAttackSettings.InputWaitDelay);
             ExitState();
         }
 
         private void StateCleaning()
         {
             //m_Animator?.SetTrigger(m_EndAttackTriggerParam);
+            m_StateHandler.OnMovementStateChanged(true);
             m_WeaponMovement.StopWeaponMovement();
-            m_VFX[m_AttackIndex].Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            StopVFX(m_VFX[m_AttackIndex]);
             if (m_WaitForInputCoroutine != null)
             {
                 m_StateHandler.StopCoroutine(m_WaitForInputCoroutine);
@@ -154,6 +220,12 @@ namespace _3C.Player
             {
                 m_StateHandler.StopCoroutine(m_AttackCoroutine);
                 m_AttackCoroutine = null;
+            }
+
+            if (m_DashTween != null)
+            {
+                m_DashTween.Kill();
+                m_DashTween = null;
             }
         }
         
@@ -172,26 +244,23 @@ namespace _3C.Player
         {
             if (IsWaitingForInput)
             {
-                if (inputType == InputType.MovementCanceled)
+                if (inputType != InputType.MeleeAttackPerformed)
                 {
                     return;
                 }
                 m_StateHandler.StopCoroutine(m_WaitForInputCoroutine);
                 m_WaitForInputCoroutine = null;
-
-                if (inputType != InputType.AttackPerformed)
-                {
-                    ExitState();
-                }
-                else
-                {
-                    IncrementAttackIndex();
-                    PlayNextAttack();
-                }
+                
+                IncrementAttackIndex();
+                PlayNextAttack();
             }
             else
             {
-                if (inputType == InputType.AttackPerformed)
+                if (inputType == InputType.MovementPerformed)
+                {
+                    m_IsAttackAsked = false;
+                }
+                if (inputType == InputType.MeleeAttackPerformed)
                 {
                     m_IsAttackAsked = true;
                 }

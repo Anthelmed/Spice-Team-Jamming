@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 43ac4d3e834ade54197f54cd123ad3c6
+<<<<<<<< Updated upstream:Assets/Scenes/AudioWorkshop.unity.meta
+guid: 64c030185b6079f48a9e9ff345122a6f
+========
+guid: 50cfc90d36a568444aa71feb51c2cbb0
+>>>>>>>> Stashed changes:Assets/Scenes/Vincent.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

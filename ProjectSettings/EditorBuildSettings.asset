@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/_MapScene.unity
+    guid: 647aa4ab5e74c954080f6c8a4f077fe8
   - enabled: 1
-    path: Assets/Scenes/AlexTestBattleScene.unity
+    path: Assets/Scenes/_LevelScene.unity
     guid: 91eb3e6583346054e966071b6bdfcb93
   m_configObjects: {}
