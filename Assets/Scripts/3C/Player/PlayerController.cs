@@ -1,4 +1,5 @@
-﻿using DefaultNamespace;
+﻿using System.Linq.Expressions;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,10 +8,53 @@ namespace _3C.Player
     public class PlayerController : MonoBehaviour
     {
         private Camera m_MainCamera;
+        private PlayerInput m_PlayerInput;
+        private PlayerCursor m_PlayerCursor;
+
 
         private void Awake()
         {
             m_MainCamera = Camera.main;
+            m_PlayerInput = GetComponent<PlayerInput>();
+            m_PlayerInput.onControlsChanged += OnControlsChanged;
+            m_PlayerCursor = GetComponent<PlayerCursor>();
+            OnControlsChanged(m_PlayerInput);
+        }
+
+        private void OnControlsChanged(PlayerInput obj)
+        {
+            switch (obj.currentControlScheme) 
+            {
+                case "Gamepad":
+                    UseGamepadAsCursor();
+                    break;
+                default:
+                    ResetCursorToMouse();
+                    break;
+            }
+        }
+
+        private void UseGamepadAsCursor()
+        {
+            m_PlayerCursor.UseMouse = false;
+        }
+
+        private void ResetCursorToMouse()
+        {
+            m_PlayerCursor.UseMouse = true;
+        }
+
+        public void OnGamepadCursorMovement(InputAction.CallbackContext _context)
+        {
+            m_PlayerCursor.Movement = _context.ReadValue<Vector2>();
+        }
+
+        public void TriggerUIClick(InputAction.CallbackContext _context)
+        {
+            if (_context.performed)
+            {
+                GameplayData.UIPressThisFrame = true;
+            }
         }
 
         public void OnMovementAsked(InputAction.CallbackContext _context)
@@ -126,6 +170,14 @@ namespace _3C.Player
             
             GameplayData.s_PlayerInputs.InputStack.Add(_input);
             GameplayData.s_PlayerStateHandler.OnInputAdded(_input);
+        }
+
+        public void OnPause(InputAction.CallbackContext _contex)
+        {
+            if (_contex.phase == InputActionPhase.Performed)
+            {
+                
+            }
         }
     }
 }

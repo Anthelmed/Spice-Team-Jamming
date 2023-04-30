@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using _3C.Player;
+using DefaultNamespace;
 using DG.Tweening;
 using SpiceTeamJamming.UI;
 using UnityEngine;
@@ -147,12 +148,17 @@ public class GameManager : MonoBehaviour
                 {
                     ////hovering over tiles. for juice only
                     HighlightingJuice();
-
+                    if (UIRouter.CurrentRoute != UIRouter.RouteType.Map)
+                    {
+                        UIRouter.GoToRoute(UIRouter.RouteType.Map);
+                        
+                    }
 
                     //actually selecting tiles and telporting there
-                    if (Mouse.current.leftButton.wasPressedThisFrame)
+                    if (GameplayData.UIPressThisFrame)
                     {
-                        Vector2 mousePosition = Mouse.current.position.ReadValue();
+                        GameplayData.UIPressThisFrame = false;
+                        Vector2 mousePosition = GameplayData.CursorPosition;
                         Ray ray = mapCamera.ScreenPointToRay(mousePosition);
                         RaycastHit hit;
 
@@ -242,7 +248,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentGameState != GameState.level) return;
         playerCharacter.SetActive(false);
-        playerInput.SwitchCurrentActionMap("UI");
+        playerInput.SwitchCurrentActionMap("Map");
         CancelInvoke(nameof(DeactivatePlayer));
         Invoke(nameof(DeactivatePlayer), 1f);
         playerAnimator.SetTrigger("Teleport Out");
@@ -281,6 +287,8 @@ public class GameManager : MonoBehaviour
 
         TransitionToState(GameState.level);
         loadingScreenVisibilityEvent(false);
+        UIRouter.GoToRoute(UIRouter.RouteType.Battlefield);
+
     }
 
 
@@ -330,7 +338,7 @@ public class GameManager : MonoBehaviour
     {
         RaycastHit hoverHit;
 
-        Ray hoverRay = mapCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Ray hoverRay = mapCamera.ScreenPointToRay(GameplayData.CursorPosition);
         if (Physics.Raycast(hoverRay, out hoverHit))
         {
 
