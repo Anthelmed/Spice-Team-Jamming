@@ -217,7 +217,7 @@ public class BoardManager : MonoBehaviour
                 var currentPrefab = _biomePrefabHolders[currentBiome].GetRandomBiomePrefab();
                 
                 var tilePrefabTransform = currentPrefab.transform;
-                var localScale = tilePrefabTransform.localScale;
+                var localScale = new Vector3(20, 1, 20);// tilePrefabTransform.localScale;
                 float xSize = localScale.x;
                 float zSize = localScale.z;
 
@@ -226,7 +226,9 @@ public class BoardManager : MonoBehaviour
                 // We can rotate the tile [0, 90, 180, 270] degrees to get more variation
                 GameObject go = Instantiate(currentPrefab, pos, Quaternion.identity, _transform);
                 go.transform.SetParent(mapGraphicsParent);
+                go.transform.localEulerAngles = new Vector3(go.transform.localEulerAngles.x, Random.Range(0, 4) * 90f, go.transform.localEulerAngles.z);
                 var tile = go.GetComponentInChildren<GameTile>();
+                
                 tile.InitTileData(currentBiome, new Vector2Int(x, y));
 
                 MapTiles[x, y] = tile;
@@ -249,7 +251,7 @@ public class BoardManager : MonoBehaviour
                     var currentPrefab = _biomePrefabHolders[currentBiome].GetRandomBiomePrefab();
                     
                     var tilePrefabTransform = currentPrefab.transform;
-                    var localScale = tilePrefabTransform.localScale;
+                    var localScale = new Vector3(20, 1, 20);// tilePrefabTransform.localScale;;
                     float xSize = localScale.x;
                     float zSize = localScale.z;
 
@@ -276,7 +278,7 @@ public class BoardManager : MonoBehaviour
                     var currentPrefab = _biomePrefabHolders[mostCommonBiome].GetRandomBiomePrefab();
                     
                     var tilePrefabTransform = currentPrefab.transform;
-                    var localScale = tilePrefabTransform.localScale;
+                    var localScale = new Vector3(20, 1, 20);// tilePrefabTransform.localScale;;
                     float xSize = localScale.x;
                     float zSize = localScale.z;
                 

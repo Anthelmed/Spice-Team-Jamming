@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: GrassBiomePrefabHolder
   m_EditorClassIdentifier: 
   biomePrefabs:
-  - {fileID: 7336585689438855710, guid: 978824b7014bc4077a7805c66330a8bd, type: 3}
+  - {fileID: 4349463553145533619, guid: 4e6b855b754fa994691f2b8893e52d5b, type: 3}
+  - {fileID: 8544643774382564584, guid: e73f3a668ea61524697c5038af204069, type: 3}

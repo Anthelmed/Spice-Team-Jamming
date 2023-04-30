@@ -35,9 +35,9 @@ public class GameManager : MonoBehaviour
 
     GameObject loadedPlayer;
     bool battleMapLoaded;
+    bool loadingBattleMap;
 
     public event Action<GameState> OnGameStateChanged = delegate { };
-
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -125,6 +125,7 @@ public class GameManager : MonoBehaviour
 
     GameTile clickedTile;
     GameTile cachedHoverTile;
+    Vector3 cachedHoverTilePos;
     bool wigglin;
      
 
@@ -162,15 +163,15 @@ public class GameManager : MonoBehaviour
                                     return;
                                 }
                                 var cachedPos = tile.gameObject.transform.position;
-
+                                
                                 if (AudioManager.instance != null)  AudioManager.instance.PlaySingleClip(mapClickSound, SFXCategory.ui, 0, 0);
-
-                                tile.gameObject.transform.DOPunchPosition((Vector3.up * 15), 0.8f, 1, 1, false).OnComplete(() =>
+                                tile.gameObject.transform.DOPunchScale(tile.gameObject.transform.localScale * 1.1f, 0.4f, 5, 0);
+                                tile.gameObject.transform.DOPunchPosition((Vector3.up * 15), 0.4f, 1, 1, false).OnComplete(() =>
                                 {
                                     mapDestination = clickedTile.mapTileData.tileCoords;
-                                    tile.gameObject.transform.position = cachedPos;
+                                    tile.Unhighlight();
+                                    //tile.gameObject.transform.position = cachedPos;
                                     TryTransitionToLevel();
-
                                 });
 
 
@@ -197,6 +198,7 @@ public class GameManager : MonoBehaviour
         if (currentGameState == GameState.level) return;
 
         Scene scene = SceneManager.GetSceneByName(sceneName);
+        loadingBattleMap = true;
         print("scene index" + scene.buildIndex);
         StartCoroutine(LoadLevelScene(sceneName));
     }
@@ -220,6 +222,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         LevelTilesManager.instance.GenerateTiles();
+        loadingBattleMap = false;
         TransitionToLevel();
         battleMapLoaded = true;
     }
@@ -237,6 +240,7 @@ public class GameManager : MonoBehaviour
 
     void TryTransitionToLevel()
     {
+        if(loadingBattleMap) return;
         if (battleMapLoaded) TransitionToLevel();
         else LoadLevel(battleSceneName); // this ends up being async that's why it's like this
     }
@@ -315,19 +319,27 @@ public class GameManager : MonoBehaviour
         Ray hoverRay = mapCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
         if (Physics.Raycast(hoverRay, out hoverHit))
         {
-            hoverHit.collider.gameObject.TryGetComponent(out GameTile hoverTile);
-            if (hoverTile != null && !wigglin && cachedHoverTile != hoverTile)
-            {
-                if (hoverTile.mapTileData.biome == Biome.Water) return; // dont juice a place you cant go
 
-                wigglin = true;
-                cachedHoverTile = hoverTile;
-                var cachedTilePos = hoverTile.gameObject.transform.position;
-                hoverTile.gameObject.transform.DOPunchPosition(Vector3.up * 5, 0.15f, 1, 1, false).OnComplete(() =>
+            hoverHit.collider.gameObject.TryGetComponent(out GameTile hoverTile);
+            if (hoverTile != null && cachedHoverTile != hoverTile)
+            {
+                if (cachedHoverTile != null)
                 {
-                    wigglin = false;
-                    hoverTile.gameObject.transform.position = cachedTilePos;
-                });
+                    cachedHoverTile.Unhighlight();
+                }
+                cachedHoverTile = hoverTile;
+                if (hoverTile.mapTileData.biome == Biome.Water)return; // dont juice a place you cant go
+
+                
+                cachedHoverTile.Highlight();
+                // wigglin = true;
+                // cachedHoverTile = hoverTile;
+                // cachedHoverTilePos = hoverTile.gameObject.transform.position;
+                // hoverTile.gameObject.transform.DOPunchPosition(Vector3.up * 5, 0.4f, 1, 1, false).OnComplete(() =>
+                // {
+                //     wigglin = false;
+                //     hoverTile.gameObject.transform.position = cachedTilePos;
+                // });
             }
         }
     }

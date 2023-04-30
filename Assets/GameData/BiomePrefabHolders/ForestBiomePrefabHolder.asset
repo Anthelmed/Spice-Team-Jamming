@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: ForestBiomePrefabHolder
   m_EditorClassIdentifier: 
   biomePrefabs:
-  - {fileID: 634344991713679357, guid: 054d3e13dcee24a4db95db1b765ef7f1, type: 3}
+  - {fileID: 8280227936981124696, guid: eb14c5d0ec059884da1c5465b1664d39, type: 3}
+  - {fileID: 7547776043660646529, guid: 209fc444554001944aed89c0fd2f4065, type: 3}
+  - {fileID: 3522296215202711309, guid: 0b79ceff4477d0c47a343cb1e77724a6, type: 3}
