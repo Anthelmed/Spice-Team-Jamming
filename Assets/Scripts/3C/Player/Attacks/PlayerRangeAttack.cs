@@ -108,6 +108,7 @@ namespace _3C.Player
             {
                 if (!m_StateHandler.PlayerManaPoints.CheckIfPossible(m_ChargedManaCost))
                 {
+                    m_StateHandler.PlayerManaPoints.TriggerOnCantConsumeMana();
                     return;
                 }
                 

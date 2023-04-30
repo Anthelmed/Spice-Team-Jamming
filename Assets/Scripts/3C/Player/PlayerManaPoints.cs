@@ -1,4 +1,5 @@
 ﻿using System;
+using DefaultNamespace;
 using NaughtyAttributes;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
@@ -25,6 +26,7 @@ namespace _3C.Player
         public void Update()
         {
             m_CurrentManaPoint += m_ReloadAmountPerSecond * Time.deltaTime;
+            PlayerStaticEvents.s_PlayerManaChanged?.Invoke(m_CurrentManaPoint);
             if (m_CurrentManaPoint > m_MaxManaPoint)
             {
                 m_CurrentManaPoint = m_MaxManaPoint;
@@ -36,6 +38,7 @@ namespace _3C.Player
             if (CheckIfPossible(_manaAmount))
             {
                 m_CurrentManaPoint -= _manaAmount;
+                PlayerStaticEvents.s_PlayerManaChanged?.Invoke(m_CurrentManaPoint);
                 return true;
             }
 
@@ -45,6 +48,11 @@ namespace _3C.Player
         public bool CheckIfPossible(float _manaAmount)
         {
             return m_CurrentManaPoint >= _manaAmount;
+        }
+
+        public void TriggerOnCantConsumeMana()
+        {
+            PlayerStaticEvents.s_OnActionImpossibleBecauseOfMana?.Invoke();
         }
     }
 }

@@ -108,6 +108,7 @@ namespace _3C.Player
             if (newPossibleStateBehavior.DoConsumeManaPoints() &&
                 !m_ManaPoints.CheckIfPossible(newPossibleStateBehavior.BaseManaPoints))
             {
+                m_ManaPoints.TriggerOnCantConsumeMana();
                 return false;
             }
             
