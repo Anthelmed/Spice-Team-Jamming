@@ -37,7 +37,7 @@ namespace SpiceTeamJamming.UI
 		
 		private void OnNewGameButtonPressed()
 		{
-			UIRouter.GoToRoute(UIRouter.RouteType.Map);
+			//GameManager.instance.NewGame();
 		}
 		
 		private void OnSettingsButtonPressed()

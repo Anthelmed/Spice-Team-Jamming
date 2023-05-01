@@ -11,8 +11,7 @@ namespace SpiceTeamJamming.UI
 		[Space] 
 		[SerializeField] private BattlefieldDocumentAutoReferences elementsReferences;
 
-		[SerializeField] private InputActionReference pauseInputAction;
-		[SerializeField] private InputActionReference mapInputAction;
+
 		
 		[SerializeField] private CustomRenderTexture playerStatHealthCustomRenderTexture;
 		[SerializeField] private CustomRenderTexture playerStatManaCustomRenderTexture;
@@ -24,12 +23,11 @@ namespace SpiceTeamJamming.UI
 
 		protected void OnEnable()
 		{
-			mapInputAction.action.Enable();
-			mapInputAction.action.performed += OnMapActionPerformed;
+		
+
 			elementsReferences.ActionHelperMap.clicked += OnMapButtonPressed;
 			
-			pauseInputAction.action.Enable();
-			pauseInputAction.action.performed += OnPauseActionPerformed;
+
 			elementsReferences.ActionHelperPause.clicked += OnPauseButtonPressed;
 
 			PlayerStaticEvents.s_PlayerHealthChanged += OnPlayerHealthChanged;
@@ -44,12 +42,12 @@ namespace SpiceTeamJamming.UI
 
 		protected void OnDisable()
 		{
-			mapInputAction.action.Disable();
-			mapInputAction.action.performed -= OnMapActionPerformed;
+			//mapInputAction.action.Disable();
+		//	mapInputAction.action.performed -= OnMapActionPerformed;
 			elementsReferences.ActionHelperMap.clicked -= OnMapButtonPressed;
 			
-			pauseInputAction.action.Disable();
-			pauseInputAction.action.performed -= OnPauseActionPerformed;
+			//pauseInputAction.action.Disable();
+			//pauseInputAction.action.performed -= OnPauseActionPerformed;
 			elementsReferences.ActionHelperPause.clicked -= OnPauseButtonPressed;
 
 			PlayerStaticEvents.s_PlayerHealthChanged -= OnPlayerHealthChanged;
@@ -58,28 +56,22 @@ namespace SpiceTeamJamming.UI
 			ClearButtonsManipulators();
 		}
 
-		private void OnMapActionPerformed(InputAction.CallbackContext _)
-		{
-			if (UIRouter.CurrentRoute != Route) return;
+		//private void OnMapActionPerformed(InputAction.CallbackContext _)
+		//{
+		//	if (UIRouter.CurrentRoute != Route) return;
 
-			GoToMap();
-		}
+		//	GoToMap();
+		//}
 		
 		private void OnMapButtonPressed()
 		{
 			GoToMap();
 		}
-
-		private void OnPauseActionPerformed(InputAction.CallbackContext _)
-		{
-			if (UIRouter.CurrentRoute != Route) return;
-			
-			UIRouter.GoToRoute(UIRouter.RouteType.Pause);
-		}
 		
 		private void OnPauseButtonPressed()
 		{
-			UIRouter.GoToRoute(UIRouter.RouteType.Pause);
+			//UIRouter.GoToRoute(UIRouter.RouteType.Pause);
+			GameManager.instance.TogglePause();
 		}
 
 		private void OnPlayerHealthChanged(float value)
@@ -94,8 +86,8 @@ namespace SpiceTeamJamming.UI
 
 		private void GoToMap()
 		{
-			UIRouter.GoToRoute(UIRouter.RouteType.Map);
-			GameManager.instance.TransitionToMap();
+
+			GameManager.instance.TryTransitionToMap();
 		}
 
 		protected override void DisplaceElementsRandomly()

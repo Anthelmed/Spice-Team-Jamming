@@ -20,7 +20,7 @@ namespace DefaultNamespace
         [InitializeOnEnterPlayMode]
         public static void InitAll()
         {
-            s_PlayerInputs = null;
+           s_PlayerInputs = null;
         }
 #endif
     }

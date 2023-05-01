@@ -302,7 +302,7 @@ public class LevelTilesManager : MonoBehaviour
                 if (tile.hasPlayer)
                 {
                     PlayerTileIndexChanged(tile.gridLocation);
-                    print(tile.gameObject.name + "has player");
+                //    print(tile.gameObject.name + "has player");
                     return;
                 }
             }
