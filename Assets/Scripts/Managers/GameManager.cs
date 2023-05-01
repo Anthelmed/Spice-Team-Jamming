@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject playerCharacter;
     [SerializeField] Vector2Int mapDestination;
     [SerializeField] GameObject mapGraphics;
+    [SerializeField] BoardManager boardManager;
     [Header ("input from player controller")]
     [SerializeField] PlayerController playerController;
 
@@ -57,6 +58,26 @@ public class GameManager : MonoBehaviour
 
         }
         playerAnimator = playerInstance.GetComponentInChildren<Animator>(true);
+    }
+
+    public void NewGame()
+    {
+        TransitionToState(GameState.title);
+        StartCoroutine(ResetGame());
+    }
+    IEnumerator ResetGame()
+    {
+        Time.timeScale = 0f;
+        LevelTilesManager.instance.ClearLevelForReset();
+        yield return new WaitForEndOfFrame();
+        boardManager.ClearMap();
+        yield return new WaitForEndOfFrame();
+        boardManager.Generate();
+        playerCharacter.GetComponent<Unit>().ResetHealth(); // do this better
+        playerCharacter.SetActive(false);
+        mapGraphics.SetActive(true);
+        Time.timeScale = 1f;
+        StartGame();
     }
 
     private void Start()
@@ -349,6 +370,7 @@ public class GameManager : MonoBehaviour
         LoadLevel(battleSceneName);
     }
   
+   
 
 
 

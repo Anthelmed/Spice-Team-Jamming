@@ -37,7 +37,7 @@ namespace SpiceTeamJamming.UI
 		
 		private void OnNewGameButtonPressed()
 		{
-			//GameManager.instance.NewGame();
+			GameManager.instance.NewGame();
 		}
 		
 		private void OnSettingsButtonPressed()
