@@ -1,29 +1,101 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 
 namespace _3C.Player
 {
+    public struct InputState
+    {
+        public bool pause;
+        public bool openMap;
+        public bool closeMap;
+        public bool mapBack;
+        public bool confirm;
+        public bool select;
+        public bool menuBack;
+    }
     public class PlayerController : MonoBehaviour
     {
         private Camera m_MainCamera;
-        private PlayerInput m_PlayerInput;
         private PlayerCursor m_PlayerCursor;
 
 
+        MainInput mainInput;
+        [SerializeField] GameManager gameManager;
+
+        public InputState inputState = new InputState();
+        private bool m_OnDeviceChangeHooked;
+
         private void Awake()
         {
+
+            gameManager.OnGameStateChanged += SwitchInputMap;
             m_MainCamera = Camera.main;
-            m_PlayerInput = GetComponent<PlayerInput>();
-            m_PlayerInput.onControlsChanged += OnControlsChanged;
-            m_PlayerCursor = GetComponent<PlayerCursor>();
-            OnControlsChanged(m_PlayerInput);
+            mainInput = new MainInput();
+
+            //init default map
+            mainInput.Map.Enable();
+
+            mainInput.Gameplay.Look.performed += OnLook;
+            mainInput.Gameplay.Dash.performed += OnDash;
+            mainInput.Gameplay.RangeAttack.performed += OnRangeAttack;
+            mainInput.Gameplay.KeyboardAim.performed += OnKeyboardAim;
+            mainInput.Gameplay.MeleeAttack.performed += OnMeleeAttack;
+            mainInput.Gameplay.Pause.started += OnPause;
+
+            mainInput.Map.Back.started += MapBackPressed;
+            mainInput.Map.Confirm.started += ConfirmPressed;
+            mainInput.Map.Select.started += SelectPressed;
+
+            mainInput.Menu.Back.started += MenuBackPressed;
+
         }
 
+        public void SwitchInputMap(GameState state)
+        {
+            // GameState state = GameManager.instance.GetCurrentGameState();
+            switch (state)
+            {
+                case GameState.map:
+                    {
+                        mainInput.Gameplay.Disable();
+                        mainInput.Map.Enable();
+                        mainInput.Menu.Disable();
+                        print("enabled the map map");
+                    }
+                    break;
+                case GameState.level:
+                    {
+                        mainInput.Gameplay.Enable();
+                        mainInput.Map.Disable();
+                        mainInput.Menu.Disable();
+                        print("enabled the level map");
+                    }
+                    break;
+                case GameState.pause:
+                    {
+                        mainInput.Gameplay.Disable();
+                        mainInput.Map.Disable();
+                        mainInput.Menu.Enable();
+                        print("enabled the pause  map");
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+
+
+
+        }
+
+        //i dunno how to call this with the current implementation. i've had succes with # of gamepads connected >0 but it's a hack
         private void OnControlsChanged(PlayerInput obj)
         {
-            switch (obj.currentControlScheme) 
+            switch (obj.currentControlScheme)
             {
                 case "Gamepad":
                     UseGamepadAsCursor();
@@ -49,28 +121,52 @@ namespace _3C.Player
             m_PlayerCursor.Movement = _context.ReadValue<Vector2>();
         }
 
-        public void TriggerUIClick(InputAction.CallbackContext _context)
+        public void TriggerUIClick(InputAction.CallbackContext _context) // this comes from the event system no? or you need it for gamepad?
         {
             if (_context.performed)
             {
-                GameplayData.UIPressThisFrame = true;
+               
             }
         }
 
-        public void OnMovementAsked(InputAction.CallbackContext _context)
+        //public void OnMovementAsked(InputAction.CallbackContext _context)
+        //{
+
+        //    switch (_context.phase)
+        //    {
+        //        case InputActionPhase.Performed:
+        //            StackInputIfNotTop(InputType.MovementPerformed);
+        //            break;
+        //        case InputActionPhase.Canceled:
+        //            StackInputIfNotTop(InputType.MovementCanceled);
+        //            break;
+        //    }
+
+        //    GameplayData.s_PlayerInputs.Movement = _context.ReadValue<Vector2>();
+        //}
+
+  
+        float x;
+        float y;
+        Vector2 lastMoveInput;
+        private void Update()   // this is as close as i could get to what you had before
         {
-            switch (_context.phase)
-            {
-                case InputActionPhase.Performed:
-                    StackInputIfNotTop(InputType.MovementPerformed);
-                    break;
-                case InputActionPhase.Canceled:
-                    StackInputIfNotTop(InputType.MovementCanceled);
-                    break;
-            }
+              x = mainInput.Gameplay.Movement.ReadValue<Vector2>().x;
+              y = mainInput.Gameplay.Movement.ReadValue<Vector2>().y;
 
-            GameplayData.s_PlayerInputs.Movement = _context.ReadValue<Vector2>();
+            var move = new Vector2(x,y);
+
+            if (move == Vector2.zero && lastMoveInput != Vector2.zero )
+            {
+                StackInputIfNotTop(InputType.MovementCanceled);
+            }
+            else StackInputIfNotTop(InputType.MovementPerformed);
+
+            lastMoveInput = move;
+            GameplayData.s_PlayerInputs.Movement = move;
+
         }
+
 
         public void OnDash(InputAction.CallbackContext _context)
         {
@@ -174,10 +270,44 @@ namespace _3C.Player
 
         public void OnPause(InputAction.CallbackContext _contex)
         {
-            if (_contex.phase == InputActionPhase.Performed)
-            {
-                
-            }
+           inputState.pause = true;
         }
+
+        private void MenuBackPressed(InputAction.CallbackContext obj)
+        {
+            inputState.mapBack = true;
+        }
+
+        private void SelectPressed(InputAction.CallbackContext obj)
+        {
+            inputState.select = true;
+        }
+
+        private void ConfirmPressed(InputAction.CallbackContext obj)
+        {
+           inputState.confirm = true;
+            GameplayData.UIPressThisFrame = true;
+        }
+
+        private void MapBackPressed(InputAction.CallbackContext obj)
+        {
+           inputState.openMap = true;
+        }
+
+        private void LateUpdate()
+        {
+            inputState.select = false;
+            inputState.pause = false;
+            inputState.closeMap = false;
+            inputState.mapBack = false;
+            inputState.menuBack = false;
+            inputState.openMap = false;
+            inputState.confirm = false;
+           // GameplayData.UIPressThisFrame = true;
+        }
+
+
+   
     }
 }
+

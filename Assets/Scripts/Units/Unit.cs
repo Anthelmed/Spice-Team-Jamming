@@ -92,6 +92,10 @@ namespace Units
             if (wasDead)
                 m_currentTile.Register(this);
         }
+        public void ResetHealth()
+        {
+            m_currentHealth = m_maxHealth;
+        }
 
         public void ChangeVisibility(bool visible)
         {

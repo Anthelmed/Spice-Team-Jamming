@@ -46,7 +46,8 @@ namespace SpiceTeamJamming.UI
 		
 		private void OnResumeButtonPressed()
 		{
-			UIRouter.GoToPreviousRoute();
+		//	UIRouter.GoToPreviousRoute();
+			GameManager.instance.ToggleUnPause();
 		}
 		
 		private void OnSettingsButtonPressed()
