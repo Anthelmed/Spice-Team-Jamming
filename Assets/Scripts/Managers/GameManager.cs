@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
         LevelTilesManager.instance.ClearLevelForReset();
         yield return new WaitForEndOfFrame();
         boardManager.ClearMap();
+        battleMapLoaded = false;
         yield return new WaitForEndOfFrame();
         boardManager.Generate();
         playerCharacter.GetComponent<Unit>().ResetHealth(); // do this better
@@ -161,11 +162,9 @@ public class GameManager : MonoBehaviour
 
     }
 
-
     GameTile clickedTile;
     GameTile cachedHoverTile;
     bool wigglin;
-     
 
     void Update()
     {
@@ -185,7 +184,7 @@ public class GameManager : MonoBehaviour
                     //actually selecting tiles and telporting there
                     if (playerController.inputState.confirm)
                     {
-                        GameplayData.UIPressThisFrame = false;
+                        GameplayData.UIPressThisFrame = false; // no idea what this was for but keeping it here
                         Vector2 mousePosition = GameplayData.CursorPosition;
                         Ray ray = mapCamera.ScreenPointToRay(mousePosition);
                         RaycastHit hit;
@@ -206,8 +205,7 @@ public class GameManager : MonoBehaviour
                                 var cachedPos = tile.gameObject.transform.position;
                                 
                                 if (AudioManager.instance != null)  AudioManager.instance.PlaySingleClip(mapClickSound, SFXCategory.ui, 0, 0);
-                                Debug.Log("here");
-                                //tile.gameObject.transform.DOPunchScale(tile.gameObject.transform.localScale * 1.1f, 0.4f, 5, 0);
+                         
                                 tile.gameObject.transform.DOPunchPosition((Vector3.up * 15), 0.4f, 1, 1, false).OnComplete(() =>
                                 {
                                     mapDestination = clickedTile.mapTileData.tileCoords;
