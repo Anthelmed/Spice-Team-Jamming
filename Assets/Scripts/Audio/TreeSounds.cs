@@ -22,33 +22,15 @@ namespace DefaultNamespace.Audio
         private void Start()
         {
             if (AudioManager.instance != null) m_AudioManager = AudioManager.instance;
-        //    if (unit != null) unit. OnTreeStateChanged += HandleTreeStateChange;
+          // if (unit != null) unit.on += HandleTreeStateChange;
 
         }
 
-        void HandleTreeStateChange(Targetable.Team team)
+        void HandleTreeStateChange(Unit.Type team)
         {
             switch (team)
             {
-                case Targetable.Team.Nature:
-                    {
-                    PlayNatureStatusSound();
-                    }
-                    break;
-                case Targetable.Team.Fire:
-                    {
-                     PlayBurnStatusSound();
-                    }
-                    break;
-                case Targetable.Team.Ice:
-                    {
-                     PlayFreezeStatusSound(); 
-                    }
-                    break;
-                case Targetable.Team.Wizard:
-                    break;
-                default:
-                    break;
+              
             }
         }
 
