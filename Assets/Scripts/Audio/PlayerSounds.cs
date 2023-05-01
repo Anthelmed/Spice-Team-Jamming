@@ -1,5 +1,4 @@
-﻿using DefaultNamespace.HealthSystem.Damageable;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace DefaultNamespace.Audio
 {
@@ -13,13 +12,13 @@ namespace DefaultNamespace.Audio
         [SerializeField] string healSound = "";
 
 
-        HealthHolder playerHealth;
+        Units.Unit playerHealth;
         AudioManager m_AudioManager;
 
         private void Start()
         {
             if (AudioManager.instance != null) m_AudioManager = AudioManager.instance;
-          //  playerHealth = GetComponentInParent<HealthHolder>();
+            playerHealth = GetComponentInParent<Units.Unit>();
             
         }
 
@@ -49,11 +48,6 @@ namespace DefaultNamespace.Audio
         {
             if (m_AudioManager == null) return;
             m_AudioManager.PlayShuffledSound(damageSound, SFXCategory.player, 0.15f, 0.05f);
-            //if (playerHealth != null)
-            //{
-            //    print("player health found" + playerHealth.MaxHealth + "/" + playerHealth.);
-
-            //}
         }
         public void PlayDeathSound()
         {
