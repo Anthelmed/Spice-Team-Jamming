@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Units;
+using UnityEngine;
 
 namespace DefaultNamespace.Audio
 {
@@ -21,32 +22,28 @@ namespace DefaultNamespace.Audio
         private void Start()
         {
             if (AudioManager.instance != null) m_AudioManager = AudioManager.instance;
-            if (vegetation != null) vegetation.OnTreeStateChanged += HandleTreeStateChange;
+            if (vegetation != null) vegetation.onHeal.AddListener(HandleTreeStateChange);
 
         }
 
-        void HandleTreeStateChange(Targetable.Team team)
+        void HandleTreeStateChange(float amount)
         {
-            switch (team)
+            switch (vegetation.Team)
             {
-                case Targetable.Team.Nature:
+                case Faction.Nature:
                     {
                     PlayNatureStatusSound();
                     }
                     break;
-                case Targetable.Team.Fire:
+                case Faction.Fire:
                     {
                      PlayBurnStatusSound();
                     }
                     break;
-                case Targetable.Team.Ice:
+                case Faction.Ice:
                     {
                      PlayFreezeStatusSound(); 
                     }
-                    break;
-                case Targetable.Team.Wizard:
-                    break;
-                default:
                     break;
             }
         }
