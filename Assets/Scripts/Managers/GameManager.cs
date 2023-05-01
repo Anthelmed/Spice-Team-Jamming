@@ -129,6 +129,7 @@ public class GameManager : MonoBehaviour
         }
 
     }
+    //ui switching and active cameras switched here on state enter
     public void OnStateEnter(GameState state, GameState fromState)
     {
         switch (state)
@@ -168,21 +169,15 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-
         switch (currentGameState)
         {
             case GameState.map:
                 {
-                    ////hovering over tiles. for juice only
-                    HighlightingJuice();
-                    if (UIRouter.CurrentRoute != UIRouter.RouteType.Map)
-                    {
-                        UIRouter.GoToRoute(UIRouter.RouteType.Map);
-                        
-                    }
+                    ////hovering over tiles. 
+                    TileHighlighting();
 
                     //actually selecting tiles and telporting there
-                    if (playerController.inputState.confirm)
+                    if (playerController.inputState.confirm && !loadingBattleMap)
                     {
                         GameplayData.UIPressThisFrame = false; // no idea what this was for but keeping it here
                         Vector2 mousePosition = GameplayData.CursorPosition;
@@ -202,7 +197,6 @@ public class GameManager : MonoBehaviour
                                     print("you cant swim!");
                                     return;
                                 }
-                                var cachedPos = tile.gameObject.transform.position;
                                 
                                 if (AudioManager.instance != null)  AudioManager.instance.PlaySingleClip(mapClickSound, SFXCategory.ui, 0, 0);
                          
@@ -211,8 +205,6 @@ public class GameManager : MonoBehaviour
                                     mapDestination = clickedTile.mapTileData.tileCoords;
                                     TryTransitionToLevel();
                                     tile.Unhighlight();
-                                    //tile.gameObject.transform.position = cachedPos;
-                                    
                                 });
                             }
                         }
@@ -236,7 +228,6 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(string sceneName)
     {
-        Debug.Log("transition 3");
         if (currentGameState == GameState.level) return;
 
         Scene scene = SceneManager.GetSceneByName(sceneName);
@@ -291,8 +282,6 @@ public class GameManager : MonoBehaviour
     }
     void TryTransitionToLevel()
     {
-        Debug.Log("transition 1");
-        if(loadingBattleMap) return;
         if (battleMapLoaded) TransitionToLevel();
         else LoadLevel(battleSceneName); // this ends up being async that's why it's like this
     }
@@ -337,7 +326,7 @@ public class GameManager : MonoBehaviour
         playerInstance.transform.rotation = desinationTile.teleportPoint.rotation;
 
     }
-    private void HighlightingJuice()
+    private void TileHighlighting()
     {
         RaycastHit hoverHit;
 
