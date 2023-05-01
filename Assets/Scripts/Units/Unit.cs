@@ -95,6 +95,7 @@ namespace Units
         public void ResetHealth()
         {
             m_currentHealth = m_maxHealth;
+            onHealthChanged?.Invoke(m_currentHealth);
         }
 
         public void ChangeVisibility(bool visible)

@@ -11,12 +11,15 @@ public class LevelTilesManager : MonoBehaviour
     [SerializeField] GameObject defaultTilePrefab;
     [SerializeField] float spacing = 40f; //dependant on prefab
     [SerializeField] List<LevelTile> allGeneratedTiles = new List<LevelTile>();
+   
 
     [Header("prefabs")]
     [SerializeField] GameObject[] grassBiomePrefabs;
     [SerializeField] GameObject[] forestBiomePrefabs;
 
     [SerializeField] EnemyPrefab[] enemies;
+    Transform levelParent;
+    Transform enemiesParent;
 
     [Serializable]
     public struct EnemyPrefab
@@ -51,36 +54,15 @@ public class LevelTilesManager : MonoBehaviour
 
         rows = BoardManager.MapTiles.GetLength(0);
         columns = BoardManager.MapTiles.GetLength(1);
-
-        //wait for singleton. 
-        //build tiles. 
-        //build dictionary
-        //sleep tiles
-
-        //SleepAllTiles();
-        //var startTile = GetTileAtGridPosition(playerSpawnCoords);
-        //startTile.WakeUp();
-
-    
     }
-    //void BuildTileDictionary()
-    //{
-    //    gridTiles.Clear();
-    //    foreach (var tile in allGeneratedTiles)
-    //    {
-    //        gridTiles.Add(tile.gridLocation, tile);
-    //    }
-    //}
 
     [ContextMenu("Generate Tiles")]
    public void GenerateTiles()   ///assuming we'll pre-generate tiles. if not this needs to be called in awake. still need to pass this the biome info etc
     {
         allGeneratedTiles.Clear();
         gridTiles.Clear();
-        foreach (Transform child in transform)
-        {
-            DestroyImmediate(child.gameObject);
-        }
+
+        SetUpObjectParents();
 
         // Prepare for spawning enemies
         var maxWeight = 0;
@@ -100,7 +82,7 @@ public class LevelTilesManager : MonoBehaviour
 
                 GameObject spawnedObject = Instantiate(prefabToSpawn, position, Quaternion.identity);
                 spawnedObject.gameObject.name = "Tile " + xIndex + " _ " + yIndex;
-                spawnedObject.transform.SetParent(transform);
+                spawnedObject.transform.SetParent(levelParent);
                 spawnedObject.transform.eulerAngles = new Vector3(spawnedObject.transform.localEulerAngles.x, Random.Range(0, 4) * 90f, spawnedObject.transform.localEulerAngles.z);
                 var tile = spawnedObject.GetComponent<LevelTile>();
                 tile.MapTile = mapTile;
@@ -119,7 +101,11 @@ public class LevelTilesManager : MonoBehaviour
                         if (enemyChoice < enemies[i].weight)
                         {
                             if (enemies[i].m_squadPrefab)
-                                Instantiate(enemies[i].m_squadPrefab, spawnedObject.transform.position, spawnedObject.transform.rotation);
+                            {
+                                var temp = Instantiate(enemies[i].m_squadPrefab, spawnedObject.transform.position, spawnedObject.transform.rotation);
+                                temp.transform.SetParent(enemiesParent);
+                            }
+
                             break;
                         }
                         enemyChoice -= enemies[i].weight;
@@ -127,12 +113,30 @@ public class LevelTilesManager : MonoBehaviour
                 }
             }
         }
-      
+
 
         foreach (LevelTile tile in gridTiles.Values)
         {
             allGeneratedTiles.Add(tile);
         }
+    }
+
+    private void SetUpObjectParents()
+    {
+        var levelGO = new GameObject();
+        levelGO.name = "levelParent";
+        levelParent = levelGO.transform;
+        levelParent.SetParent(transform);
+        var enemiesGO = new GameObject();
+        enemiesGO.name = "enemiesParent";
+        enemiesParent = enemiesGO.transform;
+        enemiesParent.SetParent(transform);
+    }
+    [ContextMenu("clear level")]
+    public void ClearLevelForReset()
+    {
+        Destroy(levelParent.gameObject);
+        Destroy(enemiesParent.gameObject);
     }
 
     private GameObject GetPrefab(GameTile mapTile)

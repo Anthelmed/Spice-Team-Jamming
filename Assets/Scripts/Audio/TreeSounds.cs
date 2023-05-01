@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Units;
+using UnityEngine;
 
 namespace DefaultNamespace.Audio
 {
@@ -14,14 +15,14 @@ namespace DefaultNamespace.Audio
 
         AudioManager m_AudioManager;
 
-        [SerializeField] Vegetation vegetation;
+        [SerializeField] Unit unit;
 
         
 
         private void Start()
         {
             if (AudioManager.instance != null) m_AudioManager = AudioManager.instance;
-            if (vegetation != null) vegetation.OnTreeStateChanged += HandleTreeStateChange;
+        //    if (unit != null) unit. OnTreeStateChanged += HandleTreeStateChange;
 
         }
 
