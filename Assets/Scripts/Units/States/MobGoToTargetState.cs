@@ -19,7 +19,7 @@ namespace Units
         {
             data.visuals.SetAnimation(MobVisuals.AnimationID.Walk);
 
-            if (data.squad.IsTooFar())
+            if (data.squad && data.squad.IsTooFar())
             {
                 data.NextState = Mob.State.Regroup;
                 return;

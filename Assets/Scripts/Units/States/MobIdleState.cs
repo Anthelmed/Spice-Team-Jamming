@@ -15,7 +15,7 @@ namespace Units
         public void Tick(Mob.Data data)
         {
             data.visuals.SetAnimation(MobVisuals.AnimationID.Idle);
-            if (data.squad.IsTooFar())
+            if (data.squad && data.squad.IsTooFar())
             {
                 data.NextState = Mob.State.Regroup;
                 return;
