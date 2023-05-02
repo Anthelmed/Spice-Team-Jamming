@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] BoardManager boardManager;
     [Header ("input from player controller")]
     [SerializeField] PlayerController playerController;
+    [SerializeField] Transform playerTeleportLimbo;
 
     [Header("misc")]
     [SerializeField] string mapClickSound = "uiClickStone";
@@ -322,6 +323,10 @@ public class GameManager : MonoBehaviour
         if (currentGameState != GameState.level) return;
         playerCharacter.SetActive(false);
         CancelInvoke(nameof(DeactivatePlayer));
+        playerInstance.transform.position = playerTeleportLimbo.position;
+        playerCharacter.transform.position = playerTeleportLimbo.position;
+
+
         Invoke(nameof(DeactivatePlayer), 1f);
         playerAnimator.SetTrigger("Teleport Out");
 
