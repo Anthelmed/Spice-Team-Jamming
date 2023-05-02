@@ -204,10 +204,14 @@ public class GameManager : MonoBehaviour
                          
                                 tile.gameObject.transform.DOPunchPosition((Vector3.up * 15), 0.4f, 1, 1, false).OnComplete(() =>
                                 {
-                                    mapDestination = clickedTile.mapTileData.tileCoords;
-                                    TryTransitionToLevel();
                                     tile.Unhighlight();
                                 });
+
+                                var tileIndex = tile.mapTileData.tileCoords;
+                                boardManager.AnimateGridSelection(tileIndex.x, tileIndex.y, 0.0001f);
+                                mapDestination = clickedTile.mapTileData.tileCoords;
+                                TryTransitionToLevel();
+                              
                             }
                         }
 
@@ -248,7 +252,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForEndOfFrame(); // make this longer if there's an actual loading screen that can appear
+        yield return new WaitForSeconds(2); // make this longer if there's an actual loading screen that can appear
 
         OnInitialLevelLoad?.Invoke();
 
@@ -331,8 +335,11 @@ public class GameManager : MonoBehaviour
         playerInstance.transform.rotation = desinationTile.teleportPoint.rotation;
 
     }
+    float highlightCooldownTimer;
     private void TileHighlighting()
     {
+        if (loadingBattleMap) return;
+
         RaycastHit hoverHit;
 
         Ray hoverRay = mapCamera.ScreenPointToRay(GameplayData.CursorPosition);
@@ -340,8 +347,9 @@ public class GameManager : MonoBehaviour
         {
 
             hoverHit.collider.gameObject.TryGetComponent(out GameTile hoverTile);
-            if (hoverTile != null && cachedHoverTile != hoverTile)
+            if (hoverTile != null && cachedHoverTile != hoverTile && Time.time > highlightCooldownTimer)
             {
+                highlightCooldownTimer = Time.time + 0.05f;
                 if (cachedHoverTile != null)
                 {
                     cachedHoverTile.Unhighlight();
