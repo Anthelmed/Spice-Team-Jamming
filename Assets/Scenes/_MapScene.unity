@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1802844, g: 0.2257149, b: 0.30692303, a: 1}
+  m_IndirectSpecularColor: {r: 0.1802844, g: 0.22571532, b: 0.30692348, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2330,6 +2330,21 @@ PrefabInstance:
       propertyPath: onHit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2320334535718811902, guid: eac1ae59bef618847b73c10b4d795403,
+        type: 3}
+      propertyPath: m_XDamping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320334535718811902, guid: eac1ae59bef618847b73c10b4d795403,
+        type: 3}
+      propertyPath: m_YDamping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320334535718811902, guid: eac1ae59bef618847b73c10b4d795403,
+        type: 3}
+      propertyPath: m_ZDamping
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3070656586767586103, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
       propertyPath: gameManager
@@ -2422,6 +2437,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5335540932568735894}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5461733414598627174 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 45338511613861606, guid: eac1ae59bef618847b73c10b4d795403,
+    type: 3}
+  m_PrefabInstance: {fileID: 5335540932568735894}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5461733414598627172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5486698474186339243 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 445589202552034109, guid: eac1ae59bef618847b73c10b4d795403,
@@ -2609,6 +2636,11 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 388412510}
+    - target: {fileID: 4504791909821565872, guid: 6abfd14f34c3b3943b98386ef95799df,
+        type: 3}
+      propertyPath: characterVirtualCamera
+      value: 
+      objectReference: {fileID: 5461733414598627174}
     - target: {fileID: 5749347542480522340, guid: 6abfd14f34c3b3943b98386ef95799df,
         type: 3}
       propertyPath: m_RootOrder

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using _3C.Player;
+using Cinemachine;
 using DefaultNamespace;
 using DG.Tweening;
 using SpiceTeamJamming.UI;
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Camera mapCamera;
     [SerializeField] GameObject playerInstance;
     [SerializeField] GameObject playerCharacter;
+    [SerializeField] CinemachineVirtualCamera characterVirtualCamera;
     [SerializeField] Vector2Int mapDestination;
     [SerializeField] GameObject mapGraphics;
     [SerializeField] BoardManager boardManager;
@@ -58,6 +60,7 @@ public class GameManager : MonoBehaviour
 
         }
         playerAnimator = playerInstance.GetComponentInChildren<Animator>(true);
+        m_PlayerCameraTransposer = characterVirtualCamera.GetCinemachineComponent<CinemachineTransposer>();
     }
 
     public void NewGame()
@@ -166,6 +169,7 @@ public class GameManager : MonoBehaviour
     GameTile clickedTile;
     GameTile cachedHoverTile;
     bool wigglin;
+    private CinemachineTransposer m_PlayerCameraTransposer;
 
     void Update()
     {
@@ -295,6 +299,7 @@ public class GameManager : MonoBehaviour
         playerInstance.transform.position = spawnPos;
         playerCharacter.transform.localPosition = Vector3.zero;
         playerCharacter.SetActive(true);
+        StartCoroutine(c_InstantPlayerCameraTransition());
 
         playerAnimator.SetTrigger("Teleport In");
         mapGraphics.SetActive(false); /// do this better
@@ -302,6 +307,19 @@ public class GameManager : MonoBehaviour
         TransitionToState(GameState.level);
         UIRouter.GoToRoute(UIRouter.RouteType.Battlefield);
 
+    }
+
+    private IEnumerator c_InstantPlayerCameraTransition()
+    {
+        Vector3 damping = new Vector3(m_PlayerCameraTransposer.m_XDamping, m_PlayerCameraTransposer.m_YDamping,
+            m_PlayerCameraTransposer.m_ZDamping);
+        m_PlayerCameraTransposer.m_XDamping = 0;
+        m_PlayerCameraTransposer.m_YDamping = 0;
+        m_PlayerCameraTransposer.m_ZDamping = 0;
+        yield return null;
+        m_PlayerCameraTransposer.m_XDamping = damping.x;
+        m_PlayerCameraTransposer.m_YDamping = damping.y;
+        m_PlayerCameraTransposer.m_ZDamping = damping.z;
     }
 
     public void TogglePause()
