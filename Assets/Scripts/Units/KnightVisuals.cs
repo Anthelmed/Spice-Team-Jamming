@@ -41,19 +41,21 @@ namespace Units
             state.time = Time.timeSinceLevelLoad - m_currentStart;
         }
 
-        public override void SetAnimation(AnimationID id)
+        public override void SetAnimation(AnimationID id, bool force = false)
         {
-            if ((int)id == m_current) return;
+            if ((int)id == m_current && !force) return;
 
             if (isActiveAndEnabled)
             {
+                if (force && (int)id == m_current)
+                    m_animator.Stop();
                 m_animator.CrossFade(id.ToString(), 0.2f);
             }
 
             m_current = (int)id;
             m_currentStart = Time.timeSinceLevelLoad;
 
-            if (m_sounds)
+            if (isActiveAndEnabled && m_sounds)
             {
                 switch (id)
                 {

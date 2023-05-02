@@ -5,7 +5,7 @@ namespace Units
 {
     public abstract class MobVisuals : UnitVisuals
     {
-        public abstract void SetAnimation(AnimationID id);
+        public abstract void SetAnimation(AnimationID id, bool force = false);
         public abstract float GetDuration(AnimationID id);
         public abstract Vector2 MeleeRange { get; }
         public abstract float RangedDelay { get; }

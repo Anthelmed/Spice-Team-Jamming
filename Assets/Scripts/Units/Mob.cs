@@ -74,9 +74,12 @@ namespace Units
 
         private void OnHit(float damage, Unit other)
         {
-            m_data.NextState = State.Hit;
-            // Change immediately
+            m_data.NextState = State.Queueing;
             UpdateTransition();
+            m_data.NextState = State.Hit;
+            UpdateTransition();
+            m_data.visuals.SetAnimation(MobVisuals.AnimationID.Hit, true);
+            // Change immediately
         }
 
         private void OnValidate()

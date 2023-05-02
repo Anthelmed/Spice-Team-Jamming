@@ -23,7 +23,7 @@ namespace Units
 
         public override float RangedDelay => 0;
 
-        public override void SetAnimation(AnimationID id)
+        public override void SetAnimation(AnimationID id, bool force = false)
         {
             if (!SwitchAnimation(id)) return;
 
@@ -61,14 +61,14 @@ namespace Units
             m_renderer.localBounds = new Bounds(Vector3.zero, Vector3.one * 2);
         }
 
-        private bool SwitchAnimation(AnimationID desiredAnimationID)
+        private bool SwitchAnimation(AnimationID desiredAnimationID, bool force = false)
         {
             var desiredAnimation = (int)desiredAnimationID;
 
             if (!animationData)
                 return false;
 
-            if (m_currentAnimation == desiredAnimation)
+            if (m_currentAnimation == desiredAnimation && !force)
             {
                 if (desiredAnimation > 1)
                 {
