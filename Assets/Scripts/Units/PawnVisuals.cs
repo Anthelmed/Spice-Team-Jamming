@@ -65,8 +65,23 @@ namespace Units
         {
             var desiredAnimation = (int)desiredAnimationID;
 
-            if (!animationData || m_currentAnimation == desiredAnimation)
+            if (!animationData)
                 return false;
+
+            if (m_currentAnimation == desiredAnimation)
+            {
+                if (desiredAnimation > 1)
+                {
+                    if (Time.timeSinceLevelLoad - m_previousData.w >= m_previousData.x)
+                    {
+                        m_previousData.w = Time.timeSinceLevelLoad - m_previousData.x + 0.1f;
+                        m_mpb.SetVector(ANIM_DATA, m_previousData);
+                        m_renderer.SetPropertyBlock(m_mpb);
+                    }
+
+                }
+                return false;
+            }
 
             m_currentAnimation = desiredAnimation;
             var data = animationData.animations[desiredAnimation];

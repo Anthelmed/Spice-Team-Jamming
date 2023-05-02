@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 namespace Units
@@ -18,7 +19,7 @@ namespace Units
             data.visuals.SetAnimation(MobVisuals.AnimationID.Death);
 
             if (Time.timeSinceLevelLoad >= (data.frameStarted + data.visuals.GetDuration(MobVisuals.AnimationID.Death)))
-                data.NextState = Mob.State.Destroy;
+                Object.Destroy(data.mob.gameObject);
         }
     }
 }
