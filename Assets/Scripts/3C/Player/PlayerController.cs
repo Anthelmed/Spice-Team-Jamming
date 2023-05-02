@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq.Expressions;
 using DefaultNamespace;
+using NaughtyAttributes.Test;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.InputSystem.Users;
 
 namespace _3C.Player
@@ -57,7 +59,19 @@ namespace _3C.Player
             mainInput.Map.Select.started += SelectPressed;
 
             mainInput.Menu.Back.started += MenuBackPressed;
+            InputSystem.onEvent += CheckIfSchemeChanged;
 
+        }
+
+        private void CheckIfSchemeChanged(InputEventPtr _, InputDevice _device)
+        {
+            if (mainInput.GamepadScheme.SupportsDevice(_device))
+            {
+                m_PlayerCursor.UseMouse = false;
+            } else if (mainInput.KeyboardMouseScheme.SupportsDevice(_device))
+            {
+                m_PlayerCursor.UseMouse = true;
+            }
         }
 
         private void OnMovement(InputAction.CallbackContext _context)
@@ -104,30 +118,6 @@ namespace _3C.Player
                     }
                     break;
             }
-        }
-
-        //i dunno how to call this with the current implementation. i've had succes with # of gamepads connected >0 but it's a hack
-        private void OnControlsChanged(PlayerInput obj)
-        {
-            switch (obj.currentControlScheme)
-            {
-                case "Gamepad":
-                    UseGamepadAsCursor();
-                    break;
-                default:
-                    ResetCursorToMouse();
-                    break;
-            }
-        }
-
-        private void UseGamepadAsCursor()
-        {
-            m_PlayerCursor.UseMouse = false;
-        }
-
-        private void ResetCursorToMouse()
-        {
-            m_PlayerCursor.UseMouse = true;
         }
 
         public void OnGamepadCursorMovement(InputAction.CallbackContext _context)
