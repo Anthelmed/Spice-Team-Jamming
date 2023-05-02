@@ -37,6 +37,7 @@ namespace _3C.Player
             gameManager.OnGameStateChanged += SwitchInputMap;
             m_MainCamera = Camera.main;
             mainInput = new MainInput();
+            m_PlayerCursor = GetComponent<PlayerCursor>();
 
             //init default map
             mainInput.Map.Enable();
