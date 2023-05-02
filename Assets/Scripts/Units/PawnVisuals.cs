@@ -74,7 +74,7 @@ namespace Units
                 {
                     if (Time.timeSinceLevelLoad - m_previousData.w >= m_previousData.x)
                     {
-                        m_previousData.w = Time.timeSinceLevelLoad - m_previousData.x + 0.1f;
+                        m_previousData.w = Time.timeSinceLevelLoad - m_previousData.x;
                         m_mpb.SetVector(ANIM_DATA, m_previousData);
                         m_renderer.SetPropertyBlock(m_mpb);
                     }

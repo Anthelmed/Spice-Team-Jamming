@@ -18,7 +18,7 @@ namespace Units
         {
             data.visuals.SetAnimation(MobVisuals.AnimationID.Death);
 
-            if (Time.timeSinceLevelLoad >= (data.frameStarted + data.visuals.GetDuration(MobVisuals.AnimationID.Death)))
+            if (Time.timeSinceLevelLoad >= (data.frameStarted + data.visuals.GetDuration(MobVisuals.AnimationID.Death) - 0.1f))
                 Object.Destroy(data.mob.gameObject);
         }
     }
