@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using _3C.Player.Weapons;
+using Units;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -54,6 +55,7 @@ namespace _3C.Player
         private IObjectPool<RangeAttackHolder> m_RangeAttackPool;
         private IObjectPool<RangeAttackHolder> m_ChargedRangeAttackPool;
         private RangeAttackPhase m_CurrentAttackPhase;
+        private Unit m_UnitComponent;
 
         protected override void Init(IStateHandler _stateHandler)
         {
@@ -64,6 +66,7 @@ namespace _3C.Player
             }
             m_RangeAttackPool = new ObjectPool<RangeAttackHolder>(CreateRangeItem, maxSize: 10);
             m_ChargedRangeAttackPool = new ObjectPool<RangeAttackHolder>(CreateChargedRangeItem, maxSize: 4);
+            m_UnitComponent = _stateHandler.gameObject.GetComponent<Unit>();
         }
 
         private RangeAttackHolder CreateChargedRangeItem()
@@ -196,6 +199,7 @@ namespace _3C.Player
             
             var spawned = _pool.Get();
             spawned.HitBox.damage = _damage;
+            spawned.HitBox.m_owner = m_UnitComponent;
             spawned.transform.position = m_Transform.position;
             spawned.transform.rotation = m_Transform.rotation;
             spawned.WeaponMovement.TriggerWeaponMovement(m_AttackDuration, m_AttackAnimationCurve);
