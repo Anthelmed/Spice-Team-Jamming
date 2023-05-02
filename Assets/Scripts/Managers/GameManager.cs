@@ -8,6 +8,7 @@ using SpiceTeamJamming.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Units;
+using UnityEngine.UI;
 
 public enum GameState
 {
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] string battleSceneName;
     [SerializeField] Camera mapCamera;
+    [SerializeField] CanvasGroup loaderCanvas;
     [SerializeField] GameObject playerInstance;
     [SerializeField] GameObject playerCharacter;
     [SerializeField] CinemachineVirtualCamera characterVirtualCamera;
@@ -89,6 +91,7 @@ public class GameManager : MonoBehaviour
     }
     public void StartGame()
     {
+        loaderCanvas.alpha = 0;
         TransitionToState(GameState.map);
     }
     
@@ -241,7 +244,7 @@ public class GameManager : MonoBehaviour
         print("scene index" + scene.buildIndex);
         StartCoroutine(LoadLevelScene(sceneName));
     }
-
+    float fadeDuration = 0.5f;
     IEnumerator LoadLevelScene(String sceneToLoad)
     {
          AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
@@ -252,7 +255,20 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(2); // make this longer if there's an actual loading screen that can appear
+        yield return new WaitForSeconds(0.5f); // make this longer if there's an actual loading screen that can appear
+
+        float elapsedTime = 0f;
+
+        // Fade in (0 to 1)/////////// fade canvas
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+             loaderCanvas.alpha = Mathf.Lerp(0, 1, elapsedTime / fadeDuration);
+            yield return null;
+        }
+
+        elapsedTime = 0f;
+        ////////////////
 
         OnInitialLevelLoad?.Invoke();
 
@@ -265,6 +281,16 @@ public class GameManager : MonoBehaviour
         loadingBattleMap = false;
         TransitionToLevel();
         battleMapLoaded = true;
+
+        /////////////fade canvas in
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            loaderCanvas.alpha = Mathf.Lerp(1, 0, elapsedTime / fadeDuration);
+            yield return null;
+        }
+
+        loaderCanvas.alpha = 0;
     }
 
     public void TryTransitionToMap()
