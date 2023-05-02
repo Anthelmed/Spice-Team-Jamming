@@ -25,7 +25,7 @@ namespace Units
 
         public override void SetAnimation(AnimationID id, bool force = false)
         {
-            if (!SwitchAnimation(id)) return;
+            if (!SwitchAnimation(id, force)) return;
 
             if (m_sounds)
             {
