@@ -58,6 +58,7 @@ namespace _3C.Player
             mainInput.Map.Back.started += MapBackPressed;
             mainInput.Map.Confirm.started += ConfirmPressed;
             mainInput.Map.Select.started += SelectPressed;
+            mainInput.Map.MapPause.started += OnPause;
 
             mainInput.Menu.Back.started += MenuBackPressed;
             InputSystem.onEvent += CheckIfSchemeChanged;
@@ -219,7 +220,7 @@ namespace _3C.Player
 
         private void MenuBackPressed(InputAction.CallbackContext obj)
         {
-            inputState.mapBack = true;
+            inputState.menuBack = true;
         }
 
         private void SelectPressed(InputAction.CallbackContext obj)
@@ -235,7 +236,7 @@ namespace _3C.Player
 
         private void MapBackPressed(InputAction.CallbackContext obj)
         {
-           inputState.openMap = true;
+           inputState.mapBack = true;
         }
 
         private void LateUpdate()

@@ -71,7 +71,7 @@ namespace SpiceTeamJamming.UI
 		private void OnPauseButtonPressed()
 		{
 			//UIRouter.GoToRoute(UIRouter.RouteType.Pause);
-			GameManager.instance.TogglePause();
+			GameManager.instance.Pause();
 		}
 
 		private void OnPlayerHealthChanged(float value)

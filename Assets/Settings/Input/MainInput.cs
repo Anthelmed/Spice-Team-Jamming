@@ -41,7 +41,7 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""feea6738-fad4-4f05-b3da-cad0ab71341a"",
-                    ""path"": ""*/{Back}"",
+                    ""path"": ""<Keyboard>/b"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -52,7 +52,7 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d3172a06-8829-4591-a73c-5a5236446106"",
-                    ""path"": ""*/{Cancel}"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -101,20 +101,18 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MapPause"",
+                    ""type"": ""Button"",
+                    ""id"": ""3449ef39-f243-4657-a2cf-62b73774aadb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""76f2e749-4c91-4f1d-8d25-6604f51f3e97"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Select"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""b2d70ad9-d2ef-4844-8281-ad27a4b78d82"",
@@ -139,34 +137,45 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""df5b8dd5-4ac0-41f4-9445-71cb6bc67b96"",
-                    ""path"": ""*/{Back}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Back"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7cc8aeb1-6e35-4611-a2c8-1048eac1e925"",
-                    ""path"": ""*/{Cancel}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Back"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""901747fe-bf98-4cd3-a20c-ddeaa1129a12"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""GamepadCursorMovemen"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3339ca16-8ca7-47d9-808e-d7b9fef00b0a"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ddd8b740-c322-41d2-85cc-185181a8b7c0"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1097b2be-3f77-4dae-89be-69ccbbf71d56"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""MapPause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -407,7 +416,7 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3f265182-76ca-43e8-8a12-3173ba84c55e"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
@@ -428,8 +437,19 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""3fe6404e-38ee-464a-b763-bc531e8daa7a"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""b0749097-4729-4958-9036-8a22381abe9e"",
-                    ""path"": ""<Keyboard>/tab"",
+                    ""path"": ""<Keyboard>/b"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
@@ -440,7 +460,7 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""167ccdf7-8edb-4b12-88b0-09b8e8eefe10"",
-                    ""path"": ""<Gamepad>/select"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -512,6 +532,7 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
         m_Map_Confirm = m_Map.FindAction("Confirm", throwIfNotFound: true);
         m_Map_Back = m_Map.FindAction("Back", throwIfNotFound: true);
         m_Map_GamepadCursorMovemen = m_Map.FindAction("GamepadCursorMovemen", throwIfNotFound: true);
+        m_Map_MapPause = m_Map.FindAction("MapPause", throwIfNotFound: true);
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
@@ -633,6 +654,7 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Map_Confirm;
     private readonly InputAction m_Map_Back;
     private readonly InputAction m_Map_GamepadCursorMovemen;
+    private readonly InputAction m_Map_MapPause;
     public struct MapActions
     {
         private @MainInput m_Wrapper;
@@ -641,6 +663,7 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
         public InputAction @Confirm => m_Wrapper.m_Map_Confirm;
         public InputAction @Back => m_Wrapper.m_Map_Back;
         public InputAction @GamepadCursorMovemen => m_Wrapper.m_Map_GamepadCursorMovemen;
+        public InputAction @MapPause => m_Wrapper.m_Map_MapPause;
         public InputActionMap Get() { return m_Wrapper.m_Map; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -662,6 +685,9 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
             @GamepadCursorMovemen.started += instance.OnGamepadCursorMovemen;
             @GamepadCursorMovemen.performed += instance.OnGamepadCursorMovemen;
             @GamepadCursorMovemen.canceled += instance.OnGamepadCursorMovemen;
+            @MapPause.started += instance.OnMapPause;
+            @MapPause.performed += instance.OnMapPause;
+            @MapPause.canceled += instance.OnMapPause;
         }
 
         private void UnregisterCallbacks(IMapActions instance)
@@ -678,6 +704,9 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
             @GamepadCursorMovemen.started -= instance.OnGamepadCursorMovemen;
             @GamepadCursorMovemen.performed -= instance.OnGamepadCursorMovemen;
             @GamepadCursorMovemen.canceled -= instance.OnGamepadCursorMovemen;
+            @MapPause.started -= instance.OnMapPause;
+            @MapPause.performed -= instance.OnMapPause;
+            @MapPause.canceled -= instance.OnMapPause;
         }
 
         public void RemoveCallbacks(IMapActions instance)
@@ -825,6 +854,7 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
         void OnConfirm(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
         void OnGamepadCursorMovemen(InputAction.CallbackContext context);
+        void OnMapPause(InputAction.CallbackContext context);
     }
     public interface IGameplayActions
     {

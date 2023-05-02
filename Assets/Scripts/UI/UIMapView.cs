@@ -47,7 +47,7 @@ public class UIMapView : UIView
 	
 	private void OnPauseButtonPressed()
 	{
-		GameManager.instance.TogglePause();
+		GameManager.instance.Pause();
 	}
 	
 	private void OnHoverTileChanged(GameTile tile)

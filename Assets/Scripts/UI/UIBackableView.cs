@@ -31,14 +31,20 @@ namespace SpiceTeamJamming.UI
 
 		private void OnBackButtonPressed()
 		{
-			GoBack();
+			if (UIRouter.CurrentRoute != Route) return;
+			if (UIRouter.CurrentRoute == UIRouter.RouteType.Pause) GameManager.instance.UnPause();
+			if (UIRouter.CurrentRoute == UIRouter.RouteType.Settings) UIRouter.GoToPreviousRoute();
+			if (UIRouter.CurrentRoute == UIRouter.RouteType.SettingsAccessibility) UIRouter.GoToPreviousRoute();
+			if (UIRouter.CurrentRoute == UIRouter.RouteType.SettingsAudio) UIRouter.GoToPreviousRoute();
+			//	if (UIRouter.CurrentRoute == UIRouter.RouteType.Battlefield) return;
+
 		}
 
 		private void GoBack()
-		{
-			if (UIRouter.CurrentRoute != Route) return;
-			if (UIRouter.CurrentRoute == UIRouter.RouteType.Pause) GameManager.instance.ToggleUnPause();
-			else UIRouter.GoToPreviousRoute();
+		{ 
+	
+			//only handling button presses from here. all other input gets handled in player controller
+
 
 		}
 	}
