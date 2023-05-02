@@ -103,8 +103,6 @@ namespace _3C.Player
                         print("enabled the pause  map");
                     }
                     break;
-                default:
-                    break;
             }
         }
 
@@ -144,45 +142,6 @@ namespace _3C.Player
                
             }
         }
-
-        //public void OnMovementAsked(InputAction.CallbackContext _context)
-        //{
-
-        //    switch (_context.phase)
-        //    {
-        //        case InputActionPhase.Performed:
-        //            StackInputIfNotTop(InputType.MovementPerformed);
-        //            break;
-        //        case InputActionPhase.Canceled:
-        //            StackInputIfNotTop(InputType.MovementCanceled);
-        //            break;
-        //    }
-
-        //    GameplayData.s_PlayerInputs.Movement = _context.ReadValue<Vector2>();
-        //}
-
-  
-        // float x;
-        // float y;
-        // Vector2 lastMoveInput;
-        // private void Update()   // this is as close as i could get to what you had before
-        // {
-        //       x = mainInput.Gameplay.Movement.ReadValue<Vector2>().x;
-        //       y = mainInput.Gameplay.Movement.ReadValue<Vector2>().y;
-        //
-        //     var move = new Vector2(x,y);
-        //
-        //     if (move == Vector2.zero && lastMoveInput != Vector2.zero )
-        //     {
-        //         StackInputIfNotTop(InputType.MovementCanceled);
-        //     }
-        //     else StackInputIfNotTop(InputType.MovementPerformed);
-        //
-        //     lastMoveInput = move;
-        //     GameplayData.s_PlayerInputs.Movement = move;
-        //
-        // }
-
 
         public void OnDash(InputAction.CallbackContext _context)
         {
