@@ -38,12 +38,18 @@ namespace _3C.Player
 
             //init default map
             mainInput.Map.Enable();
-
+            
+            mainInput.Gameplay.Movement.performed += OnMovement;
+            mainInput.Gameplay.Movement.canceled += OnMovement;
             mainInput.Gameplay.Look.performed += OnLook;
+            mainInput.Gameplay.Look.canceled += OnLook;
             mainInput.Gameplay.Dash.performed += OnDash;
             mainInput.Gameplay.RangeAttack.performed += OnRangeAttack;
+            mainInput.Gameplay.RangeAttack.canceled += OnRangeAttack;
             mainInput.Gameplay.KeyboardAim.performed += OnKeyboardAim;
+            mainInput.Gameplay.KeyboardAim.canceled += OnKeyboardAim;
             mainInput.Gameplay.MeleeAttack.performed += OnMeleeAttack;
+            mainInput.Gameplay.MeleeAttack.canceled += OnMeleeAttack;
             mainInput.Gameplay.Pause.started += OnPause;
 
             mainInput.Map.Back.started += MapBackPressed;
@@ -54,9 +60,23 @@ namespace _3C.Player
 
         }
 
+        private void OnMovement(InputAction.CallbackContext _context)
+        {
+            switch (_context.phase)
+            {
+                case InputActionPhase.Performed:
+                    StackInputIfNotTop(InputType.MovementPerformed);
+                    break;
+                case InputActionPhase.Canceled:
+                    StackInputIfNotTop(InputType.MovementCanceled);
+                    break;
+            }
+
+            GameplayData.s_PlayerInputs.Movement = _context.ReadValue<Vector2>();
+        }
+
         public void SwitchInputMap(GameState state)
         {
-            // GameState state = GameManager.instance.GetCurrentGameState();
             switch (state)
             {
                 case GameState.map:
@@ -86,10 +106,6 @@ namespace _3C.Player
                 default:
                     break;
             }
-
-
-
-
         }
 
         //i dunno how to call this with the current implementation. i've had succes with # of gamepads connected >0 but it's a hack
@@ -146,26 +162,26 @@ namespace _3C.Player
         //}
 
   
-        float x;
-        float y;
-        Vector2 lastMoveInput;
-        private void Update()   // this is as close as i could get to what you had before
-        {
-              x = mainInput.Gameplay.Movement.ReadValue<Vector2>().x;
-              y = mainInput.Gameplay.Movement.ReadValue<Vector2>().y;
-
-            var move = new Vector2(x,y);
-
-            if (move == Vector2.zero && lastMoveInput != Vector2.zero )
-            {
-                StackInputIfNotTop(InputType.MovementCanceled);
-            }
-            else StackInputIfNotTop(InputType.MovementPerformed);
-
-            lastMoveInput = move;
-            GameplayData.s_PlayerInputs.Movement = move;
-
-        }
+        // float x;
+        // float y;
+        // Vector2 lastMoveInput;
+        // private void Update()   // this is as close as i could get to what you had before
+        // {
+        //       x = mainInput.Gameplay.Movement.ReadValue<Vector2>().x;
+        //       y = mainInput.Gameplay.Movement.ReadValue<Vector2>().y;
+        //
+        //     var move = new Vector2(x,y);
+        //
+        //     if (move == Vector2.zero && lastMoveInput != Vector2.zero )
+        //     {
+        //         StackInputIfNotTop(InputType.MovementCanceled);
+        //     }
+        //     else StackInputIfNotTop(InputType.MovementPerformed);
+        //
+        //     lastMoveInput = move;
+        //     GameplayData.s_PlayerInputs.Movement = move;
+        //
+        // }
 
 
         public void OnDash(InputAction.CallbackContext _context)
@@ -222,28 +238,6 @@ namespace _3C.Player
                 case InputActionPhase.Canceled:
                     StackInputIfNotTop(InputType.AimCanceled);
                     break;
-            }
-        }
-        
-        private void ChangeAiming(InputAction.CallbackContext _context)
-        {
-            if (_context.phase == InputActionPhase.Canceled)
-            {
-                GameplayData.s_PlayerInputs.AimDirection = Vector2.zero;
-            }
-
-            var gamepadAimInput = _context.ReadValue<Vector2>();
-            if (gamepadAimInput != Vector2.zero)
-            {
-                GameplayData.s_PlayerInputs.AimDirection = gamepadAimInput;
-            }
-
-            Plane plane = new Plane(Vector3.up, Vector3.zero);
-            var ray = m_MainCamera.ScreenPointToRay(Mouse.current.position.value);
-            if (plane.Raycast(ray, out float value))
-            {
-                var direction = ray.GetPoint(value) - GameplayData.s_PlayerStateHandler.transform.position;
-                GameplayData.s_PlayerInputs.AimDirection = direction.normalized;
             }
         }
 
@@ -305,9 +299,6 @@ namespace _3C.Player
             inputState.confirm = false;
            // GameplayData.UIPressThisFrame = true;
         }
-
-
-   
     }
 }
 
