@@ -33,9 +33,21 @@ public class GameManager : MonoBehaviour
     [SerializeField] BoardManager boardManager;
     [Header ("input from player controller")]
     [SerializeField] PlayerController playerController;
+    [SerializeField] Transform playerTeleportLimbo;
 
     [Header("misc")]
     [SerializeField] string mapClickSound = "uiClickStone";
+
+    [Header("Timer")]
+    [SerializeField] float gameTime; // total duration of the game
+    private bool timerRunning = false;
+    float gameTimer;
+    public event Action OnGameTimerElapsed = delegate { };
+
+    public float GameTimer
+    {
+        get { return gameTimer; }
+    }
 
     GameState currentGameState;
     GameState lastState;
@@ -50,6 +62,7 @@ public class GameManager : MonoBehaviour
     bool loadingBattleMap;
     
     public event Action<GameState> OnGameStateChanged = delegate { };
+
 
 
     private void Awake()
@@ -72,7 +85,7 @@ public class GameManager : MonoBehaviour
     IEnumerator ResetGame()
     {
         Time.timeScale = 0f;
-        LevelTilesManager.instance.ClearLevelForReset();
+      if (LevelTilesManager.instance != null)  LevelTilesManager.instance.ClearLevelForReset();
         yield return new WaitForEndOfFrame();
         boardManager.ClearMap();
         battleMapLoaded = false;
@@ -91,6 +104,8 @@ public class GameManager : MonoBehaviour
     }
     public void StartGame()
     {
+        gameTimer = gameTime;
+        timerRunning = true;
         loaderCanvas.alpha = 0;
         TransitionToState(GameState.map);
     }
@@ -114,24 +129,6 @@ public class GameManager : MonoBehaviour
 
     public void OnStateExit(GameState state, GameState toState)
     {
-        switch (state)
-        {
-
-            case GameState.map:
-                {
-                }
-                break;
-            case GameState.level:
-                {
-                }
-                break;
-            case GameState.pause:
-                {
-                }
-                break;
-            default:
-                break;
-        }
 
     }
     //ui switching and active cameras switched here on state enter
@@ -142,6 +139,7 @@ public class GameManager : MonoBehaviour
      
             case GameState.map:
                 {
+                    timerRunning = true;
                     Time.timeScale = 1;
                     mapCamera.gameObject.SetActive(true);
                     UIRouter.GoToRoute(UIRouter.RouteType.Map);
@@ -149,6 +147,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.level:
                 {
+                    timerRunning = true;
                     Time.timeScale = 1;
                     mapCamera.gameObject.SetActive(false);
                     UIRouter.GoToRoute(UIRouter.RouteType.Battlefield);
@@ -156,6 +155,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.pause:
                 {
+                    timerRunning = false;
                     lastState = fromState;
                     Time.timeScale = 0;
                     UIRouter.GoToRoute(UIRouter.RouteType.Pause);
@@ -174,10 +174,17 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        HandleGameTimer();
+
         switch (currentGameState)
         {
             case GameState.map:
                 {
+                    if (playerController.inputState.pause)
+                    {
+                        Pause();
+                        return;
+                    }
                     ////hovering over tiles. 
                     TileHighlighting();
 
@@ -202,9 +209,9 @@ public class GameManager : MonoBehaviour
                                     print("you cant swim!");
                                     return;
                                 }
-                                
-                                if (AudioManager.instance != null)  AudioManager.instance.PlaySingleClip(mapClickSound, SFXCategory.ui, 0, 0);
-                         
+
+                                if (AudioManager.instance != null) AudioManager.instance.PlaySingleClip(mapClickSound, SFXCategory.ui, 0, 0);
+
                                 tile.gameObject.transform.DOPunchPosition((Vector3.up * 15), 0.4f, 1, 1, false).OnComplete(() =>
                                 {
                                     tile.Unhighlight();
@@ -214,7 +221,7 @@ public class GameManager : MonoBehaviour
                                 boardManager.AnimateGridSelection(tileIndex.x, tileIndex.y, 0.0001f);
                                 mapDestination = clickedTile.mapTileData.tileCoords;
                                 TryTransitionToLevel();
-                              
+
                             }
                         }
 
@@ -222,17 +229,46 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.level:
+                {
+                    if (playerController.inputState.pause) Pause();
+                }
                 break;
             case GameState.pause:
                 {
-                if (playerController.inputState.menuBack) UIRouter.GoToPreviousRoute();
-                if (playerController.inputState.mapBack) UIRouter.GoToPreviousRoute();
-               // if (playerController.inputState.mapBack) TogglePause();
+                    if (playerController.inputState.pause)
+                    {
+                        UnPause();
+                        return;
+                    }
+                    if (playerController.inputState.menuBack)
+                    {
+                        if (UIRouter.CurrentRoute == UIRouter.RouteType.Pause)
+                        {
+                            UnPause();
+                            return;
+                        }
+                        else UIRouter.GoToPreviousRoute();
+                    }
+              
                 }
                 break;
             default:
                 break;
-        }  
+        }
+    }
+
+    private void HandleGameTimer()
+    {
+        if (timerRunning)
+        {
+            gameTimer -= Time.deltaTime;
+            if (gameTimer <= 0)
+            {
+                gameTimer = 0;
+                timerRunning = false;
+                OnGameTimerElapsed?.Invoke();
+            }
+        }
     }
 
     public void LoadLevel(string sceneName)
@@ -248,7 +284,6 @@ public class GameManager : MonoBehaviour
     IEnumerator LoadLevelScene(String sceneToLoad)
     {
         float elapsedTime = 0f;
-       //// fade the first load here to avoid hiccups
         
             yield return new WaitForSeconds(0.5f);
             while (elapsedTime < fadeDuration)
@@ -288,6 +323,10 @@ public class GameManager : MonoBehaviour
         if (currentGameState != GameState.level) return;
         playerCharacter.SetActive(false);
         CancelInvoke(nameof(DeactivatePlayer));
+        playerInstance.transform.position = playerTeleportLimbo.position;
+        playerCharacter.transform.position = playerTeleportLimbo.position;
+
+
         Invoke(nameof(DeactivatePlayer), 1f);
         playerAnimator.SetTrigger("Teleport Out");
 
@@ -299,7 +338,6 @@ public class GameManager : MonoBehaviour
     }
     void DeactivatePlayer()
     {
-      //  playerInstance.SetActive(false);
         playerCharacter.SetActive(false);
     }
     void TryTransitionToLevel()
@@ -320,7 +358,6 @@ public class GameManager : MonoBehaviour
                 yield return null;
             }
         }
-  
 
         //   Debug.Log("transition 2");
         var spawnTile = LevelTilesManager.instance.GetTileAtGridPosition(mapDestination);
@@ -352,13 +389,13 @@ public class GameManager : MonoBehaviour
         loaderCanvas.alpha = 0;
     }
 
-    public void TogglePause()
+    public void Pause()
     {
 
         if (currentGameState != GameState.pause) TransitionToState(GameState.pause);
     }
 
-    public void ToggleUnPause()
+    public void UnPause()
     {
         if (currentGameState == GameState.pause) TransitionToState(lastState);
     }
@@ -408,10 +445,6 @@ public class GameManager : MonoBehaviour
     {
         LoadLevel(battleSceneName);
     }
-  
-   
-
-
 
 
 }
