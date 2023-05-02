@@ -4873,7 +4873,7 @@ Transform:
   - {fileID: 6053447887720514591}
   - {fileID: 405251844445817259}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7784722972410613760
 MeshFilter:
@@ -4944,6 +4944,7 @@ MonoBehaviour:
     type: 3}
   transitionDuration: 0.1
   m_renderer: {fileID: 6674486160574715071}
+  m_meleeRange: {x: 0.16, y: 0.32}
 --- !u!114 &8743697497758026039
 MonoBehaviour:
   m_ObjectHideFlags: 0
