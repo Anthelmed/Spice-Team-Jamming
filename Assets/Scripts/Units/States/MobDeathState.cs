@@ -1,10 +1,12 @@
+using UnityEngine;
+
 namespace Units
 {
     public class MobDeathState : Mob.IState
     {
         public void Enter(Mob.Data data)
         {
-            if (data.visuals) data.visuals.TriggerDeath();
+            data.frameStarted = Time.timeSinceLevelLoad;
         }
 
         public void Exit(Mob.Data data)
@@ -13,7 +15,9 @@ namespace Units
 
         public void Tick(Mob.Data data)
         {
-            if (!data.visuals || !data.mob.Visible || data.visuals.HasAnimationFinished())
+            data.visuals.SetAnimation(MobVisuals.AnimationID.Death);
+
+            if (Time.timeSinceLevelLoad >= (data.frameStarted + data.visuals.GetDuration(MobVisuals.AnimationID.Death)))
                 data.NextState = Mob.State.Destroy;
         }
     }

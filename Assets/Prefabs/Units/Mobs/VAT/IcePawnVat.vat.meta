@@ -21,12 +21,16 @@ ScriptedImporter:
   - vertexVat: {fileID: 2800000, guid: b76c1c7b2bd37d744a563809ac689be6, type: 2}
     normalVat: {fileID: 2800000, guid: 75a0920493489894fb8c7baaf985dda6, type: 2}
     fps: 30
-    duration: 1.5
+    duration: 2.25
+  - vertexVat: {fileID: 2800000, guid: b76c1c7b2bd37d744a563809ac689be6, type: 2}
+    normalVat: {fileID: 2800000, guid: 75a0920493489894fb8c7baaf985dda6, type: 2}
+    fps: 30
+    duration: 2.25
   - vertexVat: {fileID: 2800000, guid: 43dbd49eb16d94e4281dc21ae21f5f4f, type: 2}
     normalVat: {fileID: 2800000, guid: 3ce8e553a136b654caeade51f89a8bbb, type: 2}
     fps: 30
-    duration: 2.916667
+    duration: 2.917
   - vertexVat: {fileID: 2800000, guid: 32c0db46c4ecc1346b1abbf91e0362fd, type: 2}
     normalVat: {fileID: 2800000, guid: fedb9748fe1227e46adc416d8565b4a1, type: 2}
     fps: 30
-    duration: 1.68
+    duration: 1.58

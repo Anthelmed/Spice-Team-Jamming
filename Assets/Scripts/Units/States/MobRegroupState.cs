@@ -13,20 +13,21 @@ namespace Units
 
         public void Tick(Mob.Data data)
         {
-            if (!data.squad || !data.squad.Leader)
-            {
-                data.NextState = Mob.State.Idle;
-                return;
-            }
+            data.visuals.SetAnimation(MobVisuals.AnimationID.Walk);
 
-            // Go to combat if we are close enough
-            if (!data.squad.IsTooFar())
+            if (!data.squad.Leader)
             {
                 data.NextState = Mob.State.Idle;
                 return;
             }
 
             data.locomotion.GoToPosition(data.squad.LeaderPosition);
+
+            if (!data.squad.IsTooFar())
+            {
+                data.NextState = Mob.State.Idle;
+                return;
+            }
         }
     }
 }

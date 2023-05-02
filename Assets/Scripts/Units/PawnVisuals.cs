@@ -9,23 +9,42 @@ namespace Units
         public float transitionDuration = 0.25f;
 
         [HideInInspector] [SerializeField] private MeshRenderer m_renderer;
+        [SerializeField] private Vector2 m_meleeRange;
 
         private MaterialPropertyBlock m_mpb;
         private int m_currentAnimation = -1;
         private Vector4 m_previousData;
-        private float m_specialAnimationEnds;
 
         private readonly int ANIM_DATA = Shader.PropertyToID("_AnimData");
         private readonly int PREV_ANIM_DATA = Shader.PropertyToID("_PrevAnimData");
         private readonly int TRANSITION = Shader.PropertyToID("_Transition");
 
-        private enum AnimationID
+        public override Vector2 MeleeRange => m_meleeRange;
+
+        public override float RangedDelay => 0;
+
+        public override void SetAnimation(AnimationID id)
         {
-            Idle = 0,
-            Walk,
-            Attack,
-            Hit,
-            Death
+            if (!SwitchAnimation(id)) return;
+
+            if (m_sounds)
+            {
+                switch (id)
+                {
+                    case AnimationID.Attack:
+                        m_sounds.PlayAttackSound();
+                        break;
+                    case AnimationID.RangedAttack:
+                        m_sounds.PlayRangeSound();
+                        break;
+                    case AnimationID.Hit:
+                        m_sounds.PlayDamageSound();
+                        break;
+                    case AnimationID.Death:
+                        m_sounds.PlayDeathSound();
+                        break;
+                }
+            }    
         }
 
         protected override void OnValidate()
@@ -42,17 +61,12 @@ namespace Units
             m_renderer.localBounds = new Bounds(Vector3.zero, Vector3.one * 2);
         }
 
-        private void OnEnable()
-        {
-            m_specialAnimationEnds = 0f;
-        }
-
-        private void SwitchAnimation(AnimationID desiredAnimationID)
+        private bool SwitchAnimation(AnimationID desiredAnimationID)
         {
             var desiredAnimation = (int)desiredAnimationID;
 
             if (!animationData || m_currentAnimation == desiredAnimation)
-                return;
+                return false;
 
             m_currentAnimation = desiredAnimation;
             var data = animationData.animations[desiredAnimation];
@@ -62,62 +76,13 @@ namespace Units
             m_mpb.SetFloat(TRANSITION, transitionDuration);
             m_previousData = data;
             m_renderer.SetPropertyBlock(m_mpb);
+
+            return true;
         }
 
-        public override bool HasAnimationFinished()
+        public override float GetDuration(AnimationID id)
         {
-            return m_specialAnimationEnds < Time.timeSinceLevelLoad;
-        }
-
-        public override bool IsDamagingFrame()
-        {
-            var time = Time.timeSinceLevelLoad;
-            if (m_currentAnimation == (int)AnimationID.Attack
-                && time >= m_previousData.w + animationData.attackHitRange.x
-                && time <= m_previousData.w + animationData.attackHitRange.y)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public override void SetSpeed(float speed)
-        {
-            if (HasAnimationFinished())
-                SwitchAnimation(speed < 0.5f ? AnimationID.Idle : AnimationID.Walk);
-        }
-
-        public override void TriggerAttack()
-        {
-            if (m_sounds && m_unit.Visible) m_sounds.PlayAttackSound();
-
-            m_specialAnimationEnds = Time.timeSinceLevelLoad + animationData.animations[(int)AnimationID.Attack].x - transitionDuration;
-            SwitchAnimation(AnimationID.Attack);
-        }
-
-        public override void TriggerDeath()
-        {
-            if (m_sounds && m_unit.Visible) m_sounds.PlayDeathSound();
-
-            m_specialAnimationEnds = Time.timeSinceLevelLoad + animationData.animations[(int)AnimationID.Death].x * 0.5f - transitionDuration;
-            SwitchAnimation(AnimationID.Death);
-        }
-
-        public override void TriggerHit()
-        {
-            if (m_sounds && m_unit.Visible) m_sounds.PlayDamageSound();
-
-            m_specialAnimationEnds = Time.timeSinceLevelLoad + animationData.animations[(int)AnimationID.Hit].x - transitionDuration;
-            SwitchAnimation(AnimationID.Hit);
-        }
-
-        public override void TriggerRangedAttack()
-        {
-            if (m_sounds && m_unit.Visible) m_sounds.PlayAttackSound();
-
-            m_specialAnimationEnds = Time.timeSinceLevelLoad + animationData.animations[(int)AnimationID.Attack].x - transitionDuration;
-            SwitchAnimation(AnimationID.Attack);
+            return animationData.animations[(int)id].x;
         }
     }
 }

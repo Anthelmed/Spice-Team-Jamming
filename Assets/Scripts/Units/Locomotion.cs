@@ -73,7 +73,6 @@ namespace Units
             trans.position = newPosition;
 
             var lastSpeed = lastVelocity.magnitude;
-            if (m_visuals) m_visuals.SetSpeed(lastSpeed);
 
             if (LookAtTarget)
             {

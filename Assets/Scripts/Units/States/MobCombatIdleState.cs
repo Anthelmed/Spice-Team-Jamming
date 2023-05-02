@@ -6,22 +6,24 @@ namespace Units
     {
         public void Enter(Mob.Data data)
         {
-            if (data.locomotion && data.perception.Target)
-            {
-                data.locomotion.StopImmediate();
-                data.locomotion.LookAtTarget = data.perception.Target.transform;
-            }
+            data.locomotion.StopImmediate();
+            data.locomotion.LookAtTarget = data.perception.Target.transform;
         }
 
         public void Exit(Mob.Data data)
         {
-            if (data.locomotion) data.locomotion.LookAtTarget = null;
+            data.locomotion.LookAtTarget = null;
         }
 
         public void Tick(Mob.Data data)
         {
-            if (data.squad && data.squad.IsTooFar())
+            data.visuals.SetAnimation(MobVisuals.AnimationID.Idle);
+
+            if (data.squad.IsTooFar())
+            {
                 data.NextState = Mob.State.Regroup;
+                return;
+            }
 
             if (!data.perception.Target)
             {
@@ -43,6 +45,7 @@ namespace Units
             if (!data.attacks.IsInMeleeRange(data.perception.Target))
             {
                 data.NextState = Mob.State.GoToTarget;
+                return;
             }
 
             if (canAttack && data.attacks.IsAttackReady)

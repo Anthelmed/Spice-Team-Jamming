@@ -16,7 +16,8 @@ namespace Units
             public MobAttacks attacks;
             public Squad squad;
 
-            public int framesLeft;
+            public float frameStarted;
+            public bool wasAttacking;
 
             public State NextState { get; set; }
         }

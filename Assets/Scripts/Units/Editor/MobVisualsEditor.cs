@@ -14,15 +14,17 @@ namespace Units
             var visuals = target as MobVisuals;
 
             if (GUILayout.Button("Idle"))
-                visuals.SetSpeed(0f);
+                visuals.SetAnimation(MobVisuals.AnimationID.Idle);
             if (GUILayout.Button("Walk"))
-                visuals.SetSpeed(10f);
+                visuals.SetAnimation(MobVisuals.AnimationID.Walk);
             if (GUILayout.Button("Attack"))
-                visuals.TriggerAttack();
+                visuals.SetAnimation(MobVisuals.AnimationID.Attack);
+            if (GUILayout.Button("Ranged Attack"))
+                visuals.SetAnimation(MobVisuals.AnimationID.RangedAttack);
             if (GUILayout.Button("Hit"))
-                visuals.TriggerHit();
+                visuals.SetAnimation(MobVisuals.AnimationID.Hit);
             if (GUILayout.Button("Death"))
-                visuals.TriggerDeath();
+                visuals.SetAnimation(MobVisuals.AnimationID.Death);
         }
     }
 }
