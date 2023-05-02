@@ -41,33 +41,54 @@ public class BoardManager : MonoBehaviour
     public static GameTile[,] MapTiles;
     private static float[,] _mapHeights;
     private Transform _transform;
+    Transform mapTilesParent;
     
     [SerializeField] private bool debugMode = false;
     [SerializeField] float mapHeightOffset;
 
     private void Awake()
     {
-        
-        int x = Mathf.Max(1, widthHeight.x);
-        int y = Mathf.Max(1, widthHeight.y);
-        MapTiles = new GameTile[x, y];
-        _mapHeights = new float[x, y];
-        
+        InitMapArrays();
+
         _transform = transform;
-        
+
         _biomePrefabHolders.Add(Biome.Grass, grassPrefabHolder);
         _biomePrefabHolders.Add(Biome.Desert, desertPrefabHolder);
         _biomePrefabHolders.Add(Biome.Mountain, mountainPrefabHolder);
         _biomePrefabHolders.Add(Biome.Forest, forestPrefabHolder);
         _biomePrefabHolders.Add(Biome.Water, waterPrefabHolder);
-        
+
         noiseOffset = Random.Range(-100f, 100f);
     }
-    
+
+    private void InitMapArrays()
+    {
+        int x = Mathf.Max(1, widthHeight.x);
+        int y = Mathf.Max(1, widthHeight.y);
+        MapTiles = new GameTile[x, y];
+        _mapHeights = new float[x, y];
+    }
+
     private void Start()
     {
+        Generate();
+    }
+
+    public void Generate()
+    {
+        var tilesParent = new GameObject();
+        tilesParent.name = "tilesParent";
+        mapTilesParent = tilesParent.transform;
+        mapTilesParent.parent = mapGraphicsParent;
+       
+        
         _GenerateMapHeights();
         _GenerateMapTiles();
+    }
+    public void ClearMap()
+    {
+        InitMapArrays();
+        Destroy(mapTilesParent.gameObject);
     }
     
     public static int[] WorldPosToGrid(Vector3 pos)

@@ -5,8 +5,8 @@ using DefaultNamespace;
 using DG.Tweening;
 using SpiceTeamJamming.UI;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using Units;
 
 public enum GameState
 {
@@ -17,35 +17,37 @@ public enum GameState
 }
 public class GameManager : MonoBehaviour
 {
- 
+
     [Header("references")]
+
     [SerializeField] string battleSceneName;
     [SerializeField] Camera mapCamera;
     [SerializeField] GameObject playerInstance;
     [SerializeField] GameObject playerCharacter;
-    [SerializeField] GameObject playerCam;
-    [SerializeField] PlayerInput playerInput;
     [SerializeField] Vector2Int mapDestination;
     [SerializeField] GameObject mapGraphics;
-    
+    [SerializeField] BoardManager boardManager;
+    [Header ("input from player controller")]
+    [SerializeField] PlayerController playerController;
+
     [Header("misc")]
     [SerializeField] string mapClickSound = "uiClickStone";
 
     GameState currentGameState;
+    GameState lastState;
 
     public static GameManager instance;
 
-    public event Action<bool> loadingScreenVisibilityEvent = delegate { };
-    public event Action<bool> startScreenVisibilityEvent = delegate { };
-    public event Action<bool> pauseScreenVisibilityEvent = delegate { };
     public static event Action<GameTile> onHoverTileChanged;
     public event Action OnInitialLevelLoad = delegate { };
 
     Animator playerAnimator;// DO this much better
     bool battleMapLoaded;
     bool loadingBattleMap;
-
+    
     public event Action<GameState> OnGameStateChanged = delegate { };
+
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -55,11 +57,28 @@ public class GameManager : MonoBehaviour
             instance = this;
 
         }
-
-      //  if (playerCam != null) playerCam.SetActive(false);
-    //    HideAllPanels();
-       // startScreenVisibilityEvent(true);
         playerAnimator = playerInstance.GetComponentInChildren<Animator>(true);
+    }
+
+    public void NewGame()
+    {
+        TransitionToState(GameState.title);
+        StartCoroutine(ResetGame());
+    }
+    IEnumerator ResetGame()
+    {
+        Time.timeScale = 0f;
+        LevelTilesManager.instance.ClearLevelForReset();
+        yield return new WaitForEndOfFrame();
+        boardManager.ClearMap();
+        battleMapLoaded = false;
+        yield return new WaitForEndOfFrame();
+        boardManager.Generate();
+        playerCharacter.GetComponent<Unit>().ResetHealth(); // do this better
+        playerCharacter.SetActive(false);
+        mapGraphics.SetActive(true);
+        Time.timeScale = 1f;
+        StartGame();
     }
 
     private void Start()
@@ -68,12 +87,14 @@ public class GameManager : MonoBehaviour
     }
     public void StartGame()
     {
-        playerInput.SwitchCurrentActionMap("Map");
-        print("current action map" + playerInput.currentActionMap);
-        HideAllPanels();
-            TransitionToState(GameState.map);
+        TransitionToState(GameState.map);
     }
     
+    public GameState GetCurrentGameState()
+    {
+        return currentGameState;
+    }
+
      void TransitionToState(GameState newState)
     {
         GameState tmpInitialState = currentGameState;
@@ -81,7 +102,7 @@ public class GameManager : MonoBehaviour
         currentGameState = newState;
         OnStateEnter(newState, tmpInitialState);
     }
-
+ 
     /// <summary>
     /// /state
     /// </summary>
@@ -90,45 +111,48 @@ public class GameManager : MonoBehaviour
     {
         switch (state)
         {
-            case GameState.title:
-                break;
+
             case GameState.map:
+                {
+                }
                 break;
             case GameState.level:
+                {
+                }
                 break;
             case GameState.pause:
                 {
-                 //   pauseScreenVisibilityEvent(false);
-                    UIRouter.GoToRoute(UIRouter.RouteType.Battlefield);
                 }
                 break;
             default:
                 break;
         }
+
     }
+    //ui switching and active cameras switched here on state enter
     public void OnStateEnter(GameState state, GameState fromState)
     {
         switch (state)
         {
-            case GameState.title:
-                break;
+     
             case GameState.map:
-
                 {
+                    Time.timeScale = 1;
                     mapCamera.gameObject.SetActive(true);
-                 //   if (playerCam != null) playerCam.SetActive(false);
-
+                    UIRouter.GoToRoute(UIRouter.RouteType.Map);
                 }
                 break;
             case GameState.level:
                 {
+                    Time.timeScale = 1;
                     mapCamera.gameObject.SetActive(false);
-                 //   if (playerCam != null) playerCam.SetActive(false);
+                    UIRouter.GoToRoute(UIRouter.RouteType.Battlefield);
                 }
                 break;
             case GameState.pause:
                 {
-                  //  pauseScreenVisibilityEvent(true);
+                    lastState = fromState;
+                    Time.timeScale = 0;
                     UIRouter.GoToRoute(UIRouter.RouteType.Pause);
                 }
                 break;
@@ -136,35 +160,26 @@ public class GameManager : MonoBehaviour
                 break;
         }
         OnGameStateChanged(state);
-    }
 
+    }
 
     GameTile clickedTile;
     GameTile cachedHoverTile;
     bool wigglin;
-     
 
     void Update()
     {
-
         switch (currentGameState)
         {
-            case GameState.title:
-                break;
             case GameState.map:
                 {
-                    ////hovering over tiles. for juice only
-                    HighlightingJuice();
-                    if (UIRouter.CurrentRoute != UIRouter.RouteType.Map)
-                    {
-                        UIRouter.GoToRoute(UIRouter.RouteType.Map);
-                        
-                    }
+                    ////hovering over tiles. 
+                    TileHighlighting();
 
                     //actually selecting tiles and telporting there
-                    if (GameplayData.UIPressThisFrame)
+                    if (playerController.inputState.confirm && !loadingBattleMap)
                     {
-                        GameplayData.UIPressThisFrame = false;
+                        GameplayData.UIPressThisFrame = false; // no idea what this was for but keeping it here
                         Vector2 mousePosition = GameplayData.CursorPosition;
                         Ray ray = mapCamera.ScreenPointToRay(mousePosition);
                         RaycastHit hit;
@@ -182,22 +197,15 @@ public class GameManager : MonoBehaviour
                                     print("you cant swim!");
                                     return;
                                 }
-                                var cachedPos = tile.gameObject.transform.position;
                                 
                                 if (AudioManager.instance != null)  AudioManager.instance.PlaySingleClip(mapClickSound, SFXCategory.ui, 0, 0);
-                                Debug.Log("here");
-                                //tile.gameObject.transform.DOPunchScale(tile.gameObject.transform.localScale * 1.1f, 0.4f, 5, 0);
+                         
                                 tile.gameObject.transform.DOPunchPosition((Vector3.up * 15), 0.4f, 1, 1, false).OnComplete(() =>
                                 {
                                     mapDestination = clickedTile.mapTileData.tileCoords;
                                     TryTransitionToLevel();
                                     tile.Unhighlight();
-                                    //tile.gameObject.transform.position = cachedPos;
-                                    
                                 });
-
-
-
                             }
                         }
 
@@ -207,17 +215,19 @@ public class GameManager : MonoBehaviour
             case GameState.level:
                 break;
             case GameState.pause:
+                {
+                if (playerController.inputState.menuBack) UIRouter.GoToPreviousRoute();
+                if (playerController.inputState.mapBack) UIRouter.GoToPreviousRoute();
+               // if (playerController.inputState.mapBack) TogglePause();
+                }
                 break;
             default:
                 break;
         }  
     }
 
-   
-
     public void LoadLevel(string sceneName)
     {
-        Debug.Log("transition 3");
         if (currentGameState == GameState.level) return;
 
         Scene scene = SceneManager.GetSceneByName(sceneName);
@@ -228,7 +238,6 @@ public class GameManager : MonoBehaviour
 
     IEnumerator LoadLevelScene(String sceneToLoad)
     {
-      //  loadingScreenVisibilityEvent(true);
          AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
 
         while (!asyncLoad.isDone)
@@ -237,7 +246,8 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForEndOfFrame(); // make this longer if there's an actual loading screen that can appear
+
         OnInitialLevelLoad?.Invoke();
 
         if (LevelTilesManager.instance == null)
@@ -251,12 +261,10 @@ public class GameManager : MonoBehaviour
         battleMapLoaded = true;
     }
 
-    public void TransitionToMap()
+    public void TryTransitionToMap()
     {
         if (currentGameState != GameState.level) return;
         playerCharacter.SetActive(false);
-        playerInput.SwitchCurrentActionMap("Map");
-        print("current action map" + playerInput.currentActionMap);
         CancelInvoke(nameof(DeactivatePlayer));
         Invoke(nameof(DeactivatePlayer), 1f);
         playerAnimator.SetTrigger("Teleport Out");
@@ -274,14 +282,12 @@ public class GameManager : MonoBehaviour
     }
     void TryTransitionToLevel()
     {
-        Debug.Log("transition 1");
-        if(loadingBattleMap) return;
         if (battleMapLoaded) TransitionToLevel();
         else LoadLevel(battleSceneName); // this ends up being async that's why it's like this
     }
     void TransitionToLevel()
     {
-        Debug.Log("transition 2");
+     //   Debug.Log("transition 2");
         var spawnTile = LevelTilesManager.instance.GetTileAtGridPosition(mapDestination);
         spawnTile.WakeUp();
         var spawnPos = spawnTile.teleportPoint.position;
@@ -289,45 +295,25 @@ public class GameManager : MonoBehaviour
         playerInstance.transform.position = spawnPos;
         playerCharacter.transform.localPosition = Vector3.zero;
         playerCharacter.SetActive(true);
-        playerInput.SwitchCurrentActionMap("Gameplay");
-        print("current action map" + playerInput.currentActionMap);
 
         playerAnimator.SetTrigger("Teleport In");
         mapGraphics.SetActive(false); /// do this better
 
         TransitionToState(GameState.level);
-      //  loadingScreenVisibilityEvent(false);
         UIRouter.GoToRoute(UIRouter.RouteType.Battlefield);
 
     }
 
-
-    [ContextMenu(" hide all panels")]
-    public void HideAllPanels()
+    public void TogglePause()
     {
-      //  startScreenVisibilityEvent(false);
-      //  pauseScreenVisibilityEvent(false);
-      //  loadingScreenVisibilityEvent(false);
+
+        if (currentGameState != GameState.pause) TransitionToState(GameState.pause);
     }
 
-    //public void OnTogglePause(InputAction.CallbackContext _context)
-    //{
-    //    if (_context.phase == InputActionPhase.Performed)
-    //        switch (currentGameState)
-    //        {
-
-    //            case GameState.level:
-    //                {
-    //                    TransitionToState(GameState.pause);
-    //                }
-    //                break;
-    //            case GameState.pause:
-    //                {
-    //                    TransitionToState(GameState.level);
-    //                }
-    //                break;
-    //        }
-    //}
+    public void ToggleUnPause()
+    {
+        if (currentGameState == GameState.pause) TransitionToState(lastState);
+    }
 
 
     public void TeleportPlayerToMapPoint(Vector2Int gridCoords)
@@ -339,12 +325,8 @@ public class GameManager : MonoBehaviour
         playerInstance.transform.position = desinationTile.teleportPoint.position;
         playerInstance.transform.rotation = desinationTile.teleportPoint.rotation;
 
-        //or this?
-        //var spawnPos = WorldTilesManager.instance.GetTileAtGridPosition(mapDestination).teleportPoint.position;
-        //Instantiate(playerPrefab, spawnPos, Quaternion.identity);
-
     }
-    private void HighlightingJuice()
+    private void TileHighlighting()
     {
         RaycastHit hoverHit;
 
@@ -361,18 +343,10 @@ public class GameManager : MonoBehaviour
                 }
                 cachedHoverTile = hoverTile;
                 onHoverTileChanged?.Invoke(cachedHoverTile);
+
                 if (hoverTile.mapTileData.biome == Biome.Water)return; // dont juice a place you cant go
 
-                
                 cachedHoverTile.Highlight();
-                // wigglin = true;
-                // cachedHoverTile = hoverTile;
-                // cachedHoverTilePos = hoverTile.gameObject.transform.position;
-                // hoverTile.gameObject.transform.DOPunchPosition(Vector3.up * 5, 0.4f, 1, 1, false).OnComplete(() =>
-                // {
-                //     wigglin = false;
-                //     hoverTile.gameObject.transform.position = cachedTilePos;
-                // });
             }
         }
     }
@@ -383,10 +357,13 @@ public class GameManager : MonoBehaviour
         LoadLevel(battleSceneName);
     }
   
+   
 
 
 
 
 }
+
+
 
 

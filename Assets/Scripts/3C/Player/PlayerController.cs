@@ -1,63 +1,81 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 using DefaultNamespace;
+using NaughtyAttributes.Test;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.InputSystem.Users;
 
 namespace _3C.Player
 {
+    public struct InputState
+    {
+        public bool pause;
+        public bool openMap;
+        public bool closeMap;
+        public bool mapBack;
+        public bool confirm;
+        public bool select;
+        public bool menuBack;
+    }
     public class PlayerController : MonoBehaviour
     {
         private Camera m_MainCamera;
-        private PlayerInput m_PlayerInput;
         private PlayerCursor m_PlayerCursor;
 
 
+        MainInput mainInput;
+        [SerializeField] GameManager gameManager;
+
+        public InputState inputState = new InputState();
+        private bool m_OnDeviceChangeHooked;
+
         private void Awake()
         {
+
+            gameManager.OnGameStateChanged += SwitchInputMap;
             m_MainCamera = Camera.main;
-            m_PlayerInput = GetComponent<PlayerInput>();
-            m_PlayerInput.onControlsChanged += OnControlsChanged;
+            mainInput = new MainInput();
             m_PlayerCursor = GetComponent<PlayerCursor>();
-            OnControlsChanged(m_PlayerInput);
+
+            //init default map
+            mainInput.Map.Enable();
+            
+            mainInput.Gameplay.Movement.performed += OnMovement;
+            mainInput.Gameplay.Movement.canceled += OnMovement;
+            mainInput.Gameplay.Look.performed += OnLook;
+            mainInput.Gameplay.Look.canceled += OnLook;
+            mainInput.Gameplay.Dash.performed += OnDash;
+            mainInput.Gameplay.RangeAttack.performed += OnRangeAttack;
+            mainInput.Gameplay.RangeAttack.canceled += OnRangeAttack;
+            mainInput.Gameplay.KeyboardAim.performed += OnKeyboardAim;
+            mainInput.Gameplay.KeyboardAim.canceled += OnKeyboardAim;
+            mainInput.Gameplay.MeleeAttack.performed += OnMeleeAttack;
+            mainInput.Gameplay.MeleeAttack.canceled += OnMeleeAttack;
+            mainInput.Gameplay.Pause.started += OnPause;
+
+            mainInput.Map.Back.started += MapBackPressed;
+            mainInput.Map.Confirm.started += ConfirmPressed;
+            mainInput.Map.Select.started += SelectPressed;
+
+            mainInput.Menu.Back.started += MenuBackPressed;
+            InputSystem.onEvent += CheckIfSchemeChanged;
+
         }
 
-        private void OnControlsChanged(PlayerInput obj)
+        private void CheckIfSchemeChanged(InputEventPtr _, InputDevice _device)
         {
-            switch (obj.currentControlScheme) 
+            if (mainInput.GamepadScheme.SupportsDevice(_device))
             {
-                case "Gamepad":
-                    UseGamepadAsCursor();
-                    break;
-                default:
-                    ResetCursorToMouse();
-                    break;
+                m_PlayerCursor.UseMouse = false;
+            } else if (mainInput.KeyboardMouseScheme.SupportsDevice(_device))
+            {
+                m_PlayerCursor.UseMouse = true;
             }
         }
 
-        private void UseGamepadAsCursor()
-        {
-            m_PlayerCursor.UseMouse = false;
-        }
-
-        private void ResetCursorToMouse()
-        {
-            m_PlayerCursor.UseMouse = true;
-        }
-
-        public void OnGamepadCursorMovement(InputAction.CallbackContext _context)
-        {
-            m_PlayerCursor.Movement = _context.ReadValue<Vector2>();
-        }
-
-        public void TriggerUIClick(InputAction.CallbackContext _context)
-        {
-            if (_context.performed)
-            {
-                GameplayData.UIPressThisFrame = true;
-            }
-        }
-
-        public void OnMovementAsked(InputAction.CallbackContext _context)
+        private void OnMovement(InputAction.CallbackContext _context)
         {
             switch (_context.phase)
             {
@@ -70,6 +88,50 @@ namespace _3C.Player
             }
 
             GameplayData.s_PlayerInputs.Movement = _context.ReadValue<Vector2>();
+        }
+
+        public void SwitchInputMap(GameState state)
+        {
+            switch (state)
+            {
+                case GameState.map:
+                    {
+                        mainInput.Gameplay.Disable();
+                        mainInput.Map.Enable();
+                        mainInput.Menu.Disable();
+                        print("enabled the map map");
+                    }
+                    break;
+                case GameState.level:
+                    {
+                        mainInput.Gameplay.Enable();
+                        mainInput.Map.Disable();
+                        mainInput.Menu.Disable();
+                        print("enabled the level map");
+                    }
+                    break;
+                case GameState.pause:
+                    {
+                        mainInput.Gameplay.Disable();
+                        mainInput.Map.Disable();
+                        mainInput.Menu.Enable();
+                        print("enabled the pause  map");
+                    }
+                    break;
+            }
+        }
+
+        public void OnGamepadCursorMovement(InputAction.CallbackContext _context)
+        {
+            m_PlayerCursor.Movement = _context.ReadValue<Vector2>();
+        }
+
+        public void TriggerUIClick(InputAction.CallbackContext _context) // this comes from the event system no? or you need it for gamepad?
+        {
+            if (_context.performed)
+            {
+               
+            }
         }
 
         public void OnDash(InputAction.CallbackContext _context)
@@ -128,28 +190,6 @@ namespace _3C.Player
                     break;
             }
         }
-        
-        private void ChangeAiming(InputAction.CallbackContext _context)
-        {
-            if (_context.phase == InputActionPhase.Canceled)
-            {
-                GameplayData.s_PlayerInputs.AimDirection = Vector2.zero;
-            }
-
-            var gamepadAimInput = _context.ReadValue<Vector2>();
-            if (gamepadAimInput != Vector2.zero)
-            {
-                GameplayData.s_PlayerInputs.AimDirection = gamepadAimInput;
-            }
-
-            Plane plane = new Plane(Vector3.up, Vector3.zero);
-            var ray = m_MainCamera.ScreenPointToRay(Mouse.current.position.value);
-            if (plane.Raycast(ray, out float value))
-            {
-                var direction = ray.GetPoint(value) - GameplayData.s_PlayerStateHandler.transform.position;
-                GameplayData.s_PlayerInputs.AimDirection = direction.normalized;
-            }
-        }
 
         private void StackInputIfNotTop(InputType _input)
         {
@@ -174,10 +214,41 @@ namespace _3C.Player
 
         public void OnPause(InputAction.CallbackContext _contex)
         {
-            if (_contex.phase == InputActionPhase.Performed)
-            {
-                
-            }
+           inputState.pause = true;
+        }
+
+        private void MenuBackPressed(InputAction.CallbackContext obj)
+        {
+            inputState.mapBack = true;
+        }
+
+        private void SelectPressed(InputAction.CallbackContext obj)
+        {
+            inputState.select = true;
+        }
+
+        private void ConfirmPressed(InputAction.CallbackContext obj)
+        {
+           inputState.confirm = true;
+            GameplayData.UIPressThisFrame = true;
+        }
+
+        private void MapBackPressed(InputAction.CallbackContext obj)
+        {
+           inputState.openMap = true;
+        }
+
+        private void LateUpdate()
+        {
+            inputState.select = false;
+            inputState.pause = false;
+            inputState.closeMap = false;
+            inputState.mapBack = false;
+            inputState.menuBack = false;
+            inputState.openMap = false;
+            inputState.confirm = false;
+           // GameplayData.UIPressThisFrame = true;
         }
     }
 }
+

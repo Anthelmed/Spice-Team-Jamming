@@ -76,11 +76,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 40, y: 40.66456, z: 40}
+  m_Size: {x: 40.5, y: 40.66456, z: 40.5}
   m_Center: {x: 0, y: 6.13535, z: 0}
 --- !u!1 &4054033425627622009
 GameObject:
@@ -520,7 +520,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -4648773627140549807, guid: ad8027b03fc4bfd4a805235ef1fe0a13, type: 3}
 --- !u!4 &9190899299331647526 stripped
