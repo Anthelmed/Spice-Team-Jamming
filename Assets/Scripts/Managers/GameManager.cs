@@ -60,7 +60,6 @@ public class GameManager : MonoBehaviour
 
         }
         playerAnimator = playerInstance.GetComponentInChildren<Animator>(true);
-        m_PlayerCameraTransposer = characterVirtualCamera.GetCinemachineComponent<CinemachineTransposer>();
     }
 
     public void NewGame()
@@ -169,7 +168,6 @@ public class GameManager : MonoBehaviour
     GameTile clickedTile;
     GameTile cachedHoverTile;
     bool wigglin;
-    private CinemachineTransposer m_PlayerCameraTransposer;
 
     void Update()
     {
@@ -296,10 +294,12 @@ public class GameManager : MonoBehaviour
         spawnTile.WakeUp();
         var spawnPos = spawnTile.teleportPoint.position;
 
+        Vector3 oldPosition = playerCharacter.transform.position;
         playerInstance.transform.position = spawnPos;
         playerCharacter.transform.localPosition = Vector3.zero;
+        Vector3 movementOffset = playerCharacter.transform.position - oldPosition;
         playerCharacter.SetActive(true);
-        StartCoroutine(c_InstantPlayerCameraTransition());
+        characterVirtualCamera.OnTargetObjectWarped(playerCharacter.transform, movementOffset);
 
         playerAnimator.SetTrigger("Teleport In");
         mapGraphics.SetActive(false); /// do this better
@@ -307,19 +307,6 @@ public class GameManager : MonoBehaviour
         TransitionToState(GameState.level);
         UIRouter.GoToRoute(UIRouter.RouteType.Battlefield);
 
-    }
-
-    private IEnumerator c_InstantPlayerCameraTransition()
-    {
-        Vector3 damping = new Vector3(m_PlayerCameraTransposer.m_XDamping, m_PlayerCameraTransposer.m_YDamping,
-            m_PlayerCameraTransposer.m_ZDamping);
-        m_PlayerCameraTransposer.m_XDamping = 0;
-        m_PlayerCameraTransposer.m_YDamping = 0;
-        m_PlayerCameraTransposer.m_ZDamping = 0;
-        yield return null;
-        m_PlayerCameraTransposer.m_XDamping = damping.x;
-        m_PlayerCameraTransposer.m_YDamping = damping.y;
-        m_PlayerCameraTransposer.m_ZDamping = damping.z;
     }
 
     public void TogglePause()
