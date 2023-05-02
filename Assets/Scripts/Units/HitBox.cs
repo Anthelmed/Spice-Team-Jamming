@@ -12,7 +12,7 @@ namespace Units
             Fan
         }
 
-        [SerializeField][HideInInspector] private Unit m_owner;
+        [SerializeField][HideInInspector] public Unit m_owner;
 
         public float Radius => m_radius;
         public float damage = 1f;

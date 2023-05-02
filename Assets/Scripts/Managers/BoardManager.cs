@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using DG.Tweening;
 
 public enum Biome
 {
@@ -325,6 +327,55 @@ public class BoardManager : MonoBehaviour
         _GenerateMapHeights();
 
     }
+
+
+
+    public void AnimateGridSelection(int x, int y, float delay)
+    {
+        StartCoroutine(AnimateGridSelectionCoroutine(x, y, delay));
+    }
+
+    private IEnumerator AnimateGridSelectionCoroutine(int x, int y, float delay)
+    {
+        int rows = MapTiles.GetLength(0);
+        int cols = MapTiles.GetLength(1);
+
+        bool[,] visited = new bool[rows, cols];
+        Queue<(int, int, int)> queue = new Queue<(int, int, int)>();
+        int[] dx = { -1, 0, 1, 0 };
+        int[] dy = { 0, 1, 0, -1 };
+
+        visited[x, y] = true;
+        queue.Enqueue((x, y, 0));
+
+        while (queue.Count > 0)
+        {
+            (int cx, int cy, int distance) = queue.Dequeue();
+
+            var tempIndex = new Vector2Int(cx, cy);
+            BumpTiles(tempIndex);
+            yield return new WaitForSeconds(delay * distance);
+
+            for (int i = 0; i < 4; i++)
+            {
+                int nx = cx + dx[i];
+                int ny = cy + dy[i];
+
+                if (nx >= 0 && nx < rows && ny >= 0 && ny < cols && !visited[nx, ny])
+                {
+                    visited[nx, ny] = true;
+                    queue.Enqueue((nx, ny, distance + 1));
+                }
+            }
+        }
+    
+        void BumpTiles(Vector2Int index)
+        {
+            MapTiles[index.x, index.y].gameObject.transform.DOPunchPosition((Vector3.up * 25), 0.4f, 1, 1, false);
+        }
+
+}
+
 
 
     // private void OnDrawGizmos()

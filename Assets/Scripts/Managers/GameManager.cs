@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using _3C.Player;
+using Cinemachine;
 using DefaultNamespace;
 using DG.Tweening;
 using SpiceTeamJamming.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Units;
+using UnityEngine.UI;
 
 public enum GameState
 {
@@ -22,8 +24,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] string battleSceneName;
     [SerializeField] Camera mapCamera;
+    [SerializeField] CanvasGroup loaderCanvas;
     [SerializeField] GameObject playerInstance;
     [SerializeField] GameObject playerCharacter;
+    [SerializeField] CinemachineVirtualCamera characterVirtualCamera;
     [SerializeField] Vector2Int mapDestination;
     [SerializeField] GameObject mapGraphics;
     [SerializeField] BoardManager boardManager;
@@ -87,6 +91,7 @@ public class GameManager : MonoBehaviour
     }
     public void StartGame()
     {
+        loaderCanvas.alpha = 0;
         TransitionToState(GameState.map);
     }
     
@@ -202,10 +207,14 @@ public class GameManager : MonoBehaviour
                          
                                 tile.gameObject.transform.DOPunchPosition((Vector3.up * 15), 0.4f, 1, 1, false).OnComplete(() =>
                                 {
-                                    mapDestination = clickedTile.mapTileData.tileCoords;
-                                    TryTransitionToLevel();
                                     tile.Unhighlight();
                                 });
+
+                                var tileIndex = tile.mapTileData.tileCoords;
+                                boardManager.AnimateGridSelection(tileIndex.x, tileIndex.y, 0.0001f);
+                                mapDestination = clickedTile.mapTileData.tileCoords;
+                                TryTransitionToLevel();
+                              
                             }
                         }
 
@@ -235,18 +244,29 @@ public class GameManager : MonoBehaviour
         print("scene index" + scene.buildIndex);
         StartCoroutine(LoadLevelScene(sceneName));
     }
-
+    float fadeDuration = 0.5f;
     IEnumerator LoadLevelScene(String sceneToLoad)
     {
-         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
+        float elapsedTime = 0f;
+       //// fade the first load here to avoid hiccups
+        
+            yield return new WaitForSeconds(0.5f);
+            while (elapsedTime < fadeDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                loaderCanvas.alpha = Mathf.Lerp(0, 1, elapsedTime / fadeDuration);
+                yield return null;
+            }
+        
+
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
 
         while (!asyncLoad.isDone)
         {
             print("loading scene");
             yield return null;
         }
-
-        yield return new WaitForEndOfFrame(); // make this longer if there's an actual loading screen that can appear
 
         OnInitialLevelLoad?.Invoke();
 
@@ -257,8 +277,10 @@ public class GameManager : MonoBehaviour
         }
         LevelTilesManager.instance.GenerateTiles();
         loadingBattleMap = false;
-        TransitionToLevel();
+
+        StartCoroutine(TransitionToLevel());
         battleMapLoaded = true;
+
     }
 
     public void TryTransitionToMap()
@@ -282,19 +304,35 @@ public class GameManager : MonoBehaviour
     }
     void TryTransitionToLevel()
     {
-        if (battleMapLoaded) TransitionToLevel();
+        if (battleMapLoaded) StartCoroutine(TransitionToLevel());
         else LoadLevel(battleSceneName); // this ends up being async that's why it's like this
     }
-    void TransitionToLevel()
+    IEnumerator TransitionToLevel()
     {
-     //   Debug.Log("transition 2");
+        float elapsedTime = 0f;
+        if (battleMapLoaded)
+        {
+            yield return new WaitForSeconds(0.5f);
+            while (elapsedTime < fadeDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                loaderCanvas.alpha = Mathf.Lerp(0, 1, elapsedTime / fadeDuration);
+                yield return null;
+            }
+        }
+  
+
+        //   Debug.Log("transition 2");
         var spawnTile = LevelTilesManager.instance.GetTileAtGridPosition(mapDestination);
         spawnTile.WakeUp();
         var spawnPos = spawnTile.teleportPoint.position;
 
+        Vector3 oldPosition = playerCharacter.transform.position;
         playerInstance.transform.position = spawnPos;
         playerCharacter.transform.localPosition = Vector3.zero;
+        Vector3 movementOffset = playerCharacter.transform.position - oldPosition;
         playerCharacter.SetActive(true);
+        characterVirtualCamera.OnTargetObjectWarped(playerCharacter.transform, movementOffset);
 
         playerAnimator.SetTrigger("Teleport In");
         mapGraphics.SetActive(false); /// do this better
@@ -302,6 +340,16 @@ public class GameManager : MonoBehaviour
         TransitionToState(GameState.level);
         UIRouter.GoToRoute(UIRouter.RouteType.Battlefield);
 
+
+        elapsedTime = 0f;
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            loaderCanvas.alpha = Mathf.Lerp(1, 0, elapsedTime / fadeDuration);
+            yield return null;
+        }
+
+        loaderCanvas.alpha = 0;
     }
 
     public void TogglePause()
@@ -326,8 +374,11 @@ public class GameManager : MonoBehaviour
         playerInstance.transform.rotation = desinationTile.teleportPoint.rotation;
 
     }
+    float highlightCooldownTimer;
     private void TileHighlighting()
     {
+        if (loadingBattleMap) return;
+
         RaycastHit hoverHit;
 
         Ray hoverRay = mapCamera.ScreenPointToRay(GameplayData.CursorPosition);
@@ -335,8 +386,9 @@ public class GameManager : MonoBehaviour
         {
 
             hoverHit.collider.gameObject.TryGetComponent(out GameTile hoverTile);
-            if (hoverTile != null && cachedHoverTile != hoverTile)
+            if (hoverTile != null && cachedHoverTile != hoverTile && Time.time > highlightCooldownTimer)
             {
+                highlightCooldownTimer = Time.time + 0.05f;
                 if (cachedHoverTile != null)
                 {
                     cachedHoverTile.Unhighlight();
