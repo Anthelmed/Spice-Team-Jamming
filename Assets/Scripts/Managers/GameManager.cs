@@ -247,28 +247,26 @@ public class GameManager : MonoBehaviour
     float fadeDuration = 0.5f;
     IEnumerator LoadLevelScene(String sceneToLoad)
     {
-         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
+        float elapsedTime = 0f;
+       //// fade the first load here to avoid hiccups
+        
+            yield return new WaitForSeconds(0.5f);
+            while (elapsedTime < fadeDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                loaderCanvas.alpha = Mathf.Lerp(0, 1, elapsedTime / fadeDuration);
+                yield return null;
+            }
+        
+
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
 
         while (!asyncLoad.isDone)
         {
             print("loading scene");
             yield return null;
         }
-
-        yield return new WaitForSeconds(0.5f); // make this longer if there's an actual loading screen that can appear
-
-        float elapsedTime = 0f;
-
-        // Fade in (0 to 1)/////////// fade canvas
-        while (elapsedTime < fadeDuration)
-        {
-            elapsedTime += Time.deltaTime;
-             loaderCanvas.alpha = Mathf.Lerp(0, 1, elapsedTime / fadeDuration);
-            yield return null;
-        }
-
-        elapsedTime = 0f;
-        ////////////////
 
         OnInitialLevelLoad?.Invoke();
 
@@ -279,18 +277,10 @@ public class GameManager : MonoBehaviour
         }
         LevelTilesManager.instance.GenerateTiles();
         loadingBattleMap = false;
-        TransitionToLevel();
+
+        StartCoroutine(TransitionToLevel());
         battleMapLoaded = true;
 
-        /////////////fade canvas in
-        while (elapsedTime < fadeDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            loaderCanvas.alpha = Mathf.Lerp(1, 0, elapsedTime / fadeDuration);
-            yield return null;
-        }
-
-        loaderCanvas.alpha = 0;
     }
 
     public void TryTransitionToMap()
@@ -314,12 +304,25 @@ public class GameManager : MonoBehaviour
     }
     void TryTransitionToLevel()
     {
-        if (battleMapLoaded) TransitionToLevel();
+        if (battleMapLoaded) StartCoroutine(TransitionToLevel());
         else LoadLevel(battleSceneName); // this ends up being async that's why it's like this
     }
-    void TransitionToLevel()
+    IEnumerator TransitionToLevel()
     {
-     //   Debug.Log("transition 2");
+        float elapsedTime = 0f;
+        if (battleMapLoaded)
+        {
+            yield return new WaitForSeconds(0.5f);
+            while (elapsedTime < fadeDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                loaderCanvas.alpha = Mathf.Lerp(0, 1, elapsedTime / fadeDuration);
+                yield return null;
+            }
+        }
+  
+
+        //   Debug.Log("transition 2");
         var spawnTile = LevelTilesManager.instance.GetTileAtGridPosition(mapDestination);
         spawnTile.WakeUp();
         var spawnPos = spawnTile.teleportPoint.position;
@@ -337,6 +340,16 @@ public class GameManager : MonoBehaviour
         TransitionToState(GameState.level);
         UIRouter.GoToRoute(UIRouter.RouteType.Battlefield);
 
+
+        elapsedTime = 0f;
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            loaderCanvas.alpha = Mathf.Lerp(1, 0, elapsedTime / fadeDuration);
+            yield return null;
+        }
+
+        loaderCanvas.alpha = 0;
     }
 
     public void TogglePause()
