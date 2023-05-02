@@ -313,7 +313,7 @@ MonoBehaviour:
   - {fileID: -1304387373167265313, guid: 1920936918c417f4b98bb3888227b84b, type: 3}
   - {fileID: -5615258922942920651, guid: 1920936918c417f4b98bb3888227b84b, type: 3}
   m_meleeRange: {x: 2.4, y: 2.6}
-  m_rangedDelay: 2.5
+  m_rangedDelay: 1.4
 --- !u!111 &3628052521993433538
 Animation:
   m_ObjectHideFlags: 0

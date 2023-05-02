@@ -242,7 +242,7 @@ PrefabInstance:
     - target: {fileID: 7629986834563176671, guid: b9d674588a85e7b42acd7c3964d2e4b5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7629986834563176671, guid: b9d674588a85e7b42acd7c3964d2e4b5,
         type: 3}
@@ -376,7 +376,7 @@ MonoBehaviour:
   - {fileID: -5578746458225771231, guid: 7015ad15ded5ca74f80defcec7f6a2b9, type: 3}
   - {fileID: 5246247173934800132, guid: 7015ad15ded5ca74f80defcec7f6a2b9, type: 3}
   m_meleeRange: {x: 2.4, y: 2.6}
-  m_rangedDelay: 2.4
+  m_rangedDelay: 1.4
 --- !u!111 &3461298371912210175
 Animation:
   m_ObjectHideFlags: 0
