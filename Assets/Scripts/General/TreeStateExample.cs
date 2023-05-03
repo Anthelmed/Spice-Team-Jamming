@@ -17,6 +17,7 @@ public class TreeStateExample : MonoBehaviour
             iceCube.localScale = Vector3.zero;
 
         }
+        fireParticles.Stop();
         trunkRenderer.material.SetFloat("_TrunkState", 0);
 
     }
