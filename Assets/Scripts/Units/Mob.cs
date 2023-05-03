@@ -82,22 +82,6 @@ namespace Units
             // Change immediately
         }
 
-        private void OnValidate()
-        {
-            m_data.transform = transform;
-            m_data.mob = this;
-            m_data.perception = GetComponentInChildren<Perception>();
-            m_data.locomotion = GetComponentInChildren<Locomotion>();
-            m_data.visuals = GetComponentInChildren<MobVisuals>();
-            m_data.attacks = GetComponentInChildren<MobAttacks>();
-            m_data.squad = GetComponentInChildren<Squad>();
-        }
-
-        private void Reset()
-        {
-            OnValidate();
-        }
-
         private void UpdateTransition()
         {
             if (m_state == m_data.NextState)
@@ -111,6 +95,15 @@ namespace Units
         protected override void Awake()
         {
             base.Awake();
+
+            m_data.transform = transform;
+            m_data.mob = this;
+            m_data.perception = GetComponentInChildren<Perception>();
+            m_data.locomotion = GetComponentInChildren<Locomotion>();
+            m_data.visuals = GetComponentInChildren<MobVisuals>();
+            m_data.attacks = GetComponentInChildren<MobAttacks>();
+            m_data.squad = GetComponentInChildren<Squad>();
+
             m_state = State.Uninitialized;
             m_data.NextState = State.Idle;
 
@@ -118,16 +111,13 @@ namespace Units
             onHit.AddListener(OnHit);
         }
 
-        public override void FixedTick()
+        private void FixedUpdate()
         {
-            base.FixedTick();
-            if (m_data.locomotion)
-                m_data.locomotion.FixedTick();
+            m_data.locomotion.FixedTick();
         }
-        public override void Tick()
+        protected override void Update()
         {
-            if (!this) return;
-            base.Tick();
+            base.Update();
 
             if (m_data.NextState == State.Destroy)
             {

@@ -26,10 +26,9 @@ namespace Units
             onDie.AddListener(OnDie);
         }
 
-        public override void Tick()
+        protected override void Update()
         {
-            if (!this) return;
-            base.Tick();
+            base.Update();
 
             if (Team != Faction.Nature && Time.timeSinceLevelLoad > m_nextRecovery)
             {

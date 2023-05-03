@@ -36,23 +36,8 @@ public class LevelTile : MonoBehaviour
         m_updateTurn = Random.Range(0, UPDATE_RATE);
     }
 
-    private void FixedUpdate()
-    {
-        for (int i = 0; i < Vegetation.Count; ++i) Vegetation[i].FixedTick();
-        for (int i = 0; i < Pawns.Count; ++i) Pawns[i].FixedTick();
-        for (int i = 0; i < Knights.Count; ++i) Knights[i].FixedTick();
-        for (int i = 0; i < Players.Count; ++i) Players[i].FixedTick();
-    }
-
     private void Update()
     {
-        if ((Time.frameCount % UPDATE_RATE) != m_updateTurn) return;
-
-        for (int i = 0; i < Vegetation.Count; ++i) Vegetation[i].Tick();
-        for (int i = 0; i < Pawns.Count; ++i) Pawns[i].Tick();
-        for (int i = 0; i < Knights.Count; ++i) Knights[i].Tick();
-        for (int i = 0; i < Players.Count; ++i) Players[i].Tick();
-
         int fire = 0;
         int ice = 0;
         int total = 0;
@@ -84,22 +69,20 @@ public class LevelTile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        other.TryGetComponent(out PlayerStateHandler player);
-            if (player == null) return;
+        if (!other.TryGetComponent(out PlayerStateHandler player))
+            return;
      
         hasPlayer = true;
         tileActivated = true;
         worldTilesManager.UpdateActiveTiles(this);
-       
     }
 
     private void OnTriggerExit(Collider other)
     {
-        other.TryGetComponent(out PlayerStateHandler player);
-        if (player == null) return;
+        if (!other.TryGetComponent(out PlayerStateHandler player))
+            return;
 
         hasPlayer = false;
-   
     }
 
     internal void WakeUp()
@@ -177,7 +160,6 @@ public class LevelTile : MonoBehaviour
         float newDist;
         for (int i = 0; i < list.Count; ++i)
         {
-            if (!list[i]) continue;
             if (list[i].Team == myTeam) continue;
             newDist = (list[i].transform.position - position).magnitude;
             newDist -= list[i].Radius;
@@ -212,7 +194,6 @@ public class LevelTile : MonoBehaviour
         var list = GetListForType(type);
         for (int i = 0; i < list.Count; ++i)
         {
-            if (!list[i]) continue;
             if (list[i].Team == team) continue;
             if (CircleCircleIntersect(center, radius, list[i].transform.position, list[i].Radius))
                 m_queryResultNoAlloc.Add(list[i]);
@@ -244,7 +225,6 @@ public class LevelTile : MonoBehaviour
         var list = GetListForType(type);
         for (int i = 0; i < list.Count; ++i)
         {
-            if (!list[i]) continue;
             if (list[i].Team == team) continue;
             if (CircleFanIntersect(list[i].transform.position, list[i].Radius, center, radius, dir, halfAngle))
                 m_queryResultNoAlloc.Add(list[i]);
@@ -273,7 +253,6 @@ public class LevelTile : MonoBehaviour
         var list = GetListForType(type);
         for (int i = 0; i < list.Count; ++i)
         {
-            if (!list[i]) continue;
             if (CircleCircleIntersect(center, radius, list[i].transform.position, list[i].Radius))
                 m_queryResultNoAlloc.Add(list[i]);
         }

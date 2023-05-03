@@ -12,7 +12,6 @@ namespace Units
     }
 
     [SelectionBase]
-    [RequireComponent(typeof(AutoUpdateUnit))]
     public class Unit : MonoBehaviour
     {
         public enum Type
@@ -75,7 +74,6 @@ namespace Units
                 onDie?.Invoke(damage, other);
                 m_currentTile.Unregister(this);
                 m_currentTile = null;
-                GetComponent<AutoUpdateUnit>().enabled = true;
             }
             else
                 onHit?.Invoke(damage, other);
@@ -103,11 +101,8 @@ namespace Units
             onVisibilityChanged?.Invoke(visible);
         }
 
-        public virtual void FixedTick() { }
-
-        public virtual void Tick()
+        protected virtual void Update()
         {
-            if (!this) return;
             if (doesntMove && m_currentTile) return;
 
             var world = LevelTilesManager.instance;
@@ -155,11 +150,11 @@ namespace Units
         //         UnityEditor.Handles.DrawSolidDisc(transform.position, Vector3.up, m_radius);
         //     }
         // }
-        // private void OnDrawGizmosSelected()
-        // {
-        //     UnityEditor.Handles.color = m_debugColor;
-        //     UnityEditor.Handles.DrawSolidDisc(transform.position, Vector3.up, m_radius);
-        // }
+        private void OnDrawGizmosSelected()
+        {
+            UnityEditor.Handles.color = m_debugColor;
+            UnityEditor.Handles.DrawSolidDisc(transform.position, Vector3.up, m_radius);
+        }
 #endif
     }
 }
