@@ -103,7 +103,7 @@ namespace Units
 
         protected virtual void Update()
         {
-            if (doesntMove && m_currentTile) return;
+            if (m_currentHealth <= 0f || (doesntMove && m_currentTile)) return;
 
             var world = LevelTilesManager.instance;
             if (!world) return;
