@@ -1049,7 +1049,7 @@ MonoBehaviour:
   damage: 1
   m_shape: 1
   m_radius: 3.49
-  m_fanAngle: 116.6
+  m_fanAngle: 27.99
 --- !u!1001 &6725188657354584450
 PrefabInstance:
   m_ObjectHideFlags: 0
