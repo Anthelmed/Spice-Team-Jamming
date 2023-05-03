@@ -320,17 +320,20 @@ public class GameManager : MonoBehaviour
 
 
         if (currentGameState != GameState.level) return;
+        Invoke(nameof(DeactivatePlayer), 1f);
+        playerAnimator.SetTrigger("Teleport Out");
         StartCoroutine(TransitionToMap());
 
     }
 
-    float mapFade = 0.2f;
+    float mapFade = 0.5f;
     IEnumerator TransitionToMap()
     {
+
         transitioning = true;
         float elapsedTime = 0f;
+        yield return new WaitForSeconds(1f);
 
-        yield return new WaitForSeconds(0.5f);
         while (elapsedTime < mapFade)
         {
             elapsedTime += Time.deltaTime;
@@ -345,11 +348,6 @@ public class GameManager : MonoBehaviour
         CancelInvoke(nameof(DeactivatePlayer));
         playerInstance.transform.position = playerTeleportLimbo.position;
         playerCharacter.transform.position = playerTeleportLimbo.position;
-
-        Invoke(nameof(DeactivatePlayer), 1f);
-        playerAnimator.SetTrigger("Teleport Out");
-
-
         LevelTilesManager.instance.SleepAllTiles();
 
         BoardManager.instance.mapGraphics.SetActive(true); /// do this better
