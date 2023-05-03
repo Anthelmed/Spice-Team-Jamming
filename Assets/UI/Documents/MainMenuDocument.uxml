@@ -5,8 +5,8 @@
     <Style src="project://database/Assets/UI/Styles/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=65c1c2531fd613c45a760c865dfbb434&amp;type=3#MainMenuStyle" />
     <ui:VisualElement name="MainMenu" class="main-element auto-reference">
         <ui:VisualElement name="Overlay" />
-        <ui:VisualElement name="MainMenuLogo" class="auto-reference" />
         <ui:VisualElement name="MainMenuPanel" class="menu-panel">
+            <ui:VisualElement name="MainMenuLogo" class="auto-reference" />
             <ui:Button name="MainMenuButtonNewGame" text="New Game" class="button auto-reference" />
             <ui:Button name="MainMenuButtonSettings" text="Settings" class="button auto-reference" />
             <ui:Button name="MainMenuButtonQuit" text="Quit" class="button auto-reference" />

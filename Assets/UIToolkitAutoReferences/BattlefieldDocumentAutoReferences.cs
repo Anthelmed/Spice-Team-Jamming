@@ -18,9 +18,7 @@ namespace UIToolkitAutoReferences
 			uiDocument.rootVisualElement;
 
 		private VisualElement _battlefield;
-		private VisualElement _battlefieldPlayerStatHealthGauge;
 		private VisualElement _battlefieldPlayerStatHealth;
-		private VisualElement _battlefieldPlayerStatManaGauge;
 		private VisualElement _battlefieldPlayerStatMana;
 		private VisualElement _battlefieldMinimap;
 		private Button _actionHelperMap;
@@ -28,12 +26,8 @@ namespace UIToolkitAutoReferences
 
 		public VisualElement Battlefield => _battlefield ??=
 			RootVisualElement.Q<VisualElement>("Battlefield");
-		public VisualElement BattlefieldPlayerStatHealthGauge => _battlefieldPlayerStatHealthGauge ??=
-			RootVisualElement.Q<VisualElement>("BattlefieldPlayerStatHealthGauge");
 		public VisualElement BattlefieldPlayerStatHealth => _battlefieldPlayerStatHealth ??=
 			RootVisualElement.Q<VisualElement>("BattlefieldPlayerStatHealth");
-		public VisualElement BattlefieldPlayerStatManaGauge => _battlefieldPlayerStatManaGauge ??=
-			RootVisualElement.Q<VisualElement>("BattlefieldPlayerStatManaGauge");
 		public VisualElement BattlefieldPlayerStatMana => _battlefieldPlayerStatMana ??=
 			RootVisualElement.Q<VisualElement>("BattlefieldPlayerStatMana");
 		public VisualElement BattlefieldMinimap => _battlefieldMinimap ??=

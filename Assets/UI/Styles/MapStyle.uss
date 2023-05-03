@@ -23,10 +23,10 @@
 
 #MapBalanceIndicator {
     position: absolute;
-    bottom: 50px;
+    bottom: 44px;
     width: 654px;
-    height: 138px;
+    height: 114px;
     background-image: url('project://database/Assets/UI/Textures/V2/IndicatorL.png?fileID=2800000&guid=f44f48424532a3a4d98cbc8f1002c6d1&type=3#IndicatorL');
-    -unity-background-image-tint-color: var(--primary-color-1);
-    -unity-background-scale-mode: stretch-to-fill;
+    -unity-background-image-tint-color: var(--primary-color-1-dark);
+    -unity-background-scale-mode: scale-to-fit;
 }

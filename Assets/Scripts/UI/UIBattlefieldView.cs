@@ -94,7 +94,6 @@ namespace SpiceTeamJamming.UI
 		{
 			DisplaceElementRandomly(elementsReferences.BattlefieldPlayerStatHealth);
 			DisplaceElementRandomly(elementsReferences.BattlefieldPlayerStatMana);
-			DisplaceElementRandomly(elementsReferences.BattlefieldBalanceIndicator);
 			DisplaceElementRandomly(elementsReferences.BattlefieldMinimap);
 			DisplaceElementRandomly(elementsReferences.ActionHelperMap);
 			DisplaceElementRandomly(elementsReferences.ActionHelperPause);

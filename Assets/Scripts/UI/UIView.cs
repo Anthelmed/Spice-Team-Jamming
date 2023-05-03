@@ -12,11 +12,11 @@ namespace SpiceTeamJamming.UI
 	{
 		[SerializeField] private bool loadViewAtStart = false;
 		
-		private readonly Color _baseColorButton = new (0.5254902f, 0.8588235f, 0.6470588f);
-		private readonly Color _actionColorButton = new (0.5254902f, 0.7607843f, 0.572549f);
+		private readonly Color _baseColorButton = new (0.37f, 0.56f, 0.44f);
+		private readonly Color _actionColorButton = new (0.57f, 0.86f, 0.67f);
 		
-		private readonly float2 _minMaxTranslation = new (-12f, 12f);
-		private readonly float2 _minMaxAngle = new (-4f, 4f);
+		private readonly float2 _minMaxTranslation = new (-6f, 6f);
+		private readonly float2 _minMaxAngle = new (-2f, 2f);
 		private readonly float2 _minMaxScale = new (-0.05f, 0.05f);
 		
 		private const int FadeInDurationMS = 300;

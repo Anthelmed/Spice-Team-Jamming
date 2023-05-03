@@ -167,3 +167,12 @@
     -unity-text-align: middle-center;
     text-shadow: 0 0 5px rgb(255, 255, 255);
 }
+
+.line {
+    background-image: url('project://database/Assets/UI/Textures/V2/Line.png?fileID=2800000&guid=73aebec9beeaa424ebf50460e349de25&type=3#Line');
+    -unity-background-image-tint-color: rgb(42, 63, 49);
+    width: 548px;
+    height: 30px;
+    position: absolute;
+    -unity-background-scale-mode: stretch-to-fill;
+}
