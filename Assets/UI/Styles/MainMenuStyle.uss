@@ -5,9 +5,3 @@
     top: 100px;
     left: 100px;
 }
-
-#MainMenuButtons {
-    position: absolute;
-    top: 350px;
-    left: 350px;
-}

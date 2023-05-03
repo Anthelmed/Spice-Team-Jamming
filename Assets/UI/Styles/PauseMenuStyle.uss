@@ -1,5 +1,0 @@
-#PauseMenuButtons {
-    position: absolute;
-    top: 350px;
-    right: 350px;
-}

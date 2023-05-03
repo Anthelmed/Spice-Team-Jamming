@@ -6,10 +6,10 @@
     <Style src="project://database/Assets/UI/Styles/ActionHelperStyle.uss?fileID=7433441132597879392&amp;guid=1ee840c4db8243eaa2a9f33057bc878a&amp;type=3#ActionHelperStyle" />
     <ui:VisualElement name="PauseMenu" class="main-element auto-reference">
         <ui:VisualElement name="Overlay" />
-        <ui:VisualElement name="PauseMenuTitle" class="title auto-reference">
-            <ui:Label tabindex="-1" text="Paused" display-tooltip-when-elided="true" name="PauseMenuTitleLabel" class="title-label" />
-        </ui:VisualElement>
-        <ui:VisualElement name="PauseMenuButtons">
+        <ui:VisualElement name="PauseMenuPanel" class="menu-panel">
+            <ui:VisualElement name="PauseMenuTitle" class="title auto-reference">
+                <ui:Label tabindex="-1" text="Paused" display-tooltip-when-elided="true" name="PauseMenuTitleLabel" class="title-label" />
+            </ui:VisualElement>
             <ui:Button name="PauseMenuButtonResume" text="Resume" class="button auto-reference" />
             <ui:Button name="PauseMenuButtonSettings" text="Settings" class="button auto-reference" />
             <ui:Button name="PauseMenuButtonMainMenu" text="Return to Main Menu" class="button auto-reference" />

@@ -5,8 +5,8 @@
 #MapTileInfo {
     position: absolute;
     top: 50px;
-    width: 350px;
-    height: 350px;
+    width: 322px;
+    height: 392px;
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
@@ -15,18 +15,18 @@
     padding-right: 0;
     padding-top: 0;
     padding-bottom: 0;
-    background-image: url('project://database/Assets/UI/Textures/Background.png?fileID=2800000&guid=db5a558d34c59dd4b94b330d5b0e2b98&type=3#Background');
+    background-image: url('project://database/Assets/UI/Textures/V2/BackgroundM.png?fileID=2800000&guid=79438e571b43b6e469235ff8c7fbe678&type=3#BackgroundM');
     -unity-background-image-tint-color: var(--primary-color-1);
-    right: 100px;
-    -unity-background-scale-mode: scale-to-fit;
+    right: 20px;
+    -unity-background-scale-mode: stretch-to-fill;
 }
 
 #MapBalanceIndicator {
     position: absolute;
     bottom: 50px;
-    width: 690px;
-    height: 100px;
-    background-image: url('project://database/Assets/UI/Textures/BalanceIndicatorBackground.png?fileID=2800000&guid=ffa9cb0aae68b5249bce2f1c69a74469&type=3#BalanceIndicatorBackground');
+    width: 654px;
+    height: 138px;
+    background-image: url('project://database/Assets/UI/Textures/V2/IndicatorL.png?fileID=2800000&guid=f44f48424532a3a4d98cbc8f1002c6d1&type=3#IndicatorL');
     -unity-background-image-tint-color: var(--primary-color-1);
-    -unity-background-scale-mode: scale-to-fit;
+    -unity-background-scale-mode: stretch-to-fill;
 }

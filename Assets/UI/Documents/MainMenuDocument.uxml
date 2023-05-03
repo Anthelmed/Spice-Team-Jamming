@@ -6,7 +6,7 @@
     <ui:VisualElement name="MainMenu" class="main-element auto-reference">
         <ui:VisualElement name="Overlay" />
         <ui:VisualElement name="MainMenuLogo" class="auto-reference" />
-        <ui:VisualElement name="MainMenuButtons">
+        <ui:VisualElement name="MainMenuPanel" class="menu-panel">
             <ui:Button name="MainMenuButtonNewGame" text="New Game" class="button auto-reference" />
             <ui:Button name="MainMenuButtonSettings" text="Settings" class="button auto-reference" />
             <ui:Button name="MainMenuButtonQuit" text="Quit" class="button auto-reference" />

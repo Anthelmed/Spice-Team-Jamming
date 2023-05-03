@@ -6,14 +6,11 @@
     <Style src="project://database/Assets/UI/Styles/BattlefieldStyle.uss?fileID=7433441132597879392&amp;guid=d6e8357d1c29a054bb5b0fbbd3557a30&amp;type=3#BattlefieldStyle" />
     <ui:VisualElement name="Battlefield" class="main-element auto-reference">
         <ui:VisualElement name="BattlefieldPlayerStats" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-            <ui:VisualElement name="BattlefieldPlayerStatHealth" class="battlefield-player-stat-background auto-reference" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-                <ui:VisualElement name="BattlefieldPlayerStatHealthGauge" class="battlefield-player-stat-gauge auto-reference" />
-            </ui:VisualElement>
-            <ui:VisualElement name="BattlefieldPlayerStatMana" class="battlefield-player-stat-background auto-reference" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-                <ui:VisualElement name="BattlefieldPlayerStatManaGauge" class="battlefield-player-stat-gauge auto-reference" />
-            </ui:VisualElement>
+            <ui:VisualElement name="BattlefieldPlayerStatHealthGauge" class="battlefield-player-stat-gauge auto-reference" style="background-image: none;" />
+            <ui:VisualElement name="BattlefieldPlayerStatHealth" class="battlefield-player-stat-background auto-reference" style="background-color: rgba(0, 0, 0, 0);" />
+            <ui:VisualElement name="BattlefieldPlayerStatManaGauge" class="battlefield-player-stat-gauge auto-reference" style="background-image: none; top: 92px;" />
+            <ui:VisualElement name="BattlefieldPlayerStatMana" class="battlefield-player-stat-background auto-reference" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
         </ui:VisualElement>
-        <ui:VisualElement name="BattlefieldBalanceIndicator" class="auto-reference" />
         <ui:VisualElement name="BattlefieldMinimap" class="auto-reference" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); display: none;" />
         <ui:VisualElement name="BattlefieldActionHelpers" class="action-helpers">
             <ui:Instance template="ActionHelperMap" name="ActionHelperMap" />

@@ -1,11 +1,9 @@
 :root {
-    --primary-color-1: rgb(134, 219, 165);
-    --primary-color-1-dark: rgb(118, 194, 146);
+    --primary-color-1: rgb(93, 142, 111);
+    --primary-color-1-dark: rgb(76, 116, 91);
     --primary-color-2: rgb(142, 101, 136);
     --primary-color-3: rgb(255, 112, 105);
     --primary-color-4: rgb(79, 173, 255);
-    --title-font-size: 36px;
-    --button-font-size: 30px;
     --rowdies-font-regular: url('project://database/Assets/Fonts/Rowdies/Rowdies-Regular.ttf?fileID=12800000&guid=2cea9ff495f9b4a4daed12e48f24ef32&type=3#Rowdies-Regular');
     --montserrat-font-regular: url('project://database/Assets/Fonts/Montserrat/Montserrat-Regular.ttf?fileID=12800000&guid=95cc2332f1c404c4e86ccc0a5d4d2616&type=3#Montserrat-Regular');
     --montserrat-font-bold: url('project://database/Assets/Fonts/Montserrat/Montserrat-Bold.ttf?fileID=12800000&guid=5f840e1af5ef1174089c0c7f44033efa&type=3#Montserrat-Bold');
@@ -29,19 +27,20 @@
     right: 0;
     bottom: 0;
     opacity: 0;
+    justify-content: center;
+    align-items: center;
 }
 
 .title {
-    width: 600px;
-    height: 128px;
-    position: absolute;
-    left: 100px;
-    top: 100px;
-    background-image: url('project://database/Assets/UI/Textures/Ribbon.png?fileID=2800000&guid=c1bbd763c7324d344a631533f712280d&type=3#Ribbon');
+    width: 438px;
+    height: 98px;
+    background-image: url('project://database/Assets/UI/Textures/V2/BackgroundTitle.png?fileID=2800000&guid=8495335a9285bb64ca7df249c60ae844&type=3#BackgroundTitle');
     justify-content: center;
     align-items: center;
     -unity-background-image-tint-color: var(--primary-color-1);
     -unity-background-scale-mode: scale-to-fit;
+    margin-top: 104px;
+    margin-bottom: 85px;
 }
 
 .title-label {
@@ -49,22 +48,23 @@
     height: 100%;
     margin-left: 0;
     margin-right: 0;
-    margin-top: 30px;
+    margin-top: 0;
     margin-bottom: 0;
     padding-left: 0;
     padding-right: 0;
     padding-top: 0;
     padding-bottom: 0;
     -unity-text-align: middle-center;
-    font-size: var(--title-font-size);
+    font-size: 32px;
     -unity-font: var(--rowdies-font-regular);
-    -unity-background-image-tint-color: var(--title-text-color);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    text-shadow: 0 0 5px rgb(255, 255, 255);
 }
 
 .button {
     width: 398px;
-    height: 100px;
-    margin-bottom: 25px;
+    height: 83px;
+    margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
@@ -72,8 +72,8 @@
     padding-right: 0;
     padding-top: 0;
     padding-bottom: 0;
-    background-image: url('project://database/Assets/UI/Textures/Button.png?fileID=2800000&guid=39146f4ae7969b44398fecb7a74931bc&type=3#Button');
-    font-size: var(--button-font-size);
+    background-image: url('project://database/Assets/UI/Textures/V2/ButtonM.png?fileID=2800000&guid=486d190ba3db8be4e8a795866d30e1e5&type=3#ButtonM');
+    font-size: 22px;
     -unity-font: var(--rowdies-font-regular);
     -unity-text-align: middle-center;
     background-color: rgba(0, 0, 0, 0);
@@ -83,6 +83,18 @@
     border-bottom-width: 0;
     -unity-background-image-tint-color: var(--primary-color-1);
     -unity-background-scale-mode: scale-to-fit;
+    text-shadow: 0 0 5px rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+}
+
+.menu-panel {
+    position: absolute;
+    width: 645px;
+    height: 784px;
+    background-image: url('project://database/Assets/UI/Textures/V2/BackgroundM.png?fileID=2800000&guid=79438e571b43b6e469235ff8c7fbe678&type=3#BackgroundM');
+    justify-content: flex-start;
+    align-items: center;
+    -unity-background-image-tint-color: var(--primary-color-1-dark);
 }
 
 .square-button {
@@ -124,6 +136,7 @@
     padding-top: 50px;
     padding-bottom: 0;
     font-size: 28px;
+    text-shadow: 0 0 5px rgb(255, 255, 255);
 }
 
 .button:focus {
@@ -152,4 +165,5 @@
     font-size: 22px;
     white-space: normal;
     -unity-text-align: middle-center;
+    text-shadow: 0 0 5px rgb(255, 255, 255);
 }

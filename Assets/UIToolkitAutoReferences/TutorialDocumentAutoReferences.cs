@@ -18,9 +18,9 @@ namespace UIToolkitAutoReferences
 			uiDocument.rootVisualElement;
 
 		private VisualElement _tutorial;
+		private VisualElement _tutorialInfo;
 		private VisualElement _tutorialTitle;
 		private Label _tutorialTitleLabel;
-		private VisualElement _tutorialInfo;
 		private Label _tutorialInfoSubTitle;
 		private Label _tutorialInfoText;
 		private VisualElement _tutorialInfoImage;
@@ -28,12 +28,12 @@ namespace UIToolkitAutoReferences
 
 		public VisualElement Tutorial => _tutorial ??=
 			RootVisualElement.Q<VisualElement>("Tutorial");
+		public VisualElement TutorialInfo => _tutorialInfo ??=
+			RootVisualElement.Q<VisualElement>("TutorialInfo");
 		public VisualElement TutorialTitle => _tutorialTitle ??=
 			RootVisualElement.Q<VisualElement>("TutorialTitle");
 		public Label TutorialTitleLabel => _tutorialTitleLabel ??=
 			RootVisualElement.Q<Label>("TutorialTitleLabel");
-		public VisualElement TutorialInfo => _tutorialInfo ??=
-			RootVisualElement.Q<VisualElement>("TutorialInfo");
 		public Label TutorialInfoSubTitle => _tutorialInfoSubTitle ??=
 			RootVisualElement.Q<Label>("TutorialInfoSubTitle");
 		public Label TutorialInfoText => _tutorialInfoText ??=

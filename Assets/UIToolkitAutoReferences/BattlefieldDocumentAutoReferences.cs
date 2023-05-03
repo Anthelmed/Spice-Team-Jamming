@@ -18,27 +18,24 @@ namespace UIToolkitAutoReferences
 			uiDocument.rootVisualElement;
 
 		private VisualElement _battlefield;
-		private VisualElement _battlefieldPlayerStatHealth;
 		private VisualElement _battlefieldPlayerStatHealthGauge;
-		private VisualElement _battlefieldPlayerStatMana;
+		private VisualElement _battlefieldPlayerStatHealth;
 		private VisualElement _battlefieldPlayerStatManaGauge;
-		private VisualElement _battlefieldBalanceIndicator;
+		private VisualElement _battlefieldPlayerStatMana;
 		private VisualElement _battlefieldMinimap;
 		private Button _actionHelperMap;
 		private Button _actionHelperPause;
 
 		public VisualElement Battlefield => _battlefield ??=
 			RootVisualElement.Q<VisualElement>("Battlefield");
-		public VisualElement BattlefieldPlayerStatHealth => _battlefieldPlayerStatHealth ??=
-			RootVisualElement.Q<VisualElement>("BattlefieldPlayerStatHealth");
 		public VisualElement BattlefieldPlayerStatHealthGauge => _battlefieldPlayerStatHealthGauge ??=
 			RootVisualElement.Q<VisualElement>("BattlefieldPlayerStatHealthGauge");
-		public VisualElement BattlefieldPlayerStatMana => _battlefieldPlayerStatMana ??=
-			RootVisualElement.Q<VisualElement>("BattlefieldPlayerStatMana");
+		public VisualElement BattlefieldPlayerStatHealth => _battlefieldPlayerStatHealth ??=
+			RootVisualElement.Q<VisualElement>("BattlefieldPlayerStatHealth");
 		public VisualElement BattlefieldPlayerStatManaGauge => _battlefieldPlayerStatManaGauge ??=
 			RootVisualElement.Q<VisualElement>("BattlefieldPlayerStatManaGauge");
-		public VisualElement BattlefieldBalanceIndicator => _battlefieldBalanceIndicator ??=
-			RootVisualElement.Q<VisualElement>("BattlefieldBalanceIndicator");
+		public VisualElement BattlefieldPlayerStatMana => _battlefieldPlayerStatMana ??=
+			RootVisualElement.Q<VisualElement>("BattlefieldPlayerStatMana");
 		public VisualElement BattlefieldMinimap => _battlefieldMinimap ??=
 			RootVisualElement.Q<VisualElement>("BattlefieldMinimap");
 		public Button ActionHelperMap => _actionHelperMap ??=

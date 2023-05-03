@@ -11,7 +11,7 @@
     align-items: center;
     justify-content: flex-start;
     flex-direction: row;
-    margin-top: 25px;
+    margin-top: 0;
     margin-left: 0;
     margin-right: 0;
     margin-bottom: 0;
@@ -31,9 +31,9 @@
 }
 
 .action-helper-icon {
-    width: 50px;
-    height: 50px;
-    background-image: url('project://database/Assets/UI/Textures/SquareButton.png?fileID=2800000&guid=daece4c02aca5df409861f29d70b9556&type=3#SquareButton');
+    width: 83px;
+    height: 83px;
+    background-image: url('project://database/Assets/UI/Textures/V2/ButtonS.png?fileID=2800000&guid=b8702cc117222a248b7ecc04423349d6&type=3#ButtonS');
     -unity-background-image-tint-color: var(--primary-color-1);
     margin-left: 0;
     margin-right: 25px;
@@ -55,6 +55,7 @@
     padding-bottom: 0;
     -unity-text-align: middle-center;
     height: 100%;
+    text-shadow: 0 0 5px rgb(255, 255, 255);
 }
 
 .action-helper-label {
@@ -70,4 +71,5 @@
     padding-bottom: 0;
     -unity-text-align: middle-right;
     font-size: 22px;
+    text-shadow: 0 0 5px rgb(255, 255, 255);
 }
