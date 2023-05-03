@@ -385,7 +385,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirePawn
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7104660619101351970, guid: 96355d43fe4bc5b4ab0e32e518173755, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3218894895242519952, guid: 96355d43fe4bc5b4ab0e32e518173755,
