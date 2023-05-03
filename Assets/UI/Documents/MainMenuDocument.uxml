@@ -4,7 +4,7 @@
     <Style src="project://database/Assets/UI/Styles/ActionHelperStyle.uss?fileID=7433441132597879392&amp;guid=1ee840c4db8243eaa2a9f33057bc878a&amp;type=3#ActionHelperStyle" />
     <Style src="project://database/Assets/UI/Styles/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=65c1c2531fd613c45a760c865dfbb434&amp;type=3#MainMenuStyle" />
     <ui:VisualElement name="MainMenu" class="main-element auto-reference">
-        <ui:VisualElement name="Overlay" style="background-image: url(&apos;project://database/Assets/UI/Textures/Main%20Menu%20Background%20Render%20Texture.renderTexture?fileID=8400000&amp;guid=1429aae9268c86b4ab777637953a0fe0&amp;type=2#Main Menu Background Render Texture&apos;); background-color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(229, 229, 229);" />
+        <ui:VisualElement name="Overlay" style="background-image: url(&apos;project://database/Assets/UI/Textures/Main%20Menu%20Background%20Render%20Texture.renderTexture?fileID=8400000&amp;guid=1429aae9268c86b4ab777637953a0fe0&amp;type=2#Main Menu Background Render Texture&apos;); background-color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(191, 191, 191);" />
         <ui:VisualElement name="MainMenuPanel" class="menu-panel">
             <ui:VisualElement name="MainMenuLogo" class="auto-reference" />
             <ui:Button name="MainMenuButtonNewGame" text="New Game" class="button auto-reference" />
