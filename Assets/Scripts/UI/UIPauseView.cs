@@ -57,7 +57,8 @@ namespace SpiceTeamJamming.UI
 		
 		private void OnMainMenuButtonPressed()
 		{
-			UIRouter.GoToRoute(UIRouter.RouteType.Main);
+			GameManager.instance.TryTransitionToMainMenu();
+			//UIRouter.GoToRoute(UIRouter.RouteType.Main);
 		}
 		
 		private void OnQuitButtonPressed()

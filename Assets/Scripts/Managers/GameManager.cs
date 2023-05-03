@@ -23,10 +23,11 @@ public class GameManager : MonoBehaviour
     [Header("references")]
 
     [SerializeField] string gameSceneName;
-
+    [SerializeField] string mainMenuBackgroundSceneName;
     [SerializeField] CanvasGroup loaderCanvas;
     [SerializeField] GameObject playerInstance;
     [SerializeField] GameObject playerCharacter;
+
     [SerializeField] CinemachineVirtualCamera characterVirtualCamera;
     [SerializeField] Vector2Int mapDestination;
     [Header ("input from player controller")]
@@ -76,25 +77,26 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        loaderCanvas.alpha = 1;
         TransitionToState(GameState.title);
     }
 
     public void NewGame()
     {
         print("new game clicked");
-        StartCoroutine(UnloadAdditiveScene());
+        StartCoroutine(NewGameCoroutine());
     }
 
  
     public void StartGame()
     {
+        loaderCanvas.DOFade(0, 0.3f);
         playerCharacter.GetComponent<Unit>().ResetHealth(); // do this better
         playerCharacter.SetActive(false);
         BoardManager.instance.mapGraphics.SetActive(true);
 
         gameTimer = gameTime;
         timerRunning = true;
-        loaderCanvas.alpha = 0;
         TransitionToState(GameState.map);
     }
     
@@ -137,7 +139,7 @@ public class GameManager : MonoBehaviour
                 {
                     timerRunning = true;
                     Time.timeScale = 1;
-                    BoardManager.instance. mapCamera.gameObject.SetActive(false);
+                    BoardManager.instance.mapCamera.gameObject.SetActive(false);
                     UIRouter.GoToRoute(UIRouter.RouteType.Battlefield);
                 }
                 break;
@@ -147,6 +149,14 @@ public class GameManager : MonoBehaviour
                     lastState = fromState;
                     Time.timeScale = 0;
                     UIRouter.GoToRoute(UIRouter.RouteType.Pause);
+                }
+                break;
+                case GameState.title:
+                {
+                     timerRunning = false;
+                     Time.timeScale = 1;
+                     StartCoroutine(ToMainMenuCoroutine());
+                     
                 }
                 break;
             default:
@@ -206,7 +216,7 @@ public class GameManager : MonoBehaviour
                                 });
 
                                 var tileIndex = tile.mapTileData.tileCoords;
-                                BoardManager.instance.AnimateGridSelection(tileIndex.x, tileIndex.y, 0.0001f);
+                                BoardManager.instance.AnimateGridSelection(tileIndex.x, tileIndex.y, 0.00001f);
                                 mapDestination = clickedTile.mapTileData.tileCoords;
                                 StartCoroutine( TransitionToLevel());
 
@@ -259,12 +269,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator UnloadAdditiveScene()
+    IEnumerator ToMainMenuCoroutine()
     {
-  
-        if (SceneManager.GetSceneByBuildIndex(1).isLoaded)
+        loaderCanvas.DOFade(1, 0.3f);
+        yield return new WaitForSecondsRealtime(.3f);
+         UIRouter.GoToRoute(UIRouter.RouteType.Main);
+        if (SceneManager.GetSceneByName(gameSceneName).isLoaded)
         {
-            AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(1);
+            AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(gameSceneName);
             while (!asyncUnload.isDone)
             {
                 print("un loading old game scene");
@@ -272,24 +284,58 @@ public class GameManager : MonoBehaviour
             }
             print("finished unloading");
         }
-        StartCoroutine(LoadGameScene(gameSceneName));
-
-    }
-
-
-    float fadeDuration = 0.5f;
-    IEnumerator LoadGameScene(String sceneToLoad)
-    {
-
-        //do loading screen fade stuff here
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(mainMenuBackgroundSceneName, LoadSceneMode.Additive);
 
         while (!asyncLoad.isDone)
         {
             print("loading scene");
             yield return null;
         }
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(mainMenuBackgroundSceneName));
+        UIRouter.GoToRoute(UIRouter.RouteType.Main);
+        loaderCanvas.DOFade(0, 0.3f);
+    }
+    IEnumerator NewGameCoroutine()
+    {
+        loaderCanvas.DOFade(1, 0.3f);
+        yield return new WaitForSecondsRealtime(.3f);
+        if (SceneManager.GetSceneByName(mainMenuBackgroundSceneName).isLoaded)
+        {
+            AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(mainMenuBackgroundSceneName);
+            while (!asyncUnload.isDone)
+            {
+                print("un loading main meny background");
+                yield return null;
+            }
+            print("finished unloading");
+        }
+        if (SceneManager.GetSceneByName(gameSceneName).isLoaded)
+        {
+            AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(gameSceneName);
+            while (!asyncUnload.isDone)
+            {
+                print("un loading old game scene");
+                yield return null;
+            }
+            print("finished unloading");
+        }
+        StartCoroutine(LoadGameScene());
 
+    }
+    
+    float fadeDuration = 0.5f;
+    IEnumerator LoadGameScene()
+    {
+
+        //do loading screen fade stuff here
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(gameSceneName, LoadSceneMode.Additive);
+
+        while (!asyncLoad.isDone)
+        {
+            print("loading scene");
+            yield return null;
+        }
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(gameSceneName));
         yield return new WaitForEndOfFrame();
         if (BoardManager.instance == null)
         {
@@ -310,20 +356,21 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         LevelTilesManager.instance.GenerateTiles();
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSecondsRealtime(0.3f);
 
         StartGame();
     }
-
+     public void TryTransitionToMainMenu()
+    {
+        if (currentGameState != GameState.pause) return;
+        TransitionToState(GameState.title);
+    }
     public void TryTransitionToMap()
     {
-
-
         if (currentGameState != GameState.level) return;
         Invoke(nameof(DeactivatePlayer), 1f);
         playerAnimator.SetTrigger("Teleport Out");
         StartCoroutine(TransitionToMap());
-
     }
 
     float mapFade = 0.5f;
@@ -332,7 +379,7 @@ public class GameManager : MonoBehaviour
 
         transitioning = true;
         float elapsedTime = 0f;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.7f);
 
         while (elapsedTime < mapFade)
         {
@@ -342,7 +389,7 @@ public class GameManager : MonoBehaviour
         }
 
         var wizTile = LevelTilesManager.instance.playerTileIndex;
-        BoardManager.instance.AnimateReturnToMap(wizTile.x, wizTile.y, 0.0001f);
+        BoardManager.instance.AnimateReturnToMap(wizTile.x, wizTile.y, 0.00003f);
 
         playerCharacter.SetActive(false);
         CancelInvoke(nameof(DeactivatePlayer));

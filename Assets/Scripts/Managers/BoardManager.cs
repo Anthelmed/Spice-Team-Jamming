@@ -354,15 +354,16 @@ public class BoardManager : MonoBehaviour
 
         visited[x, y] = true;
         queue.Enqueue((x, y, 0));
-
+        yield return null;
         while (queue.Count > 0)
         {
             (int cx, int cy, int distance) = queue.Dequeue();
 
             var tempIndex = new Vector2Int(cx, cy);
             BumpTiles(tempIndex);
+            
             yield return new WaitForSeconds(delay * distance);
-
+            
             for (int i = 0; i < 4; i++)
             {
                 int nx = cx + dx[i];
@@ -378,14 +379,14 @@ public class BoardManager : MonoBehaviour
     
         void BumpTiles(Vector2Int index)
         {
-            MapTiles[index.x, index.y].gameObject.transform.DOPunchPosition((Vector3.up * 25), 0.4f, 1, 1, false);
+            MapTiles[index.x, index.y].gameObject.transform.DOPunchPosition((Vector3.up * 10), 0.4f, 1, 1, false);
         }
     }
      
     public void AnimateReturnToMap(int x, int y, float delay)
     {
         CachePositions();
-        MoveTiles(100);
+        MoveTiles(-5);
         var cachedPos = cachedPositions[x,y];
         MapTiles[x,y].gameObject.transform.DOMove(cachedPos, 0.2f).SetEase(Ease.InBounce);
         StartCoroutine(AnimateReturnCoroutine(x, y, delay));
@@ -428,7 +429,7 @@ public class BoardManager : MonoBehaviour
         void ReturnTile(Vector2Int index)
         {
             var cachedPos = cachedPositions[index.x, index.y];
-            MapTiles[index.x, index.y].gameObject.transform.DOMove(cachedPos, 0.3f).SetEase(Ease.InBounce);
+            MapTiles[index.x, index.y].gameObject.transform.DOMove(cachedPos, 0.3f).SetEase(Ease.OutBack);
         }
     }
 
