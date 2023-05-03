@@ -30,7 +30,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Percent: 1.0018773
+    - _Percent: 1.0018582
     m_Colors:
     - _Color: {r: 0.29803923, g: 0.6509804, b: 0.9607843, a: 0}
   m_BuildTextureStacks: []

@@ -50,7 +50,7 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 8393d4a4f79e39f439a8cfc4eddfbb8e,
     type: 3}
-  m_SortingOrder: 1
+  m_SortingOrder: 10
 --- !u!114 &2452148905657895443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,9 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d06d1934827e1c242af8a0aeb3d09d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadViewAtStart: 0
   elementsReferences: {fileID: 4020609372317020181}
-  pauseInputAction: {fileID: -6943124986207271257, guid: 0a8fdc4d69e296647af4ef54e1d3b8bf,
-    type: 3}
 --- !u!1 &2737721914297566832
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,8 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 675f59b719d7407aa4ddd3e1d8e26b34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backInputAction: {fileID: -3763938096565295581, guid: 0a8fdc4d69e296647af4ef54e1d3b8bf,
-    type: 3}
+  loadViewAtStart: 0
   elementsReferences: {fileID: 1936248122010723447}
 --- !u!1 &4986648243225557193
 GameObject:
@@ -272,10 +270,10 @@ Transform:
   - {fileID: 1712069029138802994}
   - {fileID: 8160600953933877657}
   - {fileID: 8771057061458776337}
-  - {fileID: 3912835606730728256}
   - {fileID: 3620786524438008062}
+  - {fileID: 3912835606730728256}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6045096746888866145
 GameObject:
@@ -353,8 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dbc3b2283a6e6c4cb292f23c8a2e4ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backInputAction: {fileID: -3763938096565295581, guid: 0a8fdc4d69e296647af4ef54e1d3b8bf,
-    type: 3}
+  loadViewAtStart: 0
   elementsReferences: {fileID: 5537882448535181883}
 --- !u!1 &6551118177193404409
 GameObject:
@@ -432,11 +429,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a367a045b64b844bdb9a438b42700e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadViewAtStart: 0
   elementsReferences: {fileID: 8862602814149896730}
-  pauseInputAction: {fileID: -6943124986207271257, guid: 0a8fdc4d69e296647af4ef54e1d3b8bf,
-    type: 3}
-  mapInputAction: {fileID: 2701014971309237409, guid: 0a8fdc4d69e296647af4ef54e1d3b8bf,
-    type: 3}
   playerStatHealthCustomRenderTexture: {fileID: 8600000, guid: e53a2c8f1d1e20b4bb3f16b2a1ed8bb7,
     type: 2}
   playerStatManaCustomRenderTexture: {fileID: 8600000, guid: 8755535c16a8487438c6e39771ba72e4,
@@ -453,6 +447,7 @@ GameObject:
   - component: {fileID: 8285231878179986448}
   - component: {fileID: 6778590938752027947}
   - component: {fileID: 2806026848609204724}
+  - component: {fileID: 2548102573602363356}
   m_Layer: 0
   m_Name: MainView
   m_TagString: Untagged
@@ -517,7 +512,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdbbdf936f2c18048bbe414a13fc15bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadViewAtStart: 0
   elementsReferences: {fileID: 6778590938752027947}
+--- !u!328 &2548102573602363356
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756440890831854917}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: a406043ad612ebf4396d7743cb4c3fdb, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 1429aae9268c86b4ab777637953a0fe0, type: 2}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 0
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 1
+  m_SkipOnDrop: 1
+  m_Looping: 1
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1 &7893120804368325823
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,8 +624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f8031f42674b1da6ded381a22ee4e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backInputAction: {fileID: -3763938096565295581, guid: 0a8fdc4d69e296647af4ef54e1d3b8bf,
-    type: 3}
+  loadViewAtStart: 0
   elementsReferences: {fileID: 9012453062371259684}
 --- !u!1 &8237060327500275616
 GameObject:
@@ -673,6 +702,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd7271b3d43f774987bb473c26df44e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backInputAction: {fileID: -3763938096565295581, guid: 0a8fdc4d69e296647af4ef54e1d3b8bf,
-    type: 3}
+  loadViewAtStart: 0
   elementsReferences: {fileID: 3542305059818502401}
