@@ -11,7 +11,7 @@ public class LevelTilesManager : MonoBehaviour
     [SerializeField] GameObject defaultTilePrefab;
     [SerializeField] float spacing = 40f; //dependant on prefab
     [SerializeField] List<LevelTile> allGeneratedTiles = new List<LevelTile>();
-   
+    public Vector2Int playerTileIndex;
 
     [Header("prefabs")]
     [SerializeField] GameObject[] grassBiomePrefabs;
@@ -306,6 +306,7 @@ public class LevelTilesManager : MonoBehaviour
                 if (tile.hasPlayer)
                 {
                     PlayerTileIndexChanged(tile.gridLocation);
+                    playerTileIndex = tile.gridLocation;
                 //    print(tile.gameObject.name + "has player");
                     return;
                 }

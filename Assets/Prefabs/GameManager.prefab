@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4504791909821565872
 MonoBehaviour:
@@ -44,9 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70363951385f3624e94ae516bb8b9741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battleSceneName: _LevelScene
-  mapCamera: {fileID: 0}
-  playerPrefab: {fileID: 445589202552034109, guid: eac1ae59bef618847b73c10b4d795403,
-    type: 3}
+  gameSceneName: _GameScene
+  loaderCanvas: {fileID: 0}
+  playerInstance: {fileID: 0}
+  playerCharacter: {fileID: 0}
+  characterVirtualCamera: {fileID: 0}
   mapDestination: {x: 2, y: 2}
-  mapGraphics: {fileID: 0}
+  playerController: {fileID: 0}
+  playerTeleportLimbo: {fileID: 0}
+  mapClickSound: uiClickStone
+  gameTime: 0
