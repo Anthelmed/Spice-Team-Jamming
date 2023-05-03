@@ -56,6 +56,14 @@ namespace SpiceTeamJamming.UI
 			ClearButtonsManipulators();
 		}
 
+		protected override void OnDestroy()
+		{
+			base.OnDestroy();
+			
+			SetHealth(1);
+			SetMana(1);
+		}
+
 		//private void OnMapActionPerformed(InputAction.CallbackContext _)
 		//{
 		//	if (UIRouter.CurrentRoute != Route) return;
@@ -76,10 +84,20 @@ namespace SpiceTeamJamming.UI
 
 		private void OnPlayerHealthChanged(float value)
 		{
-			playerStatHealthCustomRenderTexture.material.SetFloat(_percent, value);
+			SetHealth(value);
 		}
 
 		private void OnPlayerManaChanged(float value)
+		{
+			playerStatManaCustomRenderTexture.material.SetFloat(_percent, value);
+		}
+
+		private void SetHealth(float value)
+		{
+			SetMana(value);
+		}
+		
+		private void SetMana(float value)
 		{
 			playerStatManaCustomRenderTexture.material.SetFloat(_percent, value);
 		}

@@ -51,7 +51,7 @@ namespace SpiceTeamJamming.UI
 				UIRouter.GoToRoute(Route);
 		}
 
-		private void OnDestroy()
+		protected virtual void OnDestroy()
 		{
 			UIRouter.ClearRoute(Route);
 		}
