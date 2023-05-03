@@ -98,10 +98,10 @@ public class GameManager : MonoBehaviour
         StartGame();
     }
 
-    private void Start()
-    {
-        StartGame();
-    }
+    // private void Start()
+    // {
+    //     StartGame();
+    // }
     public void StartGame()
     {
         gameTimer = gameTime;
