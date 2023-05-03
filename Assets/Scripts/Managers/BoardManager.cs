@@ -48,8 +48,19 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private bool debugMode = false;
     [SerializeField] float mapHeightOffset;
 
+    public static BoardManager instance;
+    public GameObject mapGraphics;
+    public Camera mapCamera;
+
     private void Awake()
     {
+        if (instance != null && instance != this)
+            Destroy(gameObject);
+        else
+        {
+            instance = this;
+        }
+
         InitMapArrays();
 
         _transform = transform;
@@ -71,10 +82,6 @@ public class BoardManager : MonoBehaviour
         _mapHeights = new float[x, y];
     }
 
-    private void Start()
-    {
-        Generate();
-    }
 
     public void Generate()
     {
@@ -373,8 +380,96 @@ public class BoardManager : MonoBehaviour
         {
             MapTiles[index.x, index.y].gameObject.transform.DOPunchPosition((Vector3.up * 25), 0.4f, 1, 1, false);
         }
+    }
+     
+    public void AnimateReturnToMap(int x, int y, float delay)
+    {
+        CachePositions();
+        MoveTiles(100);
+        var cachedPos = cachedPositions[x,y];
+        MapTiles[x,y].gameObject.transform.DOMove(cachedPos, 0.2f).SetEase(Ease.InBounce);
+        StartCoroutine(AnimateReturnCoroutine(x, y, delay));
+    }
 
-}
+    private IEnumerator AnimateReturnCoroutine(int x, int y, float delay)
+    {
+        int rows = MapTiles.GetLength(0);
+        int cols = MapTiles.GetLength(1);
+
+        bool[,] visited = new bool[rows, cols];
+        Queue<(int, int, int)> queue = new Queue<(int, int, int)>();
+        int[] dx = { -1, 0, 1, 0 };
+        int[] dy = { 0, 1, 0, -1 };
+
+        visited[x, y] = true;
+        queue.Enqueue((x, y, 0));
+
+        while (queue.Count > 0)
+        {
+            (int cx, int cy, int distance) = queue.Dequeue();
+
+            var tempIndex = new Vector2Int(cx, cy);
+            ReturnTile(tempIndex);
+            yield return new WaitForSeconds(delay * distance);
+
+            for (int i = 0; i < 4; i++)
+            {
+                int nx = cx + dx[i];
+                int ny = cy + dy[i];
+
+                if (nx >= 0 && nx < rows && ny >= 0 && ny < cols && !visited[nx, ny])
+                {
+                    visited[nx, ny] = true;
+                    queue.Enqueue((nx, ny, distance + 1));
+                }
+            }
+        }
+
+        void ReturnTile(Vector2Int index)
+        {
+            var cachedPos = cachedPositions[index.x, index.y];
+            MapTiles[index.x, index.y].gameObject.transform.DOMove(cachedPos, 0.3f).SetEase(Ease.InBounce);
+        }
+    }
+
+    private Vector3[,] cachedPositions;
+
+    private void CachePositions()
+    {
+        int rows = MapTiles.GetLength(0);
+        int cols = MapTiles.GetLength(1);
+
+        cachedPositions = new Vector3[rows, cols];
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                cachedPositions[i, j] = MapTiles[i, j].transform.position;
+            }
+        }
+    }
+
+    public void MoveTiles(float distance)
+    {
+        if (cachedPositions == null)
+        {
+            CachePositions();
+        }
+
+        int rows = cachedPositions.GetLength(0);
+        int cols = cachedPositions.GetLength(1);
+
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                Vector3 newPosition = cachedPositions[i, j] + new Vector3(0, distance, 0);
+                MapTiles[i, j].transform.position = newPosition;
+            }
+        }
+    }
 
 
 

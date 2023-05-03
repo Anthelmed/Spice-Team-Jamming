@@ -22,15 +22,13 @@ public class GameManager : MonoBehaviour
 
     [Header("references")]
 
-    [SerializeField] string battleSceneName;
-    [SerializeField] Camera mapCamera;
+    [SerializeField] string gameSceneName;
+
     [SerializeField] CanvasGroup loaderCanvas;
     [SerializeField] GameObject playerInstance;
     [SerializeField] GameObject playerCharacter;
     [SerializeField] CinemachineVirtualCamera characterVirtualCamera;
     [SerializeField] Vector2Int mapDestination;
-    [SerializeField] GameObject mapGraphics;
-    [SerializeField] BoardManager boardManager;
     [Header ("input from player controller")]
     [SerializeField] PlayerController playerController;
     [SerializeField] Transform playerTeleportLimbo;
@@ -58,8 +56,7 @@ public class GameManager : MonoBehaviour
     public event Action OnInitialLevelLoad = delegate { };
 
     Animator playerAnimator;// DO this much better
-    bool battleMapLoaded;
-    bool loadingBattleMap;
+    bool transitioning;
     
     public event Action<GameState> OnGameStateChanged = delegate { };
 
@@ -77,33 +74,24 @@ public class GameManager : MonoBehaviour
         playerAnimator = playerInstance.GetComponentInChildren<Animator>(true);
     }
 
-    public void NewGame()
+    private void Start()
     {
         TransitionToState(GameState.title);
-        StartCoroutine(ResetGame());
-    }
-    IEnumerator ResetGame()
-    {
-        Time.timeScale = 0f;
-      if (LevelTilesManager.instance != null)  LevelTilesManager.instance.ClearLevelForReset();
-        yield return new WaitForEndOfFrame();
-        boardManager.ClearMap();
-        battleMapLoaded = false;
-        yield return new WaitForEndOfFrame();
-        boardManager.Generate();
-        playerCharacter.GetComponent<Unit>().ResetHealth(); // do this better
-        playerCharacter.SetActive(false);
-        mapGraphics.SetActive(true);
-        Time.timeScale = 1f;
-        StartGame();
     }
 
-    // private void Start()
-    // {
-    //     StartGame();
-    // }
+    public void NewGame()
+    {
+        print("new game clicked");
+        StartCoroutine(UnloadAdditiveScene());
+    }
+
+ 
     public void StartGame()
     {
+        playerCharacter.GetComponent<Unit>().ResetHealth(); // do this better
+        playerCharacter.SetActive(false);
+        BoardManager.instance.mapGraphics.SetActive(true);
+
         gameTimer = gameTime;
         timerRunning = true;
         loaderCanvas.alpha = 0;
@@ -141,7 +129,7 @@ public class GameManager : MonoBehaviour
                 {
                     timerRunning = true;
                     Time.timeScale = 1;
-                    mapCamera.gameObject.SetActive(true);
+                    BoardManager.instance.mapCamera.gameObject.SetActive(true);
                     UIRouter.GoToRoute(UIRouter.RouteType.Map);
                 }
                 break;
@@ -149,7 +137,7 @@ public class GameManager : MonoBehaviour
                 {
                     timerRunning = true;
                     Time.timeScale = 1;
-                    mapCamera.gameObject.SetActive(false);
+                    BoardManager.instance. mapCamera.gameObject.SetActive(false);
                     UIRouter.GoToRoute(UIRouter.RouteType.Battlefield);
                 }
                 break;
@@ -189,11 +177,11 @@ public class GameManager : MonoBehaviour
                     TileHighlighting();
 
                     //actually selecting tiles and telporting there
-                    if (playerController.inputState.confirm && !loadingBattleMap)
+                    if (playerController.inputState.confirm && !transitioning)
                     {
                         GameplayData.UIPressThisFrame = false; // no idea what this was for but keeping it here
                         Vector2 mousePosition = GameplayData.CursorPosition;
-                        Ray ray = mapCamera.ScreenPointToRay(mousePosition);
+                        Ray ray = BoardManager.instance.mapCamera.ScreenPointToRay(mousePosition);
                         RaycastHit hit;
 
                         if (Physics.Raycast(ray, out hit))
@@ -218,9 +206,9 @@ public class GameManager : MonoBehaviour
                                 });
 
                                 var tileIndex = tile.mapTileData.tileCoords;
-                                boardManager.AnimateGridSelection(tileIndex.x, tileIndex.y, 0.0001f);
+                                BoardManager.instance.AnimateGridSelection(tileIndex.x, tileIndex.y, 0.0001f);
                                 mapDestination = clickedTile.mapTileData.tileCoords;
-                                TryTransitionToLevel();
+                                StartCoroutine( TransitionToLevel());
 
                             }
                         }
@@ -271,30 +259,29 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void LoadLevel(string sceneName)
+    IEnumerator UnloadAdditiveScene()
     {
-        if (currentGameState == GameState.level) return;
-
-        Scene scene = SceneManager.GetSceneByName(sceneName);
-        loadingBattleMap = true;
-        print("scene index" + scene.buildIndex);
-        StartCoroutine(LoadLevelScene(sceneName));
-    }
-    float fadeDuration = 0.5f;
-    IEnumerator LoadLevelScene(String sceneToLoad)
-    {
-        float elapsedTime = 0f;
-        
-            yield return new WaitForSeconds(0.5f);
-            while (elapsedTime < fadeDuration)
+  
+        if (SceneManager.GetSceneByBuildIndex(1).isLoaded)
+        {
+            AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(1);
+            while (!asyncUnload.isDone)
             {
-                elapsedTime += Time.deltaTime;
-                loaderCanvas.alpha = Mathf.Lerp(0, 1, elapsedTime / fadeDuration);
+                print("un loading old game scene");
                 yield return null;
             }
-        
+            print("finished unloading");
+        }
+        StartCoroutine(LoadGameScene(gameSceneName));
+
+    }
 
 
+    float fadeDuration = 0.5f;
+    IEnumerator LoadGameScene(String sceneToLoad)
+    {
+
+        //do loading screen fade stuff here
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
 
         while (!asyncLoad.isDone)
@@ -303,53 +290,91 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
+        yield return new WaitForEndOfFrame();
+        if (BoardManager.instance == null)
+        {
+            print("map not generated! board manager not found");
+            yield return null;
+        }
+        yield return new WaitForEndOfFrame();
+
+        BoardManager.instance.Generate();
+        yield return new WaitForEndOfFrame();
         OnInitialLevelLoad?.Invoke();
+
+        yield return new WaitForEndOfFrame();
 
         if (LevelTilesManager.instance == null)
         {
-            print("world map not generated! tile manager not found");
+            print("level not generated! world tile manager not found");
             yield return null;
         }
         LevelTilesManager.instance.GenerateTiles();
-        loadingBattleMap = false;
+        yield return new WaitForEndOfFrame();
 
-        StartCoroutine(TransitionToLevel());
-        battleMapLoaded = true;
-
+        StartGame();
     }
 
     public void TryTransitionToMap()
     {
+
+
         if (currentGameState != GameState.level) return;
+        Invoke(nameof(DeactivatePlayer), 1f);
+        playerAnimator.SetTrigger("Teleport Out");
+        StartCoroutine(TransitionToMap());
+
+    }
+
+    float mapFade = 0.5f;
+    IEnumerator TransitionToMap()
+    {
+
+        transitioning = true;
+        float elapsedTime = 0f;
+        yield return new WaitForSeconds(1f);
+
+        while (elapsedTime < mapFade)
+        {
+            elapsedTime += Time.deltaTime;
+            loaderCanvas.alpha = Mathf.Lerp(0, 1, elapsedTime / mapFade);
+            yield return null;
+        }
+
+        var wizTile = LevelTilesManager.instance.playerTileIndex;
+        BoardManager.instance.AnimateReturnToMap(wizTile.x, wizTile.y, 0.0001f);
+
         playerCharacter.SetActive(false);
         CancelInvoke(nameof(DeactivatePlayer));
         playerInstance.transform.position = playerTeleportLimbo.position;
         playerCharacter.transform.position = playerTeleportLimbo.position;
-
-
-        Invoke(nameof(DeactivatePlayer), 1f);
-        playerAnimator.SetTrigger("Teleport Out");
-
-
         LevelTilesManager.instance.SleepAllTiles();
 
-        mapGraphics.SetActive(true); /// do this better
+        BoardManager.instance.mapGraphics.SetActive(true); /// do this better
         TransitionToState(GameState.map);
+
+        elapsedTime = 0f;
+        while (elapsedTime < mapFade)
+        {
+            elapsedTime += Time.deltaTime;
+            loaderCanvas.alpha = Mathf.Lerp(1, 0, elapsedTime / mapFade);
+            yield return null;
+        }
+
+        loaderCanvas.alpha = 0;
+        transitioning = false;
     }
+
     void DeactivatePlayer()
     {
         playerCharacter.SetActive(false);
     }
-    void TryTransitionToLevel()
-    {
-        if (battleMapLoaded) StartCoroutine(TransitionToLevel());
-        else LoadLevel(battleSceneName); // this ends up being async that's why it's like this
-    }
+
     IEnumerator TransitionToLevel()
     {
+        transitioning = true;
         float elapsedTime = 0f;
-        if (battleMapLoaded)
-        {
+
             yield return new WaitForSeconds(0.5f);
             while (elapsedTime < fadeDuration)
             {
@@ -357,7 +382,7 @@ public class GameManager : MonoBehaviour
                 loaderCanvas.alpha = Mathf.Lerp(0, 1, elapsedTime / fadeDuration);
                 yield return null;
             }
-        }
+        
 
         //   Debug.Log("transition 2");
         var spawnTile = LevelTilesManager.instance.GetTileAtGridPosition(mapDestination);
@@ -372,7 +397,7 @@ public class GameManager : MonoBehaviour
         characterVirtualCamera.OnTargetObjectWarped(playerCharacter.transform, movementOffset);
 
         playerAnimator.SetTrigger("Teleport In");
-        mapGraphics.SetActive(false); /// do this better
+        BoardManager.instance.mapGraphics.SetActive(false); /// do this better
 
         TransitionToState(GameState.level);
         UIRouter.GoToRoute(UIRouter.RouteType.Battlefield);
@@ -387,6 +412,7 @@ public class GameManager : MonoBehaviour
         }
 
         loaderCanvas.alpha = 0;
+        transitioning = false;
     }
 
     public void Pause()
@@ -414,11 +440,11 @@ public class GameManager : MonoBehaviour
     float highlightCooldownTimer;
     private void TileHighlighting()
     {
-        if (loadingBattleMap) return;
+
 
         RaycastHit hoverHit;
 
-        Ray hoverRay = mapCamera.ScreenPointToRay(GameplayData.CursorPosition);
+        Ray hoverRay = BoardManager.instance.mapCamera.ScreenPointToRay(GameplayData.CursorPosition);
         if (Physics.Raycast(hoverRay, out hoverHit))
         {
 
@@ -440,11 +466,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    [ContextMenu(" load test scene")]
-    public void LoadTestScene()
-    {
-        LoadLevel(battleSceneName);
-    }
+
 
 
 }
