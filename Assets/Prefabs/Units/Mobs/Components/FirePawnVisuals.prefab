@@ -4934,6 +4934,7 @@ MonoBehaviour:
     type: 3}
   transitionDuration: 0.1
   m_renderer: {fileID: 9030620706447115888}
+  m_meleeRange: {x: 0.16, y: 0.32}
 --- !u!114 &2204852656445281040
 MonoBehaviour:
   m_ObjectHideFlags: 0

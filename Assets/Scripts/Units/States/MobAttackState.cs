@@ -1,12 +1,14 @@
+using System.Data;
+using UnityEngine;
+
 namespace Units
 {
     public class MobAttackState : Mob.IState
     {
         public void Enter(Mob.Data data)
         {
-            data.framesLeft = 5;
-            if (data.mob.Visible && data.visuals) data.visuals.TriggerAttack();
-            else data.attacks.StartMelee();
+            data.frameStarted = Time.timeSinceLevelLoad;
+            data.wasAttacking = false;
         }
 
         public void Exit(Mob.Data data)
@@ -16,19 +18,23 @@ namespace Units
 
         public void Tick(Mob.Data data)
         {
-            data.framesLeft--;
-            if (!data.mob.Visible || !data.visuals || data.visuals.HasAnimationFinished())
-            {
-                if (data.framesLeft <= 0)
-                    data.NextState = Mob.State.CombatIdle;
+            data.visuals.SetAnimation(MobVisuals.AnimationID.Attack);
 
-                return;
+            var elapsed = Time.timeSinceLevelLoad - data.frameStarted;
+
+            if (elapsed >= data.visuals.MeleeRange.x && elapsed <= data.visuals.MeleeRange.y)
+            {
+                if (!data.wasAttacking) data.attacks.StartMelee();
+                data.wasAttacking = true;
+            }
+            else
+            {
+                if (data.wasAttacking) data.attacks.EndMelee();
+                data.wasAttacking = false;
             }
 
-            if (data.visuals.IsDamagingFrame())
-                data.attacks.StartMelee();
-            else
-                data.attacks.EndMelee();
+            if (elapsed >= data.visuals.GetDuration(MobVisuals.AnimationID.Attack))
+                data.NextState = Mob.State.CombatIdle;
         }
     }
 }

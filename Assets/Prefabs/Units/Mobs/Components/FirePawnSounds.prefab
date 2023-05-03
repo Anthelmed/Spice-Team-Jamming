@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackOneSound: FireEnemyAttacks
   attackTwoSound: 
-  rangedSound: fireBall
+  rangedSound: 
   deathSound: 
   damageSound: mobDamage
   healSound: 

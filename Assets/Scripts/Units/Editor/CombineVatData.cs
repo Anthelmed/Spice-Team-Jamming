@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEditor.AssetImporters;
 using UnityEngine;
 
-[ScriptedImporter(1, "vat")]
+[ScriptedImporter(4, "vat")]
 public class CombineVatData : ScriptedImporter
 {
     [Serializable]
@@ -35,6 +35,8 @@ public class CombineVatData : ScriptedImporter
             totalHeight += anim.vertexVat.height + 1;
         }
 
+        totalHeight += 4;
+
         // Create the combined textures
         var newVertex = new Texture2D(animations[0].vertexVat.width, totalHeight, animations[0].vertexVat.format, false);
         newVertex.name = name + "_vtxVat";
@@ -43,8 +45,9 @@ public class CombineVatData : ScriptedImporter
 
         // Fill the textures
         int offset = 0;
-        foreach (var anim in animations)
+        for (int animIdx = 0; animIdx < animations.Length; ++animIdx)
         {
+            var anim = animations[animIdx];
             for (int i = 0; i < anim.vertexVat.width; ++i)
             {
                 for (int j = 0; j < anim.vertexVat.height; ++j)
@@ -52,8 +55,18 @@ public class CombineVatData : ScriptedImporter
                     newVertex.SetPixel(i, j + offset, anim.vertexVat.GetPixel(i, j));
                     newNormal.SetPixel(i, j + offset, anim.normalVat.GetPixel(i, j));
                 }
-                newVertex.SetPixel(i, anim.vertexVat.height + offset, anim.vertexVat.GetPixel(i, 0));
-                newNormal.SetPixel(i, anim.vertexVat.height + offset, anim.normalVat.GetPixel(i, 0));
+                var row = i > 1 ? anim.vertexVat.height - 1 : 0;
+                newVertex.SetPixel(i, anim.vertexVat.height + offset, anim.vertexVat.GetPixel(i, row));
+                newNormal.SetPixel(i, anim.vertexVat.height + offset, anim.normalVat.GetPixel(i, row));
+
+                if (animIdx == animations.Length - 1)
+                {
+                    for (int j = 0; j < 4; ++j)
+                    {
+                        newVertex.SetPixel(i, anim.vertexVat.height + offset + j, anim.vertexVat.GetPixel(i, row));
+                        newNormal.SetPixel(i, anim.vertexVat.height + offset, anim.normalVat.GetPixel(i, row));
+                    }
+                }
             }
             offset += anim.vertexVat.height + 1;
         }
@@ -73,7 +86,8 @@ public class CombineVatData : ScriptedImporter
         offset = 0;
         for (int i = 0; i < animations.Length; ++i)
         {
-            resultObject.animations[i] = new Vector4(animations[i].duration, animations[i].fps, offset);
+            var extraDuration = (i == (animations.Length - 1)) ? 0.1f : 0;
+            resultObject.animations[i] = new Vector4(animations[i].duration + extraDuration, animations[i].fps, offset);
             offset += animations[i].vertexVat.height + 1;
         }
 

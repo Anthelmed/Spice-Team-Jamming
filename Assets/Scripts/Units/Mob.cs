@@ -16,7 +16,8 @@ namespace Units
             public MobAttacks attacks;
             public Squad squad;
 
-            public int framesLeft;
+            public float frameStarted;
+            public bool wasAttacking;
 
             public State NextState { get; set; }
         }
@@ -73,9 +74,12 @@ namespace Units
 
         private void OnHit(float damage, Unit other)
         {
-            m_data.NextState = State.Hit;
-            // Change immediately
+            m_data.NextState = State.Queueing;
             UpdateTransition();
+            m_data.NextState = State.Hit;
+            UpdateTransition();
+            m_data.visuals.SetAnimation(MobVisuals.AnimationID.Hit, true);
+            // Change immediately
         }
 
         private void OnValidate()

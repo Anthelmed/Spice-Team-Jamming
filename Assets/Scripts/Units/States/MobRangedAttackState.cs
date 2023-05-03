@@ -1,11 +1,13 @@
+using UnityEngine;
+
 namespace Units
 {
     public class MobRangedAttackState : Mob.IState
     {
         public void Enter(Mob.Data data)
         {
-            if (data.mob.Visible && data.visuals) data.visuals.TriggerRangedAttack();
-            else data.attacks.DoRanged();
+            data.frameStarted = Time.timeSinceLevelLoad;
+            data.wasAttacking = false;
         }
 
         public void Exit(Mob.Data data)
@@ -14,14 +16,18 @@ namespace Units
 
         public void Tick(Mob.Data data)
         {
-            if (!data.mob.Visible || !data.visuals || data.visuals.HasAnimationFinished())
+            data.visuals.SetAnimation(MobVisuals.AnimationID.RangedAttack);
+
+            var elapsed = Time.timeSinceLevelLoad - data.frameStarted;
+
+            if (!data.wasAttacking && elapsed >= data.visuals.RangedDelay)
+                data.attacks.DoRanged();
+
+            if (elapsed >= data.visuals.GetDuration(MobVisuals.AnimationID.RangedAttack))
             {
                 data.NextState = Mob.State.CombatIdle;
                 return;
             }
-
-            if (data.visuals.IsDamagingFrame() && data.perception.Target)
-                data.attacks.DoRanged();
         }
     }
 }

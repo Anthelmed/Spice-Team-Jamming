@@ -5,13 +5,20 @@ namespace Units
 {
     public abstract class MobVisuals : UnitVisuals
     {
-        public abstract void SetSpeed(float speed);
-        public abstract void TriggerAttack();
-        public abstract void TriggerRangedAttack();
-        public abstract void TriggerHit();
-        public abstract void TriggerDeath();
-        public abstract bool HasAnimationFinished();
-        public abstract bool IsDamagingFrame();
+        public abstract void SetAnimation(AnimationID id, bool force = false);
+        public abstract float GetDuration(AnimationID id);
+        public abstract Vector2 MeleeRange { get; }
+        public abstract float RangedDelay { get; }
+
+        public enum AnimationID
+        {
+            Idle = 0,
+            Walk,
+            Attack,
+            RangedAttack,
+            Hit,
+            Death
+        }
 
         [HideInInspector][SerializeField] protected MobSounds m_sounds;
 

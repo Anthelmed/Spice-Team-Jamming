@@ -49,10 +49,9 @@ MonoBehaviour:
   m_immuneTo: 0
   m_type: 0
   m_maxHealth: 10
-  m_invencivilityAfterHit: 0.5
+  m_invencivilityAfterHit: 0.1
   m_radius: 0.5
   doesntMove: 0
-  m_updateRate: 30
   onImmuneHit:
     m_PersistentCalls:
       m_Calls: []
@@ -60,6 +59,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onHeal:
+    m_PersistentCalls:
+      m_Calls: []
+  onHealthChanged:
     m_PersistentCalls:
       m_Calls: []
   onDie:
@@ -78,7 +80,8 @@ MonoBehaviour:
     visuals: {fileID: 0}
     attacks: {fileID: 0}
     squad: {fileID: 0}
-    framesLeft: 0
+    frameStarted: 0
+    wasAttacking: 0
 --- !u!114 &5136160913063148432
 MonoBehaviour:
   m_ObjectHideFlags: 0

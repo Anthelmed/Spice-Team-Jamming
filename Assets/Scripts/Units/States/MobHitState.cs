@@ -1,10 +1,13 @@
+using UnityEditor;
+using UnityEngine;
+
 namespace Units
 {
     public class MobHitState : Mob.IState
     {
         public void Enter(Mob.Data data)
         {
-            if (data.visuals) data.visuals.TriggerHit();
+            data.frameStarted = Time.timeSinceLevelLoad;
         }
 
         public void Exit(Mob.Data data)
@@ -13,7 +16,9 @@ namespace Units
 
         public void Tick(Mob.Data data)
         {
-            if (!data.visuals || !data.mob.Visible || data.visuals.HasAnimationFinished())
+            data.visuals.SetAnimation(MobVisuals.AnimationID.Hit);
+
+            if (Time.timeSinceLevelLoad >= (data.frameStarted + data.visuals.GetDuration(MobVisuals.AnimationID.Hit)))
                 data.NextState = Mob.State.CombatIdle;
         }
     }

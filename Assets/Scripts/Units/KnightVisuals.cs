@@ -2,93 +2,82 @@ using UnityEngine;
 
 namespace Units
 {
-    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(Animation))]
     public class KnightVisuals : MobVisuals
     {
-        [SerializeField] private Animator m_animator;
+        [SerializeField] private Animation m_animator;
+        [SerializeField] private AnimationClip[] m_animations;
+        [SerializeField] private Vector2 m_meleeRange;
+        [SerializeField] private float m_rangedDelay;
 
-        private bool m_animationFinished;
-        private bool m_hitFrame;
+        private int m_current;
+        private float m_currentStart;
 
-        private static readonly int SPEED = Animator.StringToHash("Speed");
-        private static readonly int ATTACK = Animator.StringToHash("Attack");
-        private static readonly int RANGED_ATTACK = Animator.StringToHash("RangedAttack");
-        private static readonly int HIT = Animator.StringToHash("Hit");
-        private static readonly int DEATH = Animator.StringToHash("Death");
+        public override Vector2 MeleeRange => m_meleeRange;
+
+        public override float RangedDelay => m_rangedDelay;
 
         protected override void OnValidate()
         {
             base.OnValidate();
-            if (!m_animator) m_animator = GetComponent<Animator>();
+            if (!m_animator) m_animator = GetComponent<Animation>();
+        }
+
+        protected override void Awake()
+        {
+            base.Awake();
+            m_animator.AddClip(m_animations[(int)AnimationID.Idle], AnimationID.Idle.ToString());
+            m_animator.AddClip(m_animations[(int)AnimationID.Walk], AnimationID.Walk.ToString());
+            m_animator.AddClip(m_animations[(int)AnimationID.Attack], AnimationID.Attack.ToString());
+            m_animator.AddClip(m_animations[(int)AnimationID.RangedAttack], AnimationID.RangedAttack.ToString());
+            m_animator.AddClip(m_animations[(int)AnimationID.Hit], AnimationID.Hit.ToString());
+            m_animator.AddClip(m_animations[(int)AnimationID.Death], AnimationID.Death.ToString());
         }
 
         private void OnEnable()
         {
-            m_animationFinished = true;
-            m_hitFrame = false;
+            m_animator.Play(((AnimationID)m_current).ToString());
+            var state = m_animator[((AnimationID)m_current).ToString()];
+            state.time = Time.timeSinceLevelLoad - m_currentStart;
         }
 
-        public void AnimationFinishedEvent()
+        public override void SetAnimation(AnimationID id, bool force = false)
         {
-            m_animationFinished = true;
+            if ((int)id == m_current && !force) return;
+
+            if (isActiveAndEnabled)
+            {
+                if (force && (int)id == m_current)
+                    m_animator.Stop();
+                m_animator.CrossFade(id.ToString(), 0.2f);
+            }
+
+            m_current = (int)id;
+            m_currentStart = Time.timeSinceLevelLoad;
+
+            if (isActiveAndEnabled && m_sounds)
+            {
+                switch (id)
+                {
+                    case AnimationID.Attack:
+                        m_sounds.PlayAttackSound();
+                        break;
+                    case AnimationID.RangedAttack:
+                        m_sounds.PlayRangeSound();
+                        break;
+                    case AnimationID.Hit:
+                        m_sounds.PlayDamageSound();
+                        break;
+                    case AnimationID.Death:
+                        m_sounds.PlayDeathSound();
+                        break;
+                }
+            }
         }
 
-        public void HitRangeStarts()
+        public override float GetDuration(AnimationID id)
         {
-            m_hitFrame = true;
-        }
-
-        public void HitRangeEnds()
-        {
-            m_hitFrame = false;
-        }
-
-        public override bool HasAnimationFinished()
-        {
-            return m_animationFinished;
-        }
-
-        public override void SetSpeed(float speed)
-        {
-            m_animator.SetFloat(SPEED, speed);
-        }
-
-        public override void TriggerAttack()
-        {
-            if (m_sounds && m_unit.Visible) m_sounds.PlayAttackSound();
-
-            m_animator.SetTrigger(ATTACK);
-            m_animationFinished = false;
-            m_hitFrame = false;
-        }
-
-        public override void TriggerRangedAttack()
-        {
-            if (m_sounds && m_unit.Visible) m_sounds.PlayRangeSound();
-
-            m_animator.SetTrigger(RANGED_ATTACK);
-            m_animationFinished = false;
-        }
-
-        public override void TriggerHit()
-        {
-            if (m_sounds && m_unit.Visible) m_sounds.PlayDamageSound();
-
-            m_animator.SetTrigger(HIT);
-            m_animationFinished = false;
-        }
-
-        public override void TriggerDeath()
-        {
-            if (m_sounds && m_unit.Visible) m_sounds.PlayDamageSound();
-
-            m_animator.SetTrigger(DEATH);
-            m_animationFinished = false;
-        }
-
-        public override bool IsDamagingFrame()
-        {
-            return m_hitFrame;
+            return m_animations[(int)id].length;
         }
     }
 }
