@@ -123,7 +123,7 @@ public class LevelTile : MonoBehaviour
     public List<Unit> Knights = new List<Unit>();
     public List<Unit> Players = new List<Unit>();
 
-    private List<Unit> m_queryResultNoAlloc = new List<Unit>(20);
+    private static List<Unit> m_queryResultNoAlloc = new List<Unit>(20);
 
     private List<Unit> GetListForType(Unit.Type type)
     {
