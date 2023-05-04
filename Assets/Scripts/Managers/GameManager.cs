@@ -15,7 +15,14 @@ public enum GameState
     title,
     map,
     level,
-    pause
+    pause,
+    gameOver
+}
+
+public enum GameResult
+{
+    Win,
+    Lose
 }
 public class GameManager : MonoBehaviour
 {
@@ -36,8 +43,11 @@ public class GameManager : MonoBehaviour
 
     [Header("misc")]
     [SerializeField] string mapClickSound = "uiClickStone";
+    [SerializeField] CanvasGroup tempCanvas;
+    [SerializeField] GameObject tempLose;
+    [SerializeField] GameObject tempWin;
 
-    [Header("Timer")]
+    [Header("Game Length (in minutes)")]
     [SerializeField] float gameTime; // total duration of the game
     private bool timerRunning = false;
     float gameTimer;
@@ -50,6 +60,7 @@ public class GameManager : MonoBehaviour
 
     GameState currentGameState;
     GameState lastState;
+    GameResult result;
 
     public static GameManager instance;
 
@@ -95,7 +106,7 @@ public class GameManager : MonoBehaviour
         playerCharacter.SetActive(false);
         BoardManager.instance.mapGraphics.SetActive(true);
 
-        gameTimer = gameTime;
+        gameTimer = gameTime * 60;
         timerRunning = true;
         TransitionToState(GameState.map);
     }
@@ -153,10 +164,33 @@ public class GameManager : MonoBehaviour
                 break;
                 case GameState.title:
                 {
-                     timerRunning = false;
+                    tempWin.SetActive(false);
+                    tempLose.SetActive(false);
+                    tempCanvas.gameObject.SetActive(false);
+
+                    timerRunning = false;
                      Time.timeScale = 1;
                      StartCoroutine(ToMainMenuCoroutine());
                      
+                }
+                break;
+                case GameState.gameOver:
+                {
+                    tempCanvas.gameObject.SetActive(true);
+                    Time.timeScale = 0;
+                    switch (result)
+                    {
+                        case GameResult.Win:
+                        {
+                                tempWin.SetActive(true);
+                        }
+                        break;
+                        case GameResult.Lose:
+                        {
+                             tempLose.SetActive(true);
+                        }
+                       break;
+                    }
                 }
                 break;
             default:
@@ -229,6 +263,7 @@ public class GameManager : MonoBehaviour
             case GameState.level:
                 {
                     if (playerController.inputState.pause) Pause();
+                    if (playerController.inputState.mapFromGame) TryTransitionToMap();
                 }
                 break;
             case GameState.pause:
@@ -264,6 +299,9 @@ public class GameManager : MonoBehaviour
             {
                 gameTimer = 0;
                 timerRunning = false;
+                result = GameResult.Win;
+                TransitionToState(GameState.gameOver);
+               
                 OnGameTimerElapsed?.Invoke();
             }
         }
@@ -362,9 +400,28 @@ public class GameManager : MonoBehaviour
     }
      public void TryTransitionToMainMenu()
     {
-        if (currentGameState != GameState.pause) return;
-        TransitionToState(GameState.title);
+        switch (currentGameState)
+        {
+            case GameState.map:
+                {
+                    TransitionToState(GameState.title);
+                }
+                break;
+            case GameState.level:
+                {
+                    TransitionToState(GameState.title);
+                }
+                break;
+            case GameState.gameOver:
+                {
+                    TransitionToState(GameState.title);
+                }
+                break;
+            default:
+                break;
+        }
     }
+
     public void TryTransitionToMap()
     {
         if (currentGameState != GameState.level) return;
@@ -473,6 +530,18 @@ public class GameManager : MonoBehaviour
         if (currentGameState == GameState.pause) TransitionToState(lastState);
     }
 
+    public void LoseGame()
+    {
+        result = GameResult.Lose;
+        TransitionToState(GameState.gameOver);
+        StartCoroutine(ReturnToStart());
+    }
+
+    IEnumerator ReturnToStart()
+    {
+        yield return new WaitForSecondsRealtime(3);
+        TryTransitionToMainMenu();
+    }
 
     public void TeleportPlayerToMapPoint(Vector2Int gridCoords)
     {
@@ -512,8 +581,6 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
-
 
 
 }

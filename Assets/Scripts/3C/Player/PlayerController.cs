@@ -18,6 +18,7 @@ namespace _3C.Player
         public bool confirm;
         public bool select;
         public bool menuBack;
+        public bool mapFromGame;
     }
     public class PlayerController : MonoBehaviour
     {
@@ -54,6 +55,7 @@ namespace _3C.Player
             mainInput.Gameplay.MeleeAttack.performed += OnMeleeAttack;
             mainInput.Gameplay.MeleeAttack.canceled += OnMeleeAttack;
             mainInput.Gameplay.Pause.started += OnPause;
+            mainInput.Gameplay.OpenMap.started += OnMapFromGameplay;
 
             mainInput.Map.Back.started += MapBackPressed;
             mainInput.Map.Confirm.started += ConfirmPressed;
@@ -64,6 +66,8 @@ namespace _3C.Player
             InputSystem.onEvent += CheckIfSchemeChanged;
 
         }
+
+  
 
         private void CheckIfSchemeChanged(InputEventPtr _, InputDevice _device)
         {
@@ -238,6 +242,10 @@ namespace _3C.Player
         {
            inputState.mapBack = true;
         }
+        private void OnMapFromGameplay(InputAction.CallbackContext obj)
+        {
+            inputState.mapFromGame = true;
+        }
 
         private void LateUpdate()
         {
@@ -248,6 +256,7 @@ namespace _3C.Player
             inputState.menuBack = false;
             inputState.openMap = false;
             inputState.confirm = false;
+            inputState.mapFromGame = false;
            // GameplayData.UIPressThisFrame = true;
         }
     }

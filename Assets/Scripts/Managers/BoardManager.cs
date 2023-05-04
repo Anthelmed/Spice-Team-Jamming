@@ -171,7 +171,9 @@ public class BoardManager : MonoBehaviour
         var tilesOfSameType = neighbouringBiomes.Where(biome => biome == currentBiome).ToList();
 
         if (tilesOfSameType.Count > 2) return currentBiome;
-        
+        ///
+        if (neighbouringBiomes.Count == 0) return currentBiome; 
+        ///
         var mostNeighbouringBiome = neighbouringBiomes.GroupBy(i=> i).OrderByDescending(grp=>grp.Count())
             .Select(grp=>grp.Key).First();
         return mostNeighbouringBiome;
@@ -203,7 +205,10 @@ public class BoardManager : MonoBehaviour
 
             return currentRandomBiome.Value;
         }
-        
+
+        ///
+        if (neighbouringBiomes.Count == 0) return Biome.Grass;
+        ///
         var mostNeighbouringBiome = neighbouringBiomes.GroupBy(i=> i).OrderByDescending(grp=>grp.Count())
             .Select(grp=>grp.Key).First();
 

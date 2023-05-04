@@ -449,7 +449,7 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b0749097-4729-4958-9036-8a22381abe9e"",
-                    ""path"": ""<Keyboard>/b"",
+                    ""path"": ""<Keyboard>/m"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",

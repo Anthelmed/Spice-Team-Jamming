@@ -10,6 +10,7 @@ namespace DefaultNamespace
         public static Action<float> s_PlayerHealthChanged;
         public static Action<float> s_PlayerManaChanged;
         public static Action s_OnActionImpossibleBecauseOfMana;
+        public static Action s_PlayerDied;
         
 #if UNITY_EDITOR
         [InitializeOnEnterPlayMode]

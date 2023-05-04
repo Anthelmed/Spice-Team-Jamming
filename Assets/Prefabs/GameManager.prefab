@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSceneName: _GameScene
+  mainMenuBackgroundSceneName: _MainMenuBackground
   loaderCanvas: {fileID: 0}
   playerInstance: {fileID: 0}
   playerCharacter: {fileID: 0}
@@ -53,4 +54,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   playerTeleportLimbo: {fileID: 0}
   mapClickSound: uiClickStone
-  gameTime: 0
+  tempCanvas: {fileID: 0}
+  tempLose: {fileID: 0}
+  tempWin: {fileID: 0}
+  gameTime: 10

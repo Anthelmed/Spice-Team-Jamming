@@ -99,25 +99,34 @@ public class AudioManager : MonoBehaviour
         overworldBgmSource.Play();
         tensionSource.Play();
     }
+    GameState lastState;
     void HandleGameStateChange(GameState state)
     {
         switch (state)
         {
             case GameState.title:
+                {
+                    TransitionToMapMusic();
+                    lastState = GameState.title;
+                }
                 break;
             case GameState.map:
                 {
+                    if (lastState == GameState.title) return;
+                    else
                     TransitionToMapMusic();
                 }
                 break;
             case GameState.level:
                 {
                     TransitionToLevelMusic();
+                    lastState = GameState.level;
                 }
                 break;
             case GameState.pause:
                 {
                     TransitionToPauseMusic();
+                    lastState = GameState.pause;
                 }
                 break;
             default:

@@ -17,5 +17,10 @@ namespace _3C.Player
         {
             PlayerStaticEvents.s_PlayerHealthChanged?.Invoke(_health / m_Unit.MAXHealth);
         }
+
+        public void OnDied()
+        {
+            PlayerStaticEvents.s_PlayerDied?.Invoke();
+        }
     }
 }
