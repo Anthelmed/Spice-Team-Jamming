@@ -9,7 +9,10 @@
             <ui:Label tabindex="-1" text="Tile Info" display-tooltip-when-elided="true" name="MapTileInfoSubTitle" class="sub-title auto-reference" />
             <ui:Label tabindex="-1" text="[Text]" display-tooltip-when-elided="true" name="MapTileInfoText" class="text auto-reference" />
         </ui:VisualElement>
-        <ui:VisualElement name="MapBalanceIndicator" class="auto-reference" />
+        <ui:VisualElement name="MapBalanceIndicator" class="auto-reference">
+            <ui:VisualElement name="MapBalanceIndicatorGauge" />
+            <ui:VisualElement name="MapBalanceIndicatorBackground" />
+        </ui:VisualElement>
         <ui:VisualElement name="MapActionHelpers" class="action-helpers">
             <ui:Instance template="ActionHelperSelect" name="ActionHelperSelect" />
             <ui:Instance template="ActionHelperPause" name="ActionHelperPause" />

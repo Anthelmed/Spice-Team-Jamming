@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Units;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -31,7 +32,9 @@ public class LevelTilesManager : MonoBehaviour
     public Vector2Int playerSpawnCoords;
 
     private Dictionary<Vector2Int, LevelTile> gridTiles = new Dictionary<Vector2Int, LevelTile>(); // A dictionary to store the grid Tiles objects
-   
+
+    public List<LevelTile> Tiles => gridTiles.Values.ToList();
+    
     public static LevelTilesManager instance;
 
 

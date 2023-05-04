@@ -26,7 +26,23 @@
     bottom: 44px;
     width: 654px;
     height: 114px;
+}
+
+#MapBalanceIndicatorBackground {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     background-image: url('project://database/Assets/UI/Textures/V2/IndicatorL.png?fileID=2800000&guid=f44f48424532a3a4d98cbc8f1002c6d1&type=3#IndicatorL');
     -unity-background-image-tint-color: var(--primary-color-1-dark);
-    -unity-background-scale-mode: scale-to-fit;
+    -unity-background-scale-mode: scale-and-crop;
+}
+
+#MapBalanceIndicatorGauge {
+    position: absolute;
+    left: 40px;
+    top: 28px;
+    right: 41px;
+    bottom: 29px;
+    -unity-background-scale-mode: scale-and-crop;
+    background-image: url('project://database/Assets/UI/Textures/Fire%20Ice%20Nature%20Progression%20Custom%20Render%20Texture.asset?fileID=8600000&guid=f23962b6744f6c548ae82d5547a978b8&type=2#Fire Ice Nature Progression Custom Render Texture');
 }

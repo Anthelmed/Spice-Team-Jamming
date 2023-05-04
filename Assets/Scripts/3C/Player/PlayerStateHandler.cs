@@ -101,6 +101,12 @@ namespace _3C.Player
             m_ManaPoints.Init(this);
         }
 
+        private void OnDisable()
+        {
+            GetBehaviorFromState(m_CurrentState)?.StopState();
+            m_CurrentState = PlayerState.IdleMovement;
+        }
+
         private bool OnStateChange(PlayerState _currentState, PlayerState _nextState)
         {
             var newPossibleStateBehavior = GetBehaviorFromState(_nextState);
