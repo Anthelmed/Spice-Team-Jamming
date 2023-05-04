@@ -5,9 +5,15 @@ namespace SpiceTeamJamming.UI
     public class UIFireIceNatureProgression : MonoBehaviour
     {
         [SerializeField] private CustomRenderTexture progressionCustomRenderTexture;
+        [SerializeField] Material worldSpaceMat;
         private static readonly int _burntTilesPercentProperty = Shader.PropertyToID("_BurntTilesPercent");
         private static readonly int _frozenTilesPercentProperty = Shader.PropertyToID("_FrozenTilesPercent");
         private static readonly int _natureTilesPercentProperty = Shader.PropertyToID("_NatureTilesPercent");
+        float goalBurnt;
+        float goalFrozen;
+
+        float currentBurnt;
+        float currentFrozen;
 
         private void OnEnable()
         {
@@ -28,7 +34,13 @@ namespace SpiceTeamJamming.UI
         {
             UpdateVisualProgression();
         }
-        
+        void Update()
+        {
+            currentBurnt = Mathf.MoveTowards(currentBurnt, goalBurnt, Time.deltaTime * 0.01f);
+            currentFrozen = Mathf.MoveTowards(currentFrozen, goalFrozen, Time.deltaTime * 0.01f);
+            worldSpaceMat.SetFloat(_burntTilesPercentProperty, currentBurnt);
+            worldSpaceMat.SetFloat(_frozenTilesPercentProperty, currentFrozen);
+        }
         private void UpdateVisualProgression()
         {
             var totalTilesCount = (float)LevelTilesManager.instance.Tiles.Count;
@@ -46,6 +58,9 @@ namespace SpiceTeamJamming.UI
 
         private void SetTilesStatusPercent(float burntTilesPercent, float frozenTilesPercent, float natureTilesPercent)
         {
+            goalBurnt = burntTilesPercent;
+            goalFrozen = frozenTilesPercent;
+            
             progressionCustomRenderTexture.material.SetFloat(_burntTilesPercentProperty, burntTilesPercent);
             progressionCustomRenderTexture.material.SetFloat(_frozenTilesPercentProperty, frozenTilesPercent);
             progressionCustomRenderTexture.material.SetFloat(_natureTilesPercentProperty, natureTilesPercent);
