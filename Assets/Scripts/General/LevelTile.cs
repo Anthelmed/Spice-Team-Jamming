@@ -72,7 +72,7 @@ public class LevelTile : MonoBehaviour
         if (!other.TryGetComponent(out PlayerStateHandler player))
             return;
      
-        hasPlayer = true;
+      //  hasPlayer = true;
         tileActivated = true;
         worldTilesManager.UpdateActiveTiles(this);
     }
@@ -82,7 +82,7 @@ public class LevelTile : MonoBehaviour
         if (!other.TryGetComponent(out PlayerStateHandler player))
             return;
 
-        hasPlayer = false;
+      //  hasPlayer = false;
     }
 
     internal void WakeUp()

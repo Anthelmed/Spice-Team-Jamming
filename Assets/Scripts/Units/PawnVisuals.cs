@@ -27,7 +27,7 @@ namespace Units
         {
             if (!SwitchAnimation(id, force)) return;
 
-            if (m_sounds)
+            if (m_sounds && m_unit.Visible)
             {
                 switch (id)
                 {

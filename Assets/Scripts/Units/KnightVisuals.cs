@@ -55,7 +55,7 @@ namespace Units
             m_current = (int)id;
             m_currentStart = Time.timeSinceLevelLoad;
 
-            if (isActiveAndEnabled && m_sounds)
+            if (isActiveAndEnabled && m_sounds && m_unit.Visible)
             {
                 switch (id)
                 {
