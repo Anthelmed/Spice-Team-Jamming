@@ -203,6 +203,8 @@ public class LevelTilesManager : MonoBehaviour
 
     internal void UpdateActiveTiles(LevelTile occupiedTile)
     { 
+     
+
         var tilesToWake = new List<LevelTile>();
         tilesToWake = GetNeighboringTiles(occupiedTile.gridLocation);
         tilesToWake.Add(occupiedTile); // add the tile we're actually on
@@ -210,11 +212,16 @@ public class LevelTilesManager : MonoBehaviour
 
         foreach (LevelTile tile in gridTiles.Values)
         {
+            if (tile == occupiedTile) continue;
+            tile.hasPlayer = false;
             if (!tilesToWake.Contains(tile))
             {
                 tile.Sleep();
             }
         }
+        //reset the one we just entered just in case
+        occupiedTile.hasPlayer = true;
+        occupiedTile.WakeUp();
         QueryPlayerLocation();
     }
 

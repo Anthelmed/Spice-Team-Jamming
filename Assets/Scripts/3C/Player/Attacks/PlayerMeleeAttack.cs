@@ -163,9 +163,12 @@ namespace _3C.Player
             particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             if (m_AreVFXWorldBased)
             {
-                particleSystem.transform.parent.parent = m_Transform;
-                m_VFXParent.localPosition = Vector3.zero;
-                m_VFXParent.localRotation = Quaternion.identity;
+                if (m_Transform.gameObject.activeInHierarchy)
+                {
+                    particleSystem.transform.parent.parent = m_Transform;
+                    m_VFXParent.localPosition = Vector3.zero;
+                    m_VFXParent.localRotation = Quaternion.identity;
+                }
             }
         }
 
