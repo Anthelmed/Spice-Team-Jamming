@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UIFireIceNatureProgressionWorldSpace
+  m_Shader: {fileID: -6465566751694194690, guid: 26ea39b67e831f94eb42df611d1ba11d,
+    type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Fire_Ramp:
+        m_Texture: {fileID: 2800000, guid: 3e0f550e3bcd41a480c2149d17639b96, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Ice_Ramp:
+        m_Texture: {fileID: 2800000, guid: 8ca7577545d545fa80aa57ec8ecc3795, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise:
+        m_Texture: {fileID: 2800000, guid: 5db077a69da24f9fbe02431609507693, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BurntTilesPercent: 0.2
+    - _FrozenTilesPercent: 0.18
+    - _NatureTilesPercent: 1
+    - _Noise_Amount: 0.5
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _Tiling: 3
+    m_Colors:
+    - _FireColor: {r: 2.608238, g: 2.608238, b: 2.608238, a: 1}
+    - _FrozenColor: {r: 2.433572, g: 2.433572, b: 2.433572, a: 1}
+    - _NatureColor: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
+    - _Noise_Movement: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - _Noise_Movement_Fire: {r: -0.06, g: -0.03, b: 0, a: 0}
+    - _Noise_Movement_Ice: {r: 0.08, g: 0.03, b: 0, a: 0}
+    - _Noise_Tiling: {r: 6.4, g: 0.25, b: 0, a: 0}
+  m_BuildTextureStacks: []
+--- !u!114 &2821048605157399561
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7

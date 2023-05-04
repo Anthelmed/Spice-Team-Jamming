@@ -4,14 +4,14 @@
     <Style src="project://database/Assets/UI/Styles/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=852c0b1f00071754886a563d72ecb599&amp;type=3#GlobalStyle" />
     <Style src="project://database/Assets/UI/Styles/ActionHelperStyle.uss?fileID=7433441132597879392&amp;guid=1ee840c4db8243eaa2a9f33057bc878a&amp;type=3#ActionHelperStyle" />
     <Style src="project://database/Assets/UI/Styles/BattlefieldStyle.uss?fileID=7433441132597879392&amp;guid=d6e8357d1c29a054bb5b0fbbd3557a30&amp;type=3#BattlefieldStyle" />
-    <ui:VisualElement name="Battlefield" class="main-element auto-reference">
+    <ui:VisualElement name="Battlefield" class="main-element auto-reference" style="opacity: 0;">
         <ui:VisualElement name="BattlefieldPlayerStats" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
             <ui:VisualElement name="BattlefieldPlayerStatHealth" class="battlefield-player-stat auto-reference" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-                <ui:VisualElement name="BattlefieldPlayerStatHealthGauge" class="battlefield-player-stat-gauge" style="background-image: url(&apos;project://database/Assets/UI/Textures/Player%20Stat%20Health%20Custom%20Render%20Texture.asset?fileID=8600000&amp;guid=e53a2c8f1d1e20b4bb3f16b2a1ed8bb7&amp;type=2#Player Stat Health Custom Render Texture&apos;);" />
+                <ui:VisualElement name="BattlefieldPlayerStatHealthGauge" class="battlefield-player-stat-gauge" style="background-image: url(&apos;project://database/Assets/UI/Textures/Player%20Stat%20Health%20Custom%20Render%20Texture.asset?fileID=8600000&amp;guid=e53a2c8f1d1e20b4bb3f16b2a1ed8bb7&amp;type=2#Player Stat Health Custom Render Texture&apos;); -unity-background-image-tint-color: rgb(197, 57, 38);" />
                 <ui:VisualElement name="BattlefieldPlayerStatHealthBackground" class="battlefield-player-stat-background" style="background-color: rgba(0, 0, 0, 0);" />
             </ui:VisualElement>
             <ui:VisualElement name="BattlefieldPlayerStatMana" class="battlefield-player-stat auto-reference" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-                <ui:VisualElement name="BattlefieldPlayerStatManaGauge" class="battlefield-player-stat-gauge" style="background-image: url(&apos;project://database/Assets/UI/Textures/Player%20Stat%20Mana%20Custom%20Render%20Texture.asset?fileID=8600000&amp;guid=8755535c16a8487438c6e39771ba72e4&amp;type=2#Player Stat Mana Custom Render Texture&apos;);" />
+                <ui:VisualElement name="BattlefieldPlayerStatManaGauge" class="battlefield-player-stat-gauge" style="background-image: url(&apos;project://database/Assets/UI/Textures/Player%20Stat%20Mana%20Custom%20Render%20Texture.asset?fileID=8600000&amp;guid=8755535c16a8487438c6e39771ba72e4&amp;type=2#Player Stat Mana Custom Render Texture&apos;); -unity-background-image-tint-color: rgb(26, 127, 176);" />
                 <ui:VisualElement name="BattlefieldPlayerStatManaBackground" class="battlefield-player-stat-background" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
             </ui:VisualElement>
         </ui:VisualElement>
