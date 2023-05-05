@@ -50,8 +50,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BurntTilesPercent: 0.2
-    - _FrozenTilesPercent: 0.18
+    - _BurntTilesPercent: 0
+    - _FrozenTilesPercent: 0
     - _NatureTilesPercent: 1
     - _Noise_Amount: 0.5
     - _QueueControl: 0
