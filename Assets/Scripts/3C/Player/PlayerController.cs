@@ -104,7 +104,7 @@ namespace _3C.Player
                         mainInput.Gameplay.Disable();
                         mainInput.Map.Enable();
                         mainInput.Menu.Disable();
-                        print("enabled the map map");
+                      //  print("enabled the map map");
                     }
                     break;
                 case GameState.level:
@@ -112,7 +112,7 @@ namespace _3C.Player
                         mainInput.Gameplay.Enable();
                         mainInput.Map.Disable();
                         mainInput.Menu.Disable();
-                        print("enabled the level map");
+                    //    print("enabled the level map");
                     }
                     break;
                 case GameState.pause:
@@ -120,7 +120,7 @@ namespace _3C.Player
                         mainInput.Gameplay.Disable();
                         mainInput.Map.Disable();
                         mainInput.Menu.Enable();
-                        print("enabled the pause  map");
+                     //   print("enabled the pause  map");
                     }
                     break;
             }
