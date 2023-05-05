@@ -7,13 +7,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: groundAE_Brown
-  m_Shader: {fileID: -6465566751694194690, guid: 718355b4c48c47c4ca1e4981631cf7e5,
+  m_Name: defaultTileWater
+  m_Shader: {fileID: -6465566751694194690, guid: 2753d56cee62e1e4c815b7d92a3a0328,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _OVERLAY_NOISE_MASK
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -21,14 +20,15 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap:
     RenderType: Opaque
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - SHADOWCASTER
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: e911b221d749ddf4fb87605f75678e87, type: 3}
-        m_Scale: {x: 10, y: 10}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
@@ -55,7 +55,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GroundRT:
-        m_Texture: {fileID: 8400000, guid: b553520e7c26ff148b6cdbebdabc3f2a, type: 2}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _IceDamageTex:
@@ -86,6 +86,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RampTexture:
+        m_Texture: {fileID: 2800000, guid: a1a4108227a8a8b4f9067f80f37c33ec, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -113,12 +117,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
+    - _AlphaClipThreshold: 0.5
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BlendOp: 0
     - _BumpScale: 1
-    - _CastShadows: 1
+    - _CastShadows: 0
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
@@ -132,7 +137,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _Noise_Intensity: 0.166
+    - _Noise_Intensity: 0.139
     - _Noise_Tile: 0.1
     - _Normal_Strength: 0
     - _OVERLAY_NOISE_MASK: 1
@@ -142,6 +147,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Rim_Width: 0.003
+    - _SPECULAR: 0
     - _SampleGI: 0
     - _Shadow_Edge_Smoothness: 0.5
     - _Smoothness: 0
@@ -155,20 +161,19 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 0
-    - _damageTexTiling: 0.2
-    - _step: 0.33
-    - _stepedge: 0.01
+    - _damageTexTiling: 0.4
     m_Colors:
     - _BaseColor: {r: 0.5542755, g: 0.5566038, b: 0.43320578, a: 1}
     - _Color: {r: 0.5542755, g: 0.5566037, b: 0.43320575, a: 1}
+    - _DiffuseColor: {r: 0.24170522, g: 0.29195482, b: 0.3490566, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FireDamageColor: {r: 31.626797, g: 6.138359, b: 0, a: 0}
     - _IceDamageColor: {r: 3.9958944, g: 8.574187, b: 8.077461, a: 0}
-    - _Lit_Color: {r: 0.4056604, g: 0.37312666, b: 0.33103418, a: 1}
+    - _Lit_Color: {r: 0.43827873, g: 0.544867, b: 0.6320754, a: 1}
     - _Rim_Color: {r: 1, g: 1, b: 1, a: 0.41960785}
-    - _Shadow_Color: {r: 0.43137255, g: 0.35481492, b: 0.30588236, a: 1}
+    - _Shadow_Color: {r: 0.23829654, g: 0.32685736, b: 0.4245283, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _frostOutercolor: {r: 0.57254905, g: 0.6862745, b: 0.7529412, a: 0}
+    - _SpecularColour: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5041493177143135333
 MonoBehaviour:

@@ -47,7 +47,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] float enemyWeight = 0.7f;
     [SerializeField] float playerWeight = 0.3f;
 
-
+    GameState m_state;
     public void UpdateTension()
     {
         //float enemyPercentage = (float)numEnemiesOnScreen / totalPossibleEnemies;
@@ -63,7 +63,7 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-
+   
         if (instance != null && instance != this)
             Destroy(this.gameObject);
         else
@@ -102,6 +102,7 @@ public class AudioManager : MonoBehaviour
     GameState lastState;
     void HandleGameStateChange(GameState state)
     {
+        m_state = state;
         switch (state)
         {
             case GameState.title:
@@ -188,6 +189,8 @@ public class AudioManager : MonoBehaviour
         {
             case SFXCategory.player:
                 {
+            
+                    if (m_state == GameState.map) return;
                     playerSfxSources[currentPlayerSource].pitch = pitch;
                     playerSfxSources[currentPlayerSource].volume = volume;
                     playerSfxSources[currentPlayerSource].PlayOneShot(clip);
@@ -196,6 +199,7 @@ public class AudioManager : MonoBehaviour
                 break;
             case SFXCategory.mob:
                 {
+                    if (m_state == GameState.map) return;
                     mobSfxSources[currentMobSource].pitch = pitch;
                     mobSfxSources[currentMobSource].volume = volume;
                     mobSfxSources[currentMobSource].PlayOneShot(clip);

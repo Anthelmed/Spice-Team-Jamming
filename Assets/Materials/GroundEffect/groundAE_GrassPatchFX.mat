@@ -156,6 +156,8 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     - _damageTexTiling: 0.2
+    - _step: 0.33
+    - _stepedge: 0.01
     m_Colors:
     - _BaseColor: {r: 0.5542755, g: 0.5566038, b: 0.43320578, a: 1}
     - _Color: {r: 0.5542755, g: 0.5566037, b: 0.43320575, a: 1}
@@ -166,6 +168,7 @@ Material:
     - _Rim_Color: {r: 1, g: 1, b: 1, a: 0.41960785}
     - _Shadow_Color: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _frostOutercolor: {r: 0.57244563, g: 0.6853716, b: 0.75471693, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5041493177143135333
 MonoBehaviour:
