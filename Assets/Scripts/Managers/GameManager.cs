@@ -568,6 +568,7 @@ public class GameManager : MonoBehaviour
             if (hoverTile != null && cachedHoverTile != hoverTile && Time.time > highlightCooldownTimer)
             {
                 highlightCooldownTimer = Time.time + 0.05f;
+                AudioManager.instance.PlaySingleClip("tinyTick", SFXCategory.ui, 0, 0);
                 if (cachedHoverTile != null)
                 {
                     cachedHoverTile.Unhighlight();

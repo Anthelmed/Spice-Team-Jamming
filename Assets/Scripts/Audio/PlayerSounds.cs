@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace DefaultNamespace.Audio
 {
@@ -9,6 +10,10 @@ namespace DefaultNamespace.Audio
         [SerializeField] string rangedSound = "";
         [SerializeField] string deathSound = "playerMagicalDeath";
         [SerializeField] string damageSound = "";
+        [SerializeField] string teleportSound = "";
+
+
+
         [SerializeField] string healSound = "";
 
 
@@ -21,8 +26,11 @@ namespace DefaultNamespace.Audio
             playerHealth = GetComponentInParent<Units.Unit>();
             
         }
-
-       public void UpdateTensionLevel(float currentValue)
+        internal void PlayTeleportSound()
+        {
+            m_AudioManager.PlaySingleClip(teleportSound, SFXCategory.player, 0.1f, 0.1f);
+        }
+        public void UpdateTensionLevel(float currentValue)
         {
  
         }

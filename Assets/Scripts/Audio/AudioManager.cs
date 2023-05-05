@@ -1,3 +1,4 @@
+using DefaultNamespace;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,16 +49,20 @@ public class AudioManager : MonoBehaviour
     [SerializeField] float playerWeight = 0.3f;
 
     GameState m_state;
-    public void UpdateTension()
+
+  
+    public void UpdateTension(float healthPercentage)
     {
+
+        
         //float enemyPercentage = (float)numEnemiesOnScreen / totalPossibleEnemies;
         //float playerPercentage = (float)playerHealth / playerMaxHealth;
         //float combinedPercentage = (enemyPercentage * enemyWeight) + (playerPercentage * playerWeight);
 
         //tension = combinedPercentage;
-
-        //float volume = Mathf.Lerp(-80f, 0f, tension);
-        //bgmMixer.SetFloat("tension", volume);
+      //  print("health eventsent to tension  " + percentage);
+        float volume = Mathf.Lerp(-80f, 0f, 1- healthPercentage);
+        bgmMixer.SetFloat("tension", volume);
 
     }
 
@@ -85,6 +90,8 @@ public class AudioManager : MonoBehaviour
         mobSfxSources = mobSfxSourceParent.GetComponentsInChildren<AudioSource> ();
 
         if (shouldPlayBGM) StartBGM();
+
+        PlayerStaticEvents.s_PlayerHealthChanged += UpdateTension;
     }
 
 
@@ -92,6 +99,9 @@ public class AudioManager : MonoBehaviour
     {
         if (GameManager.instance is null) return;
         GameManager.instance.OnGameStateChanged += HandleGameStateChange;
+
+        bgmMixer.SetFloat("tension", 0);
+   
     }
     private void StartBGM()
     {
@@ -100,50 +110,73 @@ public class AudioManager : MonoBehaviour
         tensionSource.Play();
     }
     GameState lastState;
+
+    float mapCoolDown;
+    float levelCoolDown;
     void HandleGameStateChange(GameState state)
     {
         m_state = state;
-        switch (state)
-        {
-            case GameState.title:
-                {
-                    TransitionToMapMusic();
-                    lastState = GameState.title;
-                }
-                break;
-            case GameState.map:
+    
+
+
+            switch (state)
+            {
+                case GameState.title:
+                    {
+                        InitMapMusic();
+                        lastState = GameState.title;
+                    }
+                    break;
+                case GameState.map:
                 {
                     if (lastState == GameState.title) return;
                     else
-                    TransitionToMapMusic();
+                    {
+                        if (Time.time > mapCoolDown)
+                        {
+                            mapCoolDown = Time.time + 20;
+                            TransitionToMapMusic();
+                        }
+
+                    }
                 }
-                break;
-            case GameState.level:
-                {
-                    TransitionToLevelMusic();
-                    lastState = GameState.level;
-                }
-                break;
-            case GameState.pause:
-                {
-                    TransitionToPauseMusic();
-                    lastState = GameState.pause;
-                }
-                break;
-            default:
-                break;
-        }
+                    break;
+                case GameState.level:
+                    {
+                    if (Time.time > levelCoolDown)
+                    {
+                        levelCoolDown = Time.time + 10;
+                        TransitionToLevelMusic();
+                        lastState = GameState.level;
+                    }
+                    }
+                    break;
+                case GameState.pause:
+                    {
+                        TransitionToPauseMusic();
+                        lastState = GameState.pause;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        
+    }
+     void InitMapMusic()
+    {
+        overWorldSnapshot.TransitionTo(0);
     }
 
     public void TransitionToMapMusic()
     {
-        overWorldSnapshot.TransitionTo(1);
+     //   StartCoroutine(CompleteFade(overWorldSnapshot));
+        overWorldSnapshot.TransitionTo(1f);
     }
 
     public void TransitionToLevelMusic()
     {
-        StartCoroutine(CompleteFade());
-        blendedSnapshot.TransitionTo(transitionTime);
+        StartCoroutine(CompleteFade(battleSnapshot));
+        blendedSnapshot.TransitionTo(transitionTime + 1);
        
     }
 
@@ -152,10 +185,10 @@ public class AudioManager : MonoBehaviour
         battleSnapshot.TransitionTo(transitionTime);
     }
 
-    IEnumerator CompleteFade() // fake us an Scurve fade
+    IEnumerator CompleteFade(AudioMixerSnapshot snapshot) // fake us an Scurve fade
     {
-        yield return new WaitForSeconds(transitionTime +1f);
-        battleSnapshot.TransitionTo(transitionTime);
+        yield return new WaitForSeconds(transitionTime);
+        snapshot.TransitionTo(transitionTime);
     }
 
 
@@ -217,6 +250,12 @@ public class AudioManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    private void OnDisable()
+    {
+        PlayerStaticEvents.s_PlayerHealthChanged -= UpdateTension;
+        GameManager.instance.OnGameStateChanged -= HandleGameStateChange;
     }
 
 }

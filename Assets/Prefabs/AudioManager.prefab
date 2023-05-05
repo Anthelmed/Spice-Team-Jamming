@@ -1039,7 +1039,7 @@ Transform:
   - {fileID: 3590212808450251421}
   - {fileID: 5803001632542200392}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6101249032301722782
 MonoBehaviour:
@@ -1084,6 +1084,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e6e30794f4514fd468a738bb05fef792, type: 3}
   - {fileID: 8300000, guid: 9db31297a24b8784fbb6407feafb45a5, type: 3}
   - {fileID: 8300000, guid: da162b489197646688ab8a46f38ec744, type: 3}
+  - {fileID: 8300000, guid: 3ad30001c2f974b4c8b5f2f7c3420da4, type: 3}
+  - {fileID: 8300000, guid: cb22f3b598abe0c43a9279679987511c, type: 3}
+  - {fileID: 8300000, guid: a5ec4235d5502aa499b278730cd09519, type: 3}
   multiSounds:
   - {fileID: 11400000, guid: 2930a663a6d82704c8cbee617d0f4229, type: 2}
   - {fileID: 11400000, guid: f9d9e66f694d61e4bb7f655314c4785e, type: 2}

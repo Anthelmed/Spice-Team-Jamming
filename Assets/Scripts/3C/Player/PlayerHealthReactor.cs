@@ -16,6 +16,7 @@ namespace _3C.Player
         public void OnHealthChanged(float _health)
         {
             PlayerStaticEvents.s_PlayerHealthChanged?.Invoke(_health / m_Unit.MAXHealth);
+          
         }
 
         public void OnDied()
