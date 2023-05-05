@@ -140,12 +140,12 @@ Material:
     m_Colors:
     - _AnimData: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 5.9921565, g: 5.9921565, b: 5.9921565, a: 1}
+    - _Color: {r: 12.089152, g: 12.089152, b: 12.089152, a: 1}
     - _Displacement_Noise_Scroll: {r: 1, g: -1.6, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _PrevAnimData: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _View_Direction_Remap: {r: -3.43, g: 1, b: 0, a: 1}
+    - _View_Direction_Remap: {r: -5.03, g: 1, b: 0, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &6682755358637542961
 MonoBehaviour:
