@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: HealringsPickup1
+  m_Shader: {fileID: 4800000, guid: 51325667a1842a34ea9909c053dad002, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _RECTMASK_ON
+  - _SECONDARYTEXTURE_ON
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _DisplacementGuide:
+        m_Texture: {fileID: 2800000, guid: 859c3679538481649999a4572a762e6c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GradientMap:
+        m_Texture: {fileID: 2800000, guid: c487db03c57b9fe47ae8ed8578fa071f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 203bdeda66a54eda8ab6b4661d64dfbb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SecondaryTex:
+        m_Texture: {fileID: 2800000, guid: 381971b998464a3b89560a23153e6212, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaCutoff: 0.5
+    - _Banding: 0
+    - _BurnSize: 1
+    - _CircleMask: 0
+    - _Contrast: 1
+    - _Culling: 0
+    - _CustomFramerate: 0
+    - _Cutoff: 0.166
+    - _Cutoffsoftness: 0.239
+    - _DisplacementAmount: 0
+    - _Framerate: 15
+    - _FresnelAlpha: 0
+    - _FresnelBias: 0
+    - _FresnelPower: 5
+    - _FresnelScale: 1
+    - _InnerRadius: -1
+    - _IntersectionThresholdMax: 1
+    - _Numberofbands: 3
+    - _OuterRadius: 0
+    - _ParticleControlsDisplacement: 0
+    - _PolarUV: 0
+    - _Power: 0.6
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _RectHeight: 0.6
+    - _RectMask: 1
+    - _RectMaskCutoff: 0.47
+    - _RectMaskSmoothness: 0.784
+    - _RectWidth: 1
+    - _SecondaryTexture: 1
+    - _Smoothness: 0.604
+    - _SoftFade: 0
+    - _VertexAlphaCutoff: 0
+    - _VertexOffset: 0
+    - _VertexOffsetAmount: 0.1
+    - _ZTest: 4
+    m_Colors:
+    - _BurnColor: {r: 5.590881, g: 4.0995507, b: 1.0759805, a: 1}
+    - _Color: {r: 0.8027793, g: 0.71182543, b: 0.5793643, a: 1}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _PanningSpeedXYmaintexZWdisplacementtex: {r: -0.37, g: 0, b: 0, a: 0}
+    - _Secondarypanningspeed: {r: 1.07, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

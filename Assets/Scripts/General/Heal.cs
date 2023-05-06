@@ -17,10 +17,12 @@ namespace DefaultNamespace
            if (unit != null && unit.UnitType == Unit.Type.Player)
             {
                 unit.Heal(healAmt);
+                if (AudioManager.instance != null) AudioManager.instance.PlaySingleClip("playerHeal", SFXCategory.player, 0, 0);
                 if (pickedUpVFX != null)
                 {
-                    var healFX = Instantiate(pickedUpVFX);
-                    healFX.transform.SetParent(unit.transform);
+                    var healFX = Instantiate(pickedUpVFX, other.transform.position, Quaternion.identity);
+                 //   healFX.transform.SetParent(unit.transform);
+                   
                 }
       
                 Destroy(gameObject);

@@ -12,6 +12,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _BANDING_ON
   - _SECONDARYTEXTURE_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -29,11 +30,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GradientMap:
-        m_Texture: {fileID: 2800000, guid: 7ba659a5124d4f144aa31be9d3e806ac, type: 3}
+        m_Texture: {fileID: 2800000, guid: c487db03c57b9fe47ae8ed8578fa071f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8f8a8f429b670484a867df140bb03c76, type: 3}
+        m_Texture: {fileID: 2800000, guid: d9d967f49227277429f6ae54355d403e, type: 3}
         m_Scale: {x: 1, y: 0.75}
         m_Offset: {x: 0, y: 0.12}
     - _SecondaryTex:
@@ -55,13 +56,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaCutoff: 0.5
-    - _Banding: 0
-    - _BurnSize: 0
+    - _Banding: 1
+    - _BurnSize: 1
     - _CircleMask: 0
     - _Contrast: 1
     - _Culling: 0
     - _CustomFramerate: 0
-    - _Cutoff: 0.166
+    - _Cutoff: 0.213
     - _Cutoffsoftness: 0.239
     - _DisplacementAmount: 0
     - _Framerate: 15
@@ -72,7 +73,7 @@ Material:
     - _InnerRadius: -1
     - _IntersectionThresholdMax: 1
     - _Numberofbands: 3
-    - _OuterRadius: 0
+    - _OuterRadius: 0.73
     - _ParticleControlsDisplacement: 0
     - _PolarUV: 0
     - _Power: 0.6
@@ -84,14 +85,14 @@ Material:
     - _RectMaskSmoothness: 0.513
     - _RectWidth: 0.12
     - _SecondaryTexture: 1
-    - _Smoothness: 0.604
+    - _Smoothness: 0.138
     - _SoftFade: 0
     - _VertexAlphaCutoff: 0
     - _VertexOffset: 0
     - _VertexOffsetAmount: 0
     - _ZTest: 4
     m_Colors:
-    - _BurnColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BurnColor: {r: 0.7169812, g: 0.22714235, b: 0, a: 1}
     - _Color: {r: 2.4528303, g: 2.1749277, b: 1.770203, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _PanningSpeedXYmaintexZWdisplacementtex: {r: 0, g: 0, b: 0, a: 0}
