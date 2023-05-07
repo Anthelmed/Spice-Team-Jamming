@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Units;
+using DG.Tweening;
 
 namespace DefaultNamespace
 {
@@ -17,15 +18,19 @@ namespace DefaultNamespace
            if (unit != null && unit.UnitType == Unit.Type.Player)
             {
                 unit.Heal(healAmt);
+
                 if (AudioManager.instance != null) AudioManager.instance.PlaySingleClip("playerHeal", SFXCategory.player, 0, 0);
                 if (pickedUpVFX != null)
                 {
                     var healFX = Instantiate(pickedUpVFX, other.transform.position, Quaternion.identity);
-                 //   healFX.transform.SetParent(unit.transform);
-                   
+                    healFX.transform.SetParent(unit.transform);
+
                 }
-      
-                Destroy(gameObject);
+                transform.DOScale(0, 1).SetEase(Ease.InBounce).OnComplete(() =>
+                {
+                    Destroy(gameObject);
+                });
+
             }
         }
     }

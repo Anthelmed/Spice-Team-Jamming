@@ -10051,8 +10051,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.132541
-  m_Center: {x: 0.14924166, y: 0.34220183, z: 0}
+  m_Radius: 0.4
+  m_Center: {x: 0.14924166, y: 0.67, z: 0}
 --- !u!114 &6937208194161077336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10065,7 +10065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5851ff76a97e7242ba561b1fdddaa20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healAmt: 10
+  healAmt: 50
   pickedUpVFX: {fileID: 4335129838896157578, guid: d74c797680432294bb98a434e0a33e6f,
     type: 3}
 --- !u!1001 &2234976749145811722

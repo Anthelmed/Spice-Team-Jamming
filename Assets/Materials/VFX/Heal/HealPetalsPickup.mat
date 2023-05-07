@@ -12,6 +12,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _BANDING_ON
   - _RECTMASK_ON
   - _SOFTFADE_ON
   m_InvalidKeywords: []
@@ -56,7 +57,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaCutoff: 0.5
-    - _Banding: 0
+    - _Banding: 1
     - _BurnSize: 1
     - _CircleMask: 0
     - _Contrast: 1
@@ -72,7 +73,7 @@ Material:
     - _FresnelScale: 1
     - _InnerRadius: -1
     - _IntersectionThresholdMax: 1
-    - _Numberofbands: 1
+    - _Numberofbands: 3
     - _OuterRadius: 0
     - _ParticleControlsDisplacement: 0
     - _PolarUV: 0
@@ -93,7 +94,7 @@ Material:
     - _ZTest: 4
     m_Colors:
     - _BurnColor: {r: 1, g: 0.199557, b: 0, a: 1}
-    - _Color: {r: 1.6055588, g: 1.423651, b: 1.1587287, a: 1}
+    - _Color: {r: 0.9099964, g: 0.9099964, b: 0.9099964, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _PanningSpeedXYmaintexZWdisplacementtex: {r: 0, g: 0, b: 0, a: 0}
     - _Secondarypanningspeed: {r: -0.3, g: 0, b: 0, a: 0}
