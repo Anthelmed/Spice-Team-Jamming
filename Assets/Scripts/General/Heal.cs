@@ -26,7 +26,7 @@ namespace DefaultNamespace
                     healFX.transform.SetParent(unit.transform);
 
                 }
-                transform.DOScale(0, 1).SetEase(Ease.InBounce).OnComplete(() =>
+                transform.DOScale(0, 0.5f).SetEase(Ease.InBounce).OnComplete(() =>
                 {
                     Destroy(gameObject);
                 });

@@ -17,6 +17,7 @@ public class LevelTilesManager : MonoBehaviour
     [Header("prefabs")]
     [SerializeField] GameObject[] grassBiomePrefabs;
     [SerializeField] GameObject[] forestBiomePrefabs;
+    public GameObject healPrefab;
 
     [SerializeField] EnemyPrefab[] enemies;
     Transform levelParent;
@@ -326,6 +327,8 @@ public class LevelTilesManager : MonoBehaviour
 
     #region Jordi's stuff
     private List<LevelTile> m_levelTilesReusable = new List<LevelTile>(5);
+
+
     private List<LevelTile> GetRelevantTiles(Vector3 position, float radius)
     {
         m_levelTilesReusable.Clear();

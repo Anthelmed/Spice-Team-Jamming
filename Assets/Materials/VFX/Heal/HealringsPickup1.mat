@@ -88,7 +88,7 @@ Material:
     - _VertexAlphaCutoff: 0
     - _VertexOffset: 0
     - _VertexOffsetAmount: 0.1
-    - _ZTest: 4
+    - _ZTest: 8
     m_Colors:
     - _BurnColor: {r: 5.590881, g: 4.0995507, b: 1.0759805, a: 1}
     - _Color: {r: 0.8027793, g: 0.71182543, b: 0.5793643, a: 1}

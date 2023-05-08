@@ -17,10 +17,12 @@ public class LevelTile : MonoBehaviour
     [SerializeField] RenderTexture groundFXPersistantRT;
     [SerializeField] GameObject RTCam;
     [SerializeField] GameObject environmentArt;
+    [SerializeField] Transform healSpawnPoint;
+    
     private const int UPDATE_RATE = 6;
 
     private int m_updateTurn;
-
+    bool healSpawned;
     private void Awake()
     {
         Sleep();
@@ -64,6 +66,13 @@ public class LevelTile : MonoBehaviour
         {
             status = newStatus;
             MapTile.SetTileState(status);
+            if (newStatus == WorldTileStatus.neutral && !healSpawned && worldTilesManager.healPrefab != null && healSpawnPoint != null)
+            {
+                print("heal spawned");
+                Instantiate(worldTilesManager.healPrefab, healSpawnPoint.position + (Vector3.left * 2), Quaternion.identity);
+                healSpawned = true; // dont spawn more than one ever.
+            }
+              
         }
     }
 
