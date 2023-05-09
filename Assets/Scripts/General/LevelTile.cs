@@ -69,7 +69,8 @@ public class LevelTile : MonoBehaviour
             if (newStatus == WorldTileStatus.neutral && !healSpawned && worldTilesManager.healPrefab != null && healSpawnPoint != null)
             {
                 print("heal spawned");
-                Instantiate(worldTilesManager.healPrefab, healSpawnPoint.position + (Vector3.left * 2), Quaternion.identity);
+                var heal = Instantiate(worldTilesManager.healPrefab, healSpawnPoint.position + (Vector3.left * 2), Quaternion.identity);
+                heal.transform.SetParent(environmentArt.transform, true);
                 healSpawned = true; // dont spawn more than one ever.
             }
               
