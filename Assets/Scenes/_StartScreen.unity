@@ -13732,6 +13732,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3070656586767586103, guid: eac1ae59bef618847b73c10b4d795403,
         type: 3}
+      propertyPath: uiInput
+      value: 
+      objectReference: {fileID: 1964754556}
+    - target: {fileID: 3070656586767586103, guid: eac1ae59bef618847b73c10b4d795403,
+        type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 36575210}

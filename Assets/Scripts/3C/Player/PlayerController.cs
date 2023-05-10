@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.InputSystem.Users;
+using UnityEngine.InputSystem.UI;
 
 namespace _3C.Player
 {
@@ -28,6 +29,7 @@ namespace _3C.Player
 
         MainInput mainInput;
         [SerializeField] GameManager gameManager;
+        [SerializeField] InputSystemUIInputModule uiInput;
 
         public InputState inputState = new InputState();
         private bool m_OnDeviceChangeHooked;
@@ -104,6 +106,7 @@ namespace _3C.Player
                         mainInput.Gameplay.Disable();
                         mainInput.Map.Enable();
                         mainInput.Menu.Disable();
+                        uiInput.enabled = true;
                       //  print("enabled the map map");
                     }
                     break;
@@ -112,6 +115,7 @@ namespace _3C.Player
                         mainInput.Gameplay.Enable();
                         mainInput.Map.Disable();
                         mainInput.Menu.Disable();
+                        uiInput.enabled = false;
                     //    print("enabled the level map");
                     }
                     break;
@@ -120,6 +124,7 @@ namespace _3C.Player
                         mainInput.Gameplay.Disable();
                         mainInput.Map.Disable();
                         mainInput.Menu.Enable();
+                        uiInput.enabled = true;
                      //   print("enabled the pause  map");
                     }
                     break;
